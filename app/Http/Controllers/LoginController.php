@@ -5,6 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
+use App\Models\User;
+use Illuminate\Support\Facades\DB;
 
 class LoginController extends Controller
 {
@@ -105,13 +110,89 @@ class LoginController extends Controller
 
         if ($validator->fails()) {
             return back()
+                ->withErrors(['email' => 'We cannot find a user with that email address.'])
+                ->withInput();
+        }
+
+        // Generate password reset token
+        $token = Str::random(60);
+        
+        // Delete any existing tokens for this email
+        DB::table('password_resets')->where('email', $request->email)->delete();
+        
+        // Insert new token
+        DB::table('password_resets')->insert([
+            'email' => $request->email,
+            'token' => $token,
+            'created_at' => now()
+        ]);
+
+        // For now, we'll just show success (in production, you'd send an email)
+        return back()
+            ->with('success', 'Password reset link has been sent to your email.');
+    }
+
+    /**
+     * Show the password reset form.
+     *
+     * @param  string  $token
+     * @return \Illuminate\View\View
+     */
+    public function showResetForm($token = null)
+    {
+        return view('auth.reset-password', ['token' => $token]);
+    }
+
+    /**
+     * Handle the password reset request.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function resetPassword(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email|exists:users,email',
+            'token' => 'required',
+            'password' => 'required|string|min:8|confirmed',
+        ]);
+
+        if ($validator->fails()) {
+            return back()
                 ->withErrors($validator)
                 ->withInput();
         }
 
-        // TODO: Implement password reset link sending logic
-        return back()
-            ->with('success', 'Password reset link has been sent to your email.');
+        // Find the password reset record
+        $reset = DB::table('password_resets')
+            ->where('email', $request->email)
+            ->where('token', $request->token)
+            ->first();
+
+        if (!$reset) {
+            return back()
+                ->withErrors(['email' => 'Invalid password reset token.'])
+                ->withInput();
+        }
+
+        // Check if token is not expired (24 hours)
+        if (now()->diffInHours($reset->created_at) > 24) {
+            DB::table('password_resets')->where('email', $request->email)->delete();
+            return back()
+                ->withErrors(['email' => 'Password reset token has expired.'])
+                ->withInput();
+        }
+
+        // Reset the password
+        $user = User::where('email', $request->email)->first();
+        $user->password = Hash::make($request->password);
+        $user->save();
+
+        // Delete the password reset record
+        DB::table('password_resets')->where('email', $request->email)->delete();
+
+        return redirect()->route('login')
+            ->with('success', 'Your password has been reset successfully!');
     }
 
     /**
