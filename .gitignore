@@ -1,0 +1,142 @@
+# Laravel specific files
+/.env
+/.env.backup
+/.env.*.php
+.env
+.env.backup
+.env.*
+
+# Laravel specific directories
+/node_modules
+/public/hot
+/public/storage
+/storage/*.key
+/storage/logs/*
+/storage/framework/cache/*
+/storage/framework/sessions/*
+/storage/framework/testing/*
+/storage/framework/views/*
+/vendor
+
+# Laravel build files
+.phpunit.result.cache
+Homestead.json
+Homestead.yaml
+npm-debug.log
+yarn-error.log
+
+# IDE files
+/.idea
+/.vscode
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Composer
+composer.phar
+/vendor/
+
+# Cache and logs
+/storage/logs/laravel.log
+/storage/logs/*.log
+
+# Session files
+/storage/framework/sessions/*
+
+# Cache files
+/storage/framework/cache/*
+
+# View cache
+/storage/framework/views/*
+
+# Testing
+.phpunit.result.cache
+tests/coverage/
+
+# Deployment
+/deploy.sh
+
+# Frontend build files
+/public/build
+/public/hot
+
+# Mix
+/mix-manifest.json
+
+# NPM/Yarn
+/node_modules
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Laravel specific
+.env
+.env.backup
+.env.*
+.phpunit.result.cache
+Homestead.json
+Homestead.yaml
+npm-debug.log
+yarn-error.log
+
+# Runtime files
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage directory used by tools like istanbul
+coverage/
+
+# nyc test coverage
+.nyc_output
+
+# Dependency directories
+node_modules/
+jspm_packages/
+
+# Optional npm cache directory
+.npm
+
+# Optional REPL history
+.node_repl_history
+
+# Output of 'npm pack'
+*.tgz
+
+# Yarn Integrity file
+.yarn-integrity
+
+# dotenv environment variables file
+.env
+.env.test
+
+# parcel-bundler cache (https://parceljs.org/)
+.cache
+.parcel-cache
+
+# next.js build output
+.next
+
+# nuxt.js build output
+.nuxt
+
+# vuepress build output
+.vuepress/dist
+
+# Serverless directories
+.serverless
+
+# FuseBox cache
+.fusebox/
+
+# DynamoDB Local files
+.dynamodb/
