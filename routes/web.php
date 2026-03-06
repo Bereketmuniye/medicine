@@ -31,9 +31,7 @@ Route::get('/dashboard', function () {
 })->middleware(['auth']);
 
 Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+    Route::get('/dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
     
     Route::resource('articles', App\Http\Controllers\Admin\ArticleController::class);
     Route::resource('plants', App\Http\Controllers\Admin\PlantController::class);

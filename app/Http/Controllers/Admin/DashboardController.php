@@ -29,6 +29,7 @@ class DashboardController extends Controller
                 'activity' => 'New Article Published',
                 'title' => $article->title,
                 'section' => 'Research',
+                'created_at' => $article->created_at,
                 'date' => $article->created_at->diffForHumans(),
                 'status' => ucfirst($article->status),
                 'icon' => 'fa-pen-to-square',
@@ -41,6 +42,7 @@ class DashboardController extends Controller
                 'activity' => 'New Plant Cataloged',
                 'title' => $plant->name,
                 'section' => 'Encyclopedia',
+                'created_at' => $plant->created_at,
                 'date' => $plant->created_at->diffForHumans(),
                 'status' => 'Verified',
                 'icon' => 'fa-leaf',
@@ -53,6 +55,7 @@ class DashboardController extends Controller
                 'activity' => 'Video Lesson Added',
                 'title' => $video->title,
                 'section' => 'Library',
+                'created_at' => $video->created_at,
                 'date' => $video->created_at->diffForHumans(),
                 'status' => 'Live',
                 'icon' => 'fa-play',
@@ -61,7 +64,7 @@ class DashboardController extends Controller
         });
 
         $activities = $recent_articles->concat($recent_plants)->concat($recent_videos)
-            ->sortByDesc('date')
+            ->sortByDesc('created_at')
             ->take(5);
 
         return view('dashboard', compact('stats', 'activities'));

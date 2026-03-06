@@ -18,7 +18,7 @@
             <span class="badge bg-success-subtle text-success">+8 New</span>
         </div>
         <div class="stat-label">Total Articles</div>
-        <div class="stat-value">124</div>
+        <div class="stat-value">{{ number_format($stats['articles_count']) }}</div>
     </div>
     
     <div class="stat-card">
@@ -29,7 +29,7 @@
             <span class="badge bg-success-subtle text-success">Verified</span>
         </div>
         <div class="stat-label">Plant Species</div>
-        <div class="stat-value">842</div>
+        <div class="stat-value">{{ number_format($stats['plants_count']) }}</div>
     </div>
     
     <div class="stat-card">
@@ -40,7 +40,7 @@
             <span class="badge bg-info-subtle text-info">High Engage</span>
         </div>
         <div class="stat-label">Video Lessons</div>
-        <div class="stat-value">45</div>
+        <div class="stat-value">{{ number_format($stats['videos_count']) }}</div>
     </div>
     
     <div class="stat-card">
@@ -50,8 +50,8 @@
             </div>
             <span class="badge bg-primary-subtle text-primary">Sales</span>
         </div>
-        <div class="stat-label">Book Revenue</div>
-        <div class="stat-value">12,840 ETB</div>
+        <div class="stat-label">System Revenue</div>
+        <div class="stat-value">{{ number_format($stats['total_revenue']) }} ETB</div>
     </div>
 </div>
 
@@ -74,60 +74,30 @@
                         </tr>
                     </thead>
                     <tbody class="small">
-                        <tr>
-                            <td class="border-0 py-3">
-                                <div class="d-flex align-items-center">
-                                    <div class="avatar bg-success-subtle me-3 rounded-circle d-flex align-items-center justify-content-center" style="width: 35px; height: 35px;">
-                                        <i class="fa-solid fa-plus text-success"></i>
+                        @forelse($activities as $activity)
+                            <tr>
+                                <td class="border-0 py-3">
+                                    <div class="d-flex align-items-center">
+                                        <div class="avatar bg-{{ $activity['color'] }}-subtle me-3 rounded-circle d-flex align-items-center justify-content-center" style="width: 35px; height: 35px;">
+                                            <i class="fa-solid {{ $activity['icon'] }} text-{{ $activity['color'] }}"></i>
+                                        </div>
+                                        <div>
+                                            <div class="fw-bold">{{ $activity['activity'] }}</div>
+                                            <div class="text-secondary text-xs">{{ $activity['title'] }}</div>
+                                        </div>
                                     </div>
-                                    <div>
-                                        <div class="fw-bold">New Plant Cataloged</div>
-                                        <div class="text-secondary text-xs">Kosso (Hagenia abyssinica)</div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="border-0 py-3 text-secondary">Encyclopedia</td>
-                            <td class="border-0 py-3">2 hours ago</td>
-                            <td class="border-0 py-3">
-                                <span class="badge bg-success-subtle text-success rounded-pill px-3">Published</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="border-0 py-3">
-                                <div class="d-flex align-items-center">
-                                    <div class="avatar bg-primary-subtle me-3 rounded-circle d-flex align-items-center justify-content-center" style="width: 35px; height: 35px;">
-                                        <i class="fa-solid fa-bag-shopping text-primary"></i>
-                                    </div>
-                                    <div>
-                                        <div class="fw-bold">Book Purchased</div>
-                                        <div class="text-secondary text-xs">Order #7742 - Int. Customer</div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="border-0 py-3 text-secondary">Book Store</td>
-                            <td class="border-0 py-3">5 hours ago</td>
-                            <td class="border-0 py-3">
-                                <span class="badge bg-primary-subtle text-primary rounded-pill px-3">E-Book Sent</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="border-0 py-3">
-                                <div class="d-flex align-items-center">
-                                    <div class="avatar bg-warning-subtle me-3 rounded-circle d-flex align-items-center justify-content-center" style="width: 35px; height: 35px;">
-                                        <i class="fa-solid fa-pen-to-square text-warning"></i>
-                                    </div>
-                                    <div>
-                                        <div class="fw-bold">Educational Post Draft</div>
-                                        <div class="text-secondary text-xs">Traditional Tewahedo Medicine</div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="border-0 py-3 text-secondary">Research</td>
-                            <td class="border-0 py-3">Yesterday</td>
-                            <td class="border-0 py-3">
-                                <span class="badge bg-warning-subtle text-warning rounded-pill px-3">In Review</span>
-                            </td>
-                        </tr>
+                                </td>
+                                <td class="border-0 py-3 text-secondary">{{ $activity['section'] }}</td>
+                                <td class="border-0 py-3">{{ $activity['date'] }}</td>
+                                <td class="border-0 py-3">
+                                    <span class="badge bg-{{ $activity['color'] }}-subtle text-{{ $activity['color'] }} rounded-pill px-3">{{ $activity['status'] }}</span>
+                                </td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="4" class="text-center py-4 text-secondary opacity-50">No recent activities found.</td>
+                            </tr>
+                        @endforelse
                     </tbody>
                 </table>
             </div>
@@ -139,15 +109,15 @@
         <div class="card border-0 shadow-sm p-4 bg-dark text-white h-100" style="border-radius: 24px; background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%) !important;">
             <h5 class="fw-bold mb-4">Business Actions</h5>
             <div class="d-grid gap-3">
-                <button class="btn btn-primary rounded-pill py-3 fw-bold border-0" style="background: #3b82f6;">
+                <a href="{{ route('admin.articles.create') }}" class="btn btn-primary rounded-pill py-3 fw-bold border-0" style="background: #3b82f6;">
                     <i class="fa-solid fa-plus me-2"></i>Publish Research
-                </button>
-                <button class="btn btn-light bg-opacity-10 border-0 text-white rounded-pill py-3 fw-bold">
+                </a>
+                <a href="{{ route('admin.videos.create') }}" class="btn btn-light bg-opacity-10 border-0 text-white rounded-pill py-3 fw-bold text-center">
                     <i class="fa-solid fa-upload me-2"></i>Upload Video
-                </button>
-                <button class="btn btn-light bg-opacity-10 border-0 text-white rounded-pill py-3 fw-bold">
+                </a>
+                <a href="{{ route('admin.plants.create') }}" class="btn btn-light bg-opacity-10 border-0 text-white rounded-pill py-3 fw-bold text-center">
                     <i class="fa-solid fa-seedling me-2"></i>Add Plant Species
-                </button>
+                </a>
                 <div class="p-3 bg-light bg-opacity-5 rounded-4 mt-2">
                     <div class="small fw-bold mb-1"><i class="fa-brands fa-instagram me-1"></i> Promotion Status</div>
                     <div class="progress" style="height: 6px; background: rgba(255,255,255,0.1);">
