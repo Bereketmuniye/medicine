@@ -40,6 +40,7 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::resource('videos', App\Http\Controllers\Admin\VideoController::class);
     Route::resource('books', App\Http\Controllers\Admin\BookController::class);
     Route::resource('categories', App\Http\Controllers\Admin\CategoryController::class);
+    Route::resource('promotions', App\Http\Controllers\Admin\PromotionController::class);
     Route::resource('subscribers', App\Http\Controllers\Admin\SubscriberController::class)->only(['index', 'destroy']);
     Route::resource('settings', App\Http\Controllers\Admin\SettingController::class)->only(['index', 'update']);
 });

@@ -112,15 +112,15 @@
                 <a href="{{ route('admin.articles.create') }}" class="btn btn-primary rounded-pill py-3 fw-bold border-0" style="background: #3b82f6;">
                     <i class="fa-solid fa-plus me-2"></i>Publish Research
                 </a>
-                <a href="{{ route('admin.videos.create') }}" class="btn btn-light bg-opacity-10 border-0 text-white rounded-pill py-3 fw-bold text-center">
+                <a href="{{ route('admin.videos.create') }}" class="btn btn-outline-light border-2 text-white rounded-pill py-3 fw-bold text-center" style="transition: all 0.3s ease;" onmouseover="this.style.backgroundColor='rgba(255,255,255,0.1)'; this.style.borderColor='rgba(255,255,255,0.8)';" onmouseout="this.style.backgroundColor='transparent'; this.style.borderColor='rgba(255,255,255,0.5)';">
                     <i class="fa-solid fa-upload me-2"></i>Upload Video
                 </a>
-                <a href="{{ route('admin.plants.create') }}" class="btn btn-light bg-opacity-10 border-0 text-white rounded-pill py-3 fw-bold text-center">
+                <a href="{{ route('admin.plants.create') }}" class="btn btn-outline-light border-2 text-white rounded-pill py-3 fw-bold text-center" style="transition: all 0.3s ease;" onmouseover="this.style.backgroundColor='rgba(255,255,255,0.1)'; this.style.borderColor='rgba(255,255,255,0.8)';" onmouseout="this.style.backgroundColor='transparent'; this.style.borderColor='rgba(255,255,255,0.5)';">
                     <i class="fa-solid fa-seedling me-2"></i>Add Plant Species
                 </a>
-                <div class="p-3 bg-light bg-opacity-5 rounded-4 mt-2">
-                    <div class="small fw-bold mb-1"><i class="fa-brands fa-instagram me-1"></i> Promotion Status</div>
-                    <div class="progress" style="height: 6px; background: rgba(255,255,255,0.1);">
+                <div class="p-3 bg-light bg-opacity-10 rounded-4 mt-2">
+                    <div class="small fw-bold mb-1 text-white"><i class="fa-brands fa-instagram me-1"></i> Promotion Status</div>
+                    <div class="progress" style="height: 6px; background: rgba(255,255,255,0.2);">
                         <div class="progress-bar bg-primary" style="width: 75%;"></div>
                     </div>
                 </div>

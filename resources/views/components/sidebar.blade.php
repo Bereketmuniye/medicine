@@ -34,17 +34,13 @@
             <i class="fa-solid fa-book"></i>
             <span>Book Store</span>
         </a>
-        <a href="#" class="nav-item">
-            <i class="fa-solid fa-cart-shopping"></i>
-            <span>Orders</span>
-        </a>
 
         <div class="nav-label mt-4">Online Presence</div>
         <a href="#" class="nav-item">
             <i class="fa-brands fa-instagram"></i>
             <span>Social Media</span>
         </a>
-        <a href="#" class="nav-item">
+        <a href="{{ route('admin.promotions.index') }}" class="nav-item {{ request()->routeIs('admin.promotions.*') ? 'active' : '' }}">
             <i class="fa-solid fa-bullhorn"></i>
             <span>Promotions</span>
         </a>

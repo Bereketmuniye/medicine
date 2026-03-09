@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Cache;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 
@@ -43,11 +44,25 @@ class LoginController extends Controller
         }
 
         $throttleKey = strtolower($request->input('email')) . '|' . $request->ip();
-
-        if (\Illuminate\Support\Facades\RateLimiter::tooManyAttempts($throttleKey, 5)) {
-            $seconds = \Illuminate\Support\Facades\RateLimiter::availableIn($throttleKey);
+        
+        // Manual rate limiting using cache
+        $attempts = Cache::store('database')->get($throttleKey, 0);
+        $lockoutKey = $throttleKey . ':lockout';
+        
+        // Check if currently locked out
+        if (Cache::store('database')->get($lockoutKey)) {
+            $seconds = Cache::store('database')->get($lockoutKey) - time();
             return back()
                 ->withErrors(['email' => "Too many login attempts. Please try again in {$seconds} seconds."])
+                ->withInput($request->except('password'));
+        }
+        
+        // Check if too many attempts
+        if ($attempts >= 5) {
+            // Lock out for 1 minute (60 seconds)
+            Cache::store('database')->put($lockoutKey, time() + 60, 60);
+            return back()
+                ->withErrors(['email' => "Too many login attempts. Please try again in 60 seconds."])
                 ->withInput($request->except('password'));
         }
 
@@ -55,14 +70,17 @@ class LoginController extends Controller
         $remember = $request->has('remember');
 
         if (Auth::attempt($credentials, $remember)) {
-            \Illuminate\Support\Facades\RateLimiter::clear($throttleKey);
+            // Clear rate limiting on successful login
+            Cache::store('database')->forget($throttleKey);
+            Cache::store('database')->forget($lockoutKey);
             $request->session()->regenerate();
             
             return redirect()->intended('/admin/dashboard')
                 ->with('success', 'Welcome back! You have successfully logged in.');
         }
 
-        \Illuminate\Support\Facades\RateLimiter::hit($throttleKey, 60);
+        // Increment failed attempts
+        Cache::store('database')->put($throttleKey, $attempts + 1, 60);
 
         return back()
             ->withErrors(['email' => 'The provided credentials do not match our records.'])
