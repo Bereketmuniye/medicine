@@ -41,6 +41,7 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::resource('books', App\Http\Controllers\Admin\BookController::class);
     Route::resource('categories', App\Http\Controllers\Admin\CategoryController::class);
     Route::resource('promotions', App\Http\Controllers\Admin\PromotionController::class);
+    Route::post('promotions/{promotion}/toggle-status', [App\Http\Controllers\Admin\PromotionController::class, 'toggleStatus'])->name('promotions.toggle-status');
     Route::resource('subscribers', App\Http\Controllers\Admin\SubscriberController::class)->only(['index', 'destroy']);
     Route::resource('settings', App\Http\Controllers\Admin\SettingController::class)->only(['index', 'update']);
 });
