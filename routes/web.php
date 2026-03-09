@@ -2,10 +2,20 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\WelcomeController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
+
+// Product search route
+Route::get('/search', [WelcomeController::class, 'search'])->name('products.search');
+
+// Public content routes
+Route::get('/articles', [App\Http\Controllers\ArticleController::class, 'index'])->name('articles.index');
+Route::get('/articles/{slug}', [App\Http\Controllers\ArticleController::class, 'show'])->name('articles.show');
+Route::get('/books', [App\Http\Controllers\BookController::class, 'index'])->name('books.index');
+Route::get('/books/{slug}', [App\Http\Controllers\BookController::class, 'show'])->name('books.show');
+Route::get('/consultation', [App\Http\Controllers\ConsultationController::class, 'index'])->name('consultation.index');
+Route::post('/consultation', [App\Http\Controllers\ConsultationController::class, 'store'])->name('consultation.store');
 
 // Authentication routes
 Route::middleware(['custom_throttle:5,1'])->group(function () {
