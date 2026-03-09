@@ -36,7 +36,7 @@
         </a>
 
         <div class="nav-label mt-4">Online Presence</div>
-        <a href="#" class="nav-item">
+        <a href="{{ route('admin.social-media.index') }}" class="nav-item {{ request()->routeIs('admin.social-media.*') ? 'active' : '' }}">
             <i class="fa-brands fa-instagram"></i>
             <span>Social Media</span>
         </a>
