@@ -29,10 +29,6 @@
                 </li>
             </ul>
             <div class="d-flex align-items-center">
-                <a href="#" class="btn-cart">
-                    <i class="bi bi-cart3"></i>
-                    <span>2</span>
-                </a>
                 <a href="{{ route('login') }}" class="btn-account">ACCOUNT</a>
             </div>
         </div>
