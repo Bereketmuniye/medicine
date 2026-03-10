@@ -417,6 +417,128 @@
                 padding: 0.8rem 1rem !important;
             }
         }
+
+        /* Footer */
+        .footer {
+            background: var(--primary);
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        .footer h5 {
+            color: white;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .footer ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer ul li a {
+            color: rgba(255,255,255,0.6);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer ul li a:hover {
+            color: var(--primary-light);
+        }
+
+        .footer-logo {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .footer-logo span {
+            color: var(--primary-light);
+        }
+
+        .footer-text {
+            color: rgba(255,255,255,0.6);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background: var(--primary-light);
+            color: var(--primary);
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .newsletter-form input {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 50px;
+            padding: 0.8rem 1.2rem;
+            color: white;
+            flex: 1;
+        }
+
+        .newsletter-form input::placeholder {
+            color: rgba(255,255,255,0.4);
+            font-style: italic;
+        }
+
+        .newsletter-form input:focus {
+            outline: none;
+            border-color: var(--primary-light);
+        }
+
+        .newsletter-form button {
+            background: var(--primary-light);
+            border: none;
+            border-radius: 50px;
+            padding: 0.8rem 2rem;
+            color: var(--primary);
+            font-weight: 700;
+            font-style: italic;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .newsletter-form button:hover {
+            background: transparent;
+            border: 2px solid var(--primary-light);
+            color: var(--primary-light);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            margin-top: 3rem;
+            padding-top: 2rem;
+            text-align: center;
+            color: rgba(255,255,255,0.6);
+        }
     </style>
 </head>
 <body>
@@ -551,6 +673,9 @@
         @endif
     </div>
 </section>
+
+<!-- Footer -->
+<x-footer />
 
 <!-- Scripts -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

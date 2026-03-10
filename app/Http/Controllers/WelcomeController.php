@@ -140,8 +140,8 @@ class WelcomeController extends Controller
             ->orderBy('sort_order', 'asc')
             ->get();
 
-        // Get social media accounts for footer
-        $socialAccounts = SocialMediaAccount::active()
+        // Get social media accounts
+        $socialAccounts = SocialMediaAccount::where('is_active', true)
             ->ordered()
             ->get();
 

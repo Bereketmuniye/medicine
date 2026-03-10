@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Models\SocialMediaAccount;
 use Illuminate\Http\Request;
 
 class BookController extends Controller
@@ -37,7 +38,10 @@ class BookController extends Controller
         // Featured books
         $featuredBooks = Book::orderBy('created_at', 'desc')->take(3)->get();
 
-        return view('books.index', compact('books', 'bookTypes', 'featuredBooks'));
+        // Get social media accounts for footer
+        $socialAccounts = SocialMediaAccount::where('is_active', true)->get();
+
+        return view('books.index', compact('books', 'bookTypes', 'featuredBooks', 'socialAccounts'));
     }
 
     /**
@@ -53,6 +57,9 @@ class BookController extends Controller
             ->take(4)
             ->get();
 
-        return view('books.show', compact('book', 'relatedBooks'));
+        // Get social media accounts for footer
+        $socialAccounts = SocialMediaAccount::where('is_active', true)->get();
+
+        return view('books.show', compact('book', 'relatedBooks', 'socialAccounts'));
     }
 }

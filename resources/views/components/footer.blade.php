@@ -5,7 +5,7 @@
                 <div class="footer-logo">HERBMED<span>.</span>ET</div>
                 <p class="footer-text">Reviving the heritage of Ethiopian medicinal plants through science and storytelling. Authentically sourced from local healers.</p>
                 <div class="social-links">
-                    @if($socialAccounts->isNotEmpty())
+                    @if(isset($socialAccounts) && $socialAccounts->isNotEmpty())
                         @foreach($socialAccounts as $account)
                             <a href="{{ $account->url }}" target="_blank">
                                 <i class="bi bi-{{ $account->platform }}"></i>

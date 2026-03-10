@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Article;
 use App\Models\Category;
+use App\Models\SocialMediaAccount;
 use Illuminate\Http\Request;
 
 class ArticleController extends Controller
@@ -40,7 +41,10 @@ class ArticleController extends Controller
         $articles = $query->paginate(12);
         $categories = Category::withCount('articles')->get();
 
-        return view('articles.index', compact('articles', 'categories'));
+        // Get social media accounts for footer
+        $socialAccounts = SocialMediaAccount::where('is_active', true)->get();
+
+        return view('articles.index', compact('articles', 'categories', 'socialAccounts'));
     }
 
     /**
@@ -73,6 +77,9 @@ class ArticleController extends Controller
             ->take(5)
             ->get();
 
-        return view('articles.show', compact('article', 'relatedArticles', 'latestArticles'));
+        // Get social media accounts for footer
+        $socialAccounts = SocialMediaAccount::where('is_active', true)->get();
+
+        return view('articles.show', compact('article', 'relatedArticles', 'latestArticles', 'socialAccounts'));
     }
 }
