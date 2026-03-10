@@ -1392,7 +1392,7 @@
 @include('components.promotions')
 
 <!-- Latest Articles -->
-@include('components.articles')
+<!-- @include('components.articles') -->
 
 
 
