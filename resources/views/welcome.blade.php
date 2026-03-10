@@ -21,6 +21,14 @@
             --text-light: #8e8e8e;
             --text-dark: #232222;
             --border-color: rgba(255,255,255,0.1);
+            --card-shadow: 0 20px 40px rgba(0,0,0,0.05);
+            --card-hover-shadow: 0 30px 60px rgba(0,0,0,0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
         body {
@@ -35,6 +43,15 @@
             background: var(--primary) !important;
             padding: 0.5rem 0;
             border-bottom: 1px solid var(--border-color);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
         }
 
         .navbar-brand {
@@ -56,6 +73,7 @@
             padding: 1.5rem 1rem !important;
             margin: 0 0.2rem;
             position: relative;
+            transition: color 0.3s ease;
         }
 
         .nav-link:hover,
@@ -87,6 +105,7 @@
             color: white;
             font-size: 1.2rem;
             margin-right: 1rem;
+            text-decoration: none;
         }
 
         .btn-cart span {
@@ -111,6 +130,8 @@
             border-radius: 50px;
             font-size: 0.9rem;
             transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
         }
 
         .btn-account:hover {
@@ -118,24 +139,38 @@
             color: var(--primary);
         }
 
-        /* Hero Section */
+        /* Hero Section - Full Screen with Video Background */
         .hero-section {
-            background: var(--primary);
-            padding: 100px 0 60px;
+            height: 100vh;
+            background: linear-gradient(135deg, var(--primary) 0%, #2a1f02 100%);
             position: relative;
             overflow: hidden;
             text-align: center;
+            display: flex;
+            align-items: center;
+            padding-top: 80px;
         }
 
-        .hero-section::before {
-            content: '';
+        /* Video Background */
+        .hero-video-background {
             position: absolute;
             top: 0;
             left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('https://images.unsplash.com/photo-1615485290382-441e4d049cb5?auto=format&fit=crop&w=1920&q=80') center/cover;
-            opacity: 0.2;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.4;
+            pointer-events: none;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(28,22,1,0.85) 0%, rgba(28,22,1,0.7) 100%);
+            z-index: 1;
         }
 
         .hero-content {
@@ -143,41 +178,52 @@
             z-index: 2;
             max-width: 800px;
             margin: 0 auto;
+            padding: 0 20px;
+            width: 100%;
         }
 
         .hero-subtitle {
-            color: var(--text-light);
+            color: var(--primary-light);
             font-size: 1rem;
             font-weight: 500;
             text-transform: uppercase;
             letter-spacing: 3px;
             margin-bottom: 1rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
         }
 
         .hero-title {
-            font-size: 4.5rem;
+            font-size: 5rem;
             font-weight: 900;
             font-style: italic;
             color: white;
             line-height: 1.1;
             margin-bottom: 2rem;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
         }
 
         .hero-title span {
             color: var(--primary-light);
             display: block;
-            font-size: 3rem;
+            font-size: 3.5rem;
             font-weight: 400;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
 
         /* Search Form */
         .search-wrapper {
-            background: rgba(255,255,255,0.1);
-            border: 1px solid rgba(255,255,255,0.2);
+            background: rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,202,8,0.3);
             border-radius: 50px;
             padding: 5px;
             max-width: 600px;
-            margin: 0 auto 3rem;
+            margin: 0 auto;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .search-wrapper form {
+            display: flex;
         }
 
         .search-wrapper .form-control {
@@ -186,15 +232,17 @@
             color: white;
             padding: 1rem 1.5rem;
             font-size: 1rem;
+            flex: 1;
         }
 
         .search-wrapper .form-control::placeholder {
-            color: rgba(255,255,255,0.5);
+            color: rgba(255,255,255,0.7);
             font-style: italic;
         }
 
         .search-wrapper .form-control:focus {
             box-shadow: none;
+            outline: none;
         }
 
         .search-wrapper .btn {
@@ -206,6 +254,8 @@
             border-radius: 50px;
             border: 2px solid transparent;
             transition: all 0.3s;
+            cursor: pointer;
+            white-space: nowrap;
         }
 
         .search-wrapper .btn:hover {
@@ -214,15 +264,20 @@
             color: var(--primary-light);
         }
 
-        /* Hero Stats */
+        /* Hero Stats - Fixed at bottom */
         .hero-stats {
-            position: relative;
+            position: absolute;
+            bottom: 40px;
+            left: 0;
+            right: 0;
             z-index: 2;
             display: flex;
             justify-content: center;
-            gap: 4rem;
+            gap: 6rem;
             padding: 2rem 0;
-            border-top: 1px solid rgba(255,255,255,0.1);
+            background: linear-gradient(to top, rgba(0,0,0,0.5), transparent);
+            backdrop-filter: blur(5px);
+            border-top: 1px solid rgba(255,202,8,0.2);
         }
 
         .hero-stat-item {
@@ -230,18 +285,21 @@
         }
 
         .hero-stat-number {
-            font-size: 2.5rem;
+            font-size: 3rem;
             font-weight: 700;
             color: var(--primary-light);
             line-height: 1;
-            margin-bottom: 0.3rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 2px 10px rgba(255,202,8,0.3);
         }
 
         .hero-stat-label {
-            color: rgba(255,255,255,0.7);
-            font-size: 0.85rem;
+            color: white;
+            font-size: 0.9rem;
             text-transform: uppercase;
             letter-spacing: 1px;
+            font-weight: 500;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.5);
         }
 
         /* Section Headers */
@@ -275,24 +333,29 @@
 
         /* About Section */
         .about-section {
-            padding: 80px 0;
+            padding: 100px 0;
             background: #f8f8f8;
         }
 
         .about-image {
             border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            box-shadow: var(--card-shadow);
         }
 
         .about-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            transition: transform 0.6s;
+        }
+
+        .about-image:hover img {
+            transform: scale(1.05);
         }
 
         .about-content h3 {
-            font-size: 2rem;
+            font-size: 2.2rem;
             font-weight: 700;
             color: var(--primary);
             margin-bottom: 1.5rem;
@@ -308,7 +371,7 @@
         .about-features {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
+            gap: 1.2rem;
             margin: 2rem 0;
         }
 
@@ -329,14 +392,14 @@
 
         /* Video Section */
         .video-section {
-            padding: 60px 0;
+            padding: 80px 0;
             background: white;
         }
 
         .video-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
             margin-top: 2rem;
         }
 
@@ -346,11 +409,12 @@
             border-radius: 15px;
             overflow: hidden;
             transition: all 0.3s;
+            box-shadow: var(--card-shadow);
         }
 
         .video-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+            box-shadow: var(--card-hover-shadow);
         }
 
         .video-wrapper {
@@ -370,171 +434,30 @@
         }
 
         .video-info {
-            padding: 1rem;
+            padding: 1.5rem;
         }
 
         .video-title {
             font-weight: 700;
             color: var(--primary);
-            margin-bottom: 0.3rem;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
         }
 
         .video-meta {
             color: var(--text-light);
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             display: flex;
             align-items: center;
-            gap: 1rem;
+            gap: 1.5rem;
         }
 
         .video-meta i {
             color: var(--primary-light);
-            margin-right: 0.2rem;
+            margin-right: 0.3rem;
         }
 
-        .btn-upload {
-            background: var(--primary-light);
-            color: var(--primary);
-            font-weight: 700;
-            font-style: italic;
-            padding: 0.8rem 2rem;
-            border-radius: 50px;
-            border: none;
-            transition: all 0.3s;
-            margin-top: 2rem;
-        }
-
-        .btn-upload:hover {
-            background: var(--primary);
-            color: white;
-        }
-
-        /* Contact Section */
-        .contact-section {
-            padding: 80px 0;
-            background: linear-gradient(135deg, var(--primary) 0%, #2a1f02 100%);
-            color: white;
-        }
-
-        .contact-info {
-            padding-right: 2rem;
-        }
-
-        .contact-info h3 {
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-            color: var(--primary-light);
-        }
-
-        .contact-info p {
-            color: rgba(255,255,255,0.7);
-            margin-bottom: 2rem;
-            line-height: 1.8;
-        }
-
-        .contact-details {
-            list-style: none;
-            padding: 0;
-            margin-bottom: 2rem;
-        }
-
-        .contact-details li {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 1rem;
-        }
-
-        .contact-details i {
-            width: 40px;
-            height: 40px;
-            background: rgba(255,202,8,0.1);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--primary-light);
-            font-size: 1.2rem;
-        }
-
-        .contact-details span {
-            color: rgba(255,255,255,0.9);
-        }
-
-        .contact-social {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .contact-social a {
-            width: 45px;
-            height: 45px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.2rem;
-            transition: all 0.3s;
-        }
-
-        .contact-social a:hover {
-            background: var(--primary-light);
-            color: var(--primary);
-            transform: translateY(-5px);
-        }
-
-        .contact-form {
-            background: white;
-            border-radius: 20px;
-            padding: 2.5rem;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.2);
-        }
-
-        .contact-form h4 {
-            color: var(--primary);
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-        }
-
-        .contact-form .form-control,
-        .contact-form .form-select {
-            border: 1px solid #f0f0f0;
-            border-radius: 10px;
-            padding: 0.8rem 1rem;
-            margin-bottom: 1rem;
-        }
-
-        .contact-form .form-control:focus,
-        .contact-form .form-select:focus {
-            border-color: var(--primary-light);
-            box-shadow: 0 0 0 0.2rem rgba(255,202,8,0.1);
-        }
-
-        .contact-form textarea {
-            min-height: 120px;
-        }
-
-        .contact-form button {
-            background: var(--primary-light);
-            color: var(--primary);
-            font-weight: 700;
-            font-style: italic;
-            padding: 0.8rem 2rem;
-            border-radius: 50px;
-            border: none;
-            width: 100%;
-            transition: all 0.3s;
-        }
-
-        .contact-form button:hover {
-            background: var(--primary);
-            color: white;
-        }
-
-        /* Product Cards */
+        /* Product Cards with Price */
         .product-card {
             background: white;
             border: 1px solid #f0f0f0;
@@ -542,11 +465,12 @@
             overflow: hidden;
             transition: all 0.3s;
             height: 100%;
+            box-shadow: var(--card-shadow);
         }
 
         .product-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+            box-shadow: var(--card-hover-shadow);
         }
 
         .product-image {
@@ -577,6 +501,7 @@
             font-size: 0.7rem;
             padding: 0.3rem 1rem;
             border-radius: 50px;
+            z-index: 2;
         }
 
         .product-actions {
@@ -587,6 +512,7 @@
             gap: 0.5rem;
             opacity: 0;
             transition: opacity 0.3s;
+            z-index: 2;
         }
 
         .product-card:hover .product-actions {
@@ -646,6 +572,25 @@
             margin-bottom: 1rem;
         }
 
+        .product-price {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .product-price small {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            font-weight: 400;
+        }
+
+        .product-footer {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
         .btn-reserve {
             background: var(--primary);
             color: white;
@@ -653,15 +598,36 @@
             font-style: italic;
             padding: 0.8rem;
             border-radius: 50px;
-            width: 100%;
+            flex: 1;
             border: 2px solid transparent;
             transition: all 0.3s;
+            cursor: pointer;
         }
 
         .btn-reserve:hover {
             background: var(--primary-light);
             color: var(--primary);
             border-color: var(--primary);
+        }
+
+        .btn-price {
+            background: var(--primary-light);
+            color: var(--primary);
+            font-weight: 700;
+            padding: 0.8rem 1rem;
+            border-radius: 50px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            border: 2px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .btn-price:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary-light);
         }
 
         /* Article Cards */
@@ -672,11 +638,12 @@
             overflow: hidden;
             transition: all 0.3s;
             height: 100%;
+            box-shadow: var(--card-shadow);
         }
 
         .article-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+            box-shadow: var(--card-hover-shadow);
         }
 
         .article-image {
@@ -738,10 +705,15 @@
             text-align: center;
             padding: 2rem;
             transition: all 0.3s;
+            background: white;
+            border-radius: 15px;
+            box-shadow: var(--card-shadow);
+            height: 100%;
         }
 
         .feature-card:hover {
             transform: translateY(-10px);
+            box-shadow: var(--card-hover-shadow);
         }
 
         .feature-icon {
@@ -771,6 +743,388 @@
             font-size: 0.95rem;
         }
 
+        /* Testimonials - Improved Design */
+        .testimonials-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #f8f8f8 0%, #ffffff 100%);
+        }
+
+        .testimonial-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            height: 100%;
+            transition: all 0.3s;
+            box-shadow: var(--card-shadow);
+            position: relative;
+            border: 1px solid #f0f0f0;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--card-hover-shadow);
+        }
+
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            font-size: 8rem;
+            font-family: serif;
+            color: var(--primary-light);
+            opacity: 0.1;
+            line-height: 1;
+        }
+
+        .testimonial-stars {
+            color: var(--primary-light);
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .testimonial-stars i {
+            margin-right: 0.2rem;
+        }
+
+        .testimonial-content {
+            color: var(--text-dark);
+            font-size: 1rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            border-top: 1px solid #f0f0f0;
+            padding-top: 1.5rem;
+        }
+
+        .author-avatar {
+            width: 60px;
+            height: 60px;
+            background: var(--primary-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 1.5rem;
+            box-shadow: 0 5px 15px rgba(255,202,8,0.3);
+        }
+
+        .author-info h6 {
+            margin: 0;
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 1.1rem;
+        }
+
+        .author-info small {
+            color: var(--text-light);
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .author-info i {
+            color: var(--primary-light);
+        }
+
+        /* Promotions - Improved Design */
+        .promotions-section {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .promo-card {
+            background: linear-gradient(135deg, var(--primary) 0%, #2a1f02 100%);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.3s;
+            height: 100%;
+            box-shadow: var(--card-shadow);
+            position: relative;
+        }
+
+        .promo-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,202,8,0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .promo-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--card-hover-shadow);
+        }
+
+        .promo-image {
+            height: 200px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .promo-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s;
+        }
+
+        .promo-card:hover .promo-image img {
+            transform: scale(1.1);
+        }
+
+        .promo-content {
+            padding: 2rem;
+            color: white;
+            position: relative;
+            z-index: 2;
+        }
+
+        .promo-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .promo-header h4 {
+            font-weight: 700;
+            margin: 0;
+            color: white;
+            font-size: 1.3rem;
+        }
+
+        .promo-badge {
+            background: var(--primary-light);
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 0.8rem;
+            padding: 0.3rem 1.2rem;
+            border-radius: 50px;
+        }
+
+        .promo-description {
+            color: rgba(255,255,255,0.8);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .promo-code-wrapper {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 50px;
+            padding: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .promo-code {
+            font-family: monospace;
+            font-weight: 700;
+            color: var(--primary-light);
+            font-size: 1.1rem;
+            padding: 0 1rem;
+        }
+
+        .promo-copy-btn {
+            background: var(--primary-light);
+            border: none;
+            border-radius: 50px;
+            padding: 0.5rem 1.5rem;
+            color: var(--primary);
+            font-weight: 600;
+            transition: all 0.3s;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .promo-copy-btn:hover {
+            background: white;
+            color: var(--primary);
+        }
+
+        .promo-expiry {
+            margin-top: 1rem;
+            color: rgba(255,255,255,0.6);
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .promo-expiry i {
+            color: var(--primary-light);
+        }
+
+        /* Contact Section */
+        .contact-section {
+            padding: 100px 0;
+            background: linear-gradient(135deg, var(--primary) 0%, #2a1f02 100%);
+            color: white;
+        }
+
+        .contact-info {
+            padding-right: 2rem;
+        }
+
+        .contact-info h3 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--primary-light);
+        }
+
+        .contact-info p {
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+
+        .contact-details {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 2rem;
+        }
+
+        .contact-details li {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .contact-details i {
+            width: 45px;
+            height: 45px;
+            background: rgba(255,202,8,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-light);
+            font-size: 1.2rem;
+            transition: all 0.3s;
+        }
+
+        .contact-details li:hover i {
+            background: var(--primary-light);
+            color: var(--primary);
+            transform: scale(1.1);
+        }
+
+        .contact-details span {
+            color: rgba(255,255,255,0.9);
+            font-size: 1rem;
+        }
+
+        .contact-social {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-social a {
+            width: 50px;
+            height: 50px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.3rem;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .contact-social a:hover {
+            background: var(--primary-light);
+            color: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        .contact-form {
+            background: white;
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.2);
+        }
+
+        .contact-form h4 {
+            color: var(--primary);
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        .contact-form .form-control,
+        .contact-form .form-select {
+            border: 2px solid #f0f0f0;
+            border-radius: 12px;
+            padding: 0.8rem 1rem;
+            margin-bottom: 1rem;
+            transition: all 0.3s;
+            width: 100%;
+        }
+
+        .contact-form .form-control:focus,
+        .contact-form .form-select:focus {
+            border-color: var(--primary-light);
+            box-shadow: 0 0 0 0.2rem rgba(255,202,8,0.1);
+            outline: none;
+        }
+
+        .contact-form textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .contact-form button {
+            background: var(--primary-light);
+            color: var(--primary);
+            font-weight: 700;
+            font-style: italic;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            border: none;
+            width: 100%;
+            transition: all 0.3s;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .contact-form button:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
         /* Footer */
         .footer {
             background: var(--primary);
@@ -782,6 +1136,7 @@
             color: white;
             font-weight: 700;
             margin-bottom: 1.5rem;
+            font-size: 1.1rem;
         }
 
         .footer ul {
@@ -816,6 +1171,7 @@
         .footer-text {
             color: rgba(255,255,255,0.6);
             margin-bottom: 1.5rem;
+            line-height: 1.6;
         }
 
         .social-links {
@@ -833,11 +1189,54 @@
             align-items: center;
             justify-content: center;
             transition: all 0.3s;
+            text-decoration: none;
         }
 
         .social-links a:hover {
             background: var(--primary-light);
             color: var(--primary);
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .newsletter-form input {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 50px;
+            padding: 0.8rem 1.2rem;
+            color: white;
+            flex: 1;
+        }
+
+        .newsletter-form input::placeholder {
+            color: rgba(255,255,255,0.4);
+            font-style: italic;
+        }
+
+        .newsletter-form input:focus {
+            outline: none;
+            border-color: var(--primary-light);
+        }
+
+        .newsletter-form button {
+            background: var(--primary-light);
+            border: none;
+            border-radius: 50px;
+            padding: 0.8rem 2rem;
+            color: var(--primary);
+            font-weight: 700;
+            font-style: italic;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .newsletter-form button:hover {
+            background: transparent;
+            border: 2px solid var(--primary-light);
+            color: var(--primary-light);
         }
 
         .footer-bottom {
@@ -849,19 +1248,51 @@
             font-size: 0.9rem;
         }
 
+        /* Toast notification */
+        .toast {
+            background: var(--primary-light);
+            color: var(--primary);
+            border-radius: 50px;
+            padding: 1rem 2rem;
+            font-weight: 600;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
         /* Responsive */
-        @media (max-width: 768px) {
+        @media (max-width: 1200px) {
             .hero-title {
-                font-size: 3rem;
+                font-size: 4rem;
             }
             
             .hero-title span {
-                font-size: 2rem;
+                font-size: 3rem;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .video-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .hero-stats {
+                gap: 3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 3.5rem;
+            }
+            
+            .hero-title span {
+                font-size: 2.5rem;
             }
             
             .hero-stats {
                 flex-direction: column;
                 gap: 1.5rem;
+                bottom: 20px;
+                padding: 1.5rem 0;
             }
             
             .section-title {
@@ -872,6 +1303,7 @@
                 background: var(--primary);
                 padding: 1rem;
                 border-radius: 15px;
+                margin-top: 1rem;
             }
             
             .nav-link {
@@ -886,16 +1318,57 @@
                 padding-right: 0;
                 margin-bottom: 2rem;
             }
+            
+            .video-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .search-wrapper form {
+                flex-direction: column;
+            }
+            
+            .search-wrapper .btn {
+                width: 100%;
+                margin-top: 0.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-title span {
+                font-size: 2rem;
+            }
+            
+            .hero-stats {
+                gap: 1rem;
+            }
+            
+            .hero-stat-number {
+                font-size: 2rem;
+            }
+            
+            .hero-stat-label {
+                font-size: 0.8rem;
+            }
+            
+            .contact-social a {
+                width: 40px;
+                height: 40px;
+                font-size: 1.1rem;
+            }
         }
     </style>
 </head>
 <body>
 
 <!-- Navigation -->
-<nav class="navbar navbar-expand-lg sticky-top">
+<nav class="navbar navbar-expand-lg" id="mainNav">
     <div class="container">
         <a class="navbar-brand" href="#">HERBMED<span>.</span>ET</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav" aria-controls="nav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon" style="filter: invert(1);"></span>
         </button>
         <div class="collapse navbar-collapse" id="nav">
@@ -918,6 +1391,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('articles.index') }}">LITERATURE</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('books.index') }}">BOOKS</a>
+                </li>
             </ul>
             <div class="d-flex align-items-center">
                 <a href="#" class="btn-cart">
@@ -930,8 +1406,16 @@
     </div>
 </nav>
 
-<!-- Hero Section -->
+<!-- Hero Section - Full Screen with Video Background -->
 <section class="hero-section" id="home">
+    <!-- Video Background with fallback -->
+    <video class="hero-video-background" autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1615485290382-441e4d049cb5?auto=format&fit=crop&w=1920&q=80">
+        <source src="https://assets.mixkit.co/videos/preview/mixkit-herbalist-hand-pouring-dry-tea-leaves-40153-large.mp4" type="video/mp4">
+        <!-- Fallback message if video doesn't load -->
+        Your browser does not support the video tag.
+    </video>
+    <div class="hero-overlay"></div>
+    
     <div class="container">
         <div class="hero-content" data-aos="fade-up">
             <div class="hero-subtitle">Ethiopian Heritage • Since 2020</div>
@@ -949,7 +1433,7 @@
         </div>
     </div>
     
-    <!-- Hero Stats - Now at bottom of hero section -->
+    <!-- Hero Stats - Fixed at bottom -->
     <div class="hero-stats" data-aos="fade-up" data-aos-delay="200">
         <div class="hero-stat-item">
             <div class="hero-stat-number count-up">50</div>
@@ -974,7 +1458,7 @@
             <h2 class="section-title">We compare traditional wisdom, <span>you save!</span></h2>
         </div>
         
-        <div class="row">
+        <div class="row g-4">
             <div class="col-md-3" data-aos="fade-up" data-aos-delay="100">
                 <div class="feature-card">
                     <div class="feature-icon">
@@ -1015,7 +1499,7 @@
     </div>
 </section>
 
-<!-- Featured Remedies -->
+<!-- Featured Remedies with Price -->
 <section class="py-5" id="remedies">
     <div class="container">
         <div class="section-header" data-aos="fade-up">
@@ -1046,9 +1530,15 @@
                                 <div class="product-scientific">{{ $plant->scientific_name }}</div>
                             @endif
                             <div class="product-local">{{ $plant->local_name ?? 'Traditional Herb' }}</div>
-                            <button class="btn-reserve contact-btn" data-phone="{{ $owner_phone ?? '+251911XXXXXX' }}">
-                                <i class="bi bi-whatsapp me-2"></i>RESERVE NOW
-                            </button>
+                            <div class="product-price">$29.99 <small>/oz</small></div>
+                            <div class="product-footer">
+                                <button class="btn-reserve contact-btn" data-phone="{{ $owner_phone ?? '+251911XXXXXX' }}">
+                                    <i class="bi bi-whatsapp"></i>
+                                </button>
+                                <a href="#" class="btn-price">
+                                    <i class="bi bi-bag"></i> Buy
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1096,23 +1586,23 @@
                         </div>
                     </div>
                     
-                    <a href="#" class="btn-account" style="background: var(--primary-light); color: var(--primary); border: none; padding: 1rem 2.5rem;">LEARN MORE</a>
+                    <a href="#" class="btn-account" style="background: var(--primary-light); color: var(--primary); border: none; padding: 1rem 2.5rem; display: inline-block;">LEARN MORE</a>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Video Section -->
+<!-- Video Section - Without Upload Button -->
 <section class="video-section" id="videos">
     <div class="container">
         <div class="section-header" data-aos="fade-up">
             <span class="section-subtitle">COMMUNITY VIDEOS</span>
             <h2 class="section-title">Healing <span>Stories</span></h2>
-            <p class="text-muted">Watch and share your own experiences with traditional medicine</p>
+            <p class="text-muted">Watch real experiences from our community</p>
         </div>
         
-        <!-- Video Grid - Sample videos (replace with dynamic content) -->
+        <!-- Video Grid - Sample videos -->
         <div class="video-grid">
             <div class="video-card" data-aos="fade-up" data-aos-delay="100">
                 <div class="video-wrapper">
@@ -1192,48 +1682,127 @@
                 </div>
             </div>
         </div>
-        
-        <!-- Upload Button -->
-        <div class="text-center">
-            <button class="btn-upload" data-bs-toggle="modal" data-bs-target="#uploadModal">
-                <i class="bi bi-upload me-2"></i> SHARE YOUR VIDEO
-            </button>
-        </div>
     </div>
 </section>
 
-<!-- Upload Modal -->
-<div class="modal fade" id="uploadModal" tabindex="-1">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Share Your Video</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body">
-                <form>
-                    <div class="mb-3">
-                        <label class="form-label">Your Name</label>
-                        <input type="text" class="form-control" placeholder="Enter your name">
+<!-- Testimonials - Improved Design -->
+@if($testimonials && count($testimonials) > 0)
+<section class="testimonials-section">
+    <div class="container">
+        <div class="section-header" data-aos="fade-up">
+            <span class="section-subtitle">TESTIMONIALS</span>
+            <h2 class="section-title">What our <span>customers say</span></h2>
+        </div>
+        
+        <div class="row g-4">
+            @foreach($testimonials as $testimonial)
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
+                    <div class="testimonial-card">
+                        <div class="testimonial-stars">
+                            @for($i = 1; $i <= 5; $i++)
+                                <i class="bi bi-star{{ $i <= ($testimonial['rating'] ?? 5) ? '-fill' : '' }}"></i>
+                            @endfor
+                        </div>
+                        <p class="testimonial-content">"{{ $testimonial['content'] }}"</p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">
+                                {{ substr($testimonial['author'], 0, 1) }}
+                            </div>
+                            <div class="author-info">
+                                <h6>{{ $testimonial['author'] }}</h6>
+                                <small><i class="bi bi-geo-alt"></i> {{ $testimonial['location'] }}</small>
+                            </div>
+                        </div>
                     </div>
-                    <div class="mb-3">
-                        <label class="form-label">YouTube / Vimeo Link</label>
-                        <input type="url" class="form-control" placeholder="https://youtube.com/watch?v=...">
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Video Title</label>
-                        <input type="text" class="form-control" placeholder="Enter video title">
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Description (Optional)</label>
-                        <textarea class="form-control" rows="3" placeholder="Tell us about your video"></textarea>
-                    </div>
-                    <button type="submit" class="btn-upload w-100">SUBMIT VIDEO</button>
-                </form>
-            </div>
+                </div>
+            @endforeach
         </div>
     </div>
-</div>
+</section>
+@endif
+
+<!-- Promotions - Improved Design -->
+@if($activePromotions->isNotEmpty())
+<section class="promotions-section">
+    <div class="container">
+        <div class="section-header" data-aos="fade-up">
+            <span class="section-subtitle">SPECIAL OFFERS</span>
+            <h2 class="section-title">Current <span>Promotions</span></h2>
+        </div>
+        
+        <div class="row g-4">
+            @foreach($activePromotions as $promotion)
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
+                    <div class="promo-card">
+                        @if($promotion->image)
+                            <div class="promo-image">
+                                <img src="{{ asset('storage/' . $promotion->image) }}" alt="{{ $promotion->title }}">
+                            </div>
+                        @endif
+                        <div class="promo-content">
+                            <div class="promo-header">
+                                <h4>{{ $promotion->title }}</h4>
+                                <span class="promo-badge">{{ $promotion->discount_display ?? 'Special Offer' }}</span>
+                            </div>
+                            <p class="promo-description">{{ Str::limit($promotion->description, 100) }}</p>
+                            @if($promotion->promo_code)
+                                <div class="promo-code-wrapper">
+                                    <span class="promo-code">{{ $promotion->promo_code }}</span>
+                                    <button class="promo-copy-btn" onclick="copyPromoCode('{{ $promotion->promo_code }}')">
+                                        <i class="bi bi-files"></i> Copy
+                                    </button>
+                                </div>
+                            @endif
+                            @if($promotion->expiry_date)
+                                <div class="promo-expiry">
+                                    <i class="bi bi-clock"></i>
+                                    <span>Valid until {{ \Carbon\Carbon::parse($promotion->expiry_date)->format('M d, Y') }}</span>
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    </div>
+</section>
+@endif
+
+<!-- Latest Articles -->
+@if($latestArticles->isNotEmpty())
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="section-header" data-aos="fade-up">
+            <span class="section-subtitle">KNOWLEDGE & WISDOM</span>
+            <h2 class="section-title">Latest <span>Insights</span></h2>
+        </div>
+        
+        <div class="row g-4">
+            @foreach($latestArticles->take(3) as $article)
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
+                    <div class="article-card">
+                        <div class="article-image">
+                            @if($article->featured_image)
+                                <img src="{{ asset('storage/' . $article->featured_image) }}" alt="{{ $article->title }}">
+                            @else
+                                <img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=800&q=80" alt="Article">
+                            @endif
+                        </div>
+                        <div class="article-content">
+                            <div class="article-meta">{{ $article->published_at ? $article->published_at->format('M d, Y') : 'Recently' }}</div>
+                            <h5 class="article-title">{{ Str::limit($article->title, 50) }}</h5>
+                            <p class="article-excerpt">{{ Str::limit(strip_tags($article->content), 100) }}</p>
+                            <a href="#" class="btn-read">
+                                Read More <i class="bi bi-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    </div>
+</section>
+@endif
 
 <!-- Contact Section -->
 <section class="contact-section" id="contact">
@@ -1301,115 +1870,6 @@
         </div>
     </div>
 </section>
-
-<!-- Latest Articles -->
-@if($latestArticles->isNotEmpty())
-<section class="py-5 bg-light">
-    <div class="container">
-        <div class="section-header" data-aos="fade-up">
-            <span class="section-subtitle">KNOWLEDGE & WISDOM</span>
-            <h2 class="section-title">Latest <span>Insights</span></h2>
-        </div>
-        
-        <div class="row g-4">
-            @foreach($latestArticles->take(3) as $article)
-                <div class="col-md-4" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
-                    <div class="article-card">
-                        <div class="article-image">
-                            @if($article->featured_image)
-                                <img src="{{ asset('storage/' . $article->featured_image) }}" alt="{{ $article->title }}">
-                            @else
-                                <img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=800&q=80" alt="Article">
-                            @endif
-                        </div>
-                        <div class="article-content">
-                            <div class="article-meta">{{ $article->published_at ? $article->published_at->format('M d, Y') : 'Recently' }}</div>
-                            <h5 class="article-title">{{ Str::limit($article->title, 50) }}</h5>
-                            <p class="article-excerpt">{{ Str::limit(strip_tags($article->content), 100) }}</p>
-                            <a href="#" class="btn-read">
-                                Read More <i class="bi bi-arrow-right"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            @endforeach
-        </div>
-    </div>
-</section>
-@endif
-
-<!-- Testimonials Section -->
-@if($testimonials && count($testimonials) > 0)
-<section class="py-5">
-    <div class="container">
-        <div class="section-header" data-aos="fade-up">
-            <span class="section-subtitle">TESTIMONIALS</span>
-            <h2 class="section-title">What our <span>customers say</span></h2>
-        </div>
-        
-        <div class="row g-4">
-            @foreach($testimonials as $testimonial)
-                <div class="col-md-4" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
-                    <div class="testimonial-card">
-                        <div class="testimonial-stars">
-                            @for($i = 1; $i <= 5; $i++)
-                                <i class="bi bi-star{{ $i <= ($testimonial['rating'] ?? 5) ? '-fill' : '' }}"></i>
-                            @endfor
-                        </div>
-                        <p class="testimonial-content">"{{ $testimonial['content'] }}"</p>
-                        <div class="testimonial-author">
-                            <div class="author-avatar">
-                                {{ substr($testimonial['author'], 0, 1) }}
-                            </div>
-                            <div class="author-info">
-                                <h6>{{ $testimonial['author'] }}</h6>
-                                <small>{{ $testimonial['location'] }}</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            @endforeach
-        </div>
-    </div>
-</section>
-@endif
-
-<!-- Promotions Section -->
-@if($activePromotions->isNotEmpty())
-<section class="py-5 bg-light">
-    <div class="container">
-        <div class="section-header" data-aos="fade-up">
-            <span class="section-subtitle">SPECIAL OFFERS</span>
-            <h2 class="section-title">Current <span>Promotions</span></h2>
-        </div>
-        
-        <div class="row g-4">
-            @foreach($activePromotions as $promotion)
-                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
-                    <div class="card border-0 shadow-sm h-100">
-                        @if($promotion->image)
-                            <img src="{{ asset('storage/' . $promotion->image) }}" class="card-img-top" alt="{{ $promotion->title }}" style="height: 200px; object-fit: cover;">
-                        @endif
-                        <div class="card-body p-4">
-                            <div class="d-flex justify-content-between align-items-start mb-2">
-                                <h5 class="card-title mb-0">{{ $promotion->title }}</h5>
-                                <span class="badge bg-danger">{{ $promotion->discount_display ?? 'Special Offer' }}</span>
-                            </div>
-                            <p class="card-text text-muted">{{ Str::limit($promotion->description, 100) }}</p>
-                            @if($promotion->promo_code)
-                                <div class="input-group">
-                                    <input type="text" class="form-control" value="{{ $promotion->promo_code }}" readonly>
-                                    <button class="btn btn-outline-secondary" type="button" onclick="copyPromoCode('{{ $promotion->promo_code }}')">Copy</button>
-                                </div>
-                            @endif
-                        </div>
-                    </div>
-                </div>
-            @endforeach
-        </div>
-    </div>
-</section>
-@endif
 
 <!-- Footer -->
 <footer class="footer">
@@ -1516,7 +1976,7 @@
     document.querySelectorAll('.contact-btn').forEach(btn => {
         btn.addEventListener('click', function() {
             const phone = this.getAttribute('data-phone');
-            this.innerHTML = `<i class="bi bi-whatsapp me-2"></i> ${phone}`;
+            this.innerHTML = `<i class="bi bi-whatsapp"></i>`;
             this.classList.add('bg-success');
             this.style.border = 'none';
         });
@@ -1525,7 +1985,19 @@
     // Copy promo code
     function copyPromoCode(code) {
         navigator.clipboard.writeText(code).then(() => {
-            alert('Promo code copied to clipboard!');
+            // Show success message
+            const toast = document.createElement('div');
+            toast.className = 'position-fixed top-0 end-0 p-3';
+            toast.style.zIndex = '9999';
+            toast.innerHTML = `
+                <div class="toast show" role="alert">
+                    <div class="toast-body">
+                        Promo code "${code}" copied to clipboard!
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 3000);
         });
     }
 
@@ -1533,11 +2005,9 @@
     window.addEventListener('scroll', function() {
         const nav = document.querySelector('.navbar');
         if (window.scrollY > 100) {
-            nav.style.background = 'var(--primary)';
-            nav.style.boxShadow = '0 5px 20px rgba(0,0,0,0.1)';
+            nav.classList.add('scrolled');
         } else {
-            nav.style.background = 'var(--primary)';
-            nav.style.boxShadow = 'none';
+            nav.classList.remove('scrolled');
         }
     });
 
@@ -1554,6 +2024,15 @@
             }
         });
     });
+
+    // Video background fallback
+    const video = document.querySelector('.hero-video-background');
+    if (video) {
+        video.play().catch(function(error) {
+            console.log("Video autoplay failed:", error);
+            // Video will show poster image instead
+        });
+    }
 </script>
 
 </body>
