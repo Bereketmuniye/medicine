@@ -403,13 +403,13 @@
                     <a class="nav-link" href="{{ route('welcome') }}">HOME</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#about">ABOUT</a>
+                    <a class="nav-link" href="{{ route('welcome') }}#about">ABOUT</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#videos">VIDEOS</a>
+                    <a class="nav-link" href="{{ route('welcome') }}#videos">VIDEOS</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#contact">CONTACT</a>
+                    <a class="nav-link" href="{{ route('welcome') }}#contact">CONTACT</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('articles.index') }}">LITERATURE</a>
