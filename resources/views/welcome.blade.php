@@ -9,17 +9,17 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <!-- Google Fonts - Clean & Professional -->
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
-    <!-- AOS Animation Library -->
+    <!-- AOS Animation -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <style>
         :root {
-            --primary: #1c1601;        /* Dark background from car rental */
-            --primary-light: #ffca08;   /* Yellow accent */
-            --text-light: #8e8e8e;      /* Gray text */
-            --text-dark: #232222;        /* Dark text */
+            --primary: #1c1601;
+            --primary-light: #ffca08;
+            --text-light: #8e8e8e;
+            --text-dark: #232222;
             --border-color: rgba(255,255,255,0.1);
         }
 
@@ -30,7 +30,7 @@
             overflow-x: hidden;
         }
 
-        /* ===== Navigation ===== */
+        /* Navigation */
         .navbar {
             background: var(--primary) !important;
             padding: 0.5rem 0;
@@ -118,12 +118,13 @@
             color: var(--primary);
         }
 
-        /* ===== Hero Section (Slider Style) ===== */
+        /* Hero Section */
         .hero-section {
             background: var(--primary);
-            padding: 80px 0;
+            padding: 100px 0 60px;
             position: relative;
             overflow: hidden;
+            text-align: center;
         }
 
         .hero-section::before {
@@ -134,19 +135,22 @@
             right: 0;
             bottom: 0;
             background: url('https://images.unsplash.com/photo-1615485290382-441e4d049cb5?auto=format&fit=crop&w=1920&q=80') center/cover;
-            opacity: 0.3;
+            opacity: 0.2;
         }
 
         .hero-content {
             position: relative;
             z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
         }
 
         .hero-subtitle {
             color: var(--text-light);
-            font-size: 1.2rem;
+            font-size: 1rem;
             font-weight: 500;
-            font-style: italic;
+            text-transform: uppercase;
+            letter-spacing: 3px;
             margin-bottom: 1rem;
         }
 
@@ -155,7 +159,7 @@
             font-weight: 900;
             font-style: italic;
             color: white;
-            line-height: 1;
+            line-height: 1.1;
             margin-bottom: 2rem;
         }
 
@@ -166,28 +170,14 @@
             font-weight: 400;
         }
 
-        .hero-image {
-            position: relative;
-            z-index: 2;
-        }
-
-        .hero-image img {
-            max-width: 100%;
-            animation: float 6s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
-        }
-
-        /* ===== Search Form ===== */
+        /* Search Form */
         .search-wrapper {
             background: rgba(255,255,255,0.1);
             border: 1px solid rgba(255,255,255,0.2);
             border-radius: 50px;
             padding: 5px;
-            max-width: 700px;
+            max-width: 600px;
+            margin: 0 auto 3rem;
         }
 
         .search-wrapper .form-control {
@@ -212,7 +202,7 @@
             color: var(--primary);
             font-weight: 700;
             font-style: italic;
-            padding: 1rem 2.5rem;
+            padding: 1rem 2rem;
             border-radius: 50px;
             border: 2px solid transparent;
             transition: all 0.3s;
@@ -224,7 +214,37 @@
             color: var(--primary-light);
         }
 
-        /* ===== Section Headers ===== */
+        /* Hero Stats */
+        .hero-stats {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            padding: 2rem 0;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .hero-stat-item {
+            text-align: center;
+        }
+
+        .hero-stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-light);
+            line-height: 1;
+            margin-bottom: 0.3rem;
+        }
+
+        .hero-stat-label {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Section Headers */
         .section-header {
             text-align: center;
             margin-bottom: 3rem;
@@ -253,114 +273,268 @@
             padding-bottom: 2px;
         }
 
-        /* ===== Feature Cards (Like Car Rental) ===== */
-        .feature-card {
-            text-align: center;
-            padding: 2rem;
-            transition: all 0.3s;
+        /* About Section */
+        .about-section {
+            padding: 80px 0;
+            background: #f8f8f8;
         }
 
-        .feature-card:hover {
-            transform: translateY(-10px);
+        .about-image {
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
         }
 
-        .feature-icon {
-            width: 80px;
-            height: 80px;
-            background: var(--primary-light);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 1.5rem;
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
-        .feature-icon i {
-            font-size: 2.5rem;
-            color: var(--primary);
-        }
-
-        .feature-card h4 {
+        .about-content h3 {
+            font-size: 2rem;
             font-weight: 700;
             color: var(--primary);
-            margin-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
         }
 
-        .feature-card p {
+        .about-content p {
             color: var(--text-light);
-            font-size: 0.95rem;
+            font-size: 1rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
         }
 
-        /* ===== Article Cards ===== */
-        .article-card {
+        .about-features {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .about-feature {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .about-feature i {
+            color: var(--primary-light);
+            font-size: 1.2rem;
+        }
+
+        .about-feature span {
+            font-weight: 500;
+        }
+
+        /* Video Section */
+        .video-section {
+            padding: 60px 0;
+            background: white;
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .video-card {
             background: white;
             border: 1px solid #f0f0f0;
             border-radius: 15px;
             overflow: hidden;
             transition: all 0.3s;
-            height: 100%;
         }
 
-        .article-card:hover {
+        .video-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 20px 40px rgba(0,0,0,0.05);
         }
 
-        .article-image {
-            height: 200px;
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 */
+            height: 0;
             overflow: hidden;
         }
 
-        .article-image img {
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover;
-            transition: transform 0.6s;
+            border: none;
         }
 
-        .article-card:hover .article-image img {
-            transform: scale(1.1);
+        .video-info {
+            padding: 1rem;
         }
 
-        .article-content {
-            padding: 1.5rem;
-        }
-
-        .article-meta {
-            color: var(--primary-light);
-            font-size: 0.8rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-
-        .article-title {
-            font-size: 1.2rem;
+        .video-title {
             font-weight: 700;
-            margin-bottom: 1rem;
             color: var(--primary);
+            margin-bottom: 0.3rem;
         }
 
-        .article-excerpt {
+        .video-meta {
             color: var(--text-light);
-            font-size: 0.9rem;
-            line-height: 1.6;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .video-meta i {
+            color: var(--primary-light);
+            margin-right: 0.2rem;
+        }
+
+        .btn-upload {
+            background: var(--primary-light);
+            color: var(--primary);
+            font-weight: 700;
+            font-style: italic;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            border: none;
+            transition: all 0.3s;
+            margin-top: 2rem;
+        }
+
+        .btn-upload:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, var(--primary) 0%, #2a1f02 100%);
+            color: white;
+        }
+
+        .contact-info {
+            padding-right: 2rem;
+        }
+
+        .contact-info h3 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--primary-light);
+        }
+
+        .contact-info p {
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .contact-details {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 2rem;
+        }
+
+        .contact-details li {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact-details i {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,202,8,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-light);
+            font-size: 1.2rem;
+        }
+
+        .contact-details span {
+            color: rgba(255,255,255,0.9);
+        }
+
+        .contact-social {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .contact-social a {
+            width: 45px;
+            height: 45px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+        }
+
+        .contact-social a:hover {
+            background: var(--primary-light);
+            color: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        .contact-form {
+            background: white;
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.2);
+        }
+
+        .contact-form h4 {
+            color: var(--primary);
+            font-weight: 700;
             margin-bottom: 1.5rem;
         }
 
-        .btn-read {
+        .contact-form .form-control,
+        .contact-form .form-select {
+            border: 1px solid #f0f0f0;
+            border-radius: 10px;
+            padding: 0.8rem 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact-form .form-control:focus,
+        .contact-form .form-select:focus {
+            border-color: var(--primary-light);
+            box-shadow: 0 0 0 0.2rem rgba(255,202,8,0.1);
+        }
+
+        .contact-form textarea {
+            min-height: 120px;
+        }
+
+        .contact-form button {
+            background: var(--primary-light);
             color: var(--primary);
             font-weight: 700;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
+            font-style: italic;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            border: none;
+            width: 100%;
+            transition: all 0.3s;
         }
 
-        .btn-read:hover {
-            color: var(--primary-light);
+        .contact-form button:hover {
+            background: var(--primary);
+            color: white;
         }
 
-        /* ===== Product Cards ===== */
+        /* Product Cards */
         .product-card {
             background: white;
             border: 1px solid #f0f0f0;
@@ -490,196 +664,114 @@
             border-color: var(--primary);
         }
 
-        /* ===== Pricing/Plans Section ===== */
-        .plans-section {
-            background: var(--primary);
-            color: white;
-            padding: 60px 0;
-        }
-
-        .plan-card {
-            background: rgba(255,255,255,0.1);
-            border: 1px solid rgba(255,255,255,0.2);
-            border-radius: 25px;
-            padding: 2rem;
-            text-align: center;
-            height: 100%;
-            transition: all 0.3s;
-        }
-
-        .plan-card:hover {
-            background: rgba(255,255,255,0.15);
-            transform: translateY(-10px);
-        }
-
-        .plan-card.popular {
-            background: var(--primary-light);
-            color: var(--primary);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .popular-badge {
-            position: absolute;
-            top: 1rem;
-            right: -2rem;
-            background: var(--primary);
-            color: var(--primary-light);
-            padding: 0.3rem 3rem;
-            transform: rotate(45deg);
-            font-size: 0.8rem;
-            font-weight: 700;
-        }
-
-        .plan-card h3 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-        }
-
-        .plan-price {
-            font-size: 3rem;
-            font-weight: 700;
-            margin-bottom: 2rem;
-        }
-
-        .plan-price small {
-            font-size: 1rem;
-            opacity: 0.7;
-        }
-
-        .plan-features {
-            list-style: none;
-            padding: 0;
-            margin: 0 0 2rem;
-        }
-
-        .plan-features li {
-            padding: 0.5rem 0;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .plan-features li:last-child {
-            border-bottom: none;
-        }
-
-        .plan-features i {
-            color: var(--primary-light);
-            margin-right: 0.5rem;
-        }
-
-        .popular .plan-features i {
-            color: var(--primary);
-        }
-
-        .btn-plan {
-            background: transparent;
-            border: 2px solid var(--primary-light);
-            color: var(--primary-light);
-            font-weight: 700;
-            font-style: italic;
-            padding: 0.8rem 2rem;
-            border-radius: 50px;
-            width: 100%;
-            transition: all 0.3s;
-        }
-
-        .btn-plan:hover {
-            background: var(--primary-light);
-            color: var(--primary);
-        }
-
-        .popular .btn-plan {
-            background: var(--primary);
-            border-color: var(--primary);
-            color: white;
-        }
-
-        .popular .btn-plan:hover {
-            background: transparent;
-            color: var(--primary);
-        }
-
-        /* ===== Stats Section ===== */
-        .stats-section {
-            padding: 60px 0;
-            background: #f8f8f8;
-        }
-
-        .stat-item {
-            text-align: center;
-        }
-
-        .stat-number {
-            font-size: 3rem;
-            font-weight: 700;
-            color: var(--primary);
-            line-height: 1;
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-label {
-            color: var(--text-light);
-            font-weight: 500;
-        }
-
-        /* ===== Testimonials ===== */
-        .testimonial-card {
+        /* Article Cards */
+        .article-card {
             background: white;
             border: 1px solid #f0f0f0;
-            border-radius: 25px;
-            padding: 2rem;
-            height: 100%;
+            border-radius: 15px;
+            overflow: hidden;
             transition: all 0.3s;
+            height: 100%;
         }
 
-        .testimonial-card:hover {
+        .article-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 20px 40px rgba(0,0,0,0.05);
         }
 
-        .testimonial-stars {
-            color: var(--primary-light);
-            margin-bottom: 1rem;
+        .article-image {
+            height: 200px;
+            overflow: hidden;
         }
 
-        .testimonial-content {
-            color: var(--text-dark);
-            font-size: 0.95rem;
+        .article-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s;
+        }
+
+        .article-card:hover .article-image img {
+            transform: scale(1.1);
+        }
+
+        .article-content {
+            padding: 1.5rem;
+        }
+
+        .article-meta {
+            color: var(--primary-light);
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .article-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .article-excerpt {
+            color: var(--text-light);
+            font-size: 0.9rem;
             line-height: 1.6;
             margin-bottom: 1.5rem;
-            font-style: italic;
         }
 
-        .testimonial-author {
-            display: flex;
+        .btn-read {
+            color: var(--primary);
+            font-weight: 700;
+            text-decoration: none;
+            display: inline-flex;
             align-items: center;
-            gap: 1rem;
+            gap: 0.5rem;
         }
 
-        .author-avatar {
-            width: 50px;
-            height: 50px;
+        .btn-read:hover {
+            color: var(--primary-light);
+        }
+
+        /* Feature Cards */
+        .feature-card {
+            text-align: center;
+            padding: 2rem;
+            transition: all 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
             background: var(--primary-light);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--primary);
-            font-weight: 700;
+            margin: 0 auto 1.5rem;
         }
 
-        .author-info h6 {
-            margin: 0;
-            font-weight: 700;
+        .feature-icon i {
+            font-size: 2.5rem;
             color: var(--primary);
         }
 
-        .author-info small {
+        .feature-card h4 {
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-card p {
             color: var(--text-light);
+            font-size: 0.95rem;
         }
 
-        /* ===== Footer ===== */
+        /* Footer */
         .footer {
             background: var(--primary);
             color: white;
@@ -748,42 +840,6 @@
             color: var(--primary);
         }
 
-        .newsletter-form {
-            display: flex;
-            gap: 0.5rem;
-        }
-
-        .newsletter-form input {
-            background: rgba(255,255,255,0.1);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 50px;
-            padding: 0.8rem 1.2rem;
-            color: white;
-            flex: 1;
-        }
-
-        .newsletter-form input::placeholder {
-            color: rgba(255,255,255,0.4);
-            font-style: italic;
-        }
-
-        .newsletter-form button {
-            background: var(--primary-light);
-            border: none;
-            border-radius: 50px;
-            padding: 0.8rem 2rem;
-            color: var(--primary);
-            font-weight: 700;
-            font-style: italic;
-            transition: all 0.3s;
-        }
-
-        .newsletter-form button:hover {
-            background: transparent;
-            border: 2px solid var(--primary-light);
-            color: var(--primary-light);
-        }
-
         .footer-bottom {
             border-top: 1px solid rgba(255,255,255,0.1);
             margin-top: 3rem;
@@ -793,7 +849,7 @@
             font-size: 0.9rem;
         }
 
-        /* ===== Responsive ===== */
+        /* Responsive */
         @media (max-width: 768px) {
             .hero-title {
                 font-size: 3rem;
@@ -801,6 +857,11 @@
             
             .hero-title span {
                 font-size: 2rem;
+            }
+            
+            .hero-stats {
+                flex-direction: column;
+                gap: 1.5rem;
             }
             
             .section-title {
@@ -816,12 +877,21 @@
             .nav-link {
                 padding: 0.8rem 1rem !important;
             }
+            
+            .about-features {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-info {
+                padding-right: 0;
+                margin-bottom: 2rem;
+            }
         }
     </style>
 </head>
 <body>
 
-<!-- Navigation - Exactly like car rental -->
+<!-- Navigation -->
 <nav class="navbar navbar-expand-lg sticky-top">
     <div class="container">
         <a class="navbar-brand" href="#">HERBMED<span>.</span>ET</a>
@@ -831,19 +901,22 @@
         <div class="collapse navbar-collapse" id="nav">
             <ul class="navbar-nav mx-auto">
                 <li class="nav-item">
-                    <a class="nav-link active" href="#">HOME</a>
+                    <a class="nav-link active" href="#home">HOME</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">REMEDIES</a>
+                    <a class="nav-link" href="#remedies">REMEDIES</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#about">ABOUT</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#videos">VIDEOS</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#contact">CONTACT</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('articles.index') }}">LITERATURE</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('consultation.index') }}">CONSULTATION</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('books.index') }}">BOOKS</a>
                 </li>
             </ul>
             <div class="d-flex align-items-center">
@@ -857,32 +930,43 @@
     </div>
 </nav>
 
-<!-- Hero Section - Like car rental slider -->
-<section class="hero-section" style="height: 100vh;">
-    <div class="container h-100">
-        <div class="row align-items-center h-100">
-            <div class="col-lg-6 d-flex align-items-center"> 
-                <div class="hero-content" data-aos="fade-right">
-                    <div class="hero-subtitle">Ethically Sourced • Ancestral Wisdom</div>
-                    <h1 class="hero-title">
-                        Healing for the <span>Modern Soul</span>
-                    </h1>
-                    
-                    <!-- Search Form - Like the booking form -->
-                    <div class="search-wrapper mb-5">
-                        <form class="d-flex" action="{{ route('products.search') }}" method="GET">
-                            <input type="text" name="q" class="form-control" placeholder="Search for 'Tena Adam' or 'Respiratory'..." value="{{ request('q') }}">
-                            <button type="submit" class="btn">DISCOVER</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
+<!-- Hero Section -->
+<section class="hero-section" id="home">
+    <div class="container">
+        <div class="hero-content" data-aos="fade-up">
+            <div class="hero-subtitle">Ethiopian Heritage • Since 2020</div>
+            <h1 class="hero-title">
+                Ancient Wisdom <span>Modern Healing</span>
+            </h1>
             
+            <!-- Search Form -->
+            <div class="search-wrapper">
+                <form class="d-flex" action="{{ route('products.search') }}" method="GET">
+                    <input type="text" name="q" class="form-control" placeholder="Search for 'Tena Adam'..." value="{{ request('q') }}">
+                    <button type="submit" class="btn">DISCOVER</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Hero Stats - Now at bottom of hero section -->
+    <div class="hero-stats" data-aos="fade-up" data-aos-delay="200">
+        <div class="hero-stat-item">
+            <div class="hero-stat-number count-up">50</div>
+            <div class="hero-stat-label">Traditional Herbs</div>
+        </div>
+        <div class="hero-stat-item">
+            <div class="hero-stat-number count-up">10</div>
+            <div class="hero-stat-label">Happy Clients</div>
+        </div>
+        <div class="hero-stat-item">
+            <div class="hero-stat-number count-up">24</div>
+            <div class="hero-stat-label">Expert Support</div>
         </div>
     </div>
 </section>
 
-<!-- Why Choose Us - Like car rental features -->
+<!-- Why Choose Us -->
 <section class="py-5">
     <div class="container">
         <div class="section-header" data-aos="fade-up">
@@ -931,44 +1015,8 @@
     </div>
 </section>
 
-<!-- Latest Articles - Like car rental blog section -->
-@if($latestArticles->isNotEmpty())
-<section class="py-5 bg-light">
-    <div class="container">
-        <div class="section-header" data-aos="fade-up">
-            <span class="section-subtitle">KNOWLEDGE & WISDOM</span>
-            <h2 class="section-title">Latest <span>Insights</span></h2>
-        </div>
-        
-        <div class="row g-4">
-            @foreach($latestArticles->take(3) as $article)
-                <div class="col-md-4" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
-                    <div class="article-card">
-                        <div class="article-image">
-                            @if($article->featured_image)
-                                <img src="{{ asset('storage/' . $article->featured_image) }}" alt="{{ $article->title }}">
-                            @else
-                                <img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=800&q=80" alt="Article">
-                            @endif
-                        </div>
-                        <div class="article-content">
-                            <div class="article-meta">{{ $article->published_at ? $article->published_at->format('M d, Y') : 'Recently' }}</div>
-                            <h5 class="article-title">{{ Str::limit($article->title, 50) }}</h5>
-                            <p class="article-excerpt">{{ Str::limit(strip_tags($article->content), 100) }}</p>
-                            <a href="#" class="btn-read">
-                                Read More <i class="bi bi-arrow-right"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            @endforeach
-        </div>
-    </div>
-</section>
-@endif
-
-<!-- Featured Remedies - Like car rental products -->
-<section class="py-5">
+<!-- Featured Remedies -->
+<section class="py-5" id="remedies">
     <div class="container">
         <div class="section-header" data-aos="fade-up">
             <span class="section-subtitle">THE APOTHECARY</span>
@@ -1013,98 +1061,284 @@
     </div>
 </section>
 
-<!-- Plans Section - Like car rental pricing -->
-<section class="plans-section">
+<!-- About Section -->
+<section class="about-section" id="about">
+    <div class="container">
+        <div class="row align-items-center g-5">
+            <div class="col-lg-6" data-aos="fade-right">
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=800&q=80" alt="About HerbMed" class="img-fluid">
+                </div>
+            </div>
+            <div class="col-lg-6" data-aos="fade-left">
+                <div class="about-content">
+                    <span class="section-subtitle">OUR STORY</span>
+                    <h3>Reviving Ethiopia's Healing Heritage</h3>
+                    <p>For generations, Ethiopian healers have passed down knowledge of medicinal plants through oral tradition. HerbMed was founded to preserve this wisdom while making it accessible to the modern world.</p>
+                    <p>We work directly with local communities in the Ethiopian highlands, ensuring fair trade practices and sustainable harvesting. Every product is lab-tested for purity while maintaining traditional preparation methods.</p>
+                    
+                    <div class="about-features">
+                        <div class="about-feature">
+                            <i class="bi bi-check-circle-fill"></i>
+                            <span>100% Natural Ingredients</span>
+                        </div>
+                        <div class="about-feature">
+                            <i class="bi bi-check-circle-fill"></i>
+                            <span>Fair Trade Certified</span>
+                        </div>
+                        <div class="about-feature">
+                            <i class="bi bi-check-circle-fill"></i>
+                            <span>Traditional Knowledge</span>
+                        </div>
+                        <div class="about-feature">
+                            <i class="bi bi-check-circle-fill"></i>
+                            <span>Modern Science Backed</span>
+                        </div>
+                    </div>
+                    
+                    <a href="#" class="btn-account" style="background: var(--primary-light); color: var(--primary); border: none; padding: 1rem 2.5rem;">LEARN MORE</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Video Section -->
+<section class="video-section" id="videos">
     <div class="container">
         <div class="section-header" data-aos="fade-up">
-            <span class="section-subtitle" style="color: var(--primary-light);">HEALING PLANS</span>
-            <h2 class="section-title" style="color: white;">Find the perfect <span style="color: var(--primary-light);">wellness package</span></h2>
+            <span class="section-subtitle">COMMUNITY VIDEOS</span>
+            <h2 class="section-title">Healing <span>Stories</span></h2>
+            <p class="text-muted">Watch and share your own experiences with traditional medicine</p>
+        </div>
+        
+        <!-- Video Grid - Sample videos (replace with dynamic content) -->
+        <div class="video-grid">
+            <div class="video-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+                </div>
+                <div class="video-info">
+                    <h6 class="video-title">Tena Adam for Immunity</h6>
+                    <div class="video-meta">
+                        <span><i class="bi bi-person"></i> Alemitu B.</span>
+                        <span><i class="bi bi-calendar"></i> 2 days ago</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="video-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+                </div>
+                <div class="video-info">
+                    <h6 class="video-title">Traditional Preparation Methods</h6>
+                    <div class="video-meta">
+                        <span><i class="bi bi-person"></i> Tadesse W.</span>
+                        <span><i class="bi bi-calendar"></i> 1 week ago</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="video-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+                </div>
+                <div class="video-info">
+                    <h6 class="video-title">Damakasse for Digestive Health</h6>
+                    <div class="video-meta">
+                        <span><i class="bi bi-person"></i> Meseret K.</span>
+                        <span><i class="bi bi-calendar"></i> 2 weeks ago</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="video-card" data-aos="fade-up" data-aos-delay="400">
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+                </div>
+                <div class="video-info">
+                    <h6 class="video-title">Eucalyptus Oil Extraction</h6>
+                    <div class="video-meta">
+                        <span><i class="bi bi-person"></i> Worku D.</span>
+                        <span><i class="bi bi-calendar"></i> 3 weeks ago</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="video-card" data-aos="fade-up" data-aos-delay="500">
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+                </div>
+                <div class="video-info">
+                    <h6 class="video-title">Neem for Skin Conditions</h6>
+                    <div class="video-meta">
+                        <span><i class="bi bi-person"></i> Genet A.</span>
+                        <span><i class="bi bi-calendar"></i> 1 month ago</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="video-card" data-aos="fade-up" data-aos-delay="600">
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+                </div>
+                <div class="video-info">
+                    <h6 class="video-title">My Journey with HerbMed</h6>
+                    <div class="video-meta">
+                        <span><i class="bi bi-person"></i> Sarah J.</span>
+                        <span><i class="bi bi-calendar"></i> 2 months ago</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Upload Button -->
+        <div class="text-center">
+            <button class="btn-upload" data-bs-toggle="modal" data-bs-target="#uploadModal">
+                <i class="bi bi-upload me-2"></i> SHARE YOUR VIDEO
+            </button>
+        </div>
+    </div>
+</section>
+
+<!-- Upload Modal -->
+<div class="modal fade" id="uploadModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Share Your Video</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label class="form-label">Your Name</label>
+                        <input type="text" class="form-control" placeholder="Enter your name">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">YouTube / Vimeo Link</label>
+                        <input type="url" class="form-control" placeholder="https://youtube.com/watch?v=...">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Video Title</label>
+                        <input type="text" class="form-control" placeholder="Enter video title">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Description (Optional)</label>
+                        <textarea class="form-control" rows="3" placeholder="Tell us about your video"></textarea>
+                    </div>
+                    <button type="submit" class="btn-upload w-100">SUBMIT VIDEO</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Contact Section -->
+<section class="contact-section" id="contact">
+    <div class="container">
+        <div class="row g-5">
+            <div class="col-lg-5" data-aos="fade-right">
+                <div class="contact-info">
+                    <span class="section-subtitle" style="color: var(--primary-light);">GET IN TOUCH</span>
+                    <h3>Let's Connect</h3>
+                    <p>Have questions about our products or traditional medicine? Reach out to us anytime. Our team of experts is here to help you on your wellness journey.</p>
+                    
+                    <ul class="contact-details">
+                        <li>
+                            <i class="bi bi-geo-alt"></i>
+                            <span>Bole Road, Addis Ababa, Ethiopia</span>
+                        </li>
+                        <li>
+                            <i class="bi bi-telephone"></i>
+                            <span>+251 911 234 567</span>
+                        </li>
+                        <li>
+                            <i class="bi bi-envelope"></i>
+                            <span>hello@herbmed.et</span>
+                        </li>
+                        <li>
+                            <i class="bi bi-clock"></i>
+                            <span>Mon - Fri: 9:00 AM - 6:00 PM</span>
+                        </li>
+                    </ul>
+                    
+                    <div class="contact-social">
+                        <a href="#"><i class="bi bi-facebook"></i></a>
+                        <a href="#"><i class="bi bi-instagram"></i></a>
+                        <a href="#"><i class="bi bi-twitter-x"></i></a>
+                        <a href="#"><i class="bi bi-youtube"></i></a>
+                        <a href="#"><i class="bi bi-telegram"></i></a>
+                        <a href="#"><i class="bi bi-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-7" data-aos="fade-left">
+                <div class="contact-form">
+                    <h4>Send us a Message</h4>
+                    <form>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" placeholder="Your Name">
+                            </div>
+                            <div class="col-md-6">
+                                <input type="email" class="form-control" placeholder="Your Email">
+                            </div>
+                            <div class="col-12">
+                                <input type="text" class="form-control" placeholder="Subject">
+                            </div>
+                            <div class="col-12">
+                                <textarea class="form-control" placeholder="Your Message"></textarea>
+                            </div>
+                            <div class="col-12">
+                                <button type="submit">SEND MESSAGE</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Latest Articles -->
+@if($latestArticles->isNotEmpty())
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="section-header" data-aos="fade-up">
+            <span class="section-subtitle">KNOWLEDGE & WISDOM</span>
+            <h2 class="section-title">Latest <span>Insights</span></h2>
         </div>
         
         <div class="row g-4">
-            <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
-                <div class="plan-card">
-                    <h3>Weekly Wellness</h3>
-                    <div class="plan-price">$49 <small>/week</small></div>
-                    <ul class="plan-features">
-                        <li><i class="bi bi-check-circle"></i> 3 herbal tinctures</li>
-                        <li><i class="bi bi-check-circle"></i> Weekly consultation</li>
-                        <li><i class="bi bi-check-circle"></i> Free digital guide</li>
-                        <li><i class="bi bi-check-circle"></i> Email support</li>
-                        <li><i class="bi bi-check-circle"></i> 10% member discount</li>
-                        <li><i class="bi bi-check-circle"></i> Free shipping</li>
-                    </ul>
-                    <button class="btn-plan">Get Started</button>
+            @foreach($latestArticles->take(3) as $article)
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
+                    <div class="article-card">
+                        <div class="article-image">
+                            @if($article->featured_image)
+                                <img src="{{ asset('storage/' . $article->featured_image) }}" alt="{{ $article->title }}">
+                            @else
+                                <img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=800&q=80" alt="Article">
+                            @endif
+                        </div>
+                        <div class="article-content">
+                            <div class="article-meta">{{ $article->published_at ? $article->published_at->format('M d, Y') : 'Recently' }}</div>
+                            <h5 class="article-title">{{ Str::limit($article->title, 50) }}</h5>
+                            <p class="article-excerpt">{{ Str::limit(strip_tags($article->content), 100) }}</p>
+                            <a href="#" class="btn-read">
+                                Read More <i class="bi bi-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
-                <div class="plan-card popular">
-                    <div class="popular-badge">MOST POPULAR</div>
-                    <h3>Monthly Healing</h3>
-                    <div class="plan-price">$149 <small>/month</small></div>
-                    <ul class="plan-features">
-                        <li><i class="bi bi-check-circle"></i> 10 herbal tinctures</li>
-                        <li><i class="bi bi-check-circle"></i> 4 consultations</li>
-                        <li><i class="bi bi-check-circle"></i> Premium book access</li>
-                        <li><i class="bi bi-check-circle"></i> Priority support</li>
-                        <li><i class="bi bi-check-circle"></i> 25% member discount</li>
-                        <li><i class="bi bi-check-circle"></i> Free express shipping</li>
-                    </ul>
-                    <button class="btn-plan">Get Started</button>
-                </div>
-            </div>
-            <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
-                <div class="plan-card">
-                    <h3>Annual Wisdom</h3>
-                    <div class="plan-price">$499 <small>/year</small></div>
-                    <ul class="plan-features">
-                        <li><i class="bi bi-check-circle"></i> Unlimited herbs</li>
-                        <li><i class="bi bi-check-circle"></i> Unlimited consultations</li>
-                        <li><i class="bi bi-check-circle"></i> All books included</li>
-                        <li><i class="bi bi-check-circle"></i> VIP support</li>
-                        <li><i class="bi bi-check-circle"></i> 40% member discount</li>
-                        <li><i class="bi bi-check-circle"></i> Free worldwide shipping</li>
-                    </ul>
-                    <button class="btn-plan">Get Started</button>
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
 </section>
+@endif
 
-<!-- Stats Section - Like car rental stats -->
-<section class="stats-section">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-3" data-aos="fade-up" data-aos-delay="100">
-                <div class="stat-item">
-                    <div class="stat-number">145+</div>
-                    <div class="stat-label">Countries</div>
-                </div>
-            </div>
-            <div class="col-md-3" data-aos="fade-up" data-aos-delay="200">
-                <div class="stat-item">
-                    <div class="stat-number">10k+</div>
-                    <div class="stat-label">Happy Clients</div>
-                </div>
-            </div>
-            <div class="col-md-3" data-aos="fade-up" data-aos-delay="300">
-                <div class="stat-item">
-                    <div class="stat-number">50+</div>
-                    <div class="stat-label">Traditional Herbs</div>
-                </div>
-            </div>
-            <div class="col-md-3" data-aos="fade-up" data-aos-delay="400">
-                <div class="stat-item">
-                    <div class="stat-number">38+</div>
-                    <div class="stat-label">Languages</div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Testimonials Section - Like car rental -->
+<!-- Testimonials Section -->
 @if($testimonials && count($testimonials) > 0)
 <section class="py-5">
     <div class="container">
@@ -1140,7 +1374,44 @@
 </section>
 @endif
 
-<!-- Footer - Like car rental -->
+<!-- Promotions Section -->
+@if($activePromotions->isNotEmpty())
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="section-header" data-aos="fade-up">
+            <span class="section-subtitle">SPECIAL OFFERS</span>
+            <h2 class="section-title">Current <span>Promotions</span></h2>
+        </div>
+        
+        <div class="row g-4">
+            @foreach($activePromotions as $promotion)
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
+                    <div class="card border-0 shadow-sm h-100">
+                        @if($promotion->image)
+                            <img src="{{ asset('storage/' . $promotion->image) }}" class="card-img-top" alt="{{ $promotion->title }}" style="height: 200px; object-fit: cover;">
+                        @endif
+                        <div class="card-body p-4">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <h5 class="card-title mb-0">{{ $promotion->title }}</h5>
+                                <span class="badge bg-danger">{{ $promotion->discount_display ?? 'Special Offer' }}</span>
+                            </div>
+                            <p class="card-text text-muted">{{ Str::limit($promotion->description, 100) }}</p>
+                            @if($promotion->promo_code)
+                                <div class="input-group">
+                                    <input type="text" class="form-control" value="{{ $promotion->promo_code }}" readonly>
+                                    <button class="btn btn-outline-secondary" type="button" onclick="copyPromoCode('{{ $promotion->promo_code }}')">Copy</button>
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    </div>
+</section>
+@endif
+
+<!-- Footer -->
 <footer class="footer">
     <div class="container">
         <div class="row g-4">
@@ -1204,6 +1475,43 @@
         easing: 'ease-out'
     });
 
+    // Live Counter Animation
+    function animateCounter(element) {
+        const target = parseInt(element.innerText);
+        let count = 0;
+        const duration = 2000; // 2 seconds
+        const step = target / (duration / 16); // 60fps
+        
+        function updateCount() {
+            count += step;
+            if (count < target) {
+                element.innerText = Math.floor(count) + '+';
+                requestAnimationFrame(updateCount);
+            } else {
+                element.innerText = target + '+';
+            }
+        }
+        
+        updateCount();
+    }
+
+    // Trigger counters when they come into view
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const counters = entry.target.querySelectorAll('.count-up');
+                counters.forEach(counter => animateCounter(counter));
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.5 });
+
+    // Observe hero stats section
+    const heroStats = document.querySelector('.hero-stats');
+    if (heroStats) {
+        observer.observe(heroStats);
+    }
+
     // Contact button interaction
     document.querySelectorAll('.contact-btn').forEach(btn => {
         btn.addEventListener('click', function() {
@@ -1213,6 +1521,13 @@
             this.style.border = 'none';
         });
     });
+
+    // Copy promo code
+    function copyPromoCode(code) {
+        navigator.clipboard.writeText(code).then(() => {
+            alert('Promo code copied to clipboard!');
+        });
+    }
 
     // Navbar scroll effect
     window.addEventListener('scroll', function() {
@@ -1224,6 +1539,20 @@
             nav.style.background = 'var(--primary)';
             nav.style.boxShadow = 'none';
         }
+    });
+
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
     });
 </script>
 
