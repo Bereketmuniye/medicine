@@ -9,6 +9,7 @@ use App\Models\Promotion;
 use App\Models\SocialMediaAccount;
 use App\Models\Setting;
 use Illuminate\Http\Request;
+use App\Models\Video;
 
 class WelcomeController extends Controller
 {
@@ -98,6 +99,9 @@ class WelcomeController extends Controller
         $owner_phone = Setting::where('key', 'owner_phone')->first()?->value;
         $contact_email = Setting::where('key', 'contact_email')->first()?->value;
 
+        // Get real videos from database
+        $videos = Video::with('category')->latest()->take(6)->get();
+
         // Get real counts for hero stats
         $stats = [
             'herbs_count' => Plant::count(),
@@ -137,7 +141,8 @@ class WelcomeController extends Controller
             'testimonials',
             'owner_phone',
             'contact_email',
-            'stats'
+            'stats',
+            'videos'
         ));
     }
 }

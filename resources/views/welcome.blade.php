@@ -433,6 +433,32 @@
             border: none;
         }
 
+        .video-placeholder {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary) 0%, #2a1f02 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .video-placeholder i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--primary-light);
+        }
+
+        .video-placeholder p {
+            margin: 0;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
         .video-info {
             padding: 1.5rem;
         }
@@ -442,6 +468,13 @@
             color: var(--primary);
             margin-bottom: 0.5rem;
             font-size: 1.1rem;
+        }
+
+        .video-description {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            line-height: 1.4;
+            margin-bottom: 0.5rem;
         }
 
         .video-meta {
