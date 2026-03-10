@@ -242,6 +242,20 @@ class WelcomePageSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
+            [
+                'key' => 'contact_phone',
+                'value' => '+251 911 234 567',
+                'description' => 'Business contact phone number',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'key' => 'contact_email',
+                'value' => 'hello@herbmed.et',
+                'description' => 'Business contact email address',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
         ];
 
         Setting::insert($settings);

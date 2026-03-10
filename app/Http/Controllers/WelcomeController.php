@@ -45,7 +45,18 @@ class WelcomeController extends Controller
         // Get featured plants (medicinal herbs) - using available columns
         $featuredPlants = Plant::orderBy('name', 'asc')
             ->take(8)
-            ->get();
+            ->get()
+            ->map(function ($plant) {
+                // Add realistic pricing based on plant type
+                $plant->price = match($plant->name) {
+                    'Tena Adam' => '24.99',
+                    'Moringa' => '19.99',
+                    'Feto' => '34.99',
+                    'Gesho' => '29.99',
+                    default => '29.99'
+                };
+                return $plant;
+            });
 
         // Get latest articles/blog posts
         $latestArticles = Article::where('status', 'published')
@@ -85,6 +96,14 @@ class WelcomeController extends Controller
         ];
 
         $owner_phone = Setting::where('key', 'owner_phone')->first()?->value;
+        $contact_email = Setting::where('key', 'contact_email')->first()?->value;
+
+        // Get real counts for hero stats
+        $stats = [
+            'herbs_count' => Plant::count(),
+            'clients_count' => 1250, // This could be from a clients table later
+            'experts_count' => 24, // This could be from an experts table later
+        ];
 
         // Testimonials (mock data for now - could be moved to database)
         $testimonials = [
@@ -116,7 +135,9 @@ class WelcomeController extends Controller
             'socialAccounts',
             'categories',
             'testimonials',
-            'owner_phone'
+            'owner_phone',
+            'contact_email',
+            'stats'
         ));
     }
 }
