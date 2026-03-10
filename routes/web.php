@@ -61,7 +61,7 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::resource('social-media', App\Http\Controllers\Admin\SocialMediaController::class);
     Route::post('social-media/{socialMedia}/toggle-status', [App\Http\Controllers\Admin\SocialMediaController::class, 'toggleStatus'])->name('social-media.toggle-status');
     Route::resource('subscribers', App\Http\Controllers\Admin\SubscriberController::class)->only(['index', 'destroy']);
-    Route::resource('   ', App\Http\Controllers\Admin\ContactController::class);
+    Route::resource('contacts', App\Http\Controllers\Admin\ContactController::class);
     Route::post('contacts/{contact}/read', [App\Http\Controllers\Admin\ContactController::class, 'markAsRead'])->name('contacts.read');
     Route::resource('settings', App\Http\Controllers\Admin\SettingController::class)->only(['index', 'update']);
 });

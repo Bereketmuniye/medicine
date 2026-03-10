@@ -50,6 +50,10 @@
             <i class="fa-solid fa-users"></i>
             <span>Subscribers</span>
         </a>
+        <a href="/admin/contacts" class="nav-item {{ request()->routeIs('admin.contacts.*') ? 'active' : '' }}" style="display: flex !important; visibility: visible !important;">
+            <i class="fa-solid fa-envelope"></i>
+            <span>Contact Messages</span>
+        </a>
         <a href="{{ route('admin.settings.index') }}" class="nav-item {{ request()->routeIs('admin.settings.*') ? 'active' : '' }}">
             <i class="fa-solid fa-gear"></i>
             <span>Settings</span>

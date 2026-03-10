@@ -70,7 +70,7 @@
                     </div>
                     <div class="ms-3">
                         <h6 class="mb-0 text-muted">Growth Rate</h6>
-                        <h3 class="mb-0">+{{ $subscribers->where('subscribed_at', '>=', now()->subMonth())->count() > 0 ? round(($subscribers->where('subscribed_at', '>=', now()->subMonth())->count() / max($subscribers->where('subscribed_at', '<', now()->subMonth())->count(), 1) * 100) : 0 }}%</h3>
+                        <h3 class="mb-0">+{{ $subscribers->where('subscribed_at', '>=', now()->subMonth())->count() }}%</h3>
                     </div>
                 </div>
             </div>
