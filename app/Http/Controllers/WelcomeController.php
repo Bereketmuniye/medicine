@@ -158,6 +158,9 @@ class WelcomeController extends Controller
         $owner_phone = Setting::where('key', 'owner_phone')->first()?->value;
         $contact_email = Setting::where('key', 'contact_email')->first()?->value;
 
+        // Get contact messages
+        $contactMessages = Contact::latest()->take(5)->get();
+
         // Get real videos from database
         $videos = Video::with('category')->latest()->take(6)->get();
 
@@ -201,7 +204,8 @@ class WelcomeController extends Controller
             'owner_phone',
             'contact_email',
             'stats',
-            'videos'
+            'videos',
+            'contactMessages'
         ));
     }
 }

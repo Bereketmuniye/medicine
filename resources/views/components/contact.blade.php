@@ -27,12 +27,20 @@
                     </ul>
                     
                     <div class="contact-social">
-                        <a href="#"><i class="bi bi-facebook"></i></a>
-                        <a href="#"><i class="bi bi-instagram"></i></a>
-                        <a href="#"><i class="bi bi-twitter-x"></i></a>
-                        <a href="#"><i class="bi bi-youtube"></i></a>
-                        <a href="#"><i class="bi bi-telegram"></i></a>
-                        <a href="#"><i class="bi bi-whatsapp"></i></a>
+                        @if($socialAccounts->isNotEmpty())
+                            @foreach($socialAccounts as $account)
+                                <a href="{{ $account->url }}" target="_blank" rel="noopener noreferrer">
+                                    <i class="bi bi-{{ $account->platform }}"></i>
+                                </a>
+                            @endforeach
+                        @else
+                            <a href="#"><i class="bi bi-facebook"></i></a>
+                            <a href="#"><i class="bi bi-instagram"></i></a>
+                            <a href="#"><i class="bi bi-twitter-x"></i></a>
+                            <a href="#"><i class="bi bi-youtube"></i></a>
+                            <a href="#"><i class="bi bi-telegram"></i></a>
+                            <a href="#"><i class="bi bi-whatsapp"></i></a>
+                        @endif
                     </div>
                 </div>
             </div>
