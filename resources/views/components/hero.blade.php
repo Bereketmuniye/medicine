@@ -5,7 +5,7 @@
         <!-- Fallback message if video doesn't load -->
         Your browser does not support the video tag.
     </video>
-    <div class="hero-overlay"></div>
+    <!-- <div class="hero-overlay"></div> -->
     
     <div class="container">
         <div class="hero-content" data-aos="fade-up">

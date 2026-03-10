@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Newsletter;
 use Illuminate\Http\Request;
 
 class SubscriberController extends Controller
@@ -12,7 +13,7 @@ class SubscriberController extends Controller
      */
     public function index()
     {
-        $subscribers = \App\Models\Subscriber::latest()->paginate(25);
+        $subscribers = Newsletter::latest()->paginate(25);
         return view('admin.subscribers.index', compact('subscribers'));
     }
 
@@ -21,9 +22,9 @@ class SubscriberController extends Controller
      */
     public function destroy($email)
     {
-        \App\Models\Subscriber::where('email', $email)->delete();
+        Newsletter::where('email', $email)->delete();
         return redirect()->route('admin.subscribers.index')
-            ->with('success', 'Subscriber removed.');
+            ->with('success', 'Subscriber removed successfully.');
     }
 
     /**

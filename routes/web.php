@@ -9,6 +9,12 @@ Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
 // Product search route
 Route::get('/search', [WelcomeController::class, 'search'])->name('products.search');
 
+// Newsletter subscription route
+Route::post('/subscribe', [WelcomeController::class, 'subscribe'])->name('newsletter.subscribe');
+
+// Contact form route
+Route::post('/contact', [WelcomeController::class, 'contact'])->name('contact.submit');
+
 // Public content routes
 Route::get('/articles', [App\Http\Controllers\ArticleController::class, 'index'])->name('articles.index');
 Route::get('/articles/{slug}', [App\Http\Controllers\ArticleController::class, 'show'])->name('articles.show');
@@ -55,5 +61,7 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::resource('social-media', App\Http\Controllers\Admin\SocialMediaController::class);
     Route::post('social-media/{socialMedia}/toggle-status', [App\Http\Controllers\Admin\SocialMediaController::class, 'toggleStatus'])->name('social-media.toggle-status');
     Route::resource('subscribers', App\Http\Controllers\Admin\SubscriberController::class)->only(['index', 'destroy']);
+    Route::resource('   ', App\Http\Controllers\Admin\ContactController::class);
+    Route::post('contacts/{contact}/read', [App\Http\Controllers\Admin\ContactController::class, 'markAsRead'])->name('contacts.read');
     Route::resource('settings', App\Http\Controllers\Admin\SettingController::class)->only(['index', 'update']);
 });

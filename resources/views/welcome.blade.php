@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>HerbMed Ethiopia – Ancient Wisdom, Modern Healing</title>
 
     <!-- Bootstrap 5 CSS -->
@@ -1158,6 +1159,27 @@
             box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
 
+        .contact-message {
+            margin-top: 1rem;
+            padding: 0.8rem 1rem;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .contact-message.success {
+            background: rgba(40, 167, 69, 0.1);
+            color: #28a745;
+            border: 1px solid #28a745;
+        }
+
+        .contact-message.error {
+            background: rgba(220, 53, 69, 0.1);
+            color: #dc3545;
+            border: 1px solid #dc3545;
+        }
+
         /* Footer */
         .footer {
             background: var(--primary);
@@ -1270,6 +1292,27 @@
             background: transparent;
             border: 2px solid var(--primary-light);
             color: var(--primary-light);
+        }
+
+        .newsletter-message {
+            margin-top: 1rem;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .newsletter-message.success {
+            background: rgba(40, 167, 69, 0.1);
+            color: #28a745;
+            border: 1px solid #28a745;
+        }
+
+        .newsletter-message.error {
+            background: rgba(220, 53, 69, 0.1);
+            color: #dc3545;
+            border: 1px solid #dc3545;
         }
 
         .footer-bottom {
@@ -1549,6 +1592,148 @@
             // Video will show poster image instead
         });
     }
+
+    // Newsletter subscription
+    document.getElementById('newsletterForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const form = this;
+        const submitBtn = form.querySelector('button');
+        const messageDiv = document.getElementById('newsletterMessage');
+        const email = form.querySelector('input[name="email"]').value;
+        
+        // Get CSRF token safely
+        const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
+        
+        if (!csrfToken) {
+            messageDiv.textContent = 'Security token not found. Please refresh the page.';
+            messageDiv.className = 'newsletter-message error';
+            return;
+        }
+        
+        // Validate email
+        if (!email || !email.includes('@')) {
+            messageDiv.textContent = 'Please enter a valid email address.';
+            messageDiv.className = 'newsletter-message error';
+            return;
+        }
+        
+        // Disable button and show loading
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'JOINING...';
+        
+        // Send request
+        fetch('{{ route("newsletter.subscribe") }}', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': csrfToken
+            },
+            body: JSON.stringify({
+                email: email
+            })
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data.success) {
+                messageDiv.textContent = data.message;
+                messageDiv.className = 'newsletter-message success';
+                form.reset();
+            } else {
+                messageDiv.textContent = data.message;
+                messageDiv.className = 'newsletter-message error';
+            }
+        })
+        .catch(error => {
+            console.error('Newsletter subscription error:', error);
+            messageDiv.textContent = 'Something went wrong. Please try again.';
+            messageDiv.className = 'newsletter-message error';
+        })
+        .finally(() => {
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'JOIN';
+            
+            // Hide message after 5 seconds
+            setTimeout(() => {
+                messageDiv.textContent = '';
+                messageDiv.className = 'newsletter-message';
+            }, 5000);
+        });
+    });
+
+    // Contact form submission
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const form = this;
+        const submitBtn = form.querySelector('button[type="submit"]');
+        const messageDiv = document.getElementById('contactMessage');
+        const formData = new FormData(form);
+        
+        // Get CSRF token safely
+        const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
+        
+        if (!csrfToken) {
+            messageDiv.textContent = 'Security token not found. Please refresh the page.';
+            messageDiv.className = 'contact-message error';
+            return;
+        }
+        
+        // Disable button and show loading
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'SENDING...';
+        
+        // Send request
+        fetch('{{ route("contact.submit") }}', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': csrfToken
+            },
+            body: JSON.stringify({
+                name: formData.get('name'),
+                email: formData.get('email'),
+                subject: formData.get('subject'),
+                message: formData.get('message')
+            })
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data.success) {
+                messageDiv.textContent = data.message;
+                messageDiv.className = 'contact-message success';
+                form.reset();
+            } else {
+                messageDiv.textContent = data.message;
+                messageDiv.className = 'contact-message error';
+            }
+        })
+        .catch(error => {
+            console.error('Contact form error:', error);
+            messageDiv.textContent = 'Something went wrong. Please try again.';
+            messageDiv.className = 'contact-message error';
+        })
+        .finally(() => {
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'SEND MESSAGE';
+            
+            // Hide message after 5 seconds
+            setTimeout(() => {
+                messageDiv.textContent = '';
+                messageDiv.className = 'contact-message';
+            }, 5000);
+        });
+    });
 </script>
 
 </body>

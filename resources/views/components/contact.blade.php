@@ -39,25 +39,26 @@
             <div class="col-lg-7" data-aos="fade-left">
                 <div class="contact-form">
                     <h4>Send us a Message</h4>
-                    <form>
+                    <form id="contactForm">
                         <div class="row">
                             <div class="col-md-6">
-                                <input type="text" class="form-control" placeholder="Your Name">
+                                <input type="text" name="name" class="form-control" placeholder="Your Name" required>
                             </div>
                             <div class="col-md-6">
-                                <input type="email" class="form-control" placeholder="Your Email">
+                                <input type="email" name="email" class="form-control" placeholder="Your Email" required>
                             </div>
                             <div class="col-12">
-                                <input type="text" class="form-control" placeholder="Subject">
+                                <input type="text" name="subject" class="form-control" placeholder="Subject" required>
                             </div>
                             <div class="col-12">
-                                <textarea class="form-control" placeholder="Your Message"></textarea>
+                                <textarea name="message" class="form-control" rows="4" placeholder="Your Message" required></textarea>
                             </div>
                             <div class="col-12">
-                                <button type="submit">SEND MESSAGE</button>
+                                <button type="submit" class="btn btn-primary">SEND MESSAGE</button>
                             </div>
                         </div>
                     </form>
+                    <div id="contactMessage" class="contact-message"></div>
                 </div>
             </div>
         </div>

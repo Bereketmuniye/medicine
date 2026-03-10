@@ -37,10 +37,11 @@
             <div class="col-lg-4">
                 <h5>WEEKLY WISDOM</h5>
                 <p class="footer-text">Subscribe to receive guides on seasonal remedies.</p>
-                <div class="newsletter-form">
-                    <input type="email" placeholder="Email Address">
-                    <button>JOIN</button>
-                </div>
+                <form class="newsletter-form" id="newsletterForm">
+                    <input type="email" name="email" placeholder="Email Address" required>
+                    <button type="submit">JOIN</button>
+                </form>
+                <div id="newsletterMessage" class="newsletter-message"></div>
             </div>
         </div>
         <div class="footer-bottom">

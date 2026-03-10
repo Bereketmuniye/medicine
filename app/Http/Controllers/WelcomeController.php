@@ -10,6 +10,8 @@ use App\Models\SocialMediaAccount;
 use App\Models\Setting;
 use Illuminate\Http\Request;
 use App\Models\Video;
+use App\Models\Newsletter;
+use App\Models\Contact;
 
 class WelcomeController extends Controller
 {
@@ -36,6 +38,63 @@ class WelcomeController extends Controller
         $searchResults = $plantsQuery->orderBy('name', 'asc')->take(20)->get();
         
         return view('search', compact('searchResults', 'query', 'category'));
+    }
+
+    /**
+     * Handle newsletter subscription.
+     */
+    public function subscribe(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email|unique:newsletters,email',
+            'name' => 'nullable|string|max:255'
+        ]);
+
+        try {
+            Newsletter::subscribe($request->email, $request->name);
+            
+            return response()->json([
+                'success' => true,
+                'message' => 'Thank you for subscribing! Check your email for weekly wisdom.'
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Something went wrong. Please try again.'
+            ], 500);
+        }
+    }
+
+    /**
+     * Handle contact form submission.
+     */
+    public function contact(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email',
+            'subject' => 'required|string|max:255',
+            'message' => 'required|string|min:10'
+        ]);
+
+        try {
+            Contact::createMessage(
+                $request->name,
+                $request->email,
+                $request->subject,
+                $request->message
+            );
+            
+            return response()->json([
+                'success' => true,
+                'message' => 'Thank you for your message! We\'ll get back to you within 24 hours.'
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Something went wrong. Please try again.'
+            ], 500);
+        }
     }
 
     /**
