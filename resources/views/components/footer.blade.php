@@ -38,6 +38,7 @@
                 <h5>WEEKLY WISDOM</h5>
                 <p class="footer-text">Subscribe to receive guides on seasonal remedies.</p>
                 <form class="newsletter-form" id="newsletterForm">
+                    @csrf
                     <input type="email" name="email" placeholder="Email Address" required>
                     <button type="submit">JOIN</button>
                 </form>
