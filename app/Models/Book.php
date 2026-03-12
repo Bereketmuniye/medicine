@@ -7,7 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class Book extends Model
 {
     protected $fillable = [
-        'title', 'slug', 'description', 'price', 
+        'book_id', 'title', 'slug', 'description', 'price', 
         'type', 'cover', 'file', 'stock'
+    ];
+
+    protected $casts = [
+        'cover' => 'array',
     ];
 }

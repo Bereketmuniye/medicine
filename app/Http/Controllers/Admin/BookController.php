@@ -34,7 +34,8 @@ class BookController extends Controller
             'title' => 'required|string|max:255',
             'price' => 'required|numeric|min:0',
             'type' => 'required|in:digital,physical',
-            'cover' => 'nullable|image|max:2048',
+            'cover' => 'nullable|array|max:5',
+            'cover.*' => 'nullable|image|mimes:jpg,jpeg,png,gif',
             'file' => 'nullable|file|mimes:pdf,epub|max:10240',
             'stock' => 'nullable|integer|min:0',
             'description' => 'nullable|string',
@@ -43,18 +44,44 @@ class BookController extends Controller
         $data = $request->all();
         $data['slug'] = \Illuminate\Support\Str::slug($request->title) . '-' . time();
         
+        // Generate unique book_id
+        $lastBook = \App\Models\Book::orderBy('id', 'desc')->first();
+        $nextId = $lastBook ? ((int)str_replace('BOOK-', '', $lastBook->book_id) + 1) : 1;
+        $data['book_id'] = 'BOOK-' . str_pad($nextId, 4, '0', STR_PAD_LEFT);
+        
+        // Store multiple cover images as JSON array
+        $covers = [];
         if ($request->hasFile('cover')) {
-            $data['cover'] = $request->file('cover')->store('books/covers', 'public');
+            foreach ($request->file('cover') as $cover) {
+                $covers[] = $cover->store('books/covers', 'public');
+            }
         }
+        $data['cover'] = !empty($covers) ? json_encode($covers) : null;
 
         if ($request->hasFile('file')) {
             $data['file'] = $request->file('file')->store('books/files', 'private'); // Store in private disk if possible
         }
 
-        \App\Models\Book::create($data);
+        $book = \App\Models\Book::create($data);
+
+
+        if ($request->expectsJson() || $request->ajax()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Book added to store successfully!'
+            ]);
+        }
 
         return redirect()->route('admin.books.index')
             ->with('success', 'Book added to store successfully!');
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(Book $book)
+    {
+        return view('admin.books.show', compact('book'));
     }
 
     /**
@@ -74,7 +101,8 @@ class BookController extends Controller
             'title' => 'required|string|max:255',
             'price' => 'required|numeric|min:0',
             'type' => 'required|in:digital,physical',
-            'cover' => 'nullable|image|max:2048',
+            'cover' => 'nullable|array|max:5',
+            'cover.*' => 'nullable|image|mimes:jpg,jpeg,png,gif',
             'file' => 'nullable|file|mimes:pdf,epub|max:10240',
             'stock' => 'nullable|integer|min:0',
             'description' => 'nullable|string',
@@ -82,12 +110,26 @@ class BookController extends Controller
 
         $data = $request->all();
         
+        // Handle multiple cover images like in store method
+        $covers = [];
         if ($request->hasFile('cover')) {
+            // Delete old covers if they exist
             if ($book->cover) {
-                \Illuminate\Support\Facades\Storage::disk('public')->delete($book->cover);
+                $oldCovers = json_decode($book->cover, true);
+                if (is_array($oldCovers)) {
+                    foreach ($oldCovers as $oldCover) {
+                        \Illuminate\Support\Facades\Storage::disk('public')->delete($oldCover);
+                    }
+                } else {
+                    \Illuminate\Support\Facades\Storage::disk('public')->delete($book->cover);
+                }
             }
-            $data['cover'] = $request->file('cover')->store('books/covers', 'public');
+            
+            foreach ($request->file('cover') as $cover) {
+                $covers[] = $cover->store('books/covers', 'public');
+            }
         }
+        $data['cover'] = !empty($covers) ? json_encode($covers) : $book->cover;
 
         if ($request->hasFile('file')) {
             if ($book->file) {
@@ -98,6 +140,13 @@ class BookController extends Controller
 
         $book->update($data);
 
+        if ($request->expectsJson() || $request->ajax()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Book details updated successfully!'
+            ]);
+        }
+
         return redirect()->route('admin.books.index')
             ->with('success', 'Book details updated successfully!');
     }
@@ -107,8 +156,16 @@ class BookController extends Controller
      */
     public function destroy(Book $book)
     {
+        // Delete multiple cover images if they exist
         if ($book->cover) {
-            \Illuminate\Support\Facades\Storage::disk('public')->delete($book->cover);
+            $covers = json_decode($book->cover, true);
+            if (is_array($covers)) {
+                foreach ($covers as $cover) {
+                    \Illuminate\Support\Facades\Storage::disk('public')->delete($cover);
+                }
+            } else {
+                \Illuminate\Support\Facades\Storage::disk('public')->delete($book->cover);
+            }
         }
         if ($book->file) {
             \Illuminate\Support\Facades\Storage::disk('private')->delete($book->file);

@@ -127,7 +127,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Dropzone init
     Dropzone.autoDiscover = false;
     const myDropzone = new Dropzone("#image-dropzone", {
-        url: "#",
+        url: "{{ route('admin.plants.store') }}",
         paramName: "image",
         autoProcessQueue: false,
         uploadMultiple: true,

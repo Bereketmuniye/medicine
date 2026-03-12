@@ -2,57 +2,57 @@
 
 @section('content')
 <x-admin.card-header 
-    title="{{ $article->title }}" 
-    subtitle="Detailed information about this article"
+    title="{{ $book->title }}" 
+    subtitle="Detailed information about this book"
 >
     <x-slot name="action">
-        <a href="{{ route('admin.articles.edit', $article) }}" class="btn btn-outline-primary rounded-pill px-4 me-2">
-            <i class="fa-solid fa-pen-to-square me-2"></i>Edit Article
+        <a href="{{ route('admin.books.edit', $book) }}" class="btn btn-outline-primary rounded-pill px-4 me-2">
+            <i class="fa-solid fa-pen-to-square me-2"></i>Edit Book
         </a>
-        <a href="{{ route('admin.articles.index') }}" class="btn btn-secondary rounded-pill px-4">
+        <a href="{{ route('admin.books.index') }}" class="btn btn-secondary rounded-pill px-4">
             <i class="fa-solid fa-arrow-left me-2"></i>Back to List
         </a>
     </x-slot>
 </x-admin.card-header>
 
 <div class="row">
-    <!-- Article Image and Basic Info -->
+    <!-- Book Cover and Basic Info -->
     <div class="col-lg-4 mb-4">
         <div class="card border-0 shadow-sm" style="border-radius: 24px;">
             <div class="card-body p-4">
-                <!-- Article Images -->
+                <!-- Book Cover Images -->
                 <div class="text-center mb-4">
-                    @if($article->featured_image)
+                    @if($book->cover)
                         @php
-                            $images = json_decode($article->featured_image, true);
+                            $covers = json_decode($book->cover, true);
                         @endphp
                         
-                        @if(is_array($images) && count($images) > 0)
-                            <div class="article-gallery">
+                        @if(is_array($covers) && count($covers) > 0)
+                            <div class="book-gallery">
                                 <!-- Main Image with Zoom -->
                                 <div class="main-image-container mb-3">
                                     <img 
-                                        src="{{ asset('storage/' . $images[0]) }}" 
+                                        src="{{ asset('storage/' . $covers[0]) }}" 
                                         class="img-fluid rounded-4 main-image" 
-                                        alt="{{ $article->title }} - Main Image"
+                                        alt="{{ $book->title }} - Main Cover"
                                         style="max-height: 300px; width: 100%; object-fit: cover; cursor: zoom-in;"
                                         data-bs-toggle="modal" 
                                         data-bs-target="#imageModal"
-                                        data-image="{{ asset('storage/' . $images[0]) }}"
-                                        data-alt="{{ $article->title }} - Image 1"
+                                        data-image="{{ asset('storage/' . $covers[0]) }}"
+                                        data-alt="{{ $book->title }} - Cover 1"
                                     >
                                 </div>
                                 
                                 <!-- Thumbnails -->
-                                @if(count($images) > 1)
+                                @if(count($covers) > 1)
                                     <div class="thumbnails-container d-flex flex-wrap justify-content-center gap-2">
-                                        @foreach($images as $index => $imgPath)
+                                        @foreach($covers as $index => $coverPath)
                                             <img 
-                                                src="{{ asset('storage/' . $imgPath) }}" 
+                                                src="{{ asset('storage/' . $coverPath) }}" 
                                                 class="img-fluid rounded-2 thumbnail {{ $index == 0 ? 'active' : '' }}" 
-                                                alt="{{ $article->title }} - Image {{ $index + 1 }}"
+                                                alt="{{ $book->title }} - Cover {{ $index + 1 }}"
                                                 style="max-height: 60px; width: 60px; object-fit: cover; cursor: pointer; border: 2px solid {{ $index == 0 ? '#007bff' : 'transparent' }}; transition: all 0.3s ease;"
-                                                data-main-image="{{ asset('storage/' . $imgPath) }}"
+                                                data-main-image="{{ asset('storage/' . $coverPath) }}"
                                                 data-index="{{ $index }}"
                                             >
                                         @endforeach
@@ -61,22 +61,62 @@
                             </div>
                         @else
                             <img 
-                                src="{{ asset('storage/' . $article->featured_image) }}" 
+                                src="{{ asset('storage/' . $book->cover) }}" 
                                 class="img-fluid rounded-4 mb-3" 
-                                alt="{{ $article->title }}"
+                                alt="{{ $book->title }}"
                                 style="max-height: 300px; width: 100%; object-fit: cover; cursor: zoom-in;"
                                 data-bs-toggle="modal" 
                                 data-bs-target="#imageModal"
-                                data-image="{{ asset('storage/' . $article->featured_image) }}"
-                                data-alt="{{ $article->title }}"
+                                data-image="{{ asset('storage/' . $book->cover) }}"
+                                data-alt="{{ $book->title }}"
                             >
                         @endif
                     @else
                         <div class="bg-light rounded-4 d-flex align-items-center justify-content-center mb-3" style="height: 300px;">
                             <div class="text-center">
-                                <i class="fa-solid fa-image fa-3x text-secondary opacity-50 mb-3"></i>
-                                <p class="text-secondary mb-0">No Image Avail</p>
+                                <i class="fa-solid fa-book fa-3x text-secondary opacity-50 mb-3"></i>
+                                <p class="text-secondary mb-0">No Cover Available</p>
                             </div>
+                        </div>
+                    @endif
+                </div>
+
+                <!-- Quick Info -->
+                <div class="border-top pt-3">
+                    <h6 class="fw-bold text-dark mb-3">Quick Information</h6>
+                    
+                    <div class="mb-3">
+                        <small class="text-secondary d-block">Book ID</small>
+                        <span class="text-dark">{{ $book->book_id }}</span>
+                    </div>
+
+                    <div class="mb-3">
+                        <small class="text-secondary d-block">Format</small>
+                        <span class="badge {{ $book->type === 'digital' ? 'bg-info' : 'bg-warning' }} rounded-pill px-3">
+                            {{ ucfirst($book->type) }}
+                        </span>
+                    </div>
+
+                    <div class="mb-3">
+                        <small class="text-secondary d-block">Price</small>
+                        <span class="badge bg-success-subtle text-success rounded-pill px-3">
+                            ETB {{ number_format($book->price, 2, '.', ',') }}
+                        </span>
+                    </div>
+
+                    @if($book->type === 'physical')
+                        <div class="mb-3">
+                            <small class="text-secondary d-block">Stock</small>
+                            <span class="text-dark">{{ $book->stock }} units</span>
+                        </div>
+                    @endif
+
+                    @if($book->file && $book->type === 'digital')
+                        <div class="mb-0">
+                            <small class="text-secondary d-block">Digital File</small>
+                            <span class="badge bg-primary-subtle text-primary rounded-pill px-3">
+                                <i class="fa-solid fa-file-pdf me-1"></i>Available
+                            </span>
                         </div>
                     @endif
                 </div>
@@ -86,73 +126,55 @@
 
     <!-- Detailed Information -->
     <div class="col-lg-8 mb-4">
-        <!-- Categories -->
-        @if($article->categories->count() > 0)
+        <!-- Description -->
+        @if($book->description)
             <div class="card border-0 shadow-sm mb-4" style="border-radius: 24px;">
                 <div class="card-body p-4">
                     <h6 class="fw-bold text-dark mb-3">
-                        <i class="fa-solid fa-tags text-primary me-2"></i>Categories
+                        <i class="fa-solid fa-file-alt text-primary me-2"></i>Description
                     </h6>
-                    <div class="d-flex flex-wrap gap-2">
-                        @foreach($article->categories as $category)
-                            <span class="badge bg-primary-subtle text-primary rounded-pill px-3">
-                                {{ $category->name }}
-                            </span>
-                        @endforeach
+                    <div class="text-dark">
+                        {!! nl2br(e($book->description)) !!}
                     </div>
                 </div>
             </div>
         @endif
 
-        <!-- Content -->
-        <div class="card border-0 shadow-sm mb-4" style="border-radius: 24px;">
-            <div class="card-body p-4">
-                <h6 class="fw-bold text-dark mb-3">
-                    <i class="fa-solid fa-file-alt text-primary me-2"></i>Content
-                </h6>
-                <div class="text-dark">
-                    {!! nl2br(e($article->content)) !!}
-                </div>
-            </div>
-        </div>
-
-        <!-- Article Metadata -->
+        <!-- Book Details -->
         <div class="card border-0 shadow-sm mb-4" style="border-radius: 24px;">
             <div class="card-body p-4">
                 <h6 class="fw-bold text-dark mb-4">
-                    <i class="fa-solid fa-info-circle text-primary me-2"></i>Article Information
+                    <i class="fa-solid fa-info-circle text-primary me-2"></i>Book Information
                 </h6>
                 <div class="row">
                     <div class="col-md-6 mb-3">
-                        <small class="text-secondary d-block">Article ID</small>
-                        <span class="text-dark">{{ $article->article_id }}</span>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <small class="text-secondary d-block">Status</small>
-                        <span class="badge {{ $article->status === 'published' ? 'bg-success' : 'bg-warning' }} rounded-pill px-3">
-                            {{ ucfirst($article->status) }}
-                        </span>
+                        <small class="text-secondary d-block">Book ID</small>
+                        <span class="text-dark">{{ $book->book_id }}</span>
                     </div>
                     <div class="col-md-6 mb-3">
                         <small class="text-secondary d-block">Slug</small>
-                        <span class="text-dark">{{ $article->slug }}</span>
+                        <span class="text-dark">{{ $book->slug }}</span>
                     </div>
                     <div class="col-md-6 mb-3">
-                        <small class="text-secondary d-block">Views</small>
-                        <span class="text-dark">{{ number_format($article->views) }}</span>
+                        <small class="text-secondary d-block">Price</small>
+                        <span class="text-dark">ETB {{ number_format($book->price, 2, '.', ',') }}</span>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <small class="text-secondary d-block">Format</small>
+                        <span class="text-dark">{{ ucfirst($book->type) }}</span>
                     </div>
                     <div class="col-md-6 mb-3">
                         <small class="text-secondary d-block">Created</small>
-                        <span class="text-dark">{{ $article->created_at->format('M d, Y H:i') }}</span>
+                        <span class="text-dark">{{ $book->created_at->format('M d, Y H:i') }}</span>
                     </div>
                     <div class="col-md-6 mb-3">
                         <small class="text-secondary d-block">Updated</small>
-                        <span class="text-dark">{{ $article->updated_at->format('M d, Y H:i') }}</span>
+                        <span class="text-dark">{{ $book->updated_at->format('M d, Y H:i') }}</span>
                     </div>
-                    @if($article->published_at)
+                    @if($book->type === 'physical')
                         <div class="col-md-6 mb-0">
-                            <small class="text-secondary d-block">Published</small>
-                            <span class="text-dark">{{ $article->published_at->format('M d, Y H:i') }}</span>
+                            <small class="text-secondary d-block">Stock</small>
+                            <span class="text-dark">{{ $book->stock }} units</span>
                         </div>
                     @endif
                 </div>
@@ -189,7 +211,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Update main image
             mainImage.src = newImageSrc;
             mainImage.setAttribute('data-image', newImageSrc);
-            mainImage.setAttribute('data-alt', mainImage.alt.replace(/Image \d+/, 'Image ' + (parseInt(index) + 1)));
+            mainImage.setAttribute('data-alt', mainImage.alt.replace(/Cover \d+/, 'Cover ' + (parseInt(index) + 1)));
             
             // Update active thumbnail styling
             thumbnails.forEach(t => {

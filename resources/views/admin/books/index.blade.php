@@ -18,6 +18,8 @@
             <table class="table table-hover align-middle mb-0">
                 <thead class="text-secondary opacity-50 small text-uppercase fw-bold">
                     <tr>
+                        <th class="border-0">#</th>
+                        <th class="border-0">Book ID</th>
                         <th class="border-0">Book</th>
                         <th class="border-0">Format</th>
                         <th class="border-0">Price</th>
@@ -28,11 +30,36 @@
                 <tbody class="small">
                     @forelse($books as $book)
                         <tr>
+                             <td class="border-0 py-3">{{ $loop->iteration }}</td>
+                            <td class="border-0 py-3"><a href="{{ route('admin.books.show', $book) }}" rel="noopener noreferrer" class="text-decoration-none text-danger">{{ $book->book_id }}</a></td>
                             <td class="border-0 py-3">
                                 <div class="d-flex align-items-center">
                                     <div class="book-cover me-3 rounded-2 shadow-sm overflow-hidden" style="width: 40px; height: 56px; background: #f8f9fa;">
                                         @if($book->cover)
-                                            <img src="{{ asset('storage/' . $book->cover) }}" class="w-100 h-100 object-fit-cover">
+                                            @php
+                                                $covers = json_decode($book->cover, true);
+                                            @endphp
+                                            @if(is_array($covers) && count($covers) > 0)
+                                                <div class="d-flex gap-1">
+                                                    @foreach($covers as $index => $coverPath)
+                                                        @if($index < 2)
+                                                            <img 
+                                                                src="{{ asset('storage/' . $coverPath) }}" 
+                                                                class="rounded-1"
+                                                                style="width: 18px; height: 18px; object-fit: cover;"
+                                                                alt="Book cover {{ $index + 1 }}"
+                                                            >
+                                                        @endif
+                                                    @endforeach
+                                                    @if(count($covers) > 2)
+                                                        <div class="d-flex align-items-center justify-content-center text-secondary" style="width: 18px; height: 18px; font-size: 8px;">
+                                                            +{{ count($covers) - 2 }}
+                                                        </div>
+                                                    @endif
+                                                </div>
+                                            @else
+                                                <img src="{{ asset('storage/' . $book->cover) }}" class="w-100 h-100 object-fit-cover">
+                                            @endif
                                         @else
                                             <div class="w-100 h-100 d-flex align-items-center justify-content-center text-secondary opacity-25">
                                                 <i class="fa-solid fa-book-open"></i>
@@ -40,7 +67,9 @@
                                         @endif
                                     </div>
                                     <div>
-                                        <div class="fw-bold text-dark">{{ $book->title }}</div>
+                                        <div class="fw-bold text-dark">
+                                            <a href="{{ route('admin.books.show', $book) }}" class="text-decoration-none text-dark">{{ $book->title }}</a>
+                                        </div>
                                         <div class="text-secondary text-xs">{{ $book->slug }}</div>
                                     </div>
                                 </div>
