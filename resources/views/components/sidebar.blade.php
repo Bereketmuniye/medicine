@@ -1,7 +1,7 @@
 <!-- Sidebar -->
 <aside class="sidebar" id="sidebar">
     <div class="sidebar-header">
-        <span class="logo-text">ETHIO-MEDICINE<span style="color: #3b82f6;">.</span></span>
+        <img src="{{ asset('images/shalom-logo.png') }}" alt="SHALOM HERBAL HEALING" class="logo-image">
     </div>
     
     <nav class="sidebar-nav">

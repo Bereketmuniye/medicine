@@ -17,8 +17,8 @@
 
 <div class="row">
     <!-- Book Cover and Basic Info -->
-    <div class="col-lg-4 mb-4">
-        <div class="card border-0 shadow-sm" style="border-radius: 24px;">
+    <div class="col-lg-4 col-md-5 mb-4">
+        <div class="card border-0 shadow-sm" style="border-radius: 24px; background: #fff;">
             <div class="card-body p-4">
                 <!-- Book Cover Images -->
                 <div class="text-center mb-4">
@@ -125,7 +125,7 @@
     </div>
 
     <!-- Detailed Information -->
-    <div class="col-lg-8 mb-4">
+    <div class="col-lg-8 col-md-7 mb-4">
         <!-- Description -->
         @if($book->description)
             <div class="card border-0 shadow-sm mb-4" style="border-radius: 24px;">
