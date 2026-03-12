@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
+use App\Models\ArticleInteraction;
 use App\Models\Category;
 use App\Models\SocialMediaAccount;
 use Illuminate\Http\Request;
@@ -81,5 +82,64 @@ class ArticleController extends Controller
         $socialAccounts = SocialMediaAccount::where('is_active', true)->get();
 
         return view('articles.show', compact('article', 'relatedArticles', 'latestArticles', 'socialAccounts'));
+    }
+
+    /**
+     * Mark article as helpful
+     */
+    public function markHelpful(Request $request, $id)
+    {
+        $article = Article::findOrFail($id);
+        $ipAddress = $request->ip();
+        $userAgent = $request->userAgent();
+
+        // Check if user already marked as helpful
+        if ($article->hasUserMarkedHelpful($ipAddress)) {
+            // Remove the helpful mark
+            ArticleInteraction::where('article_id', $article->id)
+                ->where('interaction_type', 'helpful')
+                ->where('ip_address', $ipAddress)
+                ->delete();
+            
+            return response()->json([
+                'success' => true,
+                'action' => 'removed',
+                'count' => $article->helpfulCount()
+            ]);
+        } else {
+            // Add helpful mark
+            ArticleInteraction::create([
+                'article_id' => $article->id,
+                'interaction_type' => 'helpful',
+                'ip_address' => $ipAddress,
+                'user_agent' => $userAgent
+            ]);
+            
+            return response()->json([
+                'success' => true,
+                'action' => 'added',
+                'count' => $article->helpfulCount()
+            ]);
+        }
+    }
+
+    /**
+     * Record article share
+     */
+    public function recordShare(Request $request, $id)
+    {
+        $article = Article::findOrFail($id);
+        
+        ArticleInteraction::create([
+            'article_id' => $article->id,
+            'interaction_type' => 'share',
+            'ip_address' => $request->ip(),
+            'user_agent' => $request->userAgent()
+        ]);
+        
+        return response()->json([
+            'success' => true,
+            'count' => $article->shareCount()
+        ]);
     }
 }

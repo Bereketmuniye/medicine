@@ -41,4 +41,27 @@ class Article extends Model
     {
         return $this->hasMany(Comment::class);
     }
+
+    public function interactions()
+    {
+        return $this->hasMany(ArticleInteraction::class);
+    }
+
+    public function helpfulCount()
+    {
+        return $this->interactions()->where('interaction_type', 'helpful')->count();
+    }
+
+    public function shareCount()
+    {
+        return $this->interactions()->where('interaction_type', 'share')->count();
+    }
+
+    public function hasUserMarkedHelpful($ipAddress)
+    {
+        return $this->interactions()
+            ->where('interaction_type', 'helpful')
+            ->where('ip_address', $ipAddress)
+            ->exists();
+    }
 }

@@ -18,6 +18,8 @@ Route::post('/contact', [WelcomeController::class, 'contact'])->name('contact.su
 // Public content routes
 Route::get('/articles', [App\Http\Controllers\ArticleController::class, 'index'])->name('articles.index');
 Route::get('/articles/{slug}', [App\Http\Controllers\ArticleController::class, 'show'])->name('articles.show');
+Route::post('/articles/{id}/helpful', [App\Http\Controllers\ArticleController::class, 'markHelpful'])->name('articles.helpful');
+Route::post('/articles/{id}/share', [App\Http\Controllers\ArticleController::class, 'recordShare'])->name('articles.share');
 Route::get('/books', [App\Http\Controllers\BookController::class, 'index'])->name('books.index');
 Route::get('/books/{slug}', [App\Http\Controllers\BookController::class, 'show'])->name('books.show');
 Route::get('/consultation', [App\Http\Controllers\ConsultationController::class, 'index'])->name('consultation.index');

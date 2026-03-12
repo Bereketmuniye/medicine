@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ $article->title }} - Ethiopian Traditional Medicine</title>
 
     <!-- Bootstrap 5 CSS -->
@@ -522,10 +523,12 @@
                             <button onclick="markHelpful()" class="btn btn-outline-primary d-flex align-items-center gap-2" id="helpful-btn">
                                 <i class="bi bi-hand-thumbs-up"></i> 
                                 <span id="helpful-text">Helpful</span>
+                                <span class="badge bg-primary" id="helpful-count">{{ $article->helpfulCount() }}</span>
                             </button>
-                            <button onclick="shareArticle()" class="btn btn-outline-secondary d-flex align-items-center gap-2">
+                            <button onclick="showShareModal()" class="btn btn-outline-secondary d-flex align-items-center gap-2">
                                 <i class="bi bi-share"></i> 
                                 Share
+                                <span class="badge bg-secondary" id="share-count">{{ $article->shareCount() }}</span>
                             </button>
                         </div>
                     </div>
@@ -571,6 +574,40 @@
     </div>
 </section>
 
+<!-- Share Modal -->
+<div class="modal fade" id="shareModal" tabindex="-1" aria-labelledby="shareModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="shareModalLabel">Share this Article</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="d-grid gap-2">
+                    <a href="#" onclick="shareOnFacebook()" class="btn btn-primary d-flex align-items-center justify-content-center gap-2">
+                        <i class="bi bi-facebook"></i> Share on Facebook
+                    </a>
+                    <a href="#" onclick="shareOnTwitter()" class="btn btn-info d-flex align-items-center justify-content-center gap-2">
+                        <i class="bi bi-twitter"></i> Share on Twitter
+                    </a>
+                    <a href="#" onclick="shareOnLinkedIn()" class="btn btn-primary d-flex align-items-center justify-content-center gap-2">
+                        <i class="bi bi-linkedin"></i> Share on LinkedIn
+                    </a>
+                    <a href="#" onclick="shareOnWhatsApp()" class="btn btn-success d-flex align-items-center justify-content-center gap-2">
+                        <i class="bi bi-whatsapp"></i> Share on WhatsApp
+                    </a>
+                    <a href="#" onclick="shareViaEmail()" class="btn btn-secondary d-flex align-items-center justify-content-center gap-2">
+                        <i class="bi bi-envelope"></i> Share via Email
+                    </a>
+                    <button onclick="copyLink()" class="btn btn-outline-dark d-flex align-items-center justify-content-center gap-2">
+                        <i class="bi bi-link-45deg"></i> Copy Link
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- CTA Section -->
 <section class="cta-section">
     <div class="container">
@@ -612,38 +649,171 @@
     });
 
     // Helpful functionality
-    function markHelpful() {
+    async function markHelpful() {
         const btn = document.getElementById('helpful-btn');
         const text = document.getElementById('helpful-text');
+        const count = document.getElementById('helpful-count');
         
-        if (btn.classList.contains('active')) {
-            btn.classList.remove('active');
-            text.textContent = 'Helpful';
-        } else {
-            btn.classList.add('active');
-            text.textContent = 'Helped!';
+        try {
+            const response = await fetch(`/articles/{{ $article->id }}/helpful`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                }
+            });
+            
+            const data = await response.json();
+            
+            if (data.success) {
+                if (data.action === 'added') {
+                    btn.classList.add('active', 'btn-primary');
+                    btn.classList.remove('btn-outline-primary');
+                    text.textContent = 'Helped!';
+                } else {
+                    btn.classList.remove('active', 'btn-primary');
+                    btn.classList.add('btn-outline-primary');
+                    text.textContent = 'Helpful';
+                }
+                count.textContent = data.count;
+            }
+        } catch (error) {
+            console.error('Error marking helpful:', error);
         }
     }
 
     // Share functionality
-    function shareArticle() {
+    let shareModal;
+
+    function showShareModal() {
+        if (!shareModal) {
+            shareModal = new bootstrap.Modal(document.getElementById('shareModal'));
+        }
+        shareModal.show();
+    }
+
+    async function recordShareAndOpen(url) {
+        try {
+            // Record share in database
+            await fetch(`/articles/{{ $article->id }}/share`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                }
+            });
+            
+            // Update share count
+            const shareCount = document.getElementById('share-count');
+            const currentCount = parseInt(shareCount.textContent);
+            shareCount.textContent = currentCount + 1;
+            
+            // Close modal
+            shareModal.hide();
+            
+            // Open share URL
+            window.open(url, '_blank', 'width=600,height=400');
+        } catch (error) {
+            console.error('Error sharing article:', error);
+        }
+    }
+
+    function shareOnFacebook() {
         const url = window.location.href;
         const title = document.querySelector('h1').textContent;
+        const shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}&quote=${encodeURIComponent(title)}`;
+        recordShareAndOpen(shareUrl);
+    }
+
+    function shareOnTwitter() {
+        const url = window.location.href;
+        const title = document.querySelector('h1').textContent;
+        const shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(url)}`;
+        recordShareAndOpen(shareUrl);
+    }
+
+    function shareOnLinkedIn() {
+        const url = window.location.href;
+        const title = document.querySelector('h1').textContent;
+        const shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}&title=${encodeURIComponent(title)}`;
+        recordShareAndOpen(shareUrl);
+    }
+
+    function shareOnWhatsApp() {
+        const url = window.location.href;
+        const title = document.querySelector('h1').textContent;
+        const shareUrl = `https://wa.me/?text=${encodeURIComponent(title + ' ' + url)}`;
+        recordShareAndOpen(shareUrl);
+    }
+
+    function shareViaEmail() {
+        const url = window.location.href;
+        const title = document.querySelector('h1').textContent;
+        const subject = encodeURIComponent(title);
+        const body = encodeURIComponent(`I thought you might find this article interesting: ${title}\n\n${url}`);
+        const shareUrl = `mailto:?subject=${subject}&body=${body}`;
+        recordShareAndOpen(shareUrl);
+    }
+
+    async function copyLink() {
+        const url = window.location.href;
+        const copyBtn = event.target.closest('button');
         
-        if (navigator.share) {
-            navigator.share({
-                title: title,
-                url: url
+        try {
+            // Record share in database
+            await fetch(`/articles/{{ $article->id }}/share`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                }
             });
-        } else {
-            navigator.clipboard.writeText(url).then(() => {
-                const shareBtn = event.target.closest('button');
-                const originalHTML = shareBtn.innerHTML;
-                shareBtn.innerHTML = '<i class="bi bi-check"></i> Copied!';
+            
+            // Update share count
+            const shareCount = document.getElementById('share-count');
+            const currentCount = parseInt(shareCount.textContent);
+            shareCount.textContent = currentCount + 1;
+            
+            // Copy to clipboard
+            await navigator.clipboard.writeText(url);
+            
+            // Show feedback
+            const originalHTML = copyBtn.innerHTML;
+            copyBtn.innerHTML = '<i class="bi bi-check"></i> Copied!';
+            copyBtn.classList.add('btn-success');
+            copyBtn.classList.remove('btn-outline-dark');
+            
+            setTimeout(() => {
+                copyBtn.innerHTML = originalHTML;
+                copyBtn.classList.remove('btn-success');
+                copyBtn.classList.add('btn-outline-dark');
+                shareModal.hide();
+            }, 1500);
+        } catch (error) {
+            console.error('Error copying link:', error);
+            // Fallback for older browsers
+            const textArea = document.createElement('textarea');
+            textArea.value = url;
+            document.body.appendChild(textArea);
+            textArea.select();
+            try {
+                document.execCommand('copy');
+                const originalHTML = copyBtn.innerHTML;
+                copyBtn.innerHTML = '<i class="bi bi-check"></i> Copied!';
+                copyBtn.classList.add('btn-success');
+                copyBtn.classList.remove('btn-outline-dark');
+                
                 setTimeout(() => {
-                    shareBtn.innerHTML = originalHTML;
-                }, 2000);
-            });
+                    copyBtn.innerHTML = originalHTML;
+                    copyBtn.classList.remove('btn-success');
+                    copyBtn.classList.add('btn-outline-dark');
+                    shareModal.hide();
+                }, 1500);
+            } catch (fallbackError) {
+                console.error('Fallback copy failed:', fallbackError);
+                alert('Failed to copy link. Please copy manually: ' + url);
+            }
+            document.body.removeChild(textArea);
         }
     }
 </script>
