@@ -23,6 +23,12 @@ Route::get('/books/{slug}', [App\Http\Controllers\BookController::class, 'show']
 Route::get('/consultation', [App\Http\Controllers\ConsultationController::class, 'index'])->name('consultation.index');
 Route::post('/consultation', [App\Http\Controllers\ConsultationController::class, 'store'])->name('consultation.store');
 
+// Public testimonial routes
+Route::get('/testimonials', [App\Http\Controllers\TestimonialController::class, 'all'])->name('testimonials.all');
+Route::get('/testimonials/create', [App\Http\Controllers\TestimonialController::class, 'create'])->name('testimonials.create');
+Route::post('/testimonials', [App\Http\Controllers\TestimonialController::class, 'store'])->name('testimonials.store');
+Route::get('/api/testimonials', [App\Http\Controllers\TestimonialController::class, 'index'])->name('testimonials.api');
+
 // Authentication routes
 Route::middleware(['custom_throttle:5,1'])->group(function () {
     Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
@@ -60,6 +66,9 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::post('promotions/{promotion}/toggle-status', [App\Http\Controllers\Admin\PromotionController::class, 'toggleStatus'])->name('promotions.toggle-status');
     Route::resource('social-media', App\Http\Controllers\Admin\SocialMediaController::class);
     Route::post('social-media/{socialMedia}/toggle-status', [App\Http\Controllers\Admin\SocialMediaController::class, 'toggleStatus'])->name('social-media.toggle-status');
+    Route::resource('testimonials', App\Http\Controllers\Admin\TestimonialController::class);
+    Route::post('testimonials/{testimonial}/toggle-status', [App\Http\Controllers\Admin\TestimonialController::class, 'toggleStatus'])->name('testimonials.toggle-status');
+    Route::post('testimonials/{testimonial}/toggle-featured', [App\Http\Controllers\Admin\TestimonialController::class, 'toggleFeatured'])->name('testimonials.toggle-featured');
     Route::resource('subscribers', App\Http\Controllers\Admin\SubscriberController::class)->only(['index', 'destroy']);
     Route::resource('contacts', App\Http\Controllers\Admin\ContactController::class);
     Route::post('contacts/{contact}/read', [App\Http\Controllers\Admin\ContactController::class, 'markAsRead'])->name('contacts.read');

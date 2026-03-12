@@ -8,6 +8,7 @@ use App\Models\Book;
 use App\Models\Promotion;
 use App\Models\SocialMediaAccount;
 use App\Models\Setting;
+use App\Models\Testimonial;
 use Illuminate\Http\Request;
 use App\Models\Video;
 use App\Models\Newsletter;
@@ -100,112 +101,84 @@ class WelcomeController extends Controller
     /**
      * Display the welcome page with real data.
      */
-    public function index()
-    {
-        // Get featured plants (medicinal herbs) - using available columns
-        $featuredPlants = Plant::orderBy('name', 'asc')
-            ->take(8)
-            ->get()
-            ->map(function ($plant) {
-                // Add realistic pricing based on plant type
-                $plant->price = match($plant->name) {
-                    'Tena Adam' => '24.99',
-                    'Moringa' => '19.99',
-                    'Feto' => '34.99',
-                    'Gesho' => '29.99',
-                    default => '29.99'
-                };
-                return $plant;
-            });
+   public function index()
+{
+    // ── Core data ────────────────────────────────────────────────
+    $featuredPlants = Plant::query()
+        ->orderBy('name')
+        ->get();
+        // No price assignment anymore — assuming price is now a real column 
+        // or handled elsewhere (frontend, separate pricing table, etc.)
 
-        // Get latest articles/blog posts
-        $latestArticles = Article::where('status', 'published')
-            ->orderBy('published_at', 'desc')
-            ->get();
+    $latestArticles = Article::query()
+        ->where('status', 'published')
+        ->latest('published_at')
+        ->get();
 
-        // Get featured books
-        $featuredBooks = Book::orderBy('title', 'asc')
-            ->get();
+    $featuredBooks = Book::query()
+        ->orderBy('title')
+        ->get();
 
-        // Get active promotions
-        $activePromotions = Promotion::where('is_active', true)
-            ->where(function($query) {
-                $query->whereNull('starts_at')
-                    ->orWhere('starts_at', '<=', now());
-            })
-            ->where(function($query) {
-                $query->whereNull('ends_at')
-                    ->orWhere('ends_at', '>=', now());
-            })
-            ->orderBy('sort_order', 'asc')
-            ->get();
+    // ── Active promotions ────────────────────────────────────────
+    $activePromotions = Promotion::query()
+        ->where('is_active', true)
+        ->where(fn($q) => $q
+            ->whereNull('starts_at')
+            ->orWhere('starts_at', '<=', now())
+        )
+        ->where(fn($q) => $q
+            ->whereNull('ends_at')
+            ->orWhere('ends_at', '>=', now())
+        )
+        ->orderBy('sort_order')
+        ->get();
 
-        // Get social media accounts
-        $socialAccounts = SocialMediaAccount::where('is_active', true)
-            ->ordered()
-            ->get();
+    // ── Categories (exactly as requested) ────────────────────────
+    $categories = collect([
+        ['name' => 'Respiratory & Cold',   'icon' => 'bi-lungs',        'count' => 24],
+        ['name' => 'Digestive Health',     'icon' => 'bi-cup-hot',      'count' => 18],
+        ['name' => 'Immunity & Energy',    'icon' => 'bi-shield-check', 'count' => 32],
+        ['name' => 'Skin & Beauty',        'icon' => 'bi-heart',        'count' => 15],
+        ['name' => "Women's Health",       'icon' => 'bi-person',       'count' => 12],
+        ['name' => 'Books & Guides',       'icon' => 'bi-book',         'count' => 8],
+    ]);
 
-        // Categories for search and navigation
-        $categories = [
-            ['name' => 'Respiratory & Cold', 'icon' => 'bi-lungs', 'count' => 24],
-            ['name' => 'Digestive Health', 'icon' => 'bi-cup-hot', 'count' => 18],
-            ['name' => 'Immunity & Energy', 'icon' => 'bi-shield-check', 'count' => 32],
-            ['name' => 'Skin & Beauty', 'icon' => 'bi-heart', 'count' => 15],
-            ['name' => 'Women\'s Health', 'icon' => 'bi-person', 'count' => 12],
-            ['name' => 'Books & Guides', 'icon' => 'bi-book', 'count' => 8],
-        ];
+    // ── Stats ────────────────────────────────────────────────────
+    $stats = [
+        'herbs_count'   => Plant::count(),
+        'clients_count' => 1250,    // consider making dynamic later
+        'experts_count' => 24,
+    ];
 
-        $owner_phone = Setting::where('key', 'owner_phone')->first()?->value;
-        $contact_email = Setting::where('key', 'contact_email')->first()?->value;
+    // ── Settings ─────────────────────────────────────────────────
+    $settings = Setting::whereIn('key', ['owner_phone', 'contact_email'])
+        ->pluck('value', 'key');
 
-        // Get contact messages
-        $contactMessages = Contact::latest()->take(5)->get();
+    // ── Other data ───────────────────────────────────────────────
+    $videos = Video::with('category')
+        ->latest()
+        ->take(6)
+        ->get();
 
-        // Get real videos from database
-        $videos = Video::with('category')->latest()->take(6)->get();
+    $testimonials = Testimonial::query()
+        ->latest()
+        ->orderBy('order')
+        ->orderBy('published_at', 'desc')
+        ->get();
 
-        // Get real counts for hero stats
-        $stats = [
-            'herbs_count' => Plant::count(),
-            'clients_count' => 1250, // This could be from a clients table later
-            'experts_count' => 24, // This could be from an experts table later
-        ];
-
-        // Testimonials (mock data for now - could be moved to database)
-        $testimonials = [
-            [
-                'content' => 'The moringa powder gave me real energy – no more afternoon fatigue!',
-                'author' => 'Abeba T.',
-                'location' => 'Addis Ababa',
-                'rating' => 5
-            ],
-            [
-                'content' => 'Finally found authentic Ethiopian herbs. The quality is exceptional!',
-                'author' => 'Kedir M.',
-                'location' => 'Dire Dawa',
-                'rating' => 5
-            ],
-            [
-                'content' => 'Their consultation service helped me find the right remedy for my condition.',
-                'author' => 'Sara H.',
-                'location' => 'Bahir Dar',
-                'rating' => 5
-            ]
-        ];
-
-        return view('welcome', compact(
-            'featuredPlants',
-            'latestArticles', 
-            'featuredBooks',
-            'activePromotions',
-            'socialAccounts',
-            'categories',
-            'testimonials',
-            'owner_phone',
-            'contact_email',
-            'stats',
-            'videos',
-            'contactMessages'
-        ));
-    }
+    return view('welcome', [
+        'featuredPlants'    => $featuredPlants,
+        'latestArticles'    => $latestArticles,
+        'featuredBooks'     => $featuredBooks,
+        'activePromotions'  => $activePromotions,
+        'socialAccounts'    => SocialMediaAccount::where('is_active', true)->ordered()->get(),
+        'categories'        => $categories,
+        'testimonials'      => $testimonials,
+        'owner_phone'       => $settings['owner_phone'] ?? null,
+        'contact_email'     => $settings['contact_email'] ?? null,
+        'stats'             => $stats,
+        'videos'            => $videos,
+        // 'contactMessages' => Contact::latest()->take(5)->get(), // usually not for public homepage
+    ]);
+}
 }

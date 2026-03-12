@@ -603,44 +603,46 @@
             <h2 class="section-title">Latest <span>Articles</span></h2>
         </div>
 
-        <div class="row g-4">
-            @forelse($articles as $article)
-                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
-                    <div class="article-card">
-                        <div class="article-image">
-                            @if($article->featured_image)
-                                <img src="{{ asset('storage/' . $article->featured_image) }}" alt="{{ $article->title }}">
-                            @else
-                                <img src="https://images.unsplash.com/photo-1515377901034-d2535478c6c6?auto=format&fit=crop&w=600&q=80" alt="{{ $article->title }}">
-                            @endif
-                            <span class="article-badge">Featured</span>
-                        </div>
-                        <div class="article-body">
-                            <div class="article-date">
-                                {{ $article->published_at ? $article->published_at->format('M d, Y') : 'Recently' }}
-                            </div>
-                            <h5 class="article-title">{{ Str::limit($article->title, 60) }}</h5>
-                            <div class="article-excerpt">{{ Str::limit(strip_tags($article->content), 120) }}</div>
-                            <div class="article-footer">
-                                <a href="{{ route('articles.show', $article->slug) }}" class="btn-read">Read More</a>
-                                <div class="article-views">
-                                    <i class="bi bi-eye"></i> {{ $article->views ?? 0 }}
-                                </div>
-                            </div>
+       <div class="row g-4">
+    @forelse($articles as $article)
+        <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
+            <div class="article-card">
+                <div class="article-image">
+                    @php
+                        $localImage = $article->featured_image ? storage_path('app/public/' . $article->featured_image) : null;
+                        $imageUrl = ($localImage && file_exists($localImage)) 
+                                    ? asset('storage/' . $article->featured_image) 
+                                    : 'https://images.unsplash.com/photo-1515377901034-d2535478c6c6?auto=format&fit=crop&w=600&q=80';
+                    @endphp
+                    <img src="{{ $imageUrl }}" alt="{{ $article->title }}">
+                    <span class="article-badge">Featured</span>
+                </div>
+                <div class="article-body">
+                    <div class="article-date">
+                        {{ $article->published_at ? $article->published_at->format('M d, Y') : 'Recently' }}
+                    </div>
+                    <h5 class="article-title">{{ Str::limit($article->title, 60) }}</h5>
+                    <div class="article-excerpt">{{ Str::limit(strip_tags($article->content), 120) }}</div>
+                    <div class="article-footer">
+                        <a href="{{ route('articles.show', $article->slug) }}" class="btn-read">Read More</a>
+                        <div class="article-views">
+                            <i class="bi bi-eye"></i> {{ $article->views ?? 0 }}
                         </div>
                     </div>
                 </div>
-            @empty
-                <div class="col-12">
-                    <div class="no-articles" data-aos="fade-up">
-                        <i class="bi bi-journal-text"></i>
-                        <h3>No articles found</h3>
-                        <p>Try adjusting your search or browse all categories.</p>
-                        <a href="{{ route('welcome') }}" class="btn-account" style="background: var(--primary-light); color: var(--primary); border: none; padding: 1rem 2.5rem; display: inline-block; margin-top: 1rem;">BACK TO HOME</a>
-                    </div>
-                </div>
-            @endforelse
+            </div>
         </div>
+    @empty
+        <div class="col-12">
+            <div class="no-articles" data-aos="fade-up">
+                <i class="bi bi-journal-text"></i>
+                <h3>No articles found</h3>
+                <p>Try adjusting your search or browse all categories.</p>
+                <a href="{{ route('welcome') }}" class="btn-account" style="background: var(--primary-light); color: var(--primary); border: none; padding: 1rem 2.5rem; display: inline-block; margin-top: 1rem;">BACK TO HOME</a>
+            </div>
+        </div>
+    @endforelse
+</div>
 
         <!-- Pagination -->
         @if($articles->hasPages())

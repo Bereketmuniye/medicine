@@ -7,17 +7,26 @@
         </div>
         
         <div class="row g-4">
-            @foreach($featuredBooks->take(3) as $book)
+            @foreach($featuredBooks as $book)
                 <div class="col-md-4" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
                     <div class="book-card">
                         <div class="book-image">
-                            @if($book->cover)
-                                <img src="{{ asset('storage/' . $book->cover) }}" alt="{{ $book->title }}">
-                            @else
-                                <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=400&q=80" alt="{{ $book->title }}">
-                            @endif
+                            <div class="book-images-carousel" id="carousel-{{ $book->id }}">
+                                @php
+                                    $covers = $book->cover ? json_decode($book->cover, true) : [];
+                                @endphp
+
+                                @if(!empty($covers))
+                                    @foreach($covers as $index => $coverPath)
+                                        <img src="{{ asset('storage/' . $coverPath) }}" alt="{{ $book->title }}" class="{{ $index === 0 ? 'active' : '' }}">
+                                    @endforeach
+                                @else
+                                    <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=400&q=80" alt="{{ $book->title }}" class="active">
+                                @endif
+                            </div>
                             <span class="book-badge">{{ $book->type == 'digital' ? 'Digital' : 'Physical' }}</span>
                         </div>
+
                         <div class="book-content">
                             <div class="book-type">{{ $book->type == 'digital' ? 'E-Book' : 'Print Book' }}</div>
                             <h5 class="book-title">{{ Str::limit($book->title, 40) }}</h5>
@@ -35,6 +44,26 @@
         </div>
     </div>
 </section>
+
+<!-- Carousel JS -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    @foreach($featuredBooks as $book)
+        const carousel{{ $book->id }} = document.getElementById('carousel-{{ $book->id }}');
+        if(carousel{{ $book->id }}) {
+            const images{{ $book->id }} = carousel{{ $book->id }}.querySelectorAll('img');
+            if(images{{ $book->id }}.length > 1){
+                let current{{ $book->id }} = 0;
+                setInterval(() => {
+                    images{{ $book->id }}[current{{ $book->id }}].classList.remove('active');
+                    current{{ $book->id }} = (current{{ $book->id }} + 1) % images{{ $book->id }}.length;
+                    images{{ $book->id }}[current{{ $book->id }}].classList.add('active');
+                }, 3000); // Change every 3 seconds
+            }
+        }
+    @endforeach
+});
+</script>
 
 <style>
 .book-card {
@@ -59,15 +88,25 @@
     overflow: hidden;
 }
 
-.book-image img {
+.book-images-carousel {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.book-images-carousel img {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.5s;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
 }
 
-.book-card:hover .book-image img {
-    transform: scale(1.05);
+.book-images-carousel img.active {
+    opacity: 1;
 }
 
 .book-badge {

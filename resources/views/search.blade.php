@@ -468,9 +468,6 @@
                                 <button class="btn-reserve contact-btn" data-phone="{{ $owner_phone ?? '+251911XXXXXX' }}">
                                     <i class="bi bi-whatsapp"></i>
                                 </button>
-                                <a href="#" class="btn-price">
-                                    <i class="bi bi-bag"></i> Buy
-                                </a>
                             </div>
                         </div>
                     </div>

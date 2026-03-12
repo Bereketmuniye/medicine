@@ -624,11 +624,16 @@
                 <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
                     <div class="book-card">
                         <div class="book-image">
-                            @if($book->cover)
-                                <img src="{{ asset('storage/' . $book->cover) }}" alt="{{ $book->title }}">
-                            @else
-                                <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=400&q=80" alt="{{ $book->title }}">
-                            @endif
+                            @php $covers = $book->cover ? json_decode($book->cover, true) : []; @endphp
+                            <div class="book-images-carousel" id="carousel-{{ $book->id }}">
+                                @if(!empty($covers))
+                                    @foreach($covers as $index => $coverPath)
+                                        <img src="{{ asset('storage/' . $coverPath) }}" alt="{{ $book->title }}" class="{{ $index === 0 ? 'active' : '' }}">
+                                    @endforeach
+                                @else
+                                    <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=400&q=80" alt="{{ $book->title }}" class="active">
+                                @endif
+                            </div>
                             <span class="book-badge">{{ ucfirst($book->type) }}</span>
                         </div>
                         <div class="book-content">
@@ -664,6 +669,7 @@
                 </div>
             @endforelse
         </div>
+
 
         <!-- Pagination -->
         @if(isset($books) && $books->hasPages())

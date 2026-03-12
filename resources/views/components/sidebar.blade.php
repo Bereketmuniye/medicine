@@ -44,6 +44,10 @@
             <i class="fa-solid fa-bullhorn"></i>
             <span>Promotions</span>
         </a>
+        <a href="{{ route('admin.testimonials.index') }}" class="nav-item {{ request()->routeIs('admin.testimonials.*') ? 'active' : '' }}">
+            <i class="fa-solid fa-quote-left"></i>
+            <span>Testimonials</span>
+        </a>
         
         <div class="nav-label mt-4">Management</div>
         <a href="{{ route('admin.subscribers.index') }}" class="nav-item {{ request()->routeIs('admin.subscribers.*') ? 'active' : '' }}">
