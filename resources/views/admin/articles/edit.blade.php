@@ -26,7 +26,7 @@
                 
                 <div class="form-group mb-4">
                     <label class="form-label fw-bold">Content</label>
-                    <textarea name="content" rows="12" class="form-control rounded-4 p-3 @error('content') is-invalid @enderror" placeholder="Write your research here..." required>{{ old('content', $article->content) }}</textarea>
+                    <textarea name="content" id="summernote-content" class="form-control @error('content') is-invalid @enderror" placeholder="Write your research here..." required>{{ old('content', $article->content) }}</textarea>
                     @error('content') <div class="invalid-feedback">{{ $message }}</div> @enderror
                 </div>
                 
@@ -114,7 +114,7 @@
         </div>
     </div>
 </form>
-
+@endsection
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
@@ -137,13 +137,17 @@ document.addEventListener('DOMContentLoaded', function() {
         e.preventDefault();
         let formData = new FormData(form);
 
-        // Remove existing featured_image to avoid conflicts
-        formData.delete('featured_image');
-
-        // Append accepted Dropzone files correctly
-        myDropzone.getAcceptedFiles().forEach(function(file, index){
-            formData.append(`featured_image[${index}]`, file);
-        });
+        // Only handle image upload if there are new images
+        const acceptedFiles = myDropzone.getAcceptedFiles();
+        if (acceptedFiles.length > 0) {
+            // Remove existing featured_image to avoid conflicts
+            formData.delete('featured_image');
+            
+            // Append accepted Dropzone files correctly
+            acceptedFiles.forEach(function(file, index){
+                formData.append(`featured_image[${index}]`, file);
+            });
+        }
 
         // Add method override for PUT
         formData.append('_method', 'PUT');
@@ -202,5 +206,29 @@ function showToast(message, type = 'success') {
         }
     }, 5000);
 }
+</script>
+
+@section('scripts')
+<script>
+// Initialize Summernote
+$(document).ready(function() {
+    $('#summernote-content').summernote({
+        height: 400,
+        toolbar: [
+            ['style', ['style', 'bold', 'italic', 'underline', 'clear']],
+            ['font', ['strikethrough', 'superscript', 'subscript']],
+            ['para', ['ul', 'ol', 'paragraph', 'height']],
+            ['insert', ['picture', 'link', 'video', 'table', 'hr']],
+            ['view', ['fullscreen', 'codeview', 'help']]
+        ],
+        callbacks: {
+            onInit: function() {
+                // Set custom styles
+                $('.note-editor').find('.note-toolbar').css('border-radius', '8px 8px 0 0');
+                $('.note-editor').find('.note-editable').css('min-height', '300px');
+            }
+        }
+    });
+});
 </script>
 @endsection

@@ -26,7 +26,7 @@
                 
                 <div class="form-group mb-4">
                     <label class="form-label fw-bold">Content</label>
-                    <textarea name="content" rows="12" class="form-control rounded-4 p-3 @error('content') is-invalid @enderror" placeholder="Write your research here..." required>{{ old('content') }}</textarea>
+                    <textarea name="content" id="summernote-content" class="form-control @error('content') is-invalid @enderror" placeholder="Write your research here..." required>{{ old('content') }}</textarea>
                     @error('content') <div class="invalid-feedback">{{ $message }}</div> @enderror
                 </div>
                 
@@ -79,7 +79,7 @@
         </div>
     </div>
 </form>
-
+@endsection
 <!-- Dropzone JS -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
@@ -162,5 +162,29 @@ function showToast(message, type = 'success') {
     toastContainer.appendChild(toast);
     setTimeout(() => { if(toast.parentNode) toast.remove(); }, 5000);
 }
+</script>
+
+@section('scripts')
+<script>
+// Initialize Summernote
+$(document).ready(function() {
+    $('#summernote-content').summernote({
+        height: 400,
+        toolbar: [
+            ['style', ['style', 'bold', 'italic', 'underline', 'clear']],
+            ['font', ['strikethrough', 'superscript', 'subscript']],
+            ['para', ['ul', 'ol', 'paragraph', 'height']],
+            ['insert', ['picture', 'link', 'video', 'table', 'hr']],
+            ['view', ['fullscreen', 'codeview', 'help']]
+        ],
+        callbacks: {
+            onInit: function() {
+                // Set custom styles
+                $('.note-editor').find('.note-toolbar').css('border-radius', '8px 8px 0 0');
+                $('.note-editor').find('.note-editable').css('min-height', '300px');
+            }
+        }
+    });
+});
 </script>
 @endsection

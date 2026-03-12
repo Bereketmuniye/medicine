@@ -491,24 +491,45 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8">
-                <div data-aos="fade-up">
-                    @if($article->featured_image)
-                        <img src="{{ asset('storage/' . $article->featured_image) }}" class="article-image" alt="{{ $article->title }}">
+                <article data-aos="fade-up">
+                    <!-- Article Featured Image -->
+                    @php
+                        $images = is_string($article->featured_image) 
+                            ? json_decode($article->featured_image, true) 
+                            : (is_array($article->featured_image) ? $article->featured_image : []);
+                        $mainImage = !empty($images) ? $images[0] : null;
+                    @endphp
+                    
+                    @if($mainImage)
+                        <div class="article-hero-image mb-4">
+                            <img 
+                                src="{{ asset('storage/' . $mainImage) }}" 
+                                alt="{{ $article->title }}" 
+                                class="img-fluid rounded-3 shadow-sm"
+                                loading="lazy"
+                            >
+                        </div>
                     @endif
                     
-                    <div class="article-body">
+                    <!-- Article Content -->
+                    <div class="article-body content-format">
                         {!! $article->content !!}
                     </div>
                     
-                    <div class="article-actions">
-                        <a href="#" class="btn-action">
-                            <i class="bi bi-hand-thumbs-up"></i> Helpful
-                        </a>
-                        <a href="#" class="btn-action btn-action-outline">
-                            <i class="bi bi-share"></i> Share
-                        </a>
+                    <!-- Article Actions -->
+                    <div class="article-actions mt-5 pt-4 border-top">
+                        <div class="d-flex gap-3 align-items-center">
+                            <button onclick="markHelpful()" class="btn btn-outline-primary d-flex align-items-center gap-2" id="helpful-btn">
+                                <i class="bi bi-hand-thumbs-up"></i> 
+                                <span id="helpful-text">Helpful</span>
+                            </button>
+                            <button onclick="shareArticle()" class="btn btn-outline-secondary d-flex align-items-center gap-2">
+                                <i class="bi bi-share"></i> 
+                                Share
+                            </button>
+                        </div>
                     </div>
-                </div>
+                </article>
             </div>
             
             <div class="col-lg-4">

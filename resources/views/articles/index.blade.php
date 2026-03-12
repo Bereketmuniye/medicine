@@ -595,54 +595,81 @@
     </div>
 </section>
 
-<!-- Articles Section -->
 <section class="articles-section">
     <div class="container">
         <div class="section-header" data-aos="fade-up">
-            <span class="section-subtitle">ARTICLES</span>
-            <h2 class="section-title">Latest <span>Articles</span></h2>
+            <span class="section-subtitle">Recent Writings</span>
+            <h2 class="section-title">Featured <span>Articles</span></h2>
         </div>
 
-       <div class="row g-4">
-    @forelse($articles as $article)
-        <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
-            <div class="article-card">
-                <div class="article-image">
-                    @php
-                        $localImage = $article->featured_image ? storage_path('app/public/' . $article->featured_image) : null;
-                        $imageUrl = ($localImage && file_exists($localImage)) 
-                                    ? asset('storage/' . $article->featured_image) 
-                                    : 'https://images.unsplash.com/photo-1515377901034-d2535478c6c6?auto=format&fit=crop&w=600&q=80';
-                    @endphp
-                    <img src="{{ $imageUrl }}" alt="{{ $article->title }}">
-                    <span class="article-badge">Featured</span>
-                </div>
-                <div class="article-body">
-                    <div class="article-date">
-                        {{ $article->published_at ? $article->published_at->format('M d, Y') : 'Recently' }}
-                    </div>
-                    <h5 class="article-title">{{ Str::limit($article->title, 60) }}</h5>
-                    <div class="article-excerpt">{{ Str::limit(strip_tags($article->content), 120) }}</div>
-                    <div class="article-footer">
-                        <a href="{{ route('articles.show', $article->slug) }}" class="btn-read">Read More</a>
-                        <div class="article-views">
-                            <i class="bi bi-eye"></i> {{ $article->views ?? 0 }}
+        <div class="row g-4">
+            @forelse($articles as $article)
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="{{ $loop->index * 80 }}">
+                    <div class="article-card">
+                        <div class="article-image">
+                            @php
+                                $images = is_string($article->featured_image) 
+                                    ? json_decode($article->featured_image, true) 
+                                    : (is_array($article->featured_image) ? $article->featured_image : []);
+                                $mainImage = !empty($images) ? $images[0] : ($article->featured_image ?? 'images/placeholder-plant.jpg');
+                            @endphp
+
+                            @if($mainImage)
+                                <img 
+                                    src="{{ asset('storage/' . $mainImage) }}" 
+                                    alt="{{ $article->title }}" 
+                                    class="w-100 h-100 object-fit-cover"
+                                    loading="lazy"
+                                >
+                            @else
+                                <div class="w-100 h-100 d-flex align-items-center justify-center bg-gradient-to-br from-[var(--primary)] to-[var(--coffee)] text-white opacity-60">
+                                    <i class="bi bi-flower1 fs-1"></i>
+                                </div>
+                            @endif
+
+                            <span class="article-badge">
+                                {{ $article->category->name ?? 'Traditional' }}
+                            </span>
+                        </div>
+
+                        <div class="article-body">
+                            <div class="article-meta">
+                                <span><i class="bi bi-calendar3"></i> {{ $article->published_at ? $article->published_at->format('M d, Y') : 'Recent' }}</span>
+                                <span class="ms-auto article-views">
+                                    <i class="bi bi-eye"></i> {{ $article->views ?? 0 }}
+                                </span>
+                            </div>
+
+                            <h5 class="article-title">{{ Str::limit($article->title, 65) }}</h5>
+                            <p class="article-excerpt">{{ Str::limit(strip_tags($article->content), 140) }}</p>
+
+                            <div class="article-footer">
+                                <a href="{{ route('articles.show', $article->slug) }}" class="btn-read">Read Article</a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            @empty
+                <div class="col-12">
+                    <div class="no-articles" data-aos="fade-up">
+                        <i class="bi bi-journal-text"></i>
+                        <h3>No articles found</h3>
+                        <p>Try a different search term or browse our full collection.</p>
+                        <a href="{{ route('welcome') }}" class="btn btn-lg mt-3" style="background:var(--primary-light); color:var(--primary); border:none; padding:0.9rem 2.2rem; border-radius:50px; font-weight:700;">
+                            Return to Home
+                        </a>
+                    </div>
+                </div>
+            @endforelse
         </div>
-    @empty
-        <div class="col-12">
-            <div class="no-articles" data-aos="fade-up">
-                <i class="bi bi-journal-text"></i>
-                <h3>No articles found</h3>
-                <p>Try adjusting your search or browse all categories.</p>
-                <a href="{{ route('welcome') }}" class="btn-account" style="background: var(--primary-light); color: var(--primary); border: none; padding: 1rem 2.5rem; display: inline-block; margin-top: 1rem;">BACK TO HOME</a>
+
+        @if($articles->hasPages())
+            <div class="d-flex justify-content-center mt-5 pt-4" data-aos="fade-up">
+                {{ $articles->links('pagination::bootstrap-5') }}
             </div>
-        </div>
-    @endforelse
-</div>
+        @endif
+    </div>
+</section>
 
         <!-- Pagination -->
         @if($articles->hasPages())

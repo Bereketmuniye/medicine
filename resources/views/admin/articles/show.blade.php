@@ -111,7 +111,7 @@
                     <i class="fa-solid fa-file-alt text-primary me-2"></i>Content
                 </h6>
                 <div class="text-dark">
-                    {!! nl2br(e($article->content)) !!}
+                    {!! $article->content !!}
                 </div>
             </div>
         </div>
