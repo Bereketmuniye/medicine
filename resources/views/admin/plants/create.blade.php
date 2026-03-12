@@ -12,7 +12,7 @@
     </x-slot>
 </x-admin.card-header>
 
-<form action="{{ route('admin.plants.store') }}" method="POST" enctype="multipart/form-data">
+<form id="plant-form" action="{{ route('admin.plants.store') }}" method="POST" enctype="multipart/form-data">
     @csrf
     <div class="row g-4">
         <!-- Main Details -->
@@ -37,11 +37,15 @@
                         <label class="form-label small fw-bold">Primary Region</label>
                         <input type="text" name="region" class="form-control rounded-4 p-3" placeholder="e.g. Highlands of Ethiopia" value="{{ old('region') }}">
                     </div>
+                    <div class="col-md-6">
+                        <label class="form-label small fw-bold">Price (ETB)</label>
+                        <input type="number" name="price" class="form-control rounded-4 p-3" placeholder="0.00" value="{{ old('price') }}" step="0.01" min="0">
+                    </div>
                 </div>
                 
                 <div class="form-group mt-4">
                     <label class="form-label small fw-bold">General Description</label>
-                    <textarea name="description" rows="5" class="form-control rounded-4 p-3" placeholder="Describe the plant's appearance and history...">{{ old('description') }}</textarea>
+                    <textarea name="description" id="description" class="form-control rounded-4 p-3" placeholder="Describe the plant's appearance and history...">{{ old('description') }}</textarea>
                 </div>
             </div>
             
@@ -79,14 +83,12 @@
             <div class="card border-0 shadow-sm p-4 mb-4" style="border-radius: 24px;">
                 <h6 class="fw-bold mb-3">Plant Imagery</h6>
                 <div class="form-group mb-4">
-                    <div class="image-preview-wrapper" id="preview-wrapper">
-                        <img src="" id="preview-img">
-                    </div>
-                    <div class="image-upload-area border border-2 border-dashed rounded-4 p-4 text-center" style="background: #e8f5e9; border-color: #a5d6a7 !important;">
-                        <i class="fa-solid fa-seedling fa-2x text-success opacity-50 mb-3"></i>
-                        <div class="small text-success mb-3">Upload plant photo</div>
-                        <input type="file" name="image" class="d-none" id="image">
-                        <label for="image" class="btn btn-sm btn-success rounded-pill px-3">Choose File</label>
+                    <div class="dropzone" id="image-dropzone" style="border: 2px dashed #28a745; border-radius: 8px; padding: 20px; background: #f8f9fa; text-align: center;">
+                        <div class="dz-message" data-dz-message>
+                            <i class="fa-solid fa-cloud-upload-alt fa-3x text-success mb-3"></i>
+                            <div class="text-success mb-2">Drop plant photos here or click to browse</div>
+                            <small class="text-muted">Support for: JPG, PNG, GIF (Max 5 files, 2MB each)</small>
+                        </div>
                     </div>
                     @error('image') <div class="text-danger small mt-1">{{ $message }}</div> @enderror
                 </div>
@@ -107,6 +109,71 @@
 </form>
 
 <script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Summernote initialization (if jQuery loaded)
+    if (typeof $ !== 'undefined' && $.fn.summernote) {
+        $('#description').summernote({
+            height: 200,
+            toolbar: [
+                ['style', ['style']],
+                ['font', ['bold','italic','underline','clear']],
+                ['para', ['ul','ol','paragraph']],
+                ['insert', ['link','picture']],
+                ['view', ['fullscreen','codeview']]
+            ]
+        });
+    }
+
+    // Dropzone init
+    Dropzone.autoDiscover = false;
+    const myDropzone = new Dropzone("#image-dropzone", {
+        url: "#",
+        paramName: "image",
+        autoProcessQueue: false,
+        uploadMultiple: true,
+        parallelUploads: 5,
+        maxFiles: 5,
+        acceptedFiles: "image/*",
+        addRemoveLinks: true
+    });
+
+    // Form submission
+    const form = document.getElementById("plant-form");
+    form.addEventListener("submit", function(e) {
+        e.preventDefault();
+        let formData = new FormData(form);
+
+        // Append accepted Dropzone files correctly
+        myDropzone.getAcceptedFiles().forEach(function(file, index){
+            formData.append(`image[${index}]`, file);
+        });
+
+        fetch(form.action, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value,
+                'Accept': 'application/json'
+            }
+        })
+        .then(res => res.json())
+        .then(data => {
+            if(data.success){
+                showToast(data.message || 'Plant created successfully!', 'success');
+                setTimeout(() => {
+                    window.location.href = "{{ route('admin.plants.index') }}";
+                }, 1500);
+            } else {
+                showToast(data.message || 'Error creating plant', 'error');
+            }
+        })
+        .catch(err => {
+            console.error(err);
+            showToast('Error creating plant', 'error');
+        });
+    });
+
+    // Add dynamic "use" fields
     let useCount = 1;
     document.getElementById('add-use-btn').addEventListener('click', function() {
         const container = document.getElementById('uses-container');
@@ -117,15 +184,15 @@
             <div class="row g-3">
                 <div class="col-md-6">
                     <label class="form-label small fw-bold">Target Disease/Condition</label>
-                    <input type="text" name="uses[${useCount}][disease]" class="form-control rounded-pill px-3" placeholder="e.g. Tapeworm" required>
+                    <input type="text" name="uses[${useCount}][disease]" class="form-control rounded-pill px-3" required>
                 </div>
                 <div class="col-md-6">
                     <label class="form-label small fw-bold">Dosage</label>
-                    <input type="text" name="uses[${useCount}][dosage]" class="form-control rounded-pill px-3" placeholder="e.g. 1 cup of infusion">
+                    <input type="text" name="uses[${useCount}][dosage]" class="form-control rounded-pill px-3">
                 </div>
                 <div class="col-12">
                     <label class="form-label small fw-bold">Preparation Method</label>
-                    <textarea name="uses[${useCount}][preparation]" rows="2" class="form-control rounded-4 p-3" placeholder="How is it prepared?"></textarea>
+                    <textarea name="uses[${useCount}][preparation]" rows="2" class="form-control rounded-4 p-3"></textarea>
                 </div>
                 <div class="col-12 text-end">
                     <button type="button" class="btn btn-sm btn-link text-danger p-0 remove-use-btn">Remove this use</button>
@@ -134,25 +201,10 @@
         `;
         container.appendChild(newItem);
         useCount++;
-        
         newItem.querySelector('.remove-use-btn').addEventListener('click', function() {
             newItem.remove();
         });
     });
-
-    document.getElementById('image').addEventListener('change', function(e) {
-        const previewWrapper = document.getElementById('preview-wrapper');
-        const previewImg = document.getElementById('preview-img');
-        const file = e.target.files[0];
-        
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function(event) {
-                previewImg.src = event.target.result;
-                previewWrapper.style.display = 'block';
-            }
-            reader.readAsDataURL(file);
-        }
-    });
+});
 </script>
 @endsection

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('slug')->unique();
             $table->text('content');
-            $table->string('featured_image')->nullable();
+            $table->text('featured_image')->nullable();
             $table->foreignId('author_id')->constrained('users')->onDelete('cascade');
             $table->string('status')->default('draft'); // draft, published
             $table->timestamp('published_at')->nullable();

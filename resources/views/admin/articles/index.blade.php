@@ -18,6 +18,8 @@
             <table class="table table-hover align-middle mb-0">
                 <thead class="text-secondary opacity-50 small text-uppercase fw-bold">
                     <tr>
+                        <th class="border-0">#</th>
+                        <th class="border-0">Article ID</th>
                         <th class="border-0">Article</th>
                         <th class="border-0">Categories</th>
                         <th class="border-0">Status</th>
@@ -28,11 +30,36 @@
                 <tbody class="small">
                     @forelse($articles as $article)
                         <tr>
+                            <td class="border-0 py-3">{{ $loop->iteration }}</td>
+                            <td class="border-0 py-3"><a href="{{ route('admin.articles.show', $article) }}" class="text-decoration-none text-danger"> {{ $article->article_id }}</a></td>
                             <td class="border-0 py-3">
                                 <div class="d-flex align-items-center">
                                     <div class="article-img me-3 rounded-3 overflow-hidden" style="width: 48px; height: 48px; background: #f8f9fa;">
                                         @if($article->featured_image)
-                                            <img src="{{ asset('storage/' . $article->featured_image) }}" class="w-100 h-100 object-fit-cover">
+                                            @php
+                                                $images = json_decode($article->featured_image, true);
+                                            @endphp
+                                            @if(is_array($images) && count($images) > 0)
+                                                <div class="d-flex gap-1">
+                                                    @foreach($images as $index => $imgPath)
+                                                        @if($index < 2)
+                                                            <img 
+                                                                src="{{ asset('storage/' . $imgPath) }}" 
+                                                                class="rounded-2"
+                                                                style="width: 20px; height: 20px; object-fit: cover;"
+                                                                alt="Article image {{ $index + 1 }}"
+                                                            >
+                                                        @endif
+                                                    @endforeach
+                                                    @if(count($images) > 2)
+                                                        <div class="d-flex align-items-center justify-content-center text-secondary" style="width: 20px; height: 20px; font-size: 10px;">
+                                                            +{{ count($images) - 2 }}
+                                                        </div>
+                                                    @endif
+                                                </div>
+                                            @else
+                                                <img src="{{ asset('storage/' . $article->featured_image) }}" class="w-100 h-100 object-fit-cover">
+                                            @endif
                                         @else
                                             <div class="w-100 h-100 d-flex align-items-center justify-content-center text-secondary">
                                                 <i class="fa-solid fa-image"></i>

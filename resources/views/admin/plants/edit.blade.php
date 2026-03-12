@@ -12,7 +12,7 @@
     </x-slot>
 </x-admin.card-header>
 
-<form action="{{ route('admin.plants.update', $plant) }}" method="POST" enctype="multipart/form-data">
+<form id="plant-form" action="{{ route('admin.plants.update', $plant) }}" method="POST" enctype="multipart/form-data">
     @csrf
     @method('PUT')
     <div class="row g-4">
@@ -38,11 +38,15 @@
                         <label class="form-label small fw-bold">Primary Region</label>
                         <input type="text" name="region" class="form-control rounded-4 p-3" placeholder="e.g. Highlands" value="{{ old('region', $plant->region) }}">
                     </div>
+                    <div class="col-md-6">
+                        <label class="form-label small fw-bold">Price (ETB)</label>
+                        <input type="number" name="price" class="form-control rounded-4 p-3" placeholder="0.00" value="{{ old('price', $plant->price) }}" step="0.01" min="0">
+                    </div>
                 </div>
                 
                 <div class="form-group mt-4">
                     <label class="form-label small fw-bold">General Description</label>
-                    <textarea name="description" rows="5" class="form-control rounded-4 p-3">{{ old('description', $plant->description) }}</textarea>
+                    <textarea name="description" id="description" class="form-control rounded-4 p-3" placeholder="Describe the plant's appearance and history...">{{ old('description', $plant->description) }}</textarea>
                 </div>
             </div>
             
@@ -84,15 +88,38 @@
         <div class="col-lg-4">
             <div class="card border-0 shadow-sm p-4 mb-4" style="border-radius: 24px;">
                 <h6 class="fw-bold mb-3">Plant Imagery</h6>
-                <div class="image-preview-wrapper" id="preview-wrapper" {!! $plant->image ? 'style="display: block;"' : '' !!}>
-                    <img src="{{ $plant->image ? asset('storage/' . $plant->image) : '' }}" id="preview-img">
+                
+                <!-- Display existing images -->
+                @if($plant->image)
+                <div class="mb-4">
+                    <label class="form-label small fw-bold">Current Images</label>
+                    <div class="existing-images-preview">
+                        @php
+                            $images = json_decode($plant->image, true);
+                            if (!is_array($images)) {
+                                $images = [$plant->image];
+                            }
+                        @endphp
+                        @foreach($images as $image)
+                            <div class="mb-2">
+                                <img src="{{ asset('storage/' . $image) }}" alt="{{ $plant->name }}" class="img-fluid rounded-3" style="max-height: 150px; width: auto; margin-right: 10px;">
+                            </div>
+                        @endforeach
+                        <div class="small text-muted mt-2">Currently uploaded images</div>
+                    </div>
                 </div>
+                @endif
+                
                 <div class="form-group mb-4">
-                    <div class="image-upload-area border border-2 border-dashed rounded-4 p-4 text-center" style="background: #e8f5e9; border-color: #a5d6a7 !important;">
-                        <i class="fa-solid fa-seedling fa-2x text-success opacity-50 mb-3"></i>
-                        <div class="small text-success mb-3">Replace plant photo</div>
-                        <input type="file" name="image" class="d-none" id="image">
-                        <label for="image" class="btn btn-sm btn-success rounded-pill px-3">Choose File</label>
+                    <label class="form-label small fw-bold">
+                        {{ $plant->image ? 'Replace or add more images' : 'Upload plant images' }}
+                    </label>
+                    <div class="dropzone" id="image-dropzone" style="border: 2px dashed #28a745; border-radius: 8px; padding: 20px; background: #f8f9fa; text-align: center;">
+                        <div class="dz-message" data-dz-message>
+                            <i class="fa-solid fa-cloud-upload-alt fa-3x text-success mb-3"></i>
+                            <div class="text-success mb-2">Drop plant photos here or click to browse</div>
+                            <small class="text-muted">Support for: JPG, PNG, GIF (Max 5 files, 2MB each)</small>
+                        </div>
                     </div>
                     @error('image') <div class="text-danger small mt-1">{{ $message }}</div> @enderror
                 </div>
@@ -113,7 +140,140 @@
 </form>
 
 <script>
-    let useCount = {{ $plant->uses->count() }};
+    document.addEventListener('DOMContentLoaded', function() {
+          if (typeof $ !== 'undefined') {
+            $('#description').summernote({
+                height: 200,
+                toolbar: [
+                    ['style', ['style']],
+                    ['font', ['bold', 'italic', 'underline', 'clear']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['insert', ['link', 'picture']],
+                    ['view', ['fullscreen', 'codeview']]
+                ]
+            });
+        } else {
+            // Fallback: Initialize Summernote with vanilla JS
+            const descriptionTextarea = document.getElementById('description');
+            if (descriptionTextarea && window.Summernote) {
+                window.Summernote.create(descriptionTextarea, {
+                    height: 200,
+                    toolbar: [
+                        ['style', ['style']],
+                        ['font', ['bold', 'italic', 'underline', 'clear']],
+                        ['para', ['ul', 'ol', 'paragraph']],
+                        ['insert', ['link', 'picture']],
+                        ['view', ['fullscreen', 'codeview']]
+                    ]
+                });
+            }
+        }
+        // Initialize Dropzone for image upload
+        Dropzone.autoDiscover = false;
+        
+        const myDropzone = new Dropzone("#image-dropzone", {
+            url: "{{ route('admin.plants.update', $plant) }}",
+            paramName: "image[]",
+            maxFiles: 5,
+            acceptedFiles: "image/*",
+            addRemoveLinks: true,
+            autoProcessQueue: false, // Don't auto-upload, will be handled by form submission
+            dictDefaultMessage: "Drop files here to upload",
+            dictFallbackMessage: "Your browser does not support drag'n'drop file uploads",
+            dictInvalidFileType: "You can't upload files of this type.",
+            dictMaxFilesExceeded: "You can only upload 5 files at once.",
+            init: function() {
+                const dropzone = this;
+                
+                // Store files for form submission
+                dropzone.filesQueue = [];
+                
+                // Add file to queue
+                dropzone.on("addedfile", function(file) {
+                    dropzone.filesQueue.push(file);
+                    console.log('File added to queue:', file.name);
+                });
+                
+                // Remove file from queue
+                dropzone.on("removedfile", function(file) {
+                    const index = dropzone.filesQueue.indexOf(file);
+                    if (index > -1) {
+                        dropzone.filesQueue.splice(index, 1);
+                    }
+                    console.log('File removed from queue:', file.name);
+                });
+            },
+            // Create hidden input files for form submission
+            sending: function(file, xhr, formData) {
+                // Add all queued files to form data
+                dropzone.filesQueue.forEach(function(file, index) {
+                    formData.append('image[' + index + ']', file);
+                });
+                return true;
+            }
+        });
+
+          const form = document.getElementById("plant-form");
+
+          form.addEventListener("submit", function (e) {
+            e.preventDefault(); // Prevent default form submission
+            
+            if (myDropzone.filesQueue.length > 0) {
+                // Create FormData to include all form data and files
+                const formData = new FormData(form);
+                
+                // Add Dropzone files to FormData
+                myDropzone.filesQueue.forEach(function(file, index) {
+                    formData.append('image[]', file);
+                });
+                
+                // Submit via fetch or XMLHttpRequest
+                const method = form.querySelector('input[name="_method"]')?.value || 'POST';
+                const action = form.action;
+                
+                // For PUT/PATCH requests, we need to include the _method field in FormData
+                if (method !== 'POST') {
+                    formData.append('_method', method);
+                }
+                
+                fetch(action, {
+                    method: 'POST', // Always use POST for Laravel method spoofing
+                    body: formData,
+                    headers: {
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || document.querySelector('input[name="_token"]')?.value,
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'Accept': 'application/json'
+                    }
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        return response.json().then(data => {
+                            throw new Error(data.message || 'Error updating plant');
+                        });
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.success) {
+                        showToast('Plant updated successfully!', 'success');
+                        setTimeout(() => {
+                            window.location.href = "{{ route('admin.plants.index') }}";
+                        }, 1500);
+                    } else {
+                        showToast(data.message || 'Error updating plant. Please try again.', 'error');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    showToast(error.message || 'Error updating plant. Please try again.', 'error');
+                });
+            } else {
+                // No files, submit normally
+                form.submit();
+            }
+        });
+
+        let useCount = {{ $plant->uses->count() }};
     document.getElementById('add-use-btn').addEventListener('click', function() {
         const container = document.getElementById('uses-container');
         const newItem = document.createElement('div');
@@ -145,26 +305,6 @@
             newItem.remove();
         });
     });
-
-    document.querySelectorAll('.remove-use-btn').forEach(btn => {
-        btn.addEventListener('click', function() {
-            this.closest('.use-item').remove();
-        });
-    });
-
-    document.getElementById('image').addEventListener('change', function(e) {
-        const previewWrapper = document.getElementById('preview-wrapper');
-        const previewImg = document.getElementById('preview-img');
-        const file = e.target.files[0];
-        
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function(event) {
-                previewImg.src = event.target.result;
-                previewWrapper.style.display = 'block';
-            }
-            reader.readAsDataURL(file);
-        }
-    });
+});
 </script>
 @endsection

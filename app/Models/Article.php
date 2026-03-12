@@ -7,13 +7,25 @@ use Illuminate\Database\Eloquent\Model;
 class Article extends Model
 {
     protected $fillable = [
-        'title', 'slug', 'content', 'featured_image', 
+        'article_id', 'title', 'slug', 'content', 'featured_image', 
         'author_id', 'status', 'published_at', 'views'
     ];
 
     protected $casts = [
         'published_at' => 'datetime',
+        'featured_image' => 'array',
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($article) {
+            if (empty($article->article_id)) {
+                $article->article_id = 'ART-' . str_pad(static::max('id') + 1, 4, '0', STR_PAD_LEFT);
+            }
+        });
+    }
 
     public function categories()
     {

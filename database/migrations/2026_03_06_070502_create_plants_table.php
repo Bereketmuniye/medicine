@@ -19,7 +19,8 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->string('region')->nullable();
             $table->text('safety_warning')->nullable();
-            $table->string('image')->nullable();
+            $table->text('image')->nullable();
+            $table->decimal('price', 8, 2)->nullable();
             $table->timestamps();
         });
     }
