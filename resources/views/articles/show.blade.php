@@ -610,6 +610,42 @@
             nav.classList.remove('scrolled');
         }
     });
+
+    // Helpful functionality
+    function markHelpful() {
+        const btn = document.getElementById('helpful-btn');
+        const text = document.getElementById('helpful-text');
+        
+        if (btn.classList.contains('active')) {
+            btn.classList.remove('active');
+            text.textContent = 'Helpful';
+        } else {
+            btn.classList.add('active');
+            text.textContent = 'Helped!';
+        }
+    }
+
+    // Share functionality
+    function shareArticle() {
+        const url = window.location.href;
+        const title = document.querySelector('h1').textContent;
+        
+        if (navigator.share) {
+            navigator.share({
+                title: title,
+                url: url
+            });
+        } else {
+            navigator.clipboard.writeText(url).then(() => {
+                const shareBtn = event.target.closest('button');
+                const originalHTML = shareBtn.innerHTML;
+                shareBtn.innerHTML = '<i class="bi bi-check"></i> Copied!';
+                setTimeout(() => {
+                    shareBtn.innerHTML = originalHTML;
+                }, 2000);
+            });
+        }
+    }
 </script>
 
 </body>
