@@ -727,6 +727,9 @@
                             @endif
                         </div>
                     </div>
+
+                    <!-- Comments Section -->
+                    <x-comments :model="$book" />
                 </div>
             </div>
         </div>

@@ -473,6 +473,9 @@
                             </button>
                         </div>
                     </div>
+
+                    <!-- Comments Section -->
+                    <x-comments :model="$article" />
                 </article>
             </div>
             

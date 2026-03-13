@@ -33,6 +33,10 @@ Route::get('/testimonials/create', [App\Http\Controllers\TestimonialController::
 Route::post('/testimonials', [App\Http\Controllers\TestimonialController::class, 'store'])->name('testimonials.store');
 Route::get('/api/testimonials', [App\Http\Controllers\TestimonialController::class, 'index'])->name('testimonials.api');
 
+// Comment routes
+Route::post('/comments', [App\Http\Controllers\CommentController::class, 'store'])->name('comments.store');
+Route::delete('/comments/{comment}', [App\Http\Controllers\CommentController::class, 'destroy'])->name('comments.destroy');
+
 // Authentication routes
 Route::middleware(['custom_throttle:5,1'])->group(function () {
     Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');

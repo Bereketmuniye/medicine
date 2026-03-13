@@ -15,6 +15,11 @@ class Book extends Model
         'cover' => 'array',
     ];
 
+    public function comments()
+    {
+        return $this->morphMany(Comment::class, 'commentable');
+    }
+
     public function interactions()
     {
         return $this->hasMany(ArticleInteraction::class, 'article_id');
