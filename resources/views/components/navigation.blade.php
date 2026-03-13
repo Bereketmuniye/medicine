@@ -13,25 +13,22 @@
         <div class="collapse navbar-collapse" id="nav">
             <ul class="navbar-nav mx-auto">
                 <li class="nav-item">
-                    <a class="nav-link active" href="#home">HOME</a>
-                </li>
-                <!-- <li class="nav-item">
-                    <a class="nav-link" href="#remedies">REMEDIES</a>
-                </li> -->
-                <li class="nav-item">
-                    <a class="nav-link" href="#about">ABOUT</a>
+                    <a class="nav-link {{ request()->routeIs('welcome') ? 'active' : '' }}" href="{{ request()->routeIs('welcome') ? '#home' : route('welcome') }}">HOME</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#videos">VIDEOS</a>
+                    <a class="nav-link" href="{{ request()->routeIs('welcome') ? '#about' : route('welcome').'#about' }}">ABOUT</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#contact">CONTACT</a>
+                    <a class="nav-link" href="{{ request()->routeIs('welcome') ? '#videos' : route('welcome').'#videos' }}">VIDEOS</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('articles.index') }}">LITERATURE</a>
+                    <a class="nav-link" href="{{ request()->routeIs('welcome') ? '#contact' : route('welcome').'#contact' }}">CONTACT</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('books.index') }}">BOOKS</a>
+                    <a class="nav-link {{ request()->routeIs('articles.*') ? 'active' : '' }}" href="{{ route('articles.index') }}">LITERATURE</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('books.*') ? 'active' : '' }}" href="{{ route('books.index') }}">BOOKS</a>
                 </li>
             </ul>
             <div class="d-flex align-items-center">
