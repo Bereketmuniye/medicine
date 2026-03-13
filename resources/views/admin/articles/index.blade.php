@@ -23,6 +23,7 @@
                         <th class="border-0">Article</th>
                         <th class="border-0">Categories</th>
                         <th class="border-0">Status</th>
+                        <th class="border-0">Comments</th>
                         <th class="border-0">Views</th>
                         <th class="border-0 text-end">Actions</th>
                     </tr>
@@ -79,6 +80,10 @@
                             </td>
                             <td class="border-0 py-3">
                                 <x-admin.status-badge :status="$article->status" />
+                            </td>
+                            <td class="border-0 py-3 fw-bold text-dark">
+                                <i class="fa-solid fa-comment-dots text-secondary opacity-50 me-1"></i>
+                                {{ number_format($article->comments_count) }}
                             </td>
                             <td class="border-0 py-3 fw-bold text-dark">{{ number_format($article->views) }}</td>
                             <td class="border-0 py-3 text-end">

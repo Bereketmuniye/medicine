@@ -81,4 +81,5 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::resource('contacts', App\Http\Controllers\Admin\ContactController::class);
     Route::post('contacts/{contact}/read', [App\Http\Controllers\Admin\ContactController::class, 'markAsRead'])->name('contacts.read');
     Route::resource('settings', App\Http\Controllers\Admin\SettingController::class)->only(['index', 'update']);
+    Route::resource('comments', App\Http\Controllers\Admin\CommentController::class)->only(['index', 'destroy']);
 });

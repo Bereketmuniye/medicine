@@ -58,6 +58,10 @@
             <i class="fa-solid fa-envelope"></i>
             <span>Contact Messages</span>
         </a>
+        <a href="{{ route('admin.comments.index') }}" class="nav-item {{ request()->routeIs('admin.comments.*') ? 'active' : '' }}">
+            <i class="fa-solid fa-comments"></i>
+            <span>User Comments</span>
+        </a>
         <a href="{{ route('admin.settings.index') }}" class="nav-item {{ request()->routeIs('admin.settings.*') ? 'active' : '' }}">
             <i class="fa-solid fa-gear"></i>
             <span>Settings</span>

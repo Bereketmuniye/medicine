@@ -14,6 +14,7 @@ class ArticleController extends Controller
     public function index()
     {
         $articles = \App\Models\Article::with(['categories', 'author'])
+            ->withCount('comments')
             ->latest()
             ->paginate(15);
             

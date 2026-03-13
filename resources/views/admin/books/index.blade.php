@@ -24,6 +24,7 @@
                         <th class="border-0">Format</th>
                         <th class="border-0">Price</th>
                         <th class="border-0">Inventory</th>
+                        <th class="border-0">Comments</th>
                         <th class="border-0 text-end">Actions</th>
                     </tr>
                 </thead>
@@ -84,6 +85,10 @@
                                 @else
                                     <span class="text-secondary italic">Digital Access</span>
                                 @endif
+                            </td>
+                            <td class="border-0 py-3 fw-bold text-dark text-center">
+                                <i class="fa-solid fa-comment-dots text-secondary opacity-50 me-1"></i>
+                                {{ number_format($book->comments_count) }}
                             </td>
                             <td class="border-0 py-3 text-end">
                                 <div class="dropdown">
