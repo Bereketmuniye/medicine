@@ -31,67 +31,8 @@
             overflow-x: hidden;
         }
 
-        /* Navigation */
-        .navbar {
-            background: var(--primary) !important;
-            padding: 0.5rem 0;
-            border-bottom: 1px solid var(--border-color);
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            transition: all 0.3s ease;
-        }
+        /* Shared navigation styles are now in navigation component */
 
-        .navbar.scrolled {
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-        }
-
-        .navbar-brand {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: white !important;
-            letter-spacing: 2px;
-        }
-
-        .navbar-brand span {
-            color: var(--primary-light);
-        }
-
-        .nav-link {
-            color: #d9d9d9 !important;
-            font-weight: 600;
-            font-style: italic;
-            font-size: 0.9rem;
-            padding: 1.5rem 1rem !important;
-            margin: 0 0.2rem;
-            position: relative;
-            transition: color 0.3s ease;
-        }
-
-        .nav-link:hover,
-        .nav-link.active {
-            color: var(--primary-light) !important;
-        }
-
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: 1rem;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 8px;
-            height: 8px;
-            background: var(--primary-light);
-            border-radius: 50%;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-
-        .nav-link:hover::after,
-        .nav-link.active::after {
-            opacity: 1;
-        }
 
         .btn-cart {
             position: relative;
@@ -415,18 +356,9 @@
         }
     </style>
 </head>
-<body>
+<body id="home" class="pt-5">
 
 <!-- Navigation -->
-<nav class="navbar navbar-expand-lg" id="mainNav">
-    <div class="container">
-        <a class="navbar-brand" href="{{ route('welcome') }}">HERBMED<span>.</span>ET</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav" aria-controls="nav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon" style="filter: invert(1);"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="nav">
-            <ul class="navbar-nav mx-auto">
-                <li class="nav-item">
                     <a class="nav-link" href="{{ route('welcome') }}">HOME</a>
                 </li>
                 <li class="nav-item">

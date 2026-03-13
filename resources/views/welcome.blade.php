@@ -60,14 +60,18 @@
         }
 
         .navbar-brand {
-            font-size: 1.8rem;
-            font-weight: 700;
+            display: flex;
+            align-items: center;
             color: white !important;
-            letter-spacing: 2px;
+            text-decoration: none;
         }
 
-        .navbar-brand span {
-            color: var(--primary-light);
+        .navbar-brand span.brand-text {
+            color: white !important;
+        }
+
+        .navbar-brand span.brand-subtext {
+            color: var(--primary-light) !important;
         }
 
         .nav-link {
@@ -1048,13 +1052,12 @@
         }
 
         .footer-logo {
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
+            display: flex;
+            flex-direction: column;
         }
 
-        .footer-logo span {
-            color: var(--primary-light);
+        .footer-logo img {
+            margin-bottom: 0.5rem;
         }
 
         .footer-text {

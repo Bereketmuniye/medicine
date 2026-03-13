@@ -2,7 +2,13 @@
     <div class="container">
         <div class="row g-4">
             <div class="col-lg-4">
-                <div class="footer-logo">HERBMED<span>.</span>ET</div>
+                <div class="footer-logo mb-4">
+                    <img src="{{ asset('images/shalom-logo-transparent.png') }}" alt="SHALOM HERBAL HEALING" style="height: 60px; width: auto; filter: brightness(0) invert(1);">
+                    <div class="mt-2 d-flex flex-column" style="line-height: 1;">
+                        <span style="font-size: 1.4rem; font-weight: 800; letter-spacing: 1px;">SHALOM</span>
+                        <span style="font-size: 0.7rem; font-weight: 500; color: var(--primary-light); letter-spacing: 2px;">HERBAL HEALING</span>
+                    </div>
+                </div>
                 <p class="footer-text">Reviving the heritage of Ethiopian medicinal plants through science and storytelling. Authentically sourced from local healers.</p>
                 <div class="social-links">
                     @if(isset($socialAccounts) && $socialAccounts->isNotEmpty())
