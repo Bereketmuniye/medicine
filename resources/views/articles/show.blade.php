@@ -208,13 +208,62 @@
             background: #ffffff;
         }
 
-        .article-image {
+        .main-image-container {
             width: 100%;
-            height: 400px;
-            object-fit: cover;
+            height: 450px;
+            margin-bottom: 1rem;
             border-radius: 15px;
-            margin-bottom: 2rem;
+            overflow: hidden;
             box-shadow: var(--card-shadow);
+        }
+
+        .main-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .main-image:hover {
+            transform: scale(1.02);
+        }
+
+        .thumbnail-container {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding: 10px 0;
+            scrollbar-width: thin;
+        }
+
+        .thumbnail-container::-webkit-scrollbar {
+            height: 6px;
+        }
+
+        .thumbnail-container::-webkit-scrollbar-thumb {
+            background: rgba(0,0,0,0.1);
+            border-radius: 10px;
+        }
+
+        .thumbnail {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 8px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.2s ease;
+            flex-shrink: 0;
+        }
+
+        .thumbnail:hover {
+            opacity: 0.8;
+        }
+
+        .thumbnail.active {
+            border-color: var(--primary-light);
+            box-shadow: 0 0 10px rgba(255, 202, 8, 0.3);
         }
 
         .article-body {
@@ -495,20 +544,29 @@
                 <article data-aos="fade-up">
                     <!-- Article Featured Image -->
                     @php
-                        $images = is_string($article->featured_image) 
+                        $articleImages = is_string($article->featured_image) 
                             ? json_decode($article->featured_image, true) 
                             : (is_array($article->featured_image) ? $article->featured_image : []);
-                        $mainImage = !empty($images) ? $images[0] : null;
+                        
+                        // Filter out empty strings
+                        $articleImages = array_filter($articleImages);
                     @endphp
                     
-                    @if($mainImage)
-                        <div class="article-hero-image mb-4">
-                            <img 
-                                src="{{ asset('storage/' . $mainImage) }}" 
-                                alt="{{ $article->title }}" 
-                                class="img-fluid rounded-3 shadow-sm"
-                                loading="lazy"
-                            >
+                    @if(!empty($articleImages))
+                        <div class="article-gallery mb-4">
+                            <div class="main-image-container">
+                                <img src="{{ asset('storage/' . $articleImages[0]) }}" class="main-image" id="mainArticleImage" alt="{{ $article->title }}">
+                            </div>
+                            
+                            @if(count($articleImages) > 1)
+                                <div class="thumbnail-container">
+                                    @foreach($articleImages as $index => $path)
+                                        <img src="{{ asset('storage/' . $path) }}" 
+                                             class="thumbnail {{ $index === 0 ? 'active' : '' }}" 
+                                             alt="{{ $article->title }} - Image {{ $index + 1 }}">
+                                    @endforeach
+                                </div>
+                            @endif
                         </div>
                     @endif
                     
@@ -647,6 +705,23 @@
             nav.classList.remove('scrolled');
         }
     });
+
+    // Image gallery functionality
+    const mainImage = document.getElementById('mainArticleImage');
+    const thumbnails = document.querySelectorAll('.thumbnail');
+    
+    if (mainImage && thumbnails.length > 0) {
+        thumbnails.forEach(thumb => {
+            thumb.addEventListener('click', function() {
+                // Update main image source
+                mainImage.src = this.src;
+                
+                // Update active state
+                thumbnails.forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    }
 
     // Helpful functionality
     async function markHelpful() {
