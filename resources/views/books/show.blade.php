@@ -636,67 +636,6 @@
             color: #28a745;
             border: 1px solid #28a745;
         }
-
-<!-- Book Content -->
-<section class="book-content-section">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-5">
-                <div data-aos="fade-up">
-                    @php
-                        $coverPath = null;
-                        $coverData = $book->cover;
-                        
-                        // Handle double encoding if it exists
-                        if (is_string($coverData) && str_starts_with($coverData, '[')) {
-                            $coverData = json_decode($coverData, true);
-                        }
-                        
-                        if (is_array($coverData) && count($coverData) > 0) {
-                            $coverPath = $coverData[0];
-                        } elseif (is_string($coverData)) {
-                            $coverPath = $coverData;
-                        }
-                    @endphp
-
-                    @if($coverPath)
-                        <img src="{{ asset('storage/' . $coverPath) }}" class="book-image" alt="{{ $book->title }}">
-                    @else
-                        <div class="book-image bg-light d-flex align-items-center justify-content-center">
-                            <i class="bi bi-book fs-1 text-muted"></i>
-                        </div>
-                    @endif
-                    
-                    <!-- Price & Actions -->
-                    <div class="book-price-section">
-                        <div class="price-tag">{{ number_format($book->price, 2) }} ETB</div>
-                        
-                        @if($book->stock !== null)
-                            <div class="mb-3">
-                                <span class="badge-custom">
-                                    <i class="bi bi-box"></i> {{ $book->stock }} copies available
-                                </span>
-                            </div>
-                        @else
-                            <div class="mb-3">
-                                <span class="badge-custom">
-                                    <i class="bi bi-download"></i> Instant Digital Download
-                                </span>
-                            </div>
-                        @endif
-                        
-                        <div class="d-grid gap-2">
-                            <button class="btn-action contact-btn" data-phone="{{ $owner_phone ?? '+251 91 163 1253' }}">
-                                <i class="bi bi-whatsapp"></i> Order or Inquire
-                            </button>
-                            
-                            @if($book->type === 'digital' || $book->file)
-                                <button class="btn-action btn-action-outline" onclick="downloadBook()">
-                                    <i class="bi bi-download"></i> Download Digital Copy
-                                </button>
-                            @endif
-                        </div>
-
         .newsletter-message.error {
             display: block;
             background: rgba(220, 53, 69, 0.1);
