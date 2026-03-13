@@ -14,17 +14,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <!-- AOS Animation -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Custom Shared Styles -->
+    <link rel="stylesheet" href="{{ asset('css/books-shared.css') }}?v={{ filemtime(public_path('css/books-shared.css')) }}&t={{ time() }}">
 
     <style>
-        :root {
-            --primary: #1c1601;
-            --primary-light: #ffca08;
-            --text-light: #8e8e8e;
-            --text-dark: #232222;
-            --border-color: rgba(255,255,255,0.1);
-            --card-shadow: 0 20px 40px rgba(0,0,0,0.05);
-            --card-hover-shadow: 0 30px 60px rgba(0,0,0,0.1);
-        }
 
         * {
             margin: 0;
@@ -178,7 +171,8 @@
         }
 
         .breadcrumb-item.active {
-            color: var(--primary-light);
+            color: var(--primary-light) !important;
+            font-weight: 500;
         }
 
         .book-title {
@@ -187,6 +181,7 @@
             margin-bottom: 1.5rem;
             text-transform: uppercase;
             letter-spacing: 1px;
+            color: white;
         }
 
         .book-meta {
@@ -293,78 +288,6 @@
             font-weight: 700;
             color: var(--primary);
             margin-bottom: 0.5rem;
-        }
-
-        .badge-custom {
-            background: var(--primary-light);
-            color: var(--primary);
-            font-size: 0.9rem;
-            padding: 0.5rem 1rem;
-            border-radius: 50px;
-            font-weight: 600;
-            display: inline-block;
-        }
-
-        .btn-action {
-            background: var(--primary);
-            color: white;
-            font-weight: 700;
-            padding: 0.8rem 1.5rem;
-            border-radius: 50px;
-            text-decoration: none;
-            transition: all 0.3s;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            border: none;
-            width: 100%;
-            justify-content: center;
-            margin-bottom: 1rem;
-        }
-
-        .btn-action:hover {
-            background: var(--primary-light);
-            color: var(--primary);
-        }
-
-        .btn-action-outline {
-            background: transparent;
-            border: 2px solid var(--primary);
-            color: var(--primary);
-        }
-
-        .btn-action-outline:hover {
-            background: var(--primary);
-            color: white;
-        }
-
-        .btn-cta {
-            background: var(--primary-light);
-            color: var(--primary);
-            font-weight: 700;
-            padding: 1rem 2rem;
-            border-radius: 50px;
-            text-decoration: none;
-            transition: all 0.3s;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .btn-cta:hover {
-            background: white;
-            color: var(--primary);
-        }
-
-        .btn-cta-outline {
-            background: transparent;
-            border: 2px solid white;
-            color: white;
-        }
-
-        .btn-cta-outline:hover {
-            background: white;
-            color: var(--primary);
         }
 
         /* Book Description */
@@ -476,6 +399,16 @@
             color: var(--primary);
             font-weight: 700;
             font-size: 0.9rem;
+        }
+
+        /* Sidebar Title (Related Books) */
+        .sidebar-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         /* CTA Section */
@@ -636,6 +569,9 @@
             color: #28a745;
             border: 1px solid #28a745;
         }
+
+
+
         .newsletter-message.error {
             display: block;
             background: rgba(220, 53, 69, 0.1);
@@ -898,53 +834,7 @@
             
             @foreach($relatedBooks as $related)
                 <div class="col-md-6 col-lg-3 mb-4" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
-                    <div class="sidebar-card h-100" style="padding: 1rem;">
-                        @php
-                            $relatedCoverPath = null;
-                            $relatedCoverData = $related->cover;
-                            
-                            // Handle double encoding if it exists
-                            if (is_string($relatedCoverData) && str_starts_with($relatedCoverData, '[')) {
-                                $relatedCoverData = json_decode($relatedCoverData, true);
-                            }
-                            
-                            if (is_array($relatedCoverData) && count($relatedCoverData) > 0) {
-                                $relatedCoverPath = $relatedCoverData[0];
-                            } elseif (is_string($relatedCoverData)) {
-                                $relatedCoverPath = $relatedCoverData;
-                            }
-                        @endphp
-
-                        @if($relatedCoverPath)
-                            <img src="{{ asset('storage/' . $relatedCoverPath) }}" class="img-fluid rounded mb-3" alt="{{ $related->title }}" style="height: 200px; width: 100%; object-fit: cover; border-radius: 10px;">
-                        @else
-                            <div class="bg-light d-flex align-items-center justify-content-center rounded mb-3" style="height: 200px; border-radius: 10px;">
-                                <i class="bi bi-book fs-1 text-muted"></i>
-                            </div>
-                        @endif
-                        
-                        <span class="badge-custom mb-2" style="font-size: 0.8rem;">{{ ucfirst($related->type) }}</span>
-                        
-                        <h6 class="fw-bold mb-2">
-                            <a href="{{ route('books.show', $related->slug) }}" style="color: var(--primary); text-decoration: none;">
-                                {{ Str::limit($related->title, 40) }}
-                            </a>
-                        </h6>
-                        
-                        <p class="text-muted small mb-3">{{ Str::limit($related->description, 60) }}</p>
-                        
-                        <div class="d-flex justify-content-between align-items-center">
-                            <span class="fw-bold" style="color: var(--primary);">{{ number_format($related->price, 2) }} ETB</span>
-                            <div class="d-flex gap-2">
-                                <a href="{{ route('books.show', $related->slug) }}" class="btn-action" style="width: auto; padding: 0.5rem 1rem; font-size: 0.8rem; margin-bottom: 0;">
-                                    <i class="bi bi-eye"></i>
-                                </a>
-                                <button class="btn-action contact-btn" data-phone="{{ $owner_phone ?? '+251 91 163 1253' }}" style="width: auto; padding: 0.5rem 1rem; font-size: 0.8rem; margin-bottom: 0;">
-                                    <i class="bi bi-whatsapp"></i> Buy
-                                </button>
-                            </div>
-                        </div>
-                    </div>
+                    <x-book-card :book="$related" :ownerPhone="$owner_phone ?? '+251 91 163 1253'" />
                 </div>
             @endforeach
         </div>

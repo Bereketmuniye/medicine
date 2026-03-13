@@ -37,4 +37,28 @@ class Book extends Model
             ->where('ip_address', $ipAddress)
             ->exists();
     }
+
+    public function getCoverImagesAttribute()
+    {
+        $coverData = $this->cover;
+        
+        // Handle double encoding if it exists
+        if (is_string($coverData) && str_starts_with($coverData, '[')) {
+            $coverData = json_decode($coverData, true);
+        }
+        
+        if (is_array($coverData)) {
+            return array_values(array_filter($coverData));
+        } elseif (is_string($coverData) && !empty($coverData)) {
+            return [$coverData];
+        }
+        
+        return [];
+    }
+
+    public function getPrimaryCoverAttribute()
+    {
+        $images = $this->cover_images;
+        return count($images) > 0 ? $images[0] : null;
+    }
 }

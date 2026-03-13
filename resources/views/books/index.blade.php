@@ -13,17 +13,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <!-- AOS Animation -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Custom Shared Styles -->
+    <link rel="stylesheet" href="{{ asset('css/books-shared.css') }}?v={{ filemtime(public_path('css/books-shared.css')) }}&t={{ time() }}">
 
     <style>
-        :root {
-            --primary: #1c1601;
-            --primary-light: #ffca08;
-            --text-light: #8e8e8e;
-            --text-dark: #232222;
-            --border-color: rgba(255,255,255,0.1);
-            --card-shadow: 0 20px 40px rgba(0,0,0,0.05);
-            --card-hover-shadow: 0 30px 60px rgba(0,0,0,0.1);
-        }
 
         * {
             margin: 0;
@@ -260,125 +253,6 @@
             padding-bottom: 2px;
         }
 
-        /* Book Cards */
-        .book-card {
-            background: white;
-            border: 1px solid #f0f0f0;
-            border-radius: 15px;
-            overflow: hidden;
-            transition: all 0.3s;
-            height: 100%;
-            box-shadow: var(--card-shadow);
-            display: flex;
-            flex-direction: column;
-        }
-
-        .book-card:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--card-hover-shadow);
-        }
-
-        .book-image {
-            height: 180px;
-            background: #f8f8f8;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .book-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.6s;
-        }
-
-        .book-card:hover .book-image img {
-            transform: scale(1.05);
-        }
-
-        .book-badge {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            background: var(--primary-light);
-            color: var(--primary);
-            font-weight: 600;
-            font-size: 0.65rem;
-            padding: 0.2rem 0.8rem;
-            border-radius: 20px;
-            z-index: 2;
-        }
-
-        .book-content {
-            padding: 1.2rem;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .book-type {
-            color: var(--primary-light);
-            font-size: 0.7rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 0.5rem;
-        }
-
-        .book-title {
-            font-size: 1rem;
-            font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 0.5rem;
-            line-height: 1.3;
-        }
-
-        .book-description {
-            color: var(--text-light);
-            font-size: 0.8rem;
-            line-height: 1.4;
-            margin-bottom: 1rem;
-            flex: 1;
-        }
-
-        .book-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 0.8rem;
-        }
-
-        .book-price {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: var(--primary);
-        }
-
-        .book-stock {
-            font-size: 0.7rem;
-            color: var(--text-light);
-        }
-
-        .book-card .btn-reserve {
-            background: var(--primary);
-            color: white;
-            font-weight: 600;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            border: 2px solid transparent;
-            transition: all 0.3s;
-            cursor: pointer;
-            font-size: 0.8rem;
-            display: flex;
-            align-items: center;
-            gap: 0.3rem;
-        }
-
-        .book-card .btn-reserve:hover {
-            background: var(--primary-light);
-            color: var(--primary);
-        }
-
         .no-books {
             text-align: center;
             padding: 4rem 2rem;
@@ -572,10 +446,6 @@
                 </li>
             </ul>
             <div class="d-flex align-items-center">
-                <a href="#" class="btn-cart">
-                    <i class="bi bi-cart3"></i>
-                    <span>2</span>
-                </a>
                 <a href="{{ route('login') }}" class="btn-account">ACCOUNT</a>
             </div>
         </div>
@@ -622,58 +492,7 @@
         <div class="row g-4">
             @forelse($books as $book)
                 <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
-                    <div class="book-card">
-                        <a href="{{ route('books.show', $book->slug) }}" class="text-decoration-none">
-                            <div class="book-image">
-                                @php
-                                    $coverPath = null;
-                                    $coverData = $book->cover;
-                                    
-                                    // Handle double encoding if it exists
-                                    if (is_string($coverData) && str_starts_with($coverData, '[')) {
-                                        $coverData = json_decode($coverData, true);
-                                    }
-                                    
-                                    if (is_array($coverData) && count($coverData) > 0) {
-                                        $coverPath = $coverData[0];
-                                    } elseif (is_string($coverData)) {
-                                        $coverPath = $coverData;
-                                    }
-                                @endphp
-
-                                @if($coverPath)
-                                    <img src="{{ asset('storage/' . $coverPath) }}" alt="{{ $book->title }}" class="active">
-                                @else
-                                    <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=400&q=80" alt="{{ $book->title }}" class="active">
-                                @endif
-                                <span class="book-badge">{{ ucfirst($book->type) }}</span>
-                            </div>
-                        </a>
-                        <div class="book-content">
-                            <div class="book-type">{{ ucfirst($book->type) }}</div>
-                            <h5 class="book-title">
-                                <a href="{{ route('books.show', $book->slug) }}" class="text-decoration-none text-dark">
-                                    {{ Str::limit($book->title, 40) }}
-                                </a>
-                            </h5>
-                            <div class="book-description">{{ Str::limit($book->description, 60) }}</div>
-                            <div class="book-footer">
-                                <div>
-                                    <div class="book-price">{{ number_format($book->price, 2) }} ETB</div>
-                                    <div class="book-stock">
-                                        @if($book->stock !== null)
-                                            {{ $book->stock }} in stock
-                                        @else
-                                            Digital Download
-                                        @endif
-                                    </div>
-                                </div>
-                                <button class="btn-reserve contact-btn" data-phone="{{ $owner_phone ?? '+251911XXXXXX' }}">
-                                    <i class="bi bi-whatsapp"></i> Order
-                                </button>
-                            </div>
-                        </div>
-                    </div>
+                    <x-book-card :book="$book" :ownerPhone="$owner_phone ?? '+251 91 163 1253'" />
                 </div>
             @empty
                 <div class="col-12">
