@@ -13,93 +13,12 @@
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <!-- AOS Animation -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">    <!-- Custom Shared Styles -->
+    <link rel="stylesheet" href="{{ asset('css/global.css') }}?v={{ filemtime(public_path('css/global.css')) }}">
 
     <style>
-        :root {
-            --primary: #1c1601;
-            --primary-light: #ffca08;
-            --text-light: #8e8e8e;
-            --text-dark: #232222;
-            --border-color: rgba(255,255,255,0.1);
-            --card-shadow: 0 20px 40px rgba(0,0,0,0.05);
-            --card-hover-shadow: 0 30px 60px rgba(0,0,0,0.1);
-        }
+        /* Shared navigation styles are now in navigation component */
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Roboto', sans-serif;
-            background-color: #ffffff;
-            color: var(--text-dark);
-            overflow-x: hidden;
-        }
-
-        /* Navigation */
-        .navbar {
-            background: var(--primary) !important;
-            padding: 0.5rem 0;
-            border-bottom: 1px solid var(--border-color);
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            transition: all 0.3s ease;
-        }
-
-        .navbar.scrolled {
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-        }
-
-        .navbar-brand {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: white !important;
-            letter-spacing: 2px;
-        }
-
-        .navbar-brand span {
-            color: var(--primary-light);
-        }
-
-        .nav-link {
-            color: #d9d9d9 !important;
-            font-weight: 600;
-            font-style: italic;
-            font-size: 0.9rem;
-            padding: 1.5rem 1rem !important;
-            margin: 0 0.2rem;
-            position: relative;
-            transition: color 0.3s ease;
-        }
-
-        .nav-link:hover,
-        .nav-link.active {
-            color: var(--primary-light) !important;
-        }
-
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: 1rem;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 8px;
-            height: 8px;
-            background: var(--primary-light);
-            border-radius: 50%;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-
-        .nav-link:hover::after,
-        .nav-link.active::after {
-            opacity: 1;
-        }
 
         .btn-cart {
             position: relative;
@@ -471,46 +390,10 @@
         }
     </style>
 </head>
-<body>
+<body class="pt-5">
 
 <!-- Navigation -->
-<nav class="navbar navbar-expand-lg" id="mainNav">
-    <div class="container">
-        <a class="navbar-brand" href="{{ route('welcome') }}">HERBMED<span>.</span>ET</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav" aria-controls="nav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon" style="filter: invert(1);"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="nav">
-            <ul class="navbar-nav mx-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('welcome') }}">HOME</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('welcome') }}#about">ABOUT</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('welcome') }}#videos">VIDEOS</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('welcome') }}#contact">CONTACT</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" href="{{ route('articles.index') }}">LITERATURE</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('books.index') }}">BOOKS</a>
-                </li>
-            </ul>
-            <div class="d-flex align-items-center">
-                <a href="#" class="btn-cart">
-                    <i class="bi bi-cart3"></i>
-                    <span>2</span>
-                </a>
-                <a href="{{ route('login') }}" class="btn-account">ACCOUNT</a>
-            </div>
-        </div>
-    </div>
-</nav>
+<x-navigation />
 
 <!-- Article Hero -->
 <section class="article-hero">
