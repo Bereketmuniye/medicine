@@ -623,22 +623,39 @@
             @forelse($books as $book)
                 <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
                     <div class="book-card">
-                        <div class="book-image">
-                            @php $covers = $book->cover ? json_decode($book->cover, true) : []; @endphp
-                            <div class="book-images-carousel" id="carousel-{{ $book->id }}">
-                                @if(!empty($covers))
-                                    @foreach($covers as $index => $coverPath)
-                                        <img src="{{ asset('storage/' . $coverPath) }}" alt="{{ $book->title }}" class="{{ $index === 0 ? 'active' : '' }}">
-                                    @endforeach
+                        <a href="{{ route('books.show', $book->slug) }}" class="text-decoration-none">
+                            <div class="book-image">
+                                @php
+                                    $coverPath = null;
+                                    $coverData = $book->cover;
+                                    
+                                    // Handle double encoding if it exists
+                                    if (is_string($coverData) && str_starts_with($coverData, '[')) {
+                                        $coverData = json_decode($coverData, true);
+                                    }
+                                    
+                                    if (is_array($coverData) && count($coverData) > 0) {
+                                        $coverPath = $coverData[0];
+                                    } elseif (is_string($coverData)) {
+                                        $coverPath = $coverData;
+                                    }
+                                @endphp
+
+                                @if($coverPath)
+                                    <img src="{{ asset('storage/' . $coverPath) }}" alt="{{ $book->title }}" class="active">
                                 @else
                                     <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=400&q=80" alt="{{ $book->title }}" class="active">
                                 @endif
+                                <span class="book-badge">{{ ucfirst($book->type) }}</span>
                             </div>
-                            <span class="book-badge">{{ ucfirst($book->type) }}</span>
-                        </div>
+                        </a>
                         <div class="book-content">
                             <div class="book-type">{{ ucfirst($book->type) }}</div>
-                            <h5 class="book-title">{{ Str::limit($book->title, 40) }}</h5>
+                            <h5 class="book-title">
+                                <a href="{{ route('books.show', $book->slug) }}" class="text-decoration-none text-dark">
+                                    {{ Str::limit($book->title, 40) }}
+                                </a>
+                            </h5>
                             <div class="book-description">{{ Str::limit($book->description, 60) }}</div>
                             <div class="book-footer">
                                 <div>

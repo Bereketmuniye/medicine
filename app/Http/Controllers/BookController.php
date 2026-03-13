@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Models\ArticleInteraction;
 use App\Models\SocialMediaAccount;
 use Illuminate\Http\Request;
 
@@ -61,5 +62,64 @@ class BookController extends Controller
         $socialAccounts = SocialMediaAccount::where('is_active', true)->get();
 
         return view('books.show', compact('book', 'relatedBooks', 'socialAccounts'));
+    }
+
+    /**
+     * Mark book as helpful
+     */
+    public function markHelpful(Request $request, $id)
+    {
+        $book = Book::findOrFail($id);
+        $ipAddress = $request->ip();
+        $userAgent = $request->userAgent();
+
+        // Check if user already marked as helpful
+        if ($book->hasUserMarkedHelpful($ipAddress)) {
+            // Remove the helpful mark
+            ArticleInteraction::where('article_id', $book->id)
+                ->where('interaction_type', 'helpful')
+                ->where('ip_address', $ipAddress)
+                ->delete();
+            
+            return response()->json([
+                'success' => true,
+                'action' => 'removed',
+                'count' => $book->helpfulCount()
+            ]);
+        } else {
+            // Add helpful mark
+            ArticleInteraction::create([
+                'article_id' => $book->id,
+                'interaction_type' => 'helpful',
+                'ip_address' => $ipAddress,
+                'user_agent' => $userAgent
+            ]);
+            
+            return response()->json([
+                'success' => true,
+                'action' => 'added',
+                'count' => $book->helpfulCount()
+            ]);
+        }
+    }
+
+    /**
+     * Record book share
+     */
+    public function recordShare(Request $request, $id)
+    {
+        $book = Book::findOrFail($id);
+        
+        ArticleInteraction::create([
+            'article_id' => $book->id,
+            'interaction_type' => 'share',
+            'ip_address' => $request->ip(),
+            'user_agent' => $request->userAgent()
+        ]);
+        
+        return response()->json([
+            'success' => true,
+            'count' => $book->shareCount()
+        ]);
     }
 }

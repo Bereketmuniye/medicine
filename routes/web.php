@@ -22,6 +22,8 @@ Route::post('/articles/{id}/helpful', [App\Http\Controllers\ArticleController::c
 Route::post('/articles/{id}/share', [App\Http\Controllers\ArticleController::class, 'recordShare'])->name('articles.share');
 Route::get('/books', [App\Http\Controllers\BookController::class, 'index'])->name('books.index');
 Route::get('/books/{slug}', [App\Http\Controllers\BookController::class, 'show'])->name('books.show');
+Route::post('/books/{id}/helpful', [App\Http\Controllers\BookController::class, 'markHelpful'])->name('books.helpful');
+Route::post('/books/{id}/share', [App\Http\Controllers\BookController::class, 'recordShare'])->name('books.share');
 Route::get('/consultation', [App\Http\Controllers\ConsultationController::class, 'index'])->name('consultation.index');
 Route::post('/consultation', [App\Http\Controllers\ConsultationController::class, 'store'])->name('consultation.store');
 
