@@ -22,23 +22,53 @@ class WelcomeController extends Controller
     public function search(Request $request)
     {
         $query = $request->get('q');
-        $category = $request->get('category');
         
-        $plantsQuery = Plant::query();
-        
+        $results = collect();
+
         if ($query) {
-            $plantsQuery->where('name', 'LIKE', "%{$query}%")
-                      ->orWhere('description', 'LIKE', "%{$query}%")
-                      ->orWhere('scientific_name', 'LIKE', "%{$query}%");
+            // Search Plants
+            $plants = Plant::where('name', 'LIKE', "%{$query}%")
+                ->orWhere('description', 'LIKE', "%{$query}%")
+                ->orWhere('scientific_name', 'LIKE', "%{$query}%")
+                ->get()
+                ->map(function($item) {
+                    $item->search_type = 'plant';
+                    return $item;
+                });
+            $results = $results->concat($plants);
+
+            // Search Books
+            $books = Book::where('title', 'LIKE', "%{$query}%")
+                ->orWhere('description', 'LIKE', "%{$query}%")
+                ->get()
+                ->map(function($item) {
+                    $item->search_type = 'book';
+                    return $item;
+                });
+            $results = $results->concat($books);
+
+            // Search Articles
+            $articles = Article::where('status', 'published')
+                ->where(function($q) use ($query) {
+                    $q->where('title', 'LIKE', "%{$query}%")
+                      ->orWhere('content', 'LIKE', "%{$query}%");
+                })
+                ->get()
+                ->map(function($item) {
+                    $item->search_type = 'article';
+                    return $item;
+                });
+            $results = $results->concat($articles);
         }
+
+        // Get owner phone for contact buttons
+        $owner_phone = Setting::where('key', 'owner_phone')->value('value');
         
-        if ($category) {
-            $plantsQuery->where('category', $category);
-        }
-        
-        $searchResults = $plantsQuery->orderBy('name', 'asc')->take(20)->get();
-        
-        return view('search', compact('searchResults', 'query', 'category'));
+        return view('search', [
+            'results' => $results,
+            'query' => $query,
+            'owner_phone' => $owner_phone
+        ]);
     }
 
     /**
