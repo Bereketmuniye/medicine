@@ -84,7 +84,7 @@
         </form>
 
         <div class="signup-footer">
-            Don't have an account? <a href="{{ route('register') }}">Create an account</a>
+            <!-- Don't have an account? <a href="{{ route('register') }}">Create an account</a> -->
         </div>
     </div>
 
