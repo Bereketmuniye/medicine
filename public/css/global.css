@@ -270,16 +270,140 @@ body {
     font-size: 0.9rem;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-    .navbar-nav {
+/* ==========================================
+   RESPONSIVE — Navigation / Header
+   ========================================== */
+
+/* Tablet & below: collapse nav */
+@media (max-width: 992px) {
+    .navbar {
+        padding: 0.4rem 0;
+    }
+
+    .navbar .container {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    .navbar-collapse {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
         background: var(--primary);
-        padding: 1rem;
-        border-radius: 15px;
-        margin-top: 1rem;
+        border-top: 1px solid var(--border-color);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
+        z-index: 999;
+    }
+
+    .navbar-nav {
+        padding: 0.8rem 1rem;
     }
 
     .nav-link {
-        padding: 0.8rem 1rem !important;
+        padding: 0.9rem 1rem !important;
+        font-size: 0.95rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .nav-link::after {
+        display: none;
+        /* hide the dot indicator on mobile */
+    }
+
+    .navbar-collapse .d-flex {
+        padding: 0.8rem 1rem 1rem;
+    }
+
+    .btn-account {
+        width: 100%;
+        text-align: center;
+        padding: 0.7rem 1.5rem;
+        font-size: 0.9rem;
+    }
+
+    .navbar-toggler {
+        border: none;
+        padding: 0.5rem;
+        min-width: 44px;
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .navbar-toggler:focus {
+        box-shadow: none;
+        outline: none;
+    }
+}
+
+/* Phones — 768px and below */
+@media (max-width: 768px) {
+    .navbar-brand img {
+        height: 40px !important;
+    }
+
+    .navbar-brand .brand-text {
+        font-size: 1rem !important;
+    }
+
+    .navbar-brand .brand-subtext {
+        font-size: 0.5rem !important;
+        letter-spacing: 1.5px !important;
+    }
+
+    .nav-link {
+        padding: 0.75rem 1rem !important;
+        font-size: 0.9rem;
+    }
+}
+
+/* Small phones — 480px and below */
+@media (max-width: 480px) {
+    .navbar {
+        padding: 0.3rem 0;
+    }
+
+    .navbar-brand img {
+        height: 35px !important;
+    }
+
+    .navbar-brand .brand-text {
+        font-size: 0.9rem !important;
+    }
+
+    .navbar-brand .brand-subtext {
+        font-size: 0.45rem !important;
+        letter-spacing: 1px !important;
+    }
+
+    .nav-link {
+        padding: 0.65rem 0.8rem !important;
+        font-size: 0.85rem;
+    }
+
+    .btn-account {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.85rem;
+    }
+}
+
+/* Very small phones — 360px and below */
+@media (max-width: 360px) {
+    .navbar-brand img {
+        height: 30px !important;
+    }
+
+    .navbar-brand .brand-text {
+        font-size: 0.8rem !important;
+    }
+
+    .navbar-brand .brand-subtext {
+        font-size: 0.4rem !important;
+    }
+
+    .navbar-brand .gap-2 {
+        gap: 0.3rem !important;
     }
 }

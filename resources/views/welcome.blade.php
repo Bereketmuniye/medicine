@@ -924,96 +924,259 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
         }
 
-        /* Responsive */
+        /* ==========================================
+           RESPONSIVE — Hero Section
+           ========================================== */
+
+        /* Tablets and small laptops */
         @media (max-width: 1200px) {
             .hero-title {
-                font-size: 4rem;
+                font-size: 3.8rem;
             }
-            
-            .hero-title span {
-                font-size: 3rem;
-            }
-        }
 
-        @media (max-width: 992px) {
-            .video-grid {
-                grid-template-columns: repeat(2, 1fr);
+            .hero-title span {
+                font-size: 2.8rem;
             }
-            
+
             .hero-stats {
-                gap: 3rem;
+                gap: 4rem;
             }
-        }
 
-        @media (max-width: 768px) {
-            .hero-title {
-                font-size: 3.5rem;
-            }
-            
-            .hero-title span {
+            .hero-stat-number {
                 font-size: 2.5rem;
             }
-            
-            .hero-stats {
-                flex-direction: column;
-                gap: 1.5rem;
-                bottom: 20px;
-                padding: 1.5rem 0;
+
+            .search-wrapper {
+                max-width: 500px;
             }
-            
+        }
+
+        /* Small tablets */
+        @media (max-width: 992px) {
+            .hero-section {
+                padding-top: 70px;
+            }
+
+            .hero-title {
+                font-size: 3.2rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .hero-title span {
+                font-size: 2.4rem;
+            }
+
+            .hero-subtitle {
+                font-size: 0.9rem;
+                letter-spacing: 2px;
+            }
+
+            .hero-stats {
+                gap: 3rem;
+                bottom: 30px;
+                padding: 1.5rem 1rem;
+            }
+
+            .hero-stat-number {
+                font-size: 2.2rem;
+            }
+
+            .hero-stat-label {
+                font-size: 0.8rem;
+                letter-spacing: 0.5px;
+            }
+
+            .search-wrapper {
+                max-width: 450px;
+            }
+        }
+
+        /* Phones landscape / large phones */
+        @media (max-width: 768px) {
+            .hero-section {
+                height: auto;
+                min-height: 100vh;
+                padding-top: 70px;
+                padding-bottom: 120px;
+            }
+
+            .hero-content {
+                padding: 0 16px;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+                margin-bottom: 1.2rem;
+            }
+
+            .hero-title span {
+                font-size: 1.8rem;
+            }
+
+            .hero-subtitle {
+                font-size: 0.8rem;
+                letter-spacing: 2px;
+                margin-bottom: 0.8rem;
+            }
+
+            .hero-stats {
+                gap: 2rem;
+                bottom: 20px;
+                padding: 1.2rem 1rem;
+                flex-direction: row;
+                flex-wrap: nowrap;
+            }
+
+            .hero-stat-number {
+                font-size: 1.8rem;
+            }
+
+            .hero-stat-label {
+                font-size: 0.75rem;
+                letter-spacing: 0.5px;
+            }
+
+            .search-wrapper {
+                max-width: 100%;
+            }
+
+            .search-wrapper .form-control {
+                padding: 0.8rem 1rem;
+                font-size: 0.9rem;
+            }
+
+            .search-wrapper .btn {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.9rem;
+            }
+
             .section-title {
                 font-size: 2rem;
             }
-            
-            
+
             .about-features {
                 grid-template-columns: 1fr;
             }
-            
+
             .contact-info {
                 padding-right: 0;
                 margin-bottom: 2rem;
             }
-            
+
             .video-grid {
                 grid-template-columns: 1fr;
             }
-            
+        }
+
+        /* Standard phones (iPhone, Samsung Galaxy, etc.) */
+        @media (max-width: 480px) {
+            .hero-section {
+                padding-top: 60px;
+                padding-bottom: 100px;
+            }
+
+            .hero-content {
+                padding: 0 12px;
+            }
+
+            .hero-title {
+                font-size: 2rem;
+                line-height: 1.15;
+                margin-bottom: 1rem;
+            }
+
+            .hero-title span {
+                font-size: 1.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 0.7rem;
+                letter-spacing: 1.5px;
+                margin-bottom: 0.6rem;
+            }
+
+            .hero-stats {
+                gap: 1.2rem;
+                bottom: 12px;
+                padding: 1rem 0.8rem;
+            }
+
+            .hero-stat-number {
+                font-size: 1.5rem;
+                margin-bottom: 0.25rem;
+            }
+
+            .hero-stat-label {
+                font-size: 0.65rem;
+                letter-spacing: 0;
+            }
+
+            .search-wrapper {
+                border-radius: 16px;
+                padding: 6px;
+            }
+
             .search-wrapper form {
                 flex-direction: column;
             }
-            
+
+            .search-wrapper .form-control {
+                padding: 0.7rem 1rem;
+                font-size: 0.85rem;
+                text-align: center;
+            }
+
             .search-wrapper .btn {
                 width: 100%;
-                margin-top: 0.5rem;
+                margin-top: 6px;
+                padding: 0.7rem 1.5rem;
+                font-size: 0.85rem;
+                border-radius: 12px;
             }
         }
 
-        @media (max-width: 480px) {
+        /* Very small phones (iPhone SE, Galaxy Fold, etc.) */
+        @media (max-width: 360px) {
+            .hero-section {
+                padding-top: 55px;
+                padding-bottom: 90px;
+            }
+
             .hero-title {
-                font-size: 2.5rem;
+                font-size: 1.7rem;
             }
-            
+
             .hero-title span {
-                font-size: 2rem;
+                font-size: 1.3rem;
             }
-            
+
+            .hero-subtitle {
+                font-size: 0.65rem;
+                letter-spacing: 1px;
+            }
+
             .hero-stats {
-                gap: 1rem;
+                gap: 0.8rem;
+                bottom: 8px;
+                padding: 0.8rem 0.5rem;
             }
-            
+
             .hero-stat-number {
-                font-size: 2rem;
+                font-size: 1.2rem;
             }
-            
+
             .hero-stat-label {
+                font-size: 0.6rem;
+            }
+
+            .search-wrapper .form-control {
+                padding: 0.6rem 0.8rem;
                 font-size: 0.8rem;
             }
-            
-            .contact-social a {
-                width: 40px;
-                height: 40px;
-                font-size: 1.1rem;
+
+            .search-wrapper .btn {
+                padding: 0.6rem 1rem;
+                font-size: 0.8rem;
             }
         }
     </style>
