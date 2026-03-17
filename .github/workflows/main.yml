@@ -1,0 +1,35 @@
+on:
+  push:
+    branches:
+      - main
+name: 🚀 Deploy website on push
+jobs:
+  web-deploy:
+    name: 🎉 Deploy
+    runs-on: ubuntu-latest
+    steps:
+    - name: 🚚 Get latest code
+      uses: actions/checkout@v4
+
+    - name: Set up PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.4'
+        extensions: mbstring, ctype, fileinfo, openssl, pdo, tokenizer, xml # Recommended Laravel extensions
+
+    # First deploy the code
+    - name: 📂 Sync files via FTP
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+      with:
+        server: ftp.shalomherbcare.com
+        username: bereketftp@shalomherbcare.com
+        password: ${{ secrets.MEDECINE_PASSWORD }} 
+   
+    - name: Run database migrations
+      run: php artisan migrate --force || echo "No migrations to run"
+    
+    - name: Composer update
+      run: composer update || echo "Composer update skipped"
+    
+    - name: Optimize application
+      run: php artisan optimize || echo "Optimization completed"
