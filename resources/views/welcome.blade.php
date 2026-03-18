@@ -1454,7 +1454,7 @@
         submitBtn.textContent = 'JOINING...';
         
         // Send request
-        fetch('{{ route("newsletter.subscribe") }}', {
+        fetch('{{ route('newsletter.subscribe') }}', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -1520,7 +1520,7 @@
         submitBtn.textContent = 'SENDING...';
         
         // Send request
-        fetch('{{ route("contact.submit") }}', {
+        fetch('{{ route('contact.submit') }}', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
