@@ -1272,31 +1272,31 @@
 <body>
 
 <!-- Navigation -->
-@include('components.navigation')
+@include('components.navigation');
 
 <!-- Hero Section -->
-@include('components.hero')
+@include('components.hero');
 
 <!-- Why Choose Us -->
-@include('components.features')
+@include('components.features');
 
 
 <!-- Featured Books -->
-@include('components.books')
+@include('components.books');
 <!-- Featured Remedies with Price -->
 <!-- @include('components.remedies') -->
 
 <!-- About Section -->
-@include('components.about')
+@include('components.about');
 
 <!-- Video Section -->
-@include('components.videos')
+@include('components.videos');
 
 <!-- Testimonials -->
-@include('components.testimonials')
+@include('components.testimonials');
 
 <!-- Promotions -->
-@include('components.promotions')
+@include('components.promotions');
 
 <!-- Latest Articles -->
 <!-- @include('components.articles') -->
@@ -1304,10 +1304,10 @@
 
 
 <!-- Contact Section -->
-@include('components.contact')
+@include('components.contact');
 
 <!-- Footer -->
-@include('components.footer')
+@include('components.footer');
 
 <!-- Scripts -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
