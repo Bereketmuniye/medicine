@@ -92,7 +92,7 @@
         
         <div class="mt-4">
             {{ $videos->links() }}
-    </div>
+        </div>
 </div>
 
 <!-- Video Player Modal -->
