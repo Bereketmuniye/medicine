@@ -118,10 +118,6 @@
                 </tbody>
             </table>
         </div>
-        
-        <div class="mt-4">
-            {{ $articles->links() }}
-        </div>
     </div>
 </div>
 @endsection
