@@ -73,12 +73,12 @@
                 @enderror
             </div>
 
-            <div class="auth-options">
+            <!-- <div class="auth-options">
                 <label class="remember-me">
                     <input type="checkbox" name="remember"> Keep me signed in
                 </label>
                 <a href="{{ route('password.request') }}" class="forgot-password">Forgot Password?</a>
-            </div>
+            </div> -->
 
             <button type="submit" class="btn-login">Sign In</button>
         </form>
