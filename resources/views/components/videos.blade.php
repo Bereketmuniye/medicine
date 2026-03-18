@@ -1,9 +1,9 @@
 <section class="video-section" id="videos">
     <div class="container">
         <div class="section-header" data-aos="fade-up">
-            <span class="section-subtitle">COMMUNITY VIDEOS</span>
-            <h2 class="section-title">Healing <span>Stories</span></h2>
-            <p class="text-muted">Watch real experiences from our community</p>
+            <span class="section-subtitle">የተለያዩ ቪዲዮዎች</span>
+            <h2 class="section-title">የተለያዩ <span>ቪዲዮዎች</span></h2>
+            <p class="text-muted">ከማህበረሰብዎ እውነተኛ ተሞክሮዎችን ይመልከቱ</p>
         </div>
         
         <!-- Video Grid - Real videos from database -->
@@ -16,7 +16,7 @@
                         @else
                             <div class="video-placeholder">
                                 <i class="bi bi-play-circle"></i>
-                                <p>Video unavailable</p>
+                                <p>ቪዲዮው አይገኝም</p>
                             </div>
                         @endif
                     </div>
@@ -42,7 +42,7 @@
                         <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
                     </div>
                     <div class="video-info">
-                        <h6 class="video-title">Tena Adam for Immunity</h6>
+                        <h6 class="video-title">ተና አዳም ለኢምዩንቲ</h6>
                         <div class="video-meta">
                             <span><i class="bi bi-person"></i> Alemitu B.</span>
                             <span><i class="bi bi-calendar"></i> 2 days ago</span>
@@ -55,7 +55,7 @@
                         <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
                     </div>
                     <div class="video-info">
-                        <h6 class="video-title">Traditional Preparation Methods</h6>
+                        <h6 class="video-title">ባህላዊ ዝግጅት ዘዴዎች</h6>
                         <div class="video-meta">
                             <span><i class="bi bi-person"></i> Tadesse W.</span>
                             <span><i class="bi bi-calendar"></i> 1 week ago</span>
@@ -68,7 +68,7 @@
                         <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
                     </div>
                     <div class="video-info">
-                        <h6 class="video-title">Damakasse for Digestive Health</h6>
+                        <h6 class="video-title">ዳማካሴ ለየአሳም ጤና</h6>
                         <div class="video-meta">
                             <span><i class="bi bi-person"></i> Meseret K.</span>
                             <span><i class="bi bi-calendar"></i> 2 weeks ago</span>
@@ -81,7 +81,7 @@
                         <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
                     </div>
                     <div class="video-info">
-                        <h6 class="video-title">Eucalyptus Oil Extraction</h6>
+                        <h6 class="video-title">ዩካሊፕተስ ዘይት ማውጣት</h6>
                         <div class="video-meta">
                             <span><i class="bi bi-person"></i> Worku D.</span>
                             <span><i class="bi bi-calendar"></i> 3 weeks ago</span>
@@ -94,7 +94,7 @@
                         <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
                     </div>
                     <div class="video-info">
-                        <h6 class="video-title">Neem for Skin Conditions</h6>
+                        <h6 class="video-title">ኒም ለቆዳ ችግሮች</h6>
                         <div class="video-meta">
                             <span><i class="bi bi-person"></i> Genet A.</span>
                             <span><i class="bi bi-calendar"></i> 1 month ago</span>
@@ -107,7 +107,7 @@
                         <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
                     </div>
                     <div class="video-info">
-                        <h6 class="video-title">My Journey with HerbMed</h6>
+                        <h6 class="video-title">ከHerbMed ጋር ያለኝ ጉዞ</h6>
                         <div class="video-meta">
                             <span><i class="bi bi-person"></i> Sarah J.</span>
                             <span><i class="bi bi-calendar"></i> 2 months ago</span>

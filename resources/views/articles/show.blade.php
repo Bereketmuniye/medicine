@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="am">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ $article->title }} - Ethiopian Traditional Medicine</title>
+    <title>{{ $article->title }} - የኢትዮጵያ ባህላዊ ሕክምና ጽሑፍ</title>
 
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -400,8 +400,8 @@
     <div class="container">
         <nav aria-label="breadcrumb" data-aos="fade-up">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ route('welcome') }}">Home</a></li>
-                <li class="breadcrumb-item"><a href="{{ route('articles.index') }}">Literature</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('welcome') }}">ቤት</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('articles.index') }}">ጽሑፍ</a></li>
                 <li class="breadcrumb-item active">{{ Str::limit($article->title, 40) }}</li>
             </ol>
         </nav>
@@ -409,8 +409,8 @@
         <div data-aos="fade-up">
             <h1 class="article-title">{{ $article->title }}</h1>
             <div class="article-meta">
-                <div><i class="bi bi-calendar3"></i> {{ $article->published_at ? $article->published_at->format('F d, Y') : 'Recently' }}</div>
-                <div><i class="bi bi-eye"></i> {{ $article->views ?? 0 }} views</div>
+                <div><i class="bi bi-calendar3"></i> {{ $article->published_at ? $article->published_at->format('F d, Y') : 'በቅርብ' }}</div>
+                <div><i class="bi bi-eye"></i> {{ $article->views ?? 0 }} መመልከታ</div>
                 @if($article->author)
                     <div><i class="bi bi-person"></i> {{ $article->author->name }}</div>
                 @endif
@@ -483,7 +483,7 @@
                 <!-- Latest Articles -->
                 @if(isset($latestArticles) && $latestArticles->isNotEmpty())
                     <div class="sidebar-card" data-aos="fade-up" data-aos-delay="100">
-                        <h5 class="sidebar-title">Latest Articles</h5>
+                        <h5 class="sidebar-title">የቅርብ ጽሑፍት</h5>
                         @foreach($latestArticles as $latest)
                             <div class="sidebar-article">
                                 <h6>
@@ -491,7 +491,7 @@
                                         {{ Str::limit($latest->title, 60) }}
                                     </a>
                                 </h6>
-                                <small>{{ $latest->published_at ? $latest->published_at->format('M d, Y') : 'Recently' }}</small>
+                                <small>{{ $latest->published_at ? $latest->published_at->format('M d, Y') : 'በቅርብ' }}</small>
                             </div>
                         @endforeach
                     </div>
@@ -500,7 +500,7 @@
                 <!-- Related Articles -->
                 @if(isset($relatedArticles) && $relatedArticles->isNotEmpty())
                     <div class="sidebar-card" data-aos="fade-up" data-aos-delay="200">
-                        <h5 class="sidebar-title">Related Articles</h5>
+                        <h5 class="sidebar-title">የተያታ ጽሑፍት</h5>
                         @foreach($relatedArticles as $related)
                             <div class="sidebar-article">
                                 <h6>
@@ -508,7 +508,7 @@
                                         {{ Str::limit($related->title, 60) }}
                                     </a>
                                 </h6>
-                                <small>{{ $related->published_at ? $related->published_at->format('M d, Y') : 'Recently' }}</small>
+                                <small>{{ $related->published_at ? $related->published_at->format('M d, Y') : 'በቅርብ' }}</small>
                             </div>
                         @endforeach
                     </div>
@@ -523,28 +523,28 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="shareModalLabel">Share this Article</h5>
+                <h5 class="modal-title" id="shareModalLabel">ይሽፉ ይልኑሉ</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <div class="d-grid gap-2">
                     <a href="#" onclick="shareOnFacebook()" class="btn btn-primary d-flex align-items-center justify-content-center gap-2">
-                        <i class="bi bi-facebook"></i> Share on Facebook
+                        <i class="bi bi-facebook"></i> በፌስቡቡ ላሽፉ
                     </a>
                     <a href="#" onclick="shareOnTwitter()" class="btn btn-info d-flex align-items-center justify-content-center gap-2">
-                        <i class="bi bi-twitter"></i> Share on Twitter
+                        <i class="bi bi-twitter"></i> በትዊተር ላሽፉ
                     </a>
                     <a href="#" onclick="shareOnLinkedIn()" class="btn btn-primary d-flex align-items-center justify-content-center gap-2">
-                        <i class="bi bi-linkedin"></i> Share on LinkedIn
+                        <i class="bi bi-linkedin"></i> በሊንደኢ ላሽፉ
                     </a>
                     <a href="#" onclick="shareOnWhatsApp()" class="btn btn-success d-flex align-items-center justify-content-center gap-2">
-                        <i class="bi bi-whatsapp"></i> Share on WhatsApp
+                        <i class="bi bi-whatsapp"></i> በዋትስንዕ ላሽፉ
                     </a>
                     <a href="#" onclick="shareViaEmail()" class="btn btn-secondary d-flex align-items-center justify-content-center gap-2">
-                        <i class="bi bi-envelope"></i> Share via Email
+                        <i class="bi bi-envelope"></i> በኢሜይል ላሽፉ
                     </a>
                     <button onclick="copyLink()" class="btn btn-outline-dark d-flex align-items-center justify-content-center gap-2">
-                        <i class="bi bi-link-45deg"></i> Copy Link
+                        <i class="bi bi-link-45deg"></i> አገኛን ይቅዱ
                     </button>
                 </div>
             </div>
@@ -556,14 +556,14 @@
 <section class="cta-section">
     <div class="container">
         <div data-aos="fade-up">
-            <h2 class="cta-title">Ready to Learn More?</h2>
-            <p class="cta-description">Explore our collection of traditional Ethiopian medicine books and remedies.</p>
+            <h2 class="cta-title">ተጨማለሉ ማማለት ይይዛሉ?</h2>
+            <p class="cta-description">የኢትዮጵያ ባህላዊ ሕክምና መጻሕፍትና መድኃኒቶችን ያስልፍሉ።</p>
             <div class="cta-buttons">
                 <a href="{{ route('books.index') }}" class="btn-cta">
-                    <i class="bi bi-book"></i> Browse Books
+                    <i class="bi bi-book"></i> መጻሕፍትን ይቃልሉ
                 </a>
                 <a href="{{ route('consultation.index') }}" class="btn-cta btn-cta-outline">
-                    <i class="bi bi-chat-dots"></i> Get Consultation
+                    <i class="bi bi-chat-dots"></i> የማማክይ ተገናማ</h2>
                 </a>
             </div>
         </div>

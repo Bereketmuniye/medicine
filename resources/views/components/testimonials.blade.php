@@ -1,4 +1,4 @@
-@props(['testimonials' => null, 'showAll' => false, 'gridCols' => 3, 'title' => 'What Our Clients Say', 'subtitle' => 'Real experiences from people who have benefited from our herbal healing'])
+@props(['testimonials' => null, 'showAll' => false, 'gridCols' => 3, 'title' => 'የደንበኞቻችን ምስክሮች', 'subtitle' => 'ከየአትክልት ሕክምናው ጥቅም የያገኙ ሰዎች እውነተኛ ተሞክሮዎች'])
 
 @php
     $testimonialsCollection = collect($testimonials ?? []);

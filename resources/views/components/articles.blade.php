@@ -2,8 +2,8 @@
 <section class="py-5 bg-light">
     <div class="container">
         <div class="section-header" data-aos="fade-up">
-            <span class="section-subtitle">KNOWLEDGE & WISDOM</span>
-            <h2 class="section-title">Latest <span>Insights</span></h2>
+            <span class="section-subtitle">የእውቀትና ጥበብ</span>
+            <h2 class="section-title">የቅርብ <span>አስተዋፍዮች</span></h2>
         </div>
         
         <div class="row g-4">
@@ -18,11 +18,11 @@
                             @endif
                         </div>
                         <div class="article-content">
-                            <div class="article-meta">{{ $article->published_at ? $article->published_at->format('M d, Y') : 'Recently' }}</div>
+                            <div class="article-meta">{{ $article->published_at ? $article->published_at->format('M d, Y') : 'በቅርብ' }}</div>
                             <h5 class="article-title">{{ Str::limit($article->title, 50) }}</h5>
                             <p class="article-excerpt">{{ Str::limit(strip_tags($article->content), 100) }}</p>
                             <a href="#" class="btn-read">
-                                Read More <i class="bi bi-arrow-right"></i>
+                                ተጨማለሉ ያንብቡ <i class="bi bi-arrow-right"></i>
                             </a>
                         </div>
                     </div>

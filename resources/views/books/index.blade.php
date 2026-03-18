@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="am">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Books - Ethiopian Traditional Medicine Library</title>
+    <title>መጻሕፍት - የኢትዮጵያ ባህላዊ ሕክምና መጻሕፍት ቤተም</title>
 
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -367,9 +367,9 @@
 <section class="books-hero">
     <div class="container">
         <div class="hero-content" data-aos="fade-up">
-            <span class="section-subtitle">THE LIBRARY</span>
-            <h1>Ancient Wisdom & <span>Modern Knowledge</span></h1>
-            <p>Discover our curated collection of books on Ethiopian traditional medicine, from ancient Ge'ez manuscripts to modern botanical studies.</p>
+            <span class="section-subtitle">ቤተ መጻሕፍት</span>
+            <h1>ጥንታዊ ጥበብ & <span>ዘመናዊ እውቀት</span></h1>
+            <p>የኢትዮጵያ ባህላዊ ሕክምና መጻሕፍትን ያግኙ - ከጥንታዊ የግእዝ ቅጆች እስከ ዘመናዊ የእጽዋት ጥናቶች።</p>
         </div>
     </div>
 </section>
@@ -380,11 +380,11 @@
         <div class="search-form" data-aos="fade-up">
             <form method="GET" action="{{ route('books.index') }}" class="row g-3">
                 <div class="col-md-8">
-                    <input type="text" name="search" class="form-control" placeholder="Search books..." value="{{ request('search') }}">
+                    <input type="text" name="search" class="form-control" placeholder="መጻሕፍትን ይፈልጉ..." value="{{ request('search') }}">
                 </div>
                 <div class="col-md-4">
                     <button type="submit" class="btn-search w-100">
-                        <i class="bi bi-search me-2"></i>SEARCH
+                        <i class="bi bi-search me-2"></i>ፈልጉ
                     </button>
                 </div>
             </form>
@@ -396,8 +396,8 @@
 <section class="books-section">
     <div class="container">
         <div class="section-header" data-aos="fade-up">
-            <span class="section-subtitle">BOOKS</span>
-            <h2 class="section-title">Featured <span>Books</span></h2>
+            <span class="section-subtitle">መጻሕፍት</span>
+            <h2 class="section-title">የተለያዩ <span>መጻሕፍት</span></h2>
         </div>
 
         <div class="row g-4">
@@ -409,9 +409,10 @@
                 <div class="col-12">
                     <div class="no-books" data-aos="fade-up">
                         <i class="bi bi-book"></i>
-                        <h3>No books found</h3>
-                        <p>Try adjusting your search or browse all categories.</p>
-                        <a href="{{ route('welcome') }}" class="btn-account" style="background: var(--primary-light); color: var(--primary); border: none; padding: 1rem 2.5rem; display: inline-block; margin-top: 1rem;">BACK TO HOME</a>
+                        <h3>መጻሕፍት አልተገኘም</h3>
+                        <p>ሁሉን ምድቦቶችን ያግኙ</p>
+                        <a href="{{ route('welcome') }}" class="btn-account" style="background: var(--primary-light); color: var(--primary); border: none; padding: 1rem 2.5rem; display: inline-block; margin-top: 1rem;">ወደ መነስ
+                            ገጽ ይመለሱ</a>
                     </div>
                 </div>
             @endforelse

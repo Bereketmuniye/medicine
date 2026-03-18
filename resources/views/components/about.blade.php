@@ -8,31 +8,31 @@
             </div>
             <div class="col-lg-6" data-aos="fade-left">
                 <div class="about-content">
-                    <span class="section-subtitle">OUR STORY</span>
-                    <h3>Reviving Ethiopia's Healing Heritage</h3>
-                    <p>For generations, Ethiopian healers have passed down knowledge of medicinal plants through oral tradition. HerbMed was founded to preserve this wisdom while making it accessible to the modern world.</p>
-                    <p>We work directly with local communities in the Ethiopian highlands, ensuring fair trade practices and sustainable harvesting. Every product is lab-tested for purity while maintaining traditional preparation methods.</p>
+                    <span class="section-subtitle">ታሪካችን</span>
+                    <h3>የኢትዮጵያን የማኅደረ ሕክምና ቅርስ እንለማማለን</h3>
+                    <p>ለብዙ ትውልዶች የኢትዮጵያ መድኃኒቶች የሕክምና እጽዋቶችን በልሳነ አፍ በኩል ይዞራሉ። HerbMed ይህንን ጥበብ ለማስቀመጥ እንዲሁም ለዘመናዊ ዓለም ለማድረስ ተመሠርቷል።</p>
+                    <p>በቀጥታ ከኢትዮጵያ ከፍታ የሚገኙ አካላዊ ማህበረሰቦች ጋር እንሰራለን፣ ፍትሃዊ ንግድ ልማድና ቆይታማ ማጥመድን በማረጋገጥ። እያንዳንዱ ምርት ትርታ ለማረጋገጥ በላቦራቶሪ ይሞክራል ባህላዊ ዝግጅት ዘዴዎችን ግን ያስቀምጣል።</p>
                     
                     <div class="about-features">
                         <div class="about-feature">
                             <i class="bi bi-check-circle-fill"></i>
-                            <span>100% Natural Ingredients</span>
+                            <span>100% ተፈጥሯዊ ንጥረ ነገሮች</span>
                         </div>
                         <div class="about-feature">
                             <i class="bi bi-check-circle-fill"></i>
-                            <span>Fair Trade Certified</span>
+                            <span>የፍትሃዊ ንግድ ምስክር</span>
                         </div>
                         <div class="about-feature">
                             <i class="bi bi-check-circle-fill"></i>
-                            <span>Traditional Knowledge</span>
+                            <span>ባህላዊ እውቀት</span>
                         </div>
                         <div class="about-feature">
                             <i class="bi bi-check-circle-fill"></i>
-                            <span>Modern Science Backed</span>
+                            <span>ዘመናዊ ሳይንስ የተደገፈ</span>
                         </div>
                     </div>
                     
-                    <a href="#" class="btn-account" style="background: var(--primary-light); color: var(--primary); border: none; padding: 1rem 2.5rem; display: inline-block;">LEARN MORE</a>
+                    <a href="#" class="btn-account" style="background: var(--primary-light); color: var(--primary); border: none; padding: 1rem 2.5rem; display: inline-block;">ተጨማለሉ ይዘቱ</a>
                 </div>
             </div>
         </div>

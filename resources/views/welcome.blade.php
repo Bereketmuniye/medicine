@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="am">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -36,7 +36,7 @@
     <meta name="msapplication-TileColor" content="#2d5016">
     <meta name="application-name" content="Shalom Herbal Healing">
     <meta name="apple-mobile-web-app-title" content="Shalom Herbal Healing">
-    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     
     <!-- Canonical URL -->
@@ -1334,7 +1334,7 @@
             toast.innerHTML = `
                 <div class="toast show" role="alert">
                     <div class="toast-body">
-                        Promo code "${code}" copied to clipboard!
+                        Promo code "${code}" ወደ clipboard ተቀድቷል!
                     </div>
                 </div>
             `;
@@ -1389,21 +1389,21 @@
         const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
         
         if (!csrfToken) {
-            messageDiv.textContent = 'Security token not found. Please refresh the page.';
+            messageDiv.textContent = 'የደህናነት ቁልፍ አልተገኘም። ገጹን ያድሱ።';
             messageDiv.className = 'newsletter-message error';
             return;
         }
         
         // Validate email
         if (!email || !email.includes('@')) {
-            messageDiv.textContent = 'Please enter a valid email address.';
+            messageDiv.textContent = 'ትክክለኛው የኢሜይል አድራሻ ያስገቡ።';
             messageDiv.className = 'newsletter-message error';
             return;
         }
         
         // Disable button and show loading
         submitBtn.disabled = true;
-        submitBtn.textContent = 'JOINING...';
+        submitBtn.textContent = 'በመመዝገብ ላይ...';
         
         // Send request
         fetch('{{ route("newsletter.subscribe") }}', {
@@ -1434,12 +1434,12 @@
         })
         .catch(error => {
             console.error('Newsletter subscription error:', error);
-            messageDiv.textContent = 'Something went wrong. Please try again.';
+            messageDiv.textContent = 'ስህተት ተፈጥሯል። እባክዎ በድጋሚ ይሞክሩ።';
             messageDiv.className = 'newsletter-message error';
         })
         .finally(() => {
             submitBtn.disabled = false;
-            submitBtn.textContent = 'JOIN';
+            submitBtn.textContent = 'ይመዝገቡ';
             
             // Hide message after 5 seconds
             setTimeout(() => {
@@ -1462,14 +1462,14 @@
         const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
         
         if (!csrfToken) {
-            messageDiv.textContent = 'Security token not found. Please refresh the page.';
+            messageDiv.textContent = 'የደህናነት ቁልፍ አልተገኘም። ገጹን ያድሱ።';
             messageDiv.className = 'contact-message error';
             return;
         }
         
         // Disable button and show loading
         submitBtn.disabled = true;
-        submitBtn.textContent = 'SENDING...';
+        submitBtn.textContent = 'በመላክ ላይ...';
         
         // Send request
         fetch('{{ route("contact.submit") }}', {
@@ -1503,12 +1503,12 @@
         })
         .catch(error => {
             console.error('Contact form error:', error);
-            messageDiv.textContent = 'Something went wrong. Please try again.';
+            messageDiv.textContent = 'ስህተት ተፈጥሯል። እባክዎ በድጋሚ ይሞክሩ።';
             messageDiv.className = 'contact-message error';
         })
         .finally(() => {
             submitBtn.disabled = false;
-            submitBtn.textContent = 'SEND MESSAGE';
+            submitBtn.textContent = 'መልዕክት ይላኩ';
             
             // Hide message after 5 seconds
             setTimeout(() => {

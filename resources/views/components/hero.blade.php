@@ -9,16 +9,16 @@
     
     <div class="container">
         <div class="hero-content" data-aos="fade-up">
-            <div class="hero-subtitle">Ethiopian Heritage • Since 2020</div>
+            <div class="hero-subtitle">የኢትዮጵያ ቅርስ • እስከ 2020 ዓ.ም</div>
             <h1 class="hero-title">
-                Ancient Wisdom <span>Modern Healing</span>
+                ጥንታዊ ጥበብ <span>ዘመናዊ ሕክምና</span>
             </h1>
             
             <!-- Search Form -->
             <div class="search-wrapper">
                 <form class="d-flex" action="{{ route('products.search') }}" method="GET">
-                    <input type="text" name="q" class="form-control" placeholder="Search for 'Tena Adam'..." value="{{ request('q') }}">
-                    <button type="submit" class="btn">DISCOVER</button>
+                    <input type="text" name="q" class="form-control" placeholder="ይፈልጉ..." value="{{ request('q') }}">
+                    <button type="submit" class="btn">አግኝ</button>
                 </form>
             </div>
         </div>
@@ -28,15 +28,15 @@
     <div class="hero-stats" data-aos="fade-up" data-aos-delay="200">
         <div class="hero-stat-item">
             <div class="hero-stat-number count-up">{{ $stats['herbs_count'] ?? 50 }}</div>
-            <div class="hero-stat-label">Traditional Herbs</div>
+            <div class="hero-stat-label">ባህላዊ ዕፅዋት</div>
         </div>
         <div class="hero-stat-item">
             <div class="hero-stat-number count-up">{{ $stats['clients_count'] ?? 1250 }}</div>
-            <div class="hero-stat-label">Happy Clients</div>
+            <div class="hero-stat-label">ደስተኛ ደንበኞች</div>
         </div>
         <div class="hero-stat-item">
             <div class="hero-stat-number count-up">{{ $stats['experts_count'] ?? 24 }}</div>
-            <div class="hero-stat-label">Expert Support</div>
+            <div class="hero-stat-label">የባለሙያ ድጋፍ</div>
         </div>
     </div>
 </section>

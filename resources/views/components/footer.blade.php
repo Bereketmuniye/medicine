@@ -3,13 +3,13 @@
         <div class="row g-4">
             <div class="col-lg-4">
                 <div class="footer-logo mb-4">
-                    <img src="{{ asset('images/shalom-logo-transparent.png') }}" alt="SHALOM HERBAL HEALING" style="height: 60px; width: auto; filter: brightness(0) invert(1);">
+                    <img src="{{ asset('images/shalom-logo-transparent.png') }}" alt="ሻሎም አትክልት ሕክምና" style="height: 60px; width: auto; filter: brightness(0) invert(1);">
                     <div class="mt-2 d-flex flex-column" style="line-height: 1;">
-                        <span style="font-size: 1.4rem; font-weight: 800; letter-spacing: 1px;">SHALOM</span>
-                        <span style="font-size: 0.7rem; font-weight: 500; color: var(--primary-light); letter-spacing: 2px;">HERBAL HEALING</span>
+                        <span style="font-size: 1.4rem; font-weight: 800; letter-spacing: 1px;">ሻሎም</span>
+                        <span style="font-size: 0.7rem; font-weight: 500; color: var(--primary-light); letter-spacing: 2px;">የዕጽዋት ህክምና</span>
                     </div>
                 </div>
-                <p class="footer-text">Reviving the heritage of Ethiopian medicinal plants through science and storytelling. Authentically sourced from local healers.</p>
+                <p class="footer-text">የኢትዮጵያን የሕክምና እጽዋቶች ቅርስ በሳይንስና ታሪክ በኩል እንለማማለን። ከአካልዊ መድኃኒቶች በእውነተኛነት የተገኙ።</p>
                 <div class="social-links">
                     @if(isset($socialAccounts) && $socialAccounts->isNotEmpty())
                         @foreach($socialAccounts as $account)
@@ -25,34 +25,34 @@
                 </div>
             </div>
             <div class="col-lg-2">
-                <h5>SHOP</h5>
+                <h5>ይግዙ</h5>
                 <ul>
-                    <li><a href="#">Herbal Extracts</a></li>
-                    <li><a href="#">Dry Roots</a></li>
-                    <li><a href="#">Ancient Books</a></li>
+                    <li><a href="#">የዕጽዋት ኤክስትራክት</a></li>
+                    <li><a href="#">የደረቁ ሥሮች</a></li>
+                    <li><a href="#">ጥንታዊ መጻሕፍት</a></li>
                 </ul>
             </div>
             <div class="col-lg-2">
-                <h5>SUPPORT</h5>
+                <h5>ድጋፍ</h5>
                 <ul>
-                    <li><a href="#">FAQs</a></li>
-                    <li><a href="#">Shipping</a></li>
-                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">ተደጋጋሚ ጥያቄዎች</a></li>
+                    <li><a href="#">ማዘዣ</a></li>
+                    <li><a href="#">ያግኙን</a></li>
                 </ul>
             </div>
             <div class="col-lg-4">
-                <h5>WEEKLY WISDOM</h5>
-                <p class="footer-text">Subscribe to receive guides on seasonal remedies.</p>
+                <h5>ሳምንታዊ ጥበብ</h5>
+                <p class="footer-text">ስለ ወቅታዊ ሕክምናዎች መመሪያዎችን ለማግኘት ይመዝገቡ።</p>
                 <form class="newsletter-form" id="newsletterForm">
                     @csrf
-                    <input type="email" name="email" placeholder="Email Address" required>
-                    <button type="submit">JOIN</button>
+                    <input type="email" name="email" placeholder="ኢሜይል አድራሻ" required>
+                    <button type="submit">ይመዝገቡ</button>
                 </form>
                 <div id="newsletterMessage" class="newsletter-message"></div>
             </div>
         </div>
         <div class="footer-bottom">
-            © 2026 HERBMED ETHIOPIA. ALL RIGHTS RESERVED.
+            © 2026 HERBMED ETHIOPIA. መብቱ የተጠበቀ።
         </div>
     </div>
 </footer>

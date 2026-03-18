@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ $book->title }} - Ethiopian Traditional Medicine Book</title>
+    <title>{{ $book->title }} - የኢትዮጵያ ባህላዊ ሕክምና መጻሕፍት</title>
 
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -576,8 +576,8 @@
     <div class="container">
         <nav aria-label="breadcrumb" data-aos="fade-up">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ route('welcome') }}">Home</a></li>
-                <li class="breadcrumb-item"><a href="{{ route('books.index') }}">Books</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('welcome') }}">ቤት</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('books.index') }}">መጻሕፍት</a></li>
                 <li class="breadcrumb-item active">{{ Str::limit($book->title, 40) }}</li>
             </ol>
         </nav>
@@ -588,9 +588,9 @@
                 <div><i class="bi bi-tag"></i> {{ ucfirst($book->type) }}</div>
                 <div><i class="bi bi-currency-dollar"></i> {{ number_format($book->price, 2) }} ETB</div>
                 @if($book->stock !== null)
-                    <div><i class="bi bi-box"></i> {{ $book->stock > 0 ? $book->stock . ' in stock' : 'Out of Stock' }}</div>
+                    <div><i class="bi bi-box"></i> {{ $book->stock > 0 ? $book->stock . ' በማእድና' : 'ከማእድና ውጣል' }}</div>
                 @else
-                    <div><i class="bi bi-download"></i> Digital Download</div>
+                    <div><i class="bi bi-download"></i> ዲጂታል ወርድ</div>
                 @endif
             </div>
         </div>
@@ -648,25 +648,25 @@
                         @if($book->stock !== null)
                             <div class="mb-3">
                                 <span class="badge-custom">
-                                    <i class="bi bi-box"></i> {{ $book->stock }} copies available
+                                    <i class="bi bi-box"></i> {{ $book->stock }} ኮፒዎች ይገኛልሉ
                                 </span>
                             </div>
                         @else
                             <div class="mb-3">
                                 <span class="badge-custom">
-                                    <i class="bi bi-download"></i> Instant Digital Download
+                                    <i class="bi bi-download"></i> ወሲእይ ዲጂታል ወርድ
                                 </span>
                             </div>
                         @endif
                         
                         <div class="d-grid gap-2">
                             <button class="btn-action contact-btn" data-phone="{{ $owner_phone ?? '+251 91 163 1253' }}">
-                                <i class="bi bi-whatsapp"></i> Order or Inquire
+                                <i class="bi bi-whatsapp"></i> ይዘዙ ወይምልል
                             </button>
                             
                             @if($book->type === 'digital' || $book->file)
                                 <button class="btn-action btn-action-outline" onclick="downloadBook()">
-                                    <i class="bi bi-download"></i> Download Digital Copy
+                                    <i class="bi bi-download"></i> ዲጂታል ኮፒይ ይውርድ
                                 </button>
                             @endif
                         </div>
@@ -685,7 +685,7 @@
                 <div data-aos="fade-up" data-aos-delay="100">
                     <!-- Book Description -->
                     <div class="book-description">
-                        <h2>About This Book</h2>
+                        <h2>ስለይ መጻሕፉው</h2>
                         <div class="content-format">
                             <p class="lead">{{ $book->description }}</p>
                         </div>
@@ -694,28 +694,28 @@
                         <h2 class="mt-4">Book Details</h2>
                         <div class="book-details-grid">
                             <div class="detail-item">
-                                <strong>Type</strong>
+                                <strong>አይነት</strong>
                                 <span>{{ ucfirst($book->type) }}</span>
                             </div>
                             <div class="detail-item">
-                                <strong>Format</strong>
-                                <span>{{ $book->type === 'digital' ? 'PDF Download' : 'Physical Copy' }}</span>
+                                <strong>ቅልቅል</strong>
+                                <span>{{ $book->type === 'digital' ? 'PDF ወርድ' : 'ንግማያን ኮፒ' }}</span>
                             </div>
                             @if($book->stock !== null)
                                 <div class="detail-item">
-                                    <strong>Availability</strong>
-                                    <span>{{ $book->stock > 0 ? 'In Stock' : 'Out of Stock' }}</span>
+                                    <strong>ማገኛልነት</strong>
+                                    <span>{{ $book->stock > 0 ? 'በማእድና' : 'ከማእድና ውጣል' }}</span>
                                 </div>
                             @endif
                             @if($book->pages)
                                 <div class="detail-item">
-                                    <strong>Pages</strong>
+                                    <strong>ገጾታል</strong>
                                     <span>{{ $book->pages }}</span>
                                 </div>
                             @endif
                             @if($book->language)
                                 <div class="detail-item">
-                                    <strong>Language</strong>
+                                    <strong>ቋንቋ</strong>
                                     <span>{{ $book->language }}</span>
                                 </div>
                             @endif
@@ -761,14 +761,14 @@
 <section class="cta-section">
     <div class="container">
         <div data-aos="fade-up">
-            <h2 class="cta-title">Need Personal Guidance?</h2>
-            <p class="cta-description">Book a consultation with our traditional medicine experts to help you choose the right resources.</p>
+            <h2 class="cta-title">የግልል መመሪያ ይያስፍዎ?</h2>
+            <p class="cta-description">ከማህላዊ ሕክምና ባለማማዎች ጋም የማማክይ ተገናማ ለመምርር ይቀመለብ።</p>
             <div class="cta-buttons">
                 <a href="{{ route('consultation.index') }}" class="btn-cta">
-                    <i class="bi bi-chat-dots"></i> Schedule Consultation
+                    <i class="bi bi-chat-dots"></i> የማማክይ ተገናማ
                 </a>
                 <a href="{{ route('articles.index') }}" class="btn-cta btn-cta-outline">
-                    <i class="bi bi-journal-text"></i> Browse Articles
+                    <i class="bi bi-journal-text"></i> ጽሑፍትን ይቃልሉ
                 </a>
             </div>
         </div>

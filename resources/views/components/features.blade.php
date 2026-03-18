@@ -1,8 +1,8 @@
 <section class="py-5">
     <div class="container">
         <div class="section-header" data-aos="fade-up">
-            <span class="section-subtitle">WHY CHOOSE US</span>
-            <h2 class="section-title">We compare traditional wisdom, <span>you save!</span></h2>
+            <span class="section-subtitle">ምን ተመራጭ ያደርገናል</span>
+            <h2 class="section-title">ባህላዊ ጥበብን እናነፃፅራለን <span>እኛ ጋር በመምጣትዎ ተጠብቀዋል!</span></h2>
         </div>
         
         <div class="row g-4">
@@ -11,8 +11,8 @@
                     <div class="feature-icon">
                         <i class="bi bi-flower1"></i>
                     </div>
-                    <h4>Wild Harvested</h4>
-                    <p>Ethically sourced from Ethiopian highlands</p>
+                    <h4>የጫካ የተሰበሰቡ</h4>
+                    <p>በህጋዊ መንገድ ከኢትዮጵያ ተራሮች የተገኙ</p>
                 </div>
             </div>
             <div class="col-md-3" data-aos="fade-up" data-aos-delay="200">
@@ -20,8 +20,8 @@
                     <div class="feature-icon">
                         <i class="bi bi-shield-check"></i>
                     </div>
-                    <h4>Lab Tested</h4>
-                    <p>Certified purity and potency</p>
+                    <h4>በላቦራቶሪ የተረጋገጠ</h4>
+                    <p>ንጽህናቸው እና አዳኝነታቸው የተረጋገጠ</p>
                 </div>
             </div>
             <div class="col-md-3" data-aos="fade-up" data-aos-delay="300">
@@ -29,8 +29,8 @@
                     <div class="feature-icon">
                         <i class="bi bi-translate"></i>
                     </div>
-                    <h4>Multilingual</h4>
-                    <p>Support in 8+ languages</p>
+                    <h4>ባለብዙ ቋንቋ</h4>
+                    <p>በ4+ ቋንቋዎች ድጋፍ</p>
                 </div>
             </div>
             <div class="col-md-3" data-aos="fade-up" data-aos-delay="400">
@@ -38,8 +38,8 @@
                     <div class="feature-icon">
                         <i class="bi bi-truck"></i>
                     </div>
-                    <h4>Global Shipping</h4>
-                    <p>To your doorstep worldwide</p>
+                    <h4>ዓለም አቀፍ ግብይት</h4>
+                    <p>ባሉበት ቤትዎ ድረስ</p>
                 </div>
             </div>
         </div>

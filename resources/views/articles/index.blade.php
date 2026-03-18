@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="am">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Literature - Ethiopian Traditional Medicine Articles</title>
+    <title>ጽሑፍ - የኢትዮጵያ ባህላዊ ሕክምና ጽሑፍት</title>
 
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -453,9 +453,9 @@
 <section class="articles-hero">
     <div class="container">
         <div class="hero-content" data-aos="fade-up">
-            <span class="section-subtitle">KNOWGE & WISDOM</span>
-            <h1>Traditional Ethiopian <span>Literature</span></h1>
-            <p>Explore our collection of articles on ancient healing practices, medicinal plants, and holistic wellness.</p>
+            <span class="section-subtitle">እውቀት እና ጥበብ</span>
+            <h1>ጥንታዊ የኢትዮጵያ <span>ጽሑፍ</span></h1>
+            <p>ስለ ጥንታዊ የፈውስ እውቀቶች፣ ስለ መድሃኒትነት ያላቸው ዕጽዋቶች እና ስለ አጠቃላይ ጤናዎ ያሉንን ጽሑፎች ስብስብ እዚህ ያግኙ</p>
         </div>
     </div>
 </section>
@@ -466,11 +466,11 @@
         <div class="search-form" data-aos="fade-up">
             <form method="GET" action="{{ route('articles.index') }}" class="row g-3">
                 <div class="col-md-8">
-                    <input type="text" name="search" class="form-control" placeholder="Search articles..." value="{{ request('search') }}">
+                    <input type="text" name="search" class="form-control" placeholder="ጽሑፉዎትን ይፈልጉ..." value="{{ request('search') }}">
                 </div>
                 <div class="col-md-4">
                     <button type="submit" class="btn-search w-100">
-                        <i class="bi bi-search me-2"></i>SEARCH
+                        <i class="bi bi-search me-2"></i>ፈልጉ
                     </button>
                 </div>
             </form>
@@ -481,8 +481,8 @@
 <section class="articles-section">
     <div class="container">
         <div class="section-header" data-aos="fade-up">
-            <span class="section-subtitle">Recent Writings</span>
-            <h2 class="section-title">Featured <span>Articles</span></h2>
+            <span class="section-subtitle">የቅርብ ጊዜ ጽሑፎች</span>
+            <h2 class="section-title">የተለያዩ <span>ጽሑፎች</span></h2>
         </div>
 
         <div class="row g-4">
@@ -511,13 +511,13 @@
                             @endif
 
                             <span class="article-badge">
-                                {{ $article->category->name ?? 'Traditional' }}
+                                {{ $article->category->name ?? 'ባህላዊ' }}
                             </span>
                         </div>
 
                         <div class="article-body">
                             <div class="article-meta">
-                                <span><i class="bi bi-calendar3"></i> {{ $article->published_at ? $article->published_at->format('M d, Y') : 'Recent' }}</span>
+                                <span><i class="bi bi-calendar3"></i> {{ $article->published_at ? $article->published_at->format('M d, Y') : 'በቅርብ' }}</span>
                                 <span class="ms-auto article-views">
                                     <i class="bi bi-eye"></i> {{ $article->views ?? 0 }}
                                 </span>
@@ -527,7 +527,7 @@
                             <p class="article-excerpt">{{ Str::limit(strip_tags($article->content), 140) }}</p>
 
                             <div class="article-footer">
-                                <a href="{{ route('articles.show', $article->slug) }}" class="btn-read">Read Article</a>
+                                <a href="{{ route('articles.show', $article->slug) }}" class="btn-read">ጽሑፉን ያንብቡ</a>
                             </div>
                         </div>
                     </div>
@@ -536,10 +536,10 @@
                 <div class="col-12">
                     <div class="no-articles" data-aos="fade-up">
                         <i class="bi bi-journal-text"></i>
-                        <h3>No articles found</h3>
-                        <p>Try a different search term or browse our full collection.</p>
+                        <h3>ጽሑፍ አልተገኘም</h3>
+                        <p>የተለየው የፍለግ ቃል ይሞክሩ ወይም የሙሉን ያስልፍሉ።</p>
                         <a href="{{ route('welcome') }}" class="btn btn-lg mt-3" style="background:var(--primary-light); color:var(--primary); border:none; padding:0.9rem 2.2rem; border-radius:50px; font-weight:700;">
-                            Return to Home
+                            ወደ ቤት ይመለሱ
                         </a>
                     </div>
                 </div>
