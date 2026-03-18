@@ -119,7 +119,7 @@
             </table>
             
             <!-- <div class="mt-4">
-                {{ $articles->links() }}
+                {{ $articles->links() }}    
             </div> -->
         </div>
     </div>

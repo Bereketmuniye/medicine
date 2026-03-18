@@ -35,9 +35,9 @@
                     <a class="nav-link {{ request()->routeIs('books.*') ? 'active' : '' }}" href="{{ route('books.index') }}">BOOKS</a>
                 </li>
             </ul>
-            <div class="d-flex align-items-center">
+            <!-- <div class="d-flex align-items-center">
                 <a href="{{ route('login') }}" class="btn-account">ACCOUNT</a>
-            </div>
+            </div> -->
         </div>
     </div>
 </nav>
