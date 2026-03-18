@@ -4,7 +4,47 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>HerbMed Ethiopia – Ancient Wisdom, Modern Healing</title>
+    
+    <!-- SEO Meta Tags -->
+    <title>Shalom Herbal Healing - Traditional Ethiopian Medicine & Natural Remedies | Dr. Shalom</title>
+    <meta name="description" content="Discover authentic Ethiopian traditional herbal medicine and natural healing remedies at Shalom Herbal Healing. Led by Dr. Shalom, we offer ancient wisdom combined with modern wellness solutions for your health journey.">
+    <meta name="keywords" content="Ethiopian traditional medicine, herbal remedies, natural healing, Dr. Shalom, Shalom Herbal Healing, traditional herbs, wellness, alternative medicine, Ethiopian herbs, natural health">
+    <meta name="author" content="Dr. Shalom - Shalom Herbal Healing">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="googlebot" content="index, follow">
+    <meta name="bingbot" content="index, follow">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:locale" content="en_US">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Shalom Herbal Healing - Traditional Ethiopian Medicine & Natural Remedies">
+    <meta property="og:description" content="Discover authentic Ethiopian traditional herbal medicine and natural healing remedies at Shalom Herbal Healing. Led by Dr. Shalom, we offer ancient wisdom combined with modern wellness solutions.">
+    <meta property="og:url" content="https://shalomherbcare.com/">
+    <meta property="og:site_name" content="Shalom Herbal Healing">
+    <meta property="article:publisher" content="https://www.facebook.com/shalomherbcare">
+    <meta property="article:author" content="Dr. Shalom">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@ShalomHerbCare">
+    <meta name="twitter:creator" content="@DrShalom">
+    <meta name="twitter:title" content="Shalom Herbal Healing - Traditional Ethiopian Medicine">
+    <meta name="twitter:description" content="Discover authentic Ethiopian traditional herbal medicine and natural healing remedies.">
+    
+    <!-- Additional SEO Meta Tags -->
+    <meta name="theme-color" content="#2d5016">
+    <meta name="msapplication-TileColor" content="#2d5016">
+    <meta name="application-name" content="Shalom Herbal Healing">
+    <meta name="apple-mobile-web-app-title" content="Shalom Herbal Healing">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://shalomherbcare.com/">
+    
+    <!-- Alternate Language Links -->
+    <link rel="alternate" hreflang="en" href="https://shalomherbcare.com/">
+    <link rel="alternate" hreflang="x-default" href="https://shalomherbcare.com/">
 
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -16,9 +56,57 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <!-- AOS Animation -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Favicon and App Icons -->
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('images/favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('images/favicon-16x16.png') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('images/apple-touch-icon.png') }}">
+    <link rel="manifest" href="{{ asset('site.webmanifest') }}">
+    
     <!-- Custom Shared Styles -->
     <link rel="stylesheet" href="{{ asset('css/global.css') }}?v={{ filemtime(public_path('css/global.css')) }}">
     <link rel="stylesheet" href="{{ asset('css/books-shared.css') }}?v={{ filemtime(public_path('css/books-shared.css')) }}&t={{ time() }}">
+    
+    <!-- Structured Data Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Shalom Herbal Healing",
+        "alternateName": "HerbMed Ethiopia",
+        "url": "https://shalomherbcare.com",
+        "logo": "https://shalomherbcare.com/images/shalom-logo-transparent.png",
+        "description": "Traditional Ethiopian herbal medicine and natural healing remedies led by Dr. Shalom",
+        "founder": {
+            "@type": "Person",
+            "name": "Dr. Shalom",
+            "jobTitle": "CEO & Founder",
+            "description": "Expert in traditional Ethiopian medicine and herbal healing"
+        },
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+251-XXX-XXXXXX",
+            "contactType": "customer service",
+            "availableLanguage": ["English", "Amharic"]
+        },
+        "sameAs": [
+            "https://www.facebook.com/shalomherbcare",
+            "https://twitter.com/ShalomHerbCare",
+            "https://www.instagram.com/shalomherbcare"
+        ],
+        "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "Ethiopia",
+            "addressLocality": "Addis Ababa"
+        },
+        "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": "9.1450",
+            "longitude": "38.7617"
+        }
+    }
+    </script>
 
     <style>
         /* Hero Section - Full Screen with Video Background */

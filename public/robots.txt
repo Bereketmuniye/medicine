@@ -1,2 +1,29 @@
 User-agent: *
-Disallow:
+Allow: /
+
+# Allow search engines to crawl all important directories
+Allow: /css/
+Allow: /js/
+Allow: /images/
+Allow: /fonts/
+
+# Disallow admin and system directories
+Disallow: /admin/
+Disallow: /vendor/
+Disallow: /storage/
+Disallow: /bootstrap/
+Disallow: /config/
+Disallow: /database/
+Disallow: /routes/
+Disallow: /tests/
+Disallow: /artisan
+Disallow: /.env*
+Disallow: /composer.*
+Disallow: /package.json
+Disallow: /webpack.mix.js
+
+# Sitemap location
+Sitemap: https://shalomherbcare.com/sitemap.xml
+
+# Crawl delay (optional, adjust as needed)
+Crawl-delay: 1

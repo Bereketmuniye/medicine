@@ -1,9 +1,9 @@
-<nav class="navbar navbar-expand-lg" id="mainNav">
+<nav class="navbar navbar-expand-lg" id="mainNav" itemscope itemtype="https://schema.org/Organization">
     <div class="container">
-        <a class="navbar-brand d-flex align-items-center gap-2" href="{{ route('welcome') }}">
-            <img src="{{ asset('images/shalom-logo-transparent.png') }}" alt="SHALOM HERBAL HEALING" style="height: 50px; width: auto;">
+        <a class="navbar-brand d-flex align-items-center gap-2" href="{{ route('welcome') }}" itemprop="url">
+            <img src="{{ asset('images/shalom-logo-transparent.png') }}" alt="SHALOM HERBAL HEALING" style="height: 50px; width: auto;" itemprop="logo">
             <div class="d-flex flex-column" style="line-height: 1;">
-                <span class="brand-text" style="font-size: 1.2rem; font-weight: 800; letter-spacing: 1px;">SHALOM</span>
+                <span class="brand-text" style="font-size: 1.2rem; font-weight: 800; letter-spacing: 1px;" itemprop="name">SHALOM</span>
                 <span class="brand-subtext" style="font-size: 0.6rem; font-weight: 500; color: var(--primary-light); letter-spacing: 2px;">HERBAL HEALING</span>
             </div>
         </a>
@@ -11,6 +11,10 @@
             <span class="navbar-toggler-icon" style="filter: invert(1);"></span>
         </button>
         <div class="collapse navbar-collapse" id="nav">
+            <div class="ceo-section me-3" itemscope itemtype="https://schema.org/Person">
+                <span class="ceo-badge" itemprop="jobTitle">CEO</span>
+                <span class="ceo-name" itemprop="name">Dr. Shalom</span>
+            </div>
             <ul class="navbar-nav mx-auto">
                 <li class="nav-item">
                     <a class="nav-link {{ request()->routeIs('welcome') ? 'active' : '' }}" href="{{ request()->routeIs('welcome') ? '#home' : route('welcome') }}">HOME</a>
