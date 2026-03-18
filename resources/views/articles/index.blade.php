@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>ጽሑፍ - የኢትዮጵያ ባህላዊ ሕክምና ጽሑፍት</title>
+    <title>ጽሑፍ - የኢትዮጵያ ጥንታዊ ሕክምና ጽሑፍት</title>
 
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -511,7 +511,7 @@
                             @endif
 
                             <span class="article-badge">
-                                {{ $article->category->name ?? 'ባህላዊ' }}
+                                {{ $article->category->name ?? 'ጥንታዊ' }}
                             </span>
                         </div>
 

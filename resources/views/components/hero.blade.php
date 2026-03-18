@@ -28,7 +28,7 @@
     <div class="hero-stats" data-aos="fade-up" data-aos-delay="200">
         <div class="hero-stat-item">
             <div class="hero-stat-number count-up">{{ $stats['herbs_count'] ?? 50 }}</div>
-            <div class="hero-stat-label">ባህላዊ ዕፅዋት</div>
+            <div class="hero-stat-label">ጥንታዊ ዕፅዋት</div>
         </div>
         <div class="hero-stat-item">
             <div class="hero-stat-number count-up">{{ $stats['clients_count'] ?? 1250 }}</div>

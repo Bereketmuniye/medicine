@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ $article->title }} - የኢትዮጵያ ባህላዊ ሕክምና ጽሑፍ</title>
+    <title>{{ $article->title }} - የኢትዮጵያ ጥንታዊ ሕክምና ጽሑፍ</title>
 
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -557,7 +557,7 @@
     <div class="container">
         <div data-aos="fade-up">
             <h2 class="cta-title">ተጨማለሉ ማማለት ይይዛሉ?</h2>
-            <p class="cta-description">የኢትዮጵያ ባህላዊ ሕክምና መጻሕፍትና መድኃኒቶችን ያስልፍሉ።</p>
+            <p class="cta-description">የኢትዮጵያ ጥንታዊ ሕክምና መጻሕፍትና መድኃኒቶችን ያስልፍሉ።</p>
             <div class="cta-buttons">
                 <a href="{{ route('books.index') }}" class="btn-cta">
                     <i class="bi bi-book"></i> መጻሕፍትን ይቃልሉ

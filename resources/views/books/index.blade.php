@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>መጻሕፍት - የኢትዮጵያ ባህላዊ ሕክምና መጻሕፍት ቤተም</title>
+    <title>መጻሕፍት - የኢትዮጵያ ጥንታዊ ሕክምና መጻሕፍት ቤተም</title>
 
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -369,7 +369,7 @@
         <div class="hero-content" data-aos="fade-up">
             <span class="section-subtitle">ቤተ መጻሕፍት</span>
             <h1>ጥንታዊ ጥበብ & <span>ዘመናዊ እውቀት</span></h1>
-            <p>የኢትዮጵያ ባህላዊ ሕክምና መጻሕፍትን ያግኙ - ከጥንታዊ የግእዝ ቅጆች እስከ ዘመናዊ የእጽዋት ጥናቶች።</p>
+            <p>የኢትዮጵያ ጥንታዊ ሕክምና መጻሕፍትን ያግኙ - ከጥንታዊ የግእዝ ቅጆች እስከ ዘመናዊ የእጽዋት ጥናቶች።</p>
         </div>
     </div>
 </section>

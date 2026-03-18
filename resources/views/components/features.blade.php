@@ -2,7 +2,7 @@
     <div class="container">
         <div class="section-header" data-aos="fade-up">
             <span class="section-subtitle">ምን ተመራጭ ያደርገናል</span>
-            <h2 class="section-title">ባህላዊ ጥበብን እናነፃፅራለን <span>እኛ ጋር በመምጣትዎ ተጠብቀዋል!</span></h2>
+            <h2 class="section-title">ጥንታዊ ጥበብን እናነፃፅራለን <span>እኛ ጋር በመምጣትዎ ተጠብቀዋል!</span></h2>
         </div>
         
         <div class="row g-4">

@@ -55,7 +55,7 @@
                         <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
                     </div>
                     <div class="video-info">
-                        <h6 class="video-title">ባህላዊ ዝግጅት ዘዴዎች</h6>
+                        <h6 class="video-title">ጥንታዊ ዝግጅት ዘዴዎች</h6>
                         <div class="video-meta">
                             <span><i class="bi bi-person"></i> Tadesse W.</span>
                             <span><i class="bi bi-calendar"></i> 1 week ago</span>
