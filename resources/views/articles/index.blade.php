@@ -554,15 +554,7 @@
     </div>
 </section>
 
-        <!-- Pagination -->
-        @if($articles->hasPages())
-            <div class="d-flex justify-content-center mt-5" data-aos="fade-up">
-                {{ $articles->links() }}
-            </div>
-        @endif
-    </div>
-</section>
-
+        
 <!-- Footer -->
 <x-footer />
 
