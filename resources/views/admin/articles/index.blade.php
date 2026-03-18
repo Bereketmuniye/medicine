@@ -119,9 +119,11 @@
             </table>
         </div>
         
+        @if($articles->hasPages())
         <div class="mt-4">
             {{ $articles->links() }}
         </div>
+    @endif
     </div>
 </div>
 @endsection
