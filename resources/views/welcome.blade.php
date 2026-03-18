@@ -4,7 +4,47 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>HerbMed Ethiopia – Ancient Wisdom, Modern Healing</title>
+    
+    <!-- SEO Meta Tags -->
+    <title>Shalom Herbal Healing - Traditional Ethiopian Medicine & Natural Remedies | Dr. Shalom</title>
+    <meta name="description" content="Discover authentic Ethiopian traditional herbal medicine and natural healing remedies at Shalom Herbal Healing. Led by Dr. Shalom, we offer ancient wisdom combined with modern wellness solutions for your health journey.">
+    <meta name="keywords" content="Ethiopian traditional medicine, herbal remedies, natural healing, Dr. Shalom, Shalom Herbal Healing, traditional herbs, wellness, alternative medicine, Ethiopian herbs, natural health">
+    <meta name="author" content="Dr. Shalom - Shalom Herbal Healing">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="googlebot" content="index, follow">
+    <meta name="bingbot" content="index, follow">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:locale" content="en_US">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Shalom Herbal Healing - Traditional Ethiopian Medicine & Natural Remedies">
+    <meta property="og:description" content="Discover authentic Ethiopian traditional herbal medicine and natural healing remedies at Shalom Herbal Healing. Led by Dr. Shalom, we offer ancient wisdom combined with modern wellness solutions.">
+    <meta property="og:url" content="https://shalomherbcare.com/">
+    <meta property="og:site_name" content="Shalom Herbal Healing">
+    <meta property="article:publisher" content="https://www.facebook.com/shalomherbcare">
+    <meta property="article:author" content="Dr. Shalom">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@ShalomHerbCare">
+    <meta name="twitter:creator" content="@DrShalom">
+    <meta name="twitter:title" content="Shalom Herbal Healing - Traditional Ethiopian Medicine">
+    <meta name="twitter:description" content="Discover authentic Ethiopian traditional herbal medicine and natural healing remedies.">
+    
+    <!-- Additional SEO Meta Tags -->
+    <meta name="theme-color" content="#2d5016">
+    <meta name="msapplication-TileColor" content="#2d5016">
+    <meta name="application-name" content="Shalom Herbal Healing">
+    <meta name="apple-mobile-web-app-title" content="Shalom Herbal Healing">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://shalomherbcare.com/">
+    
+    <!-- Alternate Language Links -->
+    <link rel="alternate" hreflang="en" href="https://shalomherbcare.com/">
+    <link rel="alternate" hreflang="x-default" href="https://shalomherbcare.com/">
 
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
