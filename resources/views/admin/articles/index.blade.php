@@ -118,9 +118,9 @@
                 </tbody>
             </table>
             
-            <div class="mt-4">
+            <!-- <div class="mt-4">
                 {{ $articles->links() }}
-            </div>
+            </div> -->
         </div>
     </div>
 </div>
