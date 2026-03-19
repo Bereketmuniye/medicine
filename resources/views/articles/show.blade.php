@@ -410,7 +410,7 @@
             <h1 class="article-title">{{ $article->title }}</h1>
             <div class="article-meta">
                 <div><i class="bi bi-calendar3"></i> {{ $article->published_at ? $article->published_at->format('F d, Y') : 'በቅርብ' }}</div>
-                <div><i class="bi bi-eye"></i> {{ $article->views ?? 0 }} መመልከታ</div>
+                <div><i class="bi bi-eye"></i> {{ $article->views ?? 0 }} እይታ</div>
                 @if($article->author)
                     <div><i class="bi bi-person"></i> {{ $article->author->name }}</div>
                 @endif
