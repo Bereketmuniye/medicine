@@ -576,7 +576,7 @@
     <div class="container">
         <nav aria-label="breadcrumb" data-aos="fade-up">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ route('welcome') }}">ቤት</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('welcome') }}">መነሻ ገጽ</a></li>
                 <li class="breadcrumb-item"><a href="{{ route('books.index') }}">መጻሕፍት</a></li>
                 <li class="breadcrumb-item active">{{ Str::limit($book->title, 40) }}</li>
             </ol>
@@ -588,7 +588,7 @@
                 <div><i class="bi bi-tag"></i> {{ ucfirst($book->type) }}</div>
                 <div><i class="bi bi-currency-dollar"></i> {{ number_format($book->price, 2) }} ETB</div>
                 @if($book->stock !== null)
-                    <div><i class="bi bi-box"></i> {{ $book->stock > 0 ? $book->stock . ' በማእድና' : 'ከማእድና ውጣል' }}</div>
+                    <div><i class="bi bi-box"></i> {{ $book->stock > 0 ? $book->stock . 'የመጻሓፍት ብዛት' : 'ከማእድና ውጣል' }}</div>
                 @else
                     <div><i class="bi bi-download"></i> ዲጂታል ወርድ</div>
                 @endif
@@ -648,32 +648,32 @@
                         @if($book->stock !== null)
                             <div class="mb-3">
                                 <span class="badge-custom">
-                                    <i class="bi bi-box"></i> {{ $book->stock }} ኮፒዎች ይገኛልሉ
+                                    <i class="bi bi-box"></i> {{ $book->stock }} ኮፒዎች ይገኛሉ
                                 </span>
                             </div>
                         @else
                             <div class="mb-3">
                                 <span class="badge-custom">
-                                    <i class="bi bi-download"></i> ወሲእይ ዲጂታል ወርድ
+                                    <i class="bi bi-download"></i> ዳዉንሎድ አድርግ
                                 </span>
                             </div>
                         @endif
                         
                         <div class="d-grid gap-2">
                             <button class="btn-action contact-btn" data-phone="{{ $owner_phone ?? '+251 91 163 1253' }}">
-                                <i class="bi bi-whatsapp"></i> ይዘዙ ወይምልል
+                                <i class="bi bi-whatsapp"></i> ይዘዙ
                             </button>
                             
                             @if($book->type === 'digital' || $book->file)
                                 <button class="btn-action btn-action-outline" onclick="downloadBook()">
-                                    <i class="bi bi-download"></i> ዲጂታል ኮፒይ ይውርድ
+                                    <i class="bi bi-download"></i> ዲጂታል ኮፒይ አዉርድ
                                 </button>
                             @endif
                         </div>
                         
                         <div class="mt-4 text-center">
                             <small class="text-muted">
-                                <i class="bi bi-shield-check" style="color: var(--primary-light);"></i> Secure Payment • Traditional Expertise
+                                <i class="bi bi-shield-check" style="color: var(--primary-light);"></i> Secure Payment • ጥንታዊ ጥበብ
                             </small>
                         </div>
                     </div>
@@ -685,31 +685,31 @@
                 <div data-aos="fade-up" data-aos-delay="100">
                     <!-- Book Description -->
                     <div class="book-description">
-                        <h2>ስለይ መጻሕፉው</h2>
+                        <h2>ስለ መጽሃፉ</h2>
                         <div class="content-format">
                             <p class="lead">{{ $book->description }}</p>
                         </div>
                         
                         <!-- Book Details -->
-                        <h2 class="mt-4">Book Details</h2>
+                        <h2 class="mt-4">የመጽሃፉ ይዘት</h2>
                         <div class="book-details-grid">
                             <div class="detail-item">
-                                <strong>አይነት</strong>
+                                <strong>የመጽሃፉ አይነት</strong>
                                 <span>{{ ucfirst($book->type) }}</span>
                             </div>
                             <div class="detail-item">
-                                <strong>ቅልቅል</strong>
+                                <strong>የመጽሃፉ አይነት</strong>
                                 <span>{{ $book->type === 'digital' ? 'PDF ወርድ' : 'ንግማያን ኮፒ' }}</span>
                             </div>
                             @if($book->stock !== null)
                                 <div class="detail-item">
-                                    <strong>ማገኛልነት</strong>
+                                    <strong>የመጽሃፉ ብዛት</strong>
                                     <span>{{ $book->stock > 0 ? 'በማእድና' : 'ከማእድና ውጣል' }}</span>
                                 </div>
                             @endif
                             @if($book->pages)
                                 <div class="detail-item">
-                                    <strong>ገጾታል</strong>
+                                    <strong>ገጽ</strong>
                                     <span>{{ $book->pages }}</span>
                                 </div>
                             @endif
@@ -743,7 +743,7 @@
         <div class="row">
             <div class="col-12">
                 <div data-aos="fade-up">
-                    <h2 class="sidebar-title text-center mb-5" style="font-size: 2rem;">Related Books</h2>
+                    <h2 class="sidebar-title text-center mb-5" style="font-size: 2rem;">ተያያዝ መጽሃፎች</h2>
                 </div>
             </div>
             
@@ -761,14 +761,14 @@
 <section class="cta-section">
     <div class="container">
         <div data-aos="fade-up">
-            <h2 class="cta-title">የግልል መመሪያ ይያስፍዎ?</h2>
-            <p class="cta-description">ከማህላዊ ሕክምና ባለማማዎች ጋም የማማክይ ተገናማ ለመምርር ይቀመለብ።</p>
+            <h2 class="cta-title">በግል ማማከር ይፈልጋሉ?</h2>
+            <p class="cta-description">ከማህላዊ ሕክምና ባለሙያዎች ጋር ይማከሩ።</p>
             <div class="cta-buttons">
                 <a href="{{ route('consultation.index') }}" class="btn-cta">
-                    <i class="bi bi-chat-dots"></i> የማማክይ ተገናማ
+                    <i class="bi bi-chat-dots"></i> የማማከር አገልግሎት 
                 </a>
                 <a href="{{ route('articles.index') }}" class="btn-cta btn-cta-outline">
-                    <i class="bi bi-journal-text"></i> ጽሑፍትን ይቃልሉ
+                    <i class="bi bi-journal-text"></i> ጽሑፍን ይመልከቱ
                 </a>
             </div>
         </div>

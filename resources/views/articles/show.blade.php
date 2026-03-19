@@ -400,7 +400,7 @@
     <div class="container">
         <nav aria-label="breadcrumb" data-aos="fade-up">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ route('welcome') }}">ቤት</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('welcome') }}">መነሻ ገጽ</a></li>
                 <li class="breadcrumb-item"><a href="{{ route('articles.index') }}">ጽሑፍ</a></li>
                 <li class="breadcrumb-item active">{{ Str::limit($article->title, 40) }}</li>
             </ol>
@@ -483,7 +483,7 @@
                 <!-- Latest Articles -->
                 @if(isset($latestArticles) && $latestArticles->isNotEmpty())
                     <div class="sidebar-card" data-aos="fade-up" data-aos-delay="100">
-                        <h5 class="sidebar-title">የቅርብ ጽሑፍት</h5>
+                        <h5 class="sidebar-title">የቅርብ ጽሑፎች</h5>
                         @foreach($latestArticles as $latest)
                             <div class="sidebar-article">
                                 <h6>
@@ -500,7 +500,7 @@
                 <!-- Related Articles -->
                 @if(isset($relatedArticles) && $relatedArticles->isNotEmpty())
                     <div class="sidebar-card" data-aos="fade-up" data-aos-delay="200">
-                        <h5 class="sidebar-title">የተያታ ጽሑፍት</h5>
+                        <h5 class="sidebar-title">ተያያዝ መጻፍት</h5>
                         @foreach($relatedArticles as $related)
                             <div class="sidebar-article">
                                 <h6>
@@ -523,28 +523,28 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="shareModalLabel">ይሽፉ ይልኑሉ</h5>
+                <h5 class="modal-title" id="shareModalLabel">ሽር ያድርጉ</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <div class="d-grid gap-2">
                     <a href="#" onclick="shareOnFacebook()" class="btn btn-primary d-flex align-items-center justify-content-center gap-2">
-                        <i class="bi bi-facebook"></i> በፌስቡቡ ላሽፉ
+                        <i class="bi bi-facebook"></i> በፌስቡቡ
                     </a>
                     <a href="#" onclick="shareOnTwitter()" class="btn btn-info d-flex align-items-center justify-content-center gap-2">
-                        <i class="bi bi-twitter"></i> በትዊተር ላሽፉ
+                        <i class="bi bi-twitter"></i> በትዊተር
                     </a>
                     <a href="#" onclick="shareOnLinkedIn()" class="btn btn-primary d-flex align-items-center justify-content-center gap-2">
-                        <i class="bi bi-linkedin"></i> በሊንደኢ ላሽፉ
+                        <i class="bi bi-linkedin"></i> በሊንደኢ
                     </a>
                     <a href="#" onclick="shareOnWhatsApp()" class="btn btn-success d-flex align-items-center justify-content-center gap-2">
-                        <i class="bi bi-whatsapp"></i> በዋትስንዕ ላሽፉ
+                        <i class="bi bi-whatsapp"></i> በዋትሳፕ
                     </a>
                     <a href="#" onclick="shareViaEmail()" class="btn btn-secondary d-flex align-items-center justify-content-center gap-2">
-                        <i class="bi bi-envelope"></i> በኢሜይል ላሽፉ
+                        <i class="bi bi-envelope"></i> በኢሜይል
                     </a>
                     <button onclick="copyLink()" class="btn btn-outline-dark d-flex align-items-center justify-content-center gap-2">
-                        <i class="bi bi-link-45deg"></i> አገኛን ይቅዱ
+                        <i class="bi bi-link-45deg"></i> ኮፒ ሊንክ
                     </button>
                 </div>
             </div>
@@ -556,14 +556,14 @@
 <section class="cta-section">
     <div class="container">
         <div data-aos="fade-up">
-            <h2 class="cta-title">ተጨማለሉ ማማለት ይይዛሉ?</h2>
-            <p class="cta-description">የኢትዮጵያ ጥንታዊ ሕክምና መጻሕፍትና መድኃኒቶችን ያስልፍሉ።</p>
+            <h2 class="cta-title">ተጨማሪ ይመልከቱ?</h2>
+            <p class="cta-description">የኢትዮጵያ ጥንታዊ ሕክምና መጻሕፍትና መድኃኒቶችን ይፈልጉ።</p>
             <div class="cta-buttons">
                 <a href="{{ route('books.index') }}" class="btn-cta">
-                    <i class="bi bi-book"></i> መጻሕፍትን ይቃልሉ
+                    <i class="bi bi-book"></i> መጻሕፍትን ይፈልጉ
                 </a>
                 <a href="{{ route('consultation.index') }}" class="btn-cta btn-cta-outline">
-                    <i class="bi bi-chat-dots"></i> የማማክይ ተገናማ</h2>
+                    <i class="bi bi-chat-dots"></i>ባለሙያ ያማክሩ </h2>
                 </a>
             </div>
         </div>
