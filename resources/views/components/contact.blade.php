@@ -4,7 +4,7 @@
             <div class="col-lg-5" data-aos="fade-right">
                 <div class="contact-info">
                     <span class="section-subtitle" style="color: var(--primary-light);">ያግኙን</span>
-                    <h3>እንገናኛለን</h3>
+                    <h3>አድራሻችን</h3>
                     <p>ስለ ምርቶቻችን ወይም ጥንታዊ ሕክምና ጥያቄዎች አሉዎት? በማንኛውም ጊዜ ይደውሉልን። የባለሙያዎቻችን ቡድን በጤና ጉዞዎ ላይ ለመርዳት ዝግጁ ነው።</p>
                     
                     <ul class="contact-details">
