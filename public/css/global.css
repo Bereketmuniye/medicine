@@ -407,3 +407,69 @@ body {
         gap: 0.3rem !important;
     }
 }
+
+/* Mobile fixes for about and contact sections */
+@media (max-width: 768px) {
+    .about-section,
+    .contact-section {
+        overflow-x: hidden;
+        width: 100%;
+    }
+    
+    .about-section .row,
+    .contact-section .row {
+        margin-left: -0.5rem;
+        margin-right: -0.5rem;
+        width: calc(100% + 1rem);
+    }
+    
+    .about-section .col-lg-6,
+    .contact-section .col-lg-6,
+    .contact-section .col-lg-5,
+    .contact-section .col-lg-7 {
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+    
+    .about-features {
+        grid-template-columns: 1fr;
+        gap: 0.8rem;
+        width: 100%;
+    }
+    
+    .contact-form {
+        width: 100%;
+        max-width: 100%;
+        padding: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .about-section .row,
+    .contact-section .row {
+        margin-left: -0.25rem;
+        margin-right: -0.25rem;
+        width: calc(100% + 0.5rem);
+    }
+    
+    .about-section .col-lg-6,
+    .contact-section .col-lg-6,
+    .contact-section .col-lg-5,
+    .contact-section .col-lg-7 {
+        padding-left: 0.25rem;
+        padding-right: 0.25rem;
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+    
+    .about-features {
+        gap: 0.5rem;
+    }
+    
+    .btn-account {
+        width: 100%;
+        max-width: 100%;
+    }
+}
