@@ -56,6 +56,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <!-- AOS Animation -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <!-- Custom Shared Styles -->
     <link rel="stylesheet" href="{{ asset('css/global.css') }}?v={{ filemtime(public_path('css/global.css')) }}">
     <link rel="stylesheet" href="{{ asset('css/books-shared.css') }}?v={{ filemtime(public_path('css/books-shared.css')) }}&t={{ time() }}">
@@ -71,6 +73,23 @@
             display: flex;
             align-items: center;
             padding-top: 80px;
+        }
+
+        /* Three.js Canvas Container */
+        #threejs-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        #threejs-container canvas {
+            display: block;
+            width: 100%;
+            height: 100%;
         }
 
         /* Video Background */
@@ -122,6 +141,8 @@
             line-height: 1.1;
             margin-bottom: 2rem;
             text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+            transform-style: preserve-3d;
+            animation: titleFloat 6s ease-in-out infinite;
         }
 
         .hero-title span {
@@ -130,6 +151,20 @@
             font-size: 3.5rem;
             font-weight: 400;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: titleSpanFloat 4s ease-in-out infinite;
+        }
+
+        @keyframes titleFloat {
+            0%, 100% { transform: translateY(0) rotateX(0); }
+            25% { transform: translateY(-10px) rotateX(2deg); }
+            50% { transform: translateY(-5px) rotateX(-1deg); }
+            75% { transform: translateY(-15px) rotateX(1deg); }
+        }
+
+        @keyframes titleSpanFloat {
+            0%, 100% { transform: translateY(0) rotateY(0); }
+            33% { transform: translateY(-8px) rotateY(2deg); }
+            66% { transform: translateY(-12px) rotateY(-2deg); }
         }
 
         /* Search Form */
@@ -1517,6 +1552,364 @@
             }, 5000);
         });
     });
+</script>
+
+<!-- Beautiful SVG Plant Growth Animation System -->
+<style>
+/* SVG Plant Animation Styles */
+.svg-plant-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.plant-svg {
+    position: absolute;
+    transform-origin: bottom center;
+    animation: plantSway 8s ease-in-out infinite;
+}
+
+.plant-stage-0 { opacity: 0; }
+.plant-stage-1 { opacity: 1; }
+.plant-stage-2 { opacity: 1; }
+.plant-stage-3 { opacity: 1; }
+.plant-stage-4 { opacity: 1; }
+.plant-stage-5 { opacity: 1; }
+
+/* Seed Stage */
+.seed-circle {
+    fill: #8B4513;
+    animation: seedPulse 3s ease-in-out infinite;
+}
+
+/* Roots */
+.root-path {
+    stroke: #654321;
+    stroke-width: 2;
+    fill: none;
+    opacity: 0;
+    animation: rootGrow 4s ease-out forwards;
+}
+
+/* Stem */
+.stem-path {
+    stroke: #90EE90;
+    stroke-width: 3;
+    fill: none;
+    stroke-linecap: round;
+    opacity: 0;
+    animation: stemGrow 3s ease-out forwards;
+}
+
+/* Leaves */
+.leaf-path {
+    fill: #228B22;
+    opacity: 0;
+    transform-origin: bottom center;
+    animation: leafUnfold 2s ease-out forwards;
+}
+
+.leaf-path.mature {
+    fill: #2E8B57;
+}
+
+/* Flowers */
+.flower-petal {
+    fill: #FFD700;
+    opacity: 0;
+    transform-origin: center;
+    animation: petalBloom 2.5s ease-out forwards;
+}
+
+.flower-petal.lavender {
+    fill: #9370DB;
+}
+
+.flower-petal.chamomile {
+    fill: #FFF8DC;
+}
+
+.flower-center {
+    fill: #FF8C00;
+    opacity: 0;
+    animation: centerAppear 2s ease-out 0.5s forwards;
+}
+
+/* Animations */
+@keyframes plantSway {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(1deg); }
+    75% { transform: rotate(-1deg); }
+}
+
+@keyframes seedPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+@keyframes rootGrow {
+    0% { 
+        opacity: 0;
+        stroke-dasharray: 100;
+        stroke-dashoffset: 100;
+    }
+    100% { 
+        opacity: 0.7;
+        stroke-dasharray: 100;
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes stemGrow {
+    0% { 
+        opacity: 0;
+        stroke-dasharray: 200;
+        stroke-dashoffset: 200;
+    }
+    100% { 
+        opacity: 1;
+        stroke-dasharray: 200;
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes leafUnfold {
+    0% { 
+        opacity: 0;
+        transform: scale(0) rotate(-45deg);
+    }
+    100% { 
+        opacity: 0.9;
+        transform: scale(1) rotate(0deg);
+    }
+}
+
+@keyframes petalBloom {
+    0% { 
+        opacity: 0;
+        transform: scale(0) rotate(0deg);
+    }
+    100% { 
+        opacity: 0.9;
+        transform: scale(1) rotate(360deg);
+    }
+}
+
+@keyframes centerAppear {
+    0% { 
+        opacity: 0;
+        transform: scale(0);
+    }
+    100% { 
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Ground with wave effect */
+.ground-svg {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 150px;
+    z-index: -1;
+}
+
+.ground-path {
+    fill: url(#groundGradient);
+    animation: groundWave 10s ease-in-out infinite;
+}
+
+@keyframes groundWave {
+    0%, 100% { d: path("M0,150 Q250,130 500,150 T1000,150 L1000,300 L0,300 Z"); }
+    50% { d: path("M0,150 Q250,170 500,150 T1000,150 L1000,300 L0,300 Z"); }
+}
+
+/* Individual plant positioning */
+.plant-1 { left: 5%; bottom: 0; height: 90vh; width: auto; animation-delay: 0s; }
+.plant-2 { right: 5%; bottom: 0; height: 90vh; width: auto; animation-delay: 2s; }
+</style>
+
+<div class="svg-plant-container" id="svg-plant-container">
+    <!-- Ground -->
+    <svg class="ground-svg" viewBox="0 0 1000 300" preserveAspectRatio="none">
+        <defs>
+            <linearGradient id="groundGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" style="stop-color:#3A5F3A;stop-opacity:0.8" />
+                <stop offset="100%" style="stop-color:#2E4B2E;stop-opacity:1" />
+            </linearGradient>
+        </defs>
+        <path class="ground-path" d="M0,150 Q250,130 500,150 T1000,150 L1000,300 L0,300 Z" />
+    </svg>
+
+    <!-- Large Plant 1 - Left Side (Basil) -->
+    <svg class="plant-svg plant-1" viewBox="0 0 300 500" preserveAspectRatio="xMidYMax meet">
+        <!-- Large Root System -->
+        <path class="root-path" d="M150,250 Q130,300 110,350 Q150,320 170,370 Q150,340 150,400" style="animation-delay: 0.5s; stroke-width: 4;"/>
+        <path class="root-path" d="M150,250 Q170,300 190,350 Q150,320 130,370" style="animation-delay: 0.7s; stroke-width: 3;"/>
+        
+        <!-- Large Seed -->
+        <circle class="seed-circle" cx="150" cy="250" r="20" style="animation-delay: 0s;"/>
+        
+        <!-- Thick Stem -->
+        <path class="stem-path" d="M150,250 Q145,200 150,150 Q155,100 150,50 Q145,20 150,0" style="animation-delay: 2s; stroke-width: 8;"/>
+        
+        <!-- Large Leaves -->
+        <path class="leaf-path" d="M150,200 Q80,170 60,100 Q90,140 150,180" style="animation-delay: 3s;"/>
+        <path class="leaf-path" d="M150,180 Q220,150 240,80 Q210,120 150,160" style="animation-delay: 3.5s;"/>
+        <path class="leaf-path mature" d="M150,150 Q70,110 45,40 Q75,80 150,130" style="animation-delay: 4s;"/>
+        <path class="leaf-path mature" d="M150,130 Q230,90 255,20 Q225,60 150,110" style="animation-delay: 4.5s;"/>
+        <path class="leaf-path mature" d="M150,100 Q60,50 30,0 Q60,40 150,90" style="animation-delay: 5s;"/>
+        <path class="leaf-path mature" d="M150,80 Q240,30 270,0 Q240,40 150,70" style="animation-delay: 5.5s;"/>
+        
+        <!-- Large Flower Cluster -->
+        <g transform="translate(150,0)">
+            <circle class="flower-petal" cx="0" cy="-25" r="15" style="animation-delay: 7s;"/>
+            <circle class="flower-petal" cx="25" cy="0" r="15" style="animation-delay: 7.2s;"/>
+            <circle class="flower-petal" cx="0" cy="25" r="15" style="animation-delay: 7.4s;"/>
+            <circle class="flower-petal" cx="-25" cy="0" r="15" style="animation-delay: 7.6s;"/>
+            <circle class="flower-petal" cx="18" cy="-18" r="12" style="animation-delay: 7.8s;"/>
+            <circle class="flower-petal" cx="18" cy="18" r="12" style="animation-delay: 8s;"/>
+            <circle class="flower-petal" cx="-18" cy="18" r="12" style="animation-delay: 8.2s;"/>
+            <circle class="flower-petal" cx="-18" cy="-18" r="12" style="animation-delay: 8.4s;"/>
+            <circle class="flower-center" cx="0" cy="0" r="12" style="animation-delay: 8.5s;"/>
+        </g>
+        
+        <!-- Additional Side Flowers -->
+        <g transform="translate(100,50)">
+            <circle class="flower-petal" cx="0" cy="-15" r="10" style="animation-delay: 9s;"/>
+            <circle class="flower-petal" cx="15" cy="0" r="10" style="animation-delay: 9.2s;"/>
+            <circle class="flower-petal" cx="0" cy="15" r="10" style="animation-delay: 9.4s;"/>
+            <circle class="flower-petal" cx="-15" cy="0" r="10" style="animation-delay: 9.6s;"/>
+            <circle class="flower-center" cx="0" cy="0" r="8" style="animation-delay: 9.8s;"/>
+        </g>
+        
+        <g transform="translate(200,40)">
+            <circle class="flower-petal" cx="0" cy="-12" r="8" style="animation-delay: 10s;"/>
+            <circle class="flower-petal" cx="12" cy="0" r="8" style="animation-delay: 10.2s;"/>
+            <circle class="flower-petal" cx="0" cy="12" r="8" style="animation-delay: 10.4s;"/>
+            <circle class="flower-petal" cx="-12" cy="0" r="8" style="animation-delay: 10.6s;"/>
+            <circle class="flower-center" cx="0" cy="0" r="6" style="animation-delay: 10.8s;"/>
+        </g>
+    </svg>
+
+    <!-- Large Plant 2 - Right Side (Lavender) -->
+    <svg class="plant-svg plant-2" viewBox="0 0 280 480" preserveAspectRatio="xMidYMax meet">
+        <!-- Large Root System -->
+        <path class="root-path" d="M140,240 Q120,290 100,340 Q140,310 160,360 Q140,330 140,390" style="animation-delay: 2.5s; stroke-width: 4;"/>
+        <path class="root-path" d="M140,240 Q160,290 180,340 Q140,310 120,360" style="animation-delay: 2.7s; stroke-width: 3;"/>
+        
+        <!-- Large Seed -->
+        <circle class="seed-circle" cx="140" cy="240" r="18" style="animation-delay: 2s;"/>
+        
+        <!-- Thick Stem -->
+        <path class="stem-path" d="M140,240 Q135,190 140,140 Q145,90 140,40 Q135,10 140,0" style="animation-delay: 4s; stroke-width: 7;"/>
+        
+        <!-- Large Leaves -->
+        <path class="leaf-path" d="M140,190 Q70,160 50,90 Q80,130 140,170" style="animation-delay: 5s;"/>
+        <path class="leaf-path" d="M140,170 Q210,140 230,70 Q200,110 140,150" style="animation-delay: 5.5s;"/>
+        <path class="leaf-path mature" d="M140,150 Q60,110 35,40 Q65,80 140,130" style="animation-delay: 6s;"/>
+        <path class="leaf-path mature" d="M140,130 Q220,90 245,20 Q215,60 140,110" style="animation-delay: 6.5s;"/>
+        <path class="leaf-path mature" d="M140,110 Q50,60 20,0 Q50,40 140,90" style="animation-delay: 7s;"/>
+        
+        <!-- Large Lavender Flower Stalks -->
+        <g transform="translate(140,0)">
+            <!-- Main lavender cluster -->
+            <ellipse class="flower-petal lavender" cx="0" cy="-30" rx="8" ry="20" style="animation-delay: 8s;"/>
+            <ellipse class="flower-petal lavender" cx="15" cy="-25" rx="8" ry="20" style="animation-delay: 8.2s;"/>
+            <ellipse class="flower-petal lavender" cx="-15" cy="-25" rx="8" ry="20" style="animation-delay: 8.4s;"/>
+            <ellipse class="flower-petal lavender" cx="0" cy="-20" rx="8" ry="20" style="animation-delay: 8.6s;"/>
+            <ellipse class="flower-petal lavender" cx="10" cy="-15" rx="8" ry="20" style="animation-delay: 8.8s;"/>
+            <ellipse class="flower-petal lavender" cx="-10" cy="-15" rx="8" ry="20" style="animation-delay: 9s;"/>
+            <ellipse class="flower-petal lavender" cx="0" cy="-10" rx="8" ry="20" style="animation-delay: 9.2s;"/>
+            <circle class="flower-center" cx="0" cy="-20" r="6" style="animation-delay: 9.5s;"/>
+        </g>
+        
+        <!-- Side lavender clusters -->
+        <g transform="translate(90,30)">
+            <ellipse class="flower-petal lavender" cx="0" cy="-20" rx="6" ry="15" style="animation-delay: 10s;"/>
+            <ellipse class="flower-petal lavender" cx="12" cy="-16" rx="6" ry="15" style="animation-delay: 10.2s;"/>
+            <ellipse class="flower-petal lavender" cx="-12" cy="-16" rx="6" ry="15" style="animation-delay: 10.4s;"/>
+            <ellipse class="flower-petal lavender" cx="0" cy="-12" rx="6" ry="15" style="animation-delay: 10.6s;"/>
+            <circle class="flower-center" cx="0" cy="-16" r="5" style="animation-delay: 10.8s;"/>
+        </g>
+        
+        <g transform="translate(190,25)">
+            <ellipse class="flower-petal lavender" cx="0" cy="-18" rx="6" ry="15" style="animation-delay: 11s;"/>
+            <ellipse class="flower-petal lavender" cx="10" cy="-14" rx="6" ry="15" style="animation-delay: 11.2s;"/>
+            <ellipse class="flower-petal lavender" cx="-10" cy="-14" rx="6" ry="15" style="animation-delay: 11.4s;"/>
+            <ellipse class="flower-petal lavender" cx="0" cy="-10" rx="6" ry="15" style="animation-delay: 11.6s;"/>
+            <circle class="flower-center" cx="0" cy="-14" r="5" style="animation-delay: 11.8s;"/>
+        </g>
+        
+        <!-- Additional small lavender clusters -->
+        <g transform="translate(110,60)">
+            <ellipse class="flower-petal lavender" cx="0" cy="-15" rx="5" ry="12" style="animation-delay: 12s;"/>
+            <ellipse class="flower-petal lavender" cx="8" cy="-12" rx="5" ry="12" style="animation-delay: 12.2s;"/>
+            <ellipse class="flower-petal lavender" cx="-8" cy="-12" rx="5" ry="12" style="animation-delay: 12.4s;"/>
+            <circle class="flower-center" cx="0" cy="-12" r="4" style="animation-delay: 12.5s;"/>
+        </g>
+        
+        <g transform="translate(170,55)">
+            <ellipse class="flower-petal lavender" cx="0" cy="-15" rx="5" ry="12" style="animation-delay: 12.7s;"/>
+            <ellipse class="flower-petal lavender" cx="8" cy="-12" rx="5" ry="12" style="animation-delay: 12.9s;"/>
+            <ellipse class="flower-petal lavender" cx="-8" cy="-12" rx="5" ry="12" style="animation-delay: 13.1s;"/>
+            <circle class="flower-center" cx="0" cy="-12" r="4" style="animation-delay: 13.2s;"/>
+        </g>
+    </svg>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Interactive mouse effect for SVG plants
+    let mouseX = 0;
+    let mouseY = 0;
+    
+    const handleMouseMove = (event) => {
+        mouseX = (event.clientX / window.innerWidth - 0.5) * 2;
+        mouseY = (event.clientY / window.innerHeight - 0.5) * 2;
+        
+        // Apply subtle rotation to plants based on mouse position
+        const plants = document.querySelectorAll('.plant-svg');
+        plants.forEach((plant, index) => {
+            const baseRotation = Math.sin(Date.now() * 0.001 + index) * 2;
+            const mouseRotationX = mouseX * 3;
+            const mouseRotationY = mouseY * 1;
+            plant.style.transform = `rotate(${baseRotation + mouseRotationX}deg)`;
+        });
+    };
+    
+    window.addEventListener('mousemove', handleMouseMove);
+    
+    // Add touch support for mobile
+    const handleTouchMove = (event) => {
+        if (event.touches.length === 1) {
+            mouseX = (event.touches[0].clientX / window.innerWidth - 0.5) * 2;
+            mouseY = (event.touches[0].clientY / window.innerHeight - 0.5) * 2;
+        }
+    };
+    
+    window.addEventListener('touchmove', handleTouchMove);
+    
+    // Restart animations on visibility change
+    document.addEventListener('visibilitychange', () => {
+        if (!document.hidden) {
+            const plants = document.querySelectorAll('.plant-svg');
+            plants.forEach(plant => {
+                plant.style.animation = 'none';
+                setTimeout(() => {
+                    plant.style.animation = '';
+                }, 10);
+            });
+        }
+    });
+});
 </script>
 
 </body>
