@@ -226,7 +226,7 @@ return [
     'medicinal_uses' => 'የህክምና ጥቅሞች',
     'quick_info' => 'ፈጣን መረጃ',
     'plant_id' => 'የእጽዋት መለያ',
-    'price' => 'ጋ',
+    'price' => 'ዋጋ',
     'currency' => 'ብር',
     'availability' => 'ዝግጅነት',
     'available' => 'ይገኛል',
