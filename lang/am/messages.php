@@ -83,7 +83,7 @@ return [
     'related_articles_sidebar' => 'ተያያዝ መጻፍት',
     
     // Share Modal
-    'share_title' => 'ሽር ያድርጉ',
+    'share_title' => 'ሼር ያድርጉ',
     'share_facebook' => 'በፌስቡቡ',
     'share_twitter' => 'በትዊተር',
     'share_linkedin' => 'በሊንደኢ',
