@@ -54,12 +54,12 @@
                 <ul class="dropdown-menu dropdown-menu-end">
                     <li>
                         <a class="dropdown-item {{ app()->getLocale() === 'en' ? 'active' : '' }}" href="{{ request()->fullUrlWithQuery(['lang' => 'en']) }}">
-                            <i class="bi bi-flag"></i> English
+                            English
                         </a>
                     </li>
                     <li>
                         <a class="dropdown-item {{ app()->getLocale() === 'am' ? 'active' : '' }}" href="{{ request()->fullUrlWithQuery(['lang' => 'am']) }}">
-                            <i class="bi bi-flag"></i> አማርኛ
+                            አማርኛ
                         </a>
                     </li>
                 </ul>

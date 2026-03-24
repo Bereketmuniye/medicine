@@ -214,7 +214,7 @@ return [
     'plants_subtitle' => 'ተፈጥሮያዊ ማከማቻ',
     'plants_title' => 'የህክምና',
     'plants_span' => 'እጽዋት',
-    'plants_description' => 'ከትውልድ የተላለፉ የኢትዮጵያ የህክምና እጽዋትን እና የማከማቻ ጥቅሞቻቸውን ያግኙ።',
+    'plants_description' => 'ከትውልድ የተላለፉ የኢትዮጵያ የህክምና እጽዋትን እና ጥቅሞቻቸውን ያግኙ።',
     'view_details' => 'ዝርዝሮችን ይመልከቱ',
     
     // Plant Detail Page
@@ -236,6 +236,7 @@ return [
     'back_to_home' => 'ወደ መነሻ ተመለስ',
     'no_plants_available' => 'እጽዋት የሉም',
     'check_back_later' => 'እባክዎ ኋላ ለአዲስ መጨመሪያዎች ይመልከቱ።',
+    'natural' => 'ተፈጥሯዊ',
     
     // Consultation Page
     'consultation_page_title' => 'ማማከር - የኢትዮጵያ ባህላዊ ህክምና',

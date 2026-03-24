@@ -244,6 +244,7 @@ return [
     'back_to_home' => 'Back to Home',
     'no_plants_available' => 'No plants available',
     'check_back_later' => 'Please check back later for new additions.',
+    'natural' => 'Natural',
     
     // Consultation Page
     'consultation_page_title' => 'Consultation - Traditional Ethiopian Medicine',
