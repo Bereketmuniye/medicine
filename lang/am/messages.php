@@ -139,7 +139,7 @@ return [
     'view' => 'እይታ',
     'helpful' => 'እገዛ',
     'helped' => 'ተረዳ',
-    'share' => 'እንዲስተዋወቅ',
+    'share' => 'እንዲተዋወቅ',
     'copied' => 'ተቀይሯል',
     
     // Contact Section
