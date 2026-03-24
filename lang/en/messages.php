@@ -4,6 +4,8 @@ return [
     // Navigation
     'home' => 'Home',
     'about' => 'About Us',
+    'plants' => 'Plants',
+    'medicine' => 'Medicine',
     'videos' => 'Videos',
     'contact' => 'Contact Us',
     'articles' => 'Articles',
@@ -210,6 +212,38 @@ return [
     'filter' => 'Filter',
     'sort' => 'Sort',
     'international_market_to_home' => 'International Market to Your Home',
+    
+    // Medicine Navigation
+    'medicinal_plants' => 'Medicinal Plants',
+    'no_plants_available' => 'No plants available',
+    'view_all_plants' => 'View All Plants',
+    
+    // Plants Section
+    'plants_subtitle' => 'Natural Healing',
+    'plants_title' => 'Medicinal',
+    'plants_span' => 'Plants',
+    'plants_description' => 'Discover authentic Ethiopian medicinal plants with healing properties passed down through generations.',
+    'view_details' => 'View Details',
+    
+    // Plant Detail Page
+    'local_name' => 'Local Name',
+    'scientific_name' => 'Scientific Name',
+    'region' => 'Region',
+    'description' => 'Description',
+    'safety_warning' => 'Safety Warning',
+    'medicinal_uses' => 'Medicinal Uses',
+    'quick_info' => 'Quick Information',
+    'plant_id' => 'Plant ID',
+    'price' => 'Price',
+    'currency' => 'Birr',
+    'availability' => 'Availability',
+    'available' => 'Available',
+    'related_plants' => 'Related Plants',
+    'back_to_plants' => 'Back to Plants',
+    'print' => 'Print',
+    'back_to_home' => 'Back to Home',
+    'no_plants_available' => 'No plants available',
+    'check_back_later' => 'Please check back later for new additions.',
     
     // Consultation Page
     'consultation_page_title' => 'Consultation - Traditional Ethiopian Medicine',

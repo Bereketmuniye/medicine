@@ -1461,6 +1461,9 @@
 <!-- About Section -->
 @include('components.about')
 
+<!-- Plants Section -->
+@include('components.plants')
+
 <!-- Video Section -->
 @include('components.videos')
 
@@ -1577,7 +1580,14 @@
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
+            const href = this.getAttribute('href');
+            
+            // Skip empty or invalid href attributes
+            if (!href || href === '#' || href.trim() === '') {
+                return;
+            }
+            
+            const target = document.querySelector(href);
             if (target) {
                 target.scrollIntoView({
                     behavior: 'smooth',

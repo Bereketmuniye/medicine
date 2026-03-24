@@ -136,9 +136,31 @@ class WelcomeController extends Controller
     // ── Core data ────────────────────────────────────────────────
     $featuredPlants = Plant::query()
         ->orderBy('name')
-        ->get();
-        // No price assignment anymore — assuming price is now a real column 
-        // or handled elsewhere (frontend, separate pricing table, etc.)
+        ->get()
+        ->map(function ($plant) {
+            // Handle image field that might be array-like or string
+            $imagePath = null;
+            if ($plant->image) {
+                // If image is a string representation of array or contains brackets, extract first path
+                if (is_string($plant->image) && strpos($plant->image, '[') === 0) {
+                    // Parse array-like string and get first image
+                    preg_match('/"([^"]+)"/', $plant->image, $matches);
+                    if (isset($matches[1])) {
+                        $imagePath = $matches[1];
+                    }
+                } else {
+                    $imagePath = $plant->image;
+                }
+            }
+            
+            // Add proper image URL
+            if ($imagePath) {
+                $plant->image_url = asset('storage/plants/' . basename($imagePath));
+            } else {
+                $plant->image_url = 'https://picsum.photos/seed/' . urlencode($plant->name) . '/400/300.jpg';
+            }
+            return $plant;
+        });
 
     $latestArticles = Article::query()
         ->where('status', 'published')
@@ -211,4 +233,83 @@ class WelcomeController extends Controller
         // 'contactMessages' => Contact::latest()->take(5)->get(), // usually not for public homepage
     ]);
 }
+
+    /**
+     * Display all plants.
+     */
+    public function plantsIndex()
+    {
+        $plants = Plant::query()
+            ->orderBy('name')
+            ->get()
+            ->map(function ($plant) {
+                // Handle image field that might be array-like or string
+                $imagePath = null;
+                if ($plant->image) {
+                    if (is_string($plant->image) && strpos($plant->image, '[') === 0) {
+                        preg_match('/"([^"]+)"/', $plant->image, $matches);
+                        if (isset($matches[1])) {
+                            $imagePath = $matches[1];
+                        }
+                    } else {
+                        $imagePath = $plant->image;
+                    }
+                }
+                
+                if ($imagePath) {
+                    $plant->image_url = asset('storage/plants/' . basename($imagePath));
+                } else {
+                    $plant->image_url = 'https://picsum.photos/seed/' . urlencode($plant->name) . '/400/300.jpg';
+                }
+                return $plant;
+            });
+
+        return view('plants.index', compact('plants'));
+    }
+
+    /**
+     * Display individual plant details.
+     */
+    public function showPlant($id)
+    {
+        $plant = Plant::findOrFail($id);
+        
+        // Handle image field that might be array-like or string
+        $imagePath = null;
+        if ($plant->image) {
+            if (is_string($plant->image) && strpos($plant->image, '[') === 0) {
+                preg_match('/"([^"]+)"/', $plant->image, $matches);
+                if (isset($matches[1])) {
+                    $imagePath = $matches[1];
+                }
+            } else {
+                $imagePath = $plant->image;
+            }
+        }
+        
+        if ($imagePath) {
+            $plant->image_url = asset('storage/plants/' . basename($imagePath));
+        } else {
+            $plant->image_url = 'https://picsum.photos/seed/' . urlencode($plant->name) . '/600/400.jpg';
+        }
+
+        // Get related plants (same region or similar name)
+        $relatedPlants = Plant::where('id', '!=', $plant->id)
+            ->where(function($query) use ($plant) {
+                $query->where('region', $plant->region)
+                      ->orWhereRaw('LOWER(name) LIKE ?', ['%' . strtolower(substr($plant->name, 0, 5)) . '%']);
+            })
+            ->limit(4)
+            ->get()
+            ->map(function ($relatedPlant) {
+                if ($relatedPlant->image) {
+                    $relatedPlant->image_url = asset('storage/plants/' . basename($relatedPlant->image));
+                } else {
+                    $relatedPlant->image_url = 'https://picsum.photos/seed/' . urlencode($relatedPlant->name) . '/300/200.jpg';
+                }
+                return $relatedPlant;
+            });
+
+        return view('plants.show', compact('plant', 'relatedPlants'));
+    }
 }

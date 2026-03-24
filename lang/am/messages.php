@@ -4,6 +4,8 @@ return [
     // Navigation
     'home' => 'መነሻ ገጽ',
     'about' => 'ስለ እኛ',
+    'plants' => 'እጽዋት',
+    'medicine' => 'ህክምና',
     'videos' => 'ቪዲዮዎች',
     'contact' => 'በዚህ ያግኙን',
     'articles' => 'ጽሑፍ',
@@ -202,6 +204,38 @@ return [
     'filter' => 'ያጣሩ',
     'sort' => 'ደርድዙ',
     'international_market_to_home' => 'ለዓለም ሕዝብ  ደራሽ ፈውስ ባሉበት ቤትዎ ድረስ',
+    
+    // Medicine Navigation
+    'medicinal_plants' => 'የህክምና እጽዋት',
+    'no_plants_available' => 'እጽዋት የሉም',
+    'view_all_plants' => 'ሁሉንም እጽዋት ይመለከቱ',
+    
+    // Plants Section
+    'plants_subtitle' => 'ተፈጥሮያዊ ማከማቻ',
+    'plants_title' => 'የህክምና',
+    'plants_span' => 'እጽዋት',
+    'plants_description' => 'ከትውልድ የተላለፉ የኢትዮጵያ የህክምና እጽዋትን እና የማከማቻ ጥቅሞቻቸውን ያግኙ።',
+    'view_details' => 'ዝርዝሮችን ይመልከቱ',
+    
+    // Plant Detail Page
+    'local_name' => 'የአካባቢው ስም',
+    'scientific_name' => 'ሳይንታዊ ስም',
+    'region' => 'ክልል',
+    'description' => 'መግለጫ',
+    'safety_warning' => 'የጤና ማሳሰቢያ',
+    'medicinal_uses' => 'የህክምና ጥቅሞች',
+    'quick_info' => 'ፈጣን መረጃ',
+    'plant_id' => 'የእጽዋት መለያ',
+    'price' => 'ጋ',
+    'currency' => 'ብር',
+    'availability' => 'ዝግጅነት',
+    'available' => 'ይገኛል',
+    'related_plants' => 'የተዛመዱ እጽዋት',
+    'back_to_plants' => 'ወደ እጽዋት ተመለስ',
+    'print' => 'ይተሙ',
+    'back_to_home' => 'ወደ መነሻ ተመለስ',
+    'no_plants_available' => 'እጽዋት የሉም',
+    'check_back_later' => 'እባክዎ ኋላ ለአዲስ መጨመሪያዎች ይመልከቱ።',
     
     // Consultation Page
     'consultation_page_title' => 'ማማከር - የኢትዮጵያ ባህላዊ ህክምና',

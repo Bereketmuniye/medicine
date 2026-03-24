@@ -9,6 +9,10 @@ Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
 // Product search route
 Route::get('/search', [WelcomeController::class, 'search'])->name('products.search');
 
+// Plants routes
+Route::get('/plants', [WelcomeController::class, 'plantsIndex'])->name('plants.index');
+Route::get('/plants/{id}', [WelcomeController::class, 'showPlant'])->name('plants.show');
+
 // Newsletter subscription route
 Route::post('/subscribe', [WelcomeController::class, 'subscribe'])->name('newsletter.subscribe');
 

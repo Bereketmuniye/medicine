@@ -18,6 +18,21 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ request()->routeIs('welcome') ? '#about' : route('welcome').'#about' }}">{{ __('messages.about') }}</a>
                 </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="plantsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        {{ __('messages.plants') }}
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="plantsDropdown">
+                        <li><h6 class="dropdown-header">{{ __('messages.medicinal_plants') }}</h6></li>
+                        @forelse($featuredPlants ?? App\Models\Plant::orderBy('name')->take(8)->get() as $plant)
+                            <li><a class="dropdown-item" href="{{ route('welcome') }}#plants">{{ $plant->name }}</a></li>
+                        @empty
+                            <li><a class="dropdown-item disabled" href="#">{{ __('messages.no_plants_available') }}</a></li>
+                        @endforelse
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="{{ route('welcome') }}#plants">{{ __('messages.view_all_plants') }}</a></li>
+                    </ul>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ request()->routeIs('welcome') ? '#videos' : route('welcome').'#videos' }}">{{ __('messages.videos') }}</a>
                 </li>
