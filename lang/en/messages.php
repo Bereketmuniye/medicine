@@ -151,6 +151,7 @@ return [
     'contact_subtitle' => 'We\'re here to help you on your wellness journey',
     'contact_description' => 'Have questions about our treatments or want to schedule a consultation? Reach out to us today.',
     'address' => 'Koteba Teaching College , Mesalemiya, Addis Ababa, Ethiopia',
+    'location_amp' => 'Koteba Teaching College, Mesalemiya, Addis Ababa, Ethiopia',
     'helpful' => 'Helpful',
     'helped' => 'Helped!',
     'share' => 'Share',

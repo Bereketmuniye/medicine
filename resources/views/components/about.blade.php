@@ -3,7 +3,7 @@
         <div class="row align-items-center g-5">
             <div class="col-lg-6" data-aos="fade-right">
                 <div class="about-image">
-                    <img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=800&q=80" alt="About HerbMed" class="img-fluid">
+                    <img src="{{ asset('images/image.png') }}" alt="About HerbMed" class="img-fluid">
                 </div>
             </div>
             <div class="col-lg-6" data-aos="fade-left">
