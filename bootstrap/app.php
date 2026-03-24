@@ -13,6 +13,11 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->alias([
             'custom_throttle' => \App\Http\Middleware\CustomThrottle::class,
+            'set_language' => \App\Http\Middleware\SetLanguage::class,
+        ]);
+        
+        $middleware->web(append: [
+            \App\Http\Middleware\SetLanguage::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

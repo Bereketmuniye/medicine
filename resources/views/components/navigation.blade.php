@@ -3,8 +3,8 @@
         <a class="navbar-brand d-flex align-items-center gap-2" href="{{ route('welcome') }}" itemprop="url">
             <img src="{{ asset('images/shalom-logo-transparent.png') }}" alt="SHALOM HERBAL HEALING" style="height: 50px; width: auto;" itemprop="logo">
             <div class="d-flex flex-column" style="line-height: 1;">
-                <span class="brand-text" style="font-size: 1.2rem; font-weight: 800; letter-spacing: 1px;" itemprop="name">ሻሎም</span>
-                <span class="brand-subtext" style="font-size: 0.6rem; font-weight: 500; color: var(--primary-light); letter-spacing: 2px;">የዕጽዋት ህክምና</span>
+                <span class="brand-text" style="font-size: 1.2rem; font-weight: 800; letter-spacing: 1px;" itemprop="name">{{ __('messages.title') }}</span>
+                <span class="brand-subtext" style="font-size: 0.6rem; font-weight: 500; color: var(--primary-light); letter-spacing: 2px;">{{ __('messages.herbal_medicine') }}</span>
             </div>
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav" aria-controls="nav" aria-expanded="false" aria-label="Toggle navigation">
@@ -13,22 +13,22 @@
         <div class="collapse navbar-collapse" id="nav">
             <ul class="navbar-nav mx-auto">
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->routeIs('welcome') ? 'active' : '' }}" href="{{ request()->routeIs('welcome') ? '#home' : route('welcome') }}">መነሻ ገጽ</a>
+                    <a class="nav-link {{ request()->routeIs('welcome') ? 'active' : '' }}" href="{{ request()->routeIs('welcome') ? '#home' : route('welcome') }}">{{ __('messages.home') }}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ request()->routeIs('welcome') ? '#about' : route('welcome').'#about' }}">ስለ እኛ</a>
+                    <a class="nav-link" href="{{ request()->routeIs('welcome') ? '#about' : route('welcome').'#about' }}">{{ __('messages.about') }}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ request()->routeIs('welcome') ? '#videos' : route('welcome').'#videos' }}">ቪዲዮዎች</a>
+                    <a class="nav-link" href="{{ request()->routeIs('welcome') ? '#videos' : route('welcome').'#videos' }}">{{ __('messages.videos') }}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ request()->routeIs('welcome') ? '#contact' : route('welcome').'#contact' }}">በዚህ ያግኙን</a>
+                    <a class="nav-link" href="{{ request()->routeIs('welcome') ? '#contact' : route('welcome').'#contact' }}">{{ __('messages.contact') }}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->routeIs('articles.*') ? 'active' : '' }}" href="{{ route('articles.index') }}">ጽሑፍ</a>
+                    <a class="nav-link {{ request()->routeIs('articles.*') ? 'active' : '' }}" href="{{ route('articles.index') }}">{{ __('messages.articles') }}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->routeIs('books.*') ? 'active' : '' }}" href="{{ route('books.index') }}">መጻሕፍት</a>
+                    <a class="nav-link {{ request()->routeIs('books.*') ? 'active' : '' }}" href="{{ route('books.index') }}">{{ __('messages.books') }}</a>
                 </li>
             </ul>
             <!-- Language Dropdown -->
