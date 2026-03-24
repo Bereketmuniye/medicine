@@ -403,7 +403,7 @@
         <div class="row g-4">
             @forelse($books as $book)
                 <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
-                    <x-book-card :book="$book" :ownerPhone="$owner_phone ?? '+251 91 163 1253'" />
+                    <x-book-card :book="$book" :ownerPhone="$owner_phone ?? '0911274140'" />
                 </div>
             @empty
                 <div class="col-12">
