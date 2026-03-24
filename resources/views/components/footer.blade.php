@@ -39,8 +39,10 @@
                 <p class="footer-text">{{ __('messages.newsletter_desc') }}</p>
                 <form class="newsletter-form" id="newsletterForm">
                     @csrf
-                    <input type="email" name="email" placeholder="{{ __('messages.your_email_placeholder') }}" required>
-                    <button type="submit">{{ __('messages.subscribe') }}</button>
+                    <div class="newsletter-input-group">
+                        <input type="email" name="email" placeholder="{{ __('messages.your_email_placeholder') }}" required>
+                        <button type="submit">{{ __('messages.subscribe') }}</button>
+                    </div>
                 </form>
                 <div id="newsletterMessage" class="newsletter-message"></div>
             </div>
@@ -50,3 +52,51 @@
         </div>
     </div>
 </footer>
+
+<style>
+.newsletter-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.newsletter-input-group {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.newsletter-input-group input {
+    flex: 1;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 0.9rem;
+}
+
+.newsletter-input-group button {
+    padding: 0.75rem 1.5rem;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background 0.3s ease;
+}
+
+.newsletter-input-group button:hover {
+    background: #2a1f02;
+}
+
+@media (max-width: 768px) {
+    .newsletter-input-group {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+    
+    .newsletter-input-group input,
+    .newsletter-input-group button {
+        width: 100%;
+    }
+}
+</style>
