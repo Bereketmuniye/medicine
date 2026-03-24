@@ -92,23 +92,22 @@
             height: 100%;
         }
 
-        /* Video Background */
-        .hero-video-background {
+        /* Static Image Background */
+        .hero-image-background {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover;
-            opacity: 0.4;
+            background: url('https://images.unsplash.com/photo-1615485290382-441e4d049cb5?auto=format&fit=crop&w=1920&q=80') center/cover;
+            opacity: 0.3;
             pointer-events: none;
         }
 
-        /* Mobile video adjustments */
+        /* Mobile adjustments */
         @media (max-width: 768px) {
-            .hero-video-background {
-                display: block !important;
-                opacity: 0.6;
+            .hero-image-background {
+                opacity: 0.4;
             }
             
             .hero-section::before {
@@ -1596,30 +1595,6 @@
             }
         });
     });
-
-    // Video background fallback
-    const video = document.querySelector('.hero-video-background');
-    if (video) {
-        // Force video to play on mobile
-        video.muted = true;
-        video.playsInline = true;
-        video.setAttribute('playsinline', '');
-        video.setAttribute('webkit-playsinline', '');
-        
-        // Try multiple approaches to autoplay
-        const playVideo = () => {
-            video.play().then(() => {
-                console.log("Video autoplay successful");
-            }).catch(function(error) {
-                console.log("Video autoplay failed:", error);
-                // Try again after user interaction
-                document.addEventListener('touchstart', playVideo, { once: true });
-                document.addEventListener('click', playVideo, { once: true });
-            });
-        };
-        
-        playVideo();
-    }
 
     // Newsletter subscription
     document.getElementById('newsletterForm').addEventListener('submit', function(e) {

@@ -1,12 +1,6 @@
 <section class="hero-section" id="home">
-    <!-- Video Background with fallback -->
-    <video class="hero-video-background" autoplay muted loop playsinline preload="auto" webkit-playsinline poster="https://images.unsplash.com/photo-1615485290382-441e4d049cb5?auto=format&fit=crop&w=1920&q=80">
-        <source src="https://assets.mixkit.co/videos/preview/mixkit-herbalist-hand-pouring-dry-tea-leaves-40153-large.mp4" type="video/mp4">
-        <source src="https://assets.mixkit.co/videos/preview/mixkit-herbalist-hand-pouring-dry-tea-leaves-40153-medium.mp4" type="video/mp4">
-        <!-- Fallback message if video doesn't load -->
-        Your browser does not support the video tag.
-    </video>
-    <!-- <div class="hero-overlay"></div> -->
+    <!-- Static Image Background -->
+    <div class="hero-image-background"></div>
     
     <div class="container">
         <div class="hero-content" data-aos="fade-up">
