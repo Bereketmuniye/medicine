@@ -155,7 +155,7 @@ return [
     'helped' => 'Helped!',
     'share' => 'Share',
     'copied' => 'Copied!',
-    'phone' => '0929922070 / 0911274140',
+    'phone' => '0911274140',
     'email' => 'hello@herbmed.et',
     'hours' => 'Mon-Fri: 9:00 AM - 6:00 PM',
     'your_name' => 'Your Name',
