@@ -84,6 +84,8 @@ return [
     
     // Share Modal
     'share_title' => 'Share',
+    'feature0_title'=>'Therapeutic Approach & Modern Medicine',
+    'feature01_title'=>'Laboratory-Tested',
     'share_facebook' => 'Share on Facebook',
     'share_twitter' => 'Share on Twitter', 
     'share_linkedin' => 'Share on LinkedIn',
@@ -91,6 +93,13 @@ return [
     'share_email' => 'Share via Email',
     'copy_link' => 'Copy Link',
     'copied' => 'Copied!',
+    
+    // Videos Section  
+    'videos_subtitle' => 'Various Videos',
+    'videos_title' => 'Various',
+    'videos_span' => 'Videos',
+    'videos_description' => 'Watch our educational videos about traditional healing methods.',
+    'video_not_available' => 'Video Not Available',
     
     // Hero Section
     'subtitle' => 'Traditional Ethiopian Medicine & Natural Remedies',
@@ -110,7 +119,7 @@ return [
     'feature1_title' => 'Authentic Traditional Medicine',
     'feature1_desc' => 'Genuine Ethiopian herbal remedies passed down through generations',
     'feature2_title' => 'Expert Guidance',
-    'feature2_desc' => 'Professional consultation with Dr. Shalom',
+    'feature2_desc' => '-tested and verified formulations',
     'feature3_title' => 'Natural Healing',
     'feature3_desc' => 'Safe and effective treatments without side effects',
     'feature4_title' => 'International Market',

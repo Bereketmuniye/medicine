@@ -92,6 +92,13 @@ return [
     'copy_link' => 'ኮፒ ሊንክ',
     'copied' => 'ተቀድሞል!',
     
+    // Videos Section  
+    'videos_subtitle' => 'የተለያዩ ቪዲዮዎች',
+    'videos_title' => 'የተለያዩ',
+    'videos_span' => 'ቪዲዮዎች',
+    'videos_description' => 'ከማህበረሰብዎ እውነተኛ ተሞክሮዎችን ይመልከቱ',
+    'video_not_available' => 'ቪዲዮው አይገኝም',
+    
     // Hero Section
     'subtitle' => 'ባህርያዊ የኢትዮጵያ ህክምና እና የተፈጥሮ ህክማና',
     'title' => 'ሻሎም',
@@ -107,12 +114,14 @@ return [
     
     // Features Section
     'why_choose_us' => 'ስለ ምን እኛን ይምረጡ',
-    'feature1_title' => 'እውነተኛ ባህርያዊ ህክምና',
-    'feature1_desc' => 'ትውልደ ትውልድ የተላለፉ የኢትዮጵያ የንፁሳፍ ህክማና',
-    'feature2_title' => 'ልምድ አማካሂ',
-    'feature2_desc' => 'ከዶክተር ሻሎም ጋር ልዩ አማካሂ',
-    'feature3_title' => 'ተፈጥሮ ህክምና',
-    'feature3_desc' => 'ያለምን ጎጂ ደህና እና ውጣእ ህክማና',
+    'feature0_title'=>'ጥንታዊ ጥበብ እና ዘመናዊ ሕክምና',
+    'feature01_title'=>'በላቦራቶሪ የተረጋገጠ',
+    'feature1_title' => 'በተፈጥሮ የተሰበሰቡ',
+    'feature1_desc' => 'ትውልደ ትውልድ የተላለፉ የኢትዮጵያ የተፈጥሮ ህክማና',
+    'feature2_title' => 'እኛ ጋር በመምጣትዎ ተጠብቀዋል',
+    'feature2_desc' => 'ንጽህናቸው እና አዳኝነታቸው የተረጋገጠ',
+    'feature3_title' => 'ባለብዙ ቋንቋ',
+    'feature3_desc' => 'በ4+ ዋንቋዎች ድጋፍ',
     'feature4_title' => 'ዓለም አቀፍ ግብይት',
     'feature4_desc' => 'ባሉበት ቤትዎ ድረስ',
     'feature5_title' => 'ጥንታዊ ጥበብ',

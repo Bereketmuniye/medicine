@@ -2,7 +2,7 @@
     <div class="container">
         <div class="section-header" data-aos="fade-up">
             <span class="section-subtitle">{{ __('messages.why_choose_us') }}</span>
-            <h2 class="section-title">{{ __('messages.feature1_title') }} <span>{{ __('messages.feature2_title') }}</span></h2>
+            <h2 class="section-title">{{ __('messages.feature0_title') }} <span>{{ __('messages.feature2_title') }}</span></h2>
         </div>
         
         <div class="row g-4">
@@ -20,7 +20,7 @@
                     <div class="feature-icon">
                         <i class="bi bi-shield-check"></i>
                     </div>
-                    <h4>{{ __('messages.feature2_title') }}</h4>
+                    <h4>{{ __('messages.feature01_title') }}</h4>
                     <p>{{ __('messages.feature2_desc') }}</p>
                 </div>
             </div>

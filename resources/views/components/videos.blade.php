@@ -1,9 +1,9 @@
 <section class="video-section" id="videos">
     <div class="container">
         <div class="section-header" data-aos="fade-up">
-            <span class="section-subtitle">የተለያዩ ቪዲዮዎች</span>
-            <h2 class="section-title">የተለያዩ <span>ቪዲዮዎች</span></h2>
-            <p class="text-muted">ከማህበረሰብዎ እውነተኛ ተሞክሮዎችን ይመልከቱ</p>
+            <span class="section-subtitle">{{ __('messages.videos_subtitle') }}</span>
+            <h2 class="section-title">{{ __('messages.videos_title') }} <span>{{ __('messages.videos_span') }}</span></h2>
+            <p class="text-muted">{{ __('messages.videos_description') }}</p>
         </div>
         
         <!-- Video Grid - Real videos from database -->
@@ -16,7 +16,7 @@
                         @else
                             <div class="video-placeholder">
                                 <i class="bi bi-play-circle"></i>
-                                <p>ቪዲዮው አይገኝም</p>
+                                <p>{{ __('messages.video_not_available') }}</p>
                             </div>
                         @endif
                     </div>
