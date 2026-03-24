@@ -86,6 +86,8 @@ return [
     'share_title' => 'Share',
     'feature0_title'=>'Therapeutic Approach & Modern Medicine',
     'feature01_title'=>'Laboratory-Tested',
+    'feature0_title'=>'Therapeutic Approach & Modern Medicine',
+    'feature01_title'=>'Laboratory-Tested',
     'share_facebook' => 'Share on Facebook',
     'share_twitter' => 'Share on Twitter', 
     'share_linkedin' => 'Share on LinkedIn',
@@ -93,6 +95,13 @@ return [
     'share_email' => 'Share via Email',
     'copy_link' => 'Copy Link',
     'copied' => 'Copied!',
+    
+    // Videos Section  
+    'videos_subtitle' => 'Various Videos',
+    'videos_title' => 'Various',
+    'videos_span' => 'Videos',
+    'videos_description' => 'Watch our educational videos about traditional healing methods.',
+    'video_not_available' => 'Video Not Available',
     
     // Videos Section  
     'videos_subtitle' => 'Various Videos',
