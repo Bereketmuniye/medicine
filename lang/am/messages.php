@@ -13,7 +13,7 @@ return [
     // Books Section
     'books_title' => 'ቤተ መጻሕፍት',
     'books_subtitle' => 'ጥንታዊ ጥበብ & ዘመናዊ እውቀት',
-    'books_description' => 'የኢትዮጵያ ጥንታዊ ሕክምና መጻሕፍትን ያግኑ - ከጥንታዊ የግእዝ ቅጆች እስከ ዘመናዊ የእጽዋት ጥናቶች።',
+    'books_description' => 'የኢትዮጵያ ጥንታዊ ሕክምና መጻሕፍትን ያግኙ - ከጥንታዊ የግእዝ ቅጆች እስከ ዘመናዊ የእጽዋት ጥናቶች።',
     'books_search_placeholder' => 'መጻሕፍትን ይፈልጉ...',
     'books_search_button' => 'ፈልጉ',
     'no_books_found' => 'መጻሕፍት አልተገኘም',
@@ -68,7 +68,7 @@ return [
     'articles_subtitle' => 'እውቀት እና ጥበብ',
     'articles_title' => 'ጥንታዊ የኢትዮጵያ',
     'articles_title_span' => 'ጽሑፍ',
-    'articles_description' => 'ስለ ጥንታዊ የፈውስ እውቀቶች፣ ስለ መድሃኒትነት ያላቸው ዕጽዋቶች እና ስለ አጠቃላይ ጤናዎ ያሉንን ጽሑፎች ስብስብ እዚህ ያግኑ',
+    'articles_description' => 'ስለ ጥንታዊ የፈውስ እውቀቶች፣ ስለ መድሃኒትነት ያላቸው ዕጽዋቶች እና ስለ አጠቃላይ ጤናዎ ያሉንን ጽሑፎች ስብስብ እዚህ ያግኙ',
     'article_page_title_suffix' => ' - የኢትዮጵያ ጥንታዊ ሕክምና ጽሑፍ',
     'no_articles_found' => 'ጽሑፍ አልተገኘም',
     'no_articles_description' => 'የተለየው የፍለግ ቃል ይሞክሩ ወይም የሙሉን ያስልፍሉ።',
