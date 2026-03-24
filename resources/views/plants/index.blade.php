@@ -168,7 +168,7 @@
             right: 0;
             bottom: 0;
             background: url('https://images.unsplash.com/photo-1512428559087-3e014338df44?auto=format&fit=crop&w=1920&q=80') center/cover;
-            opacity: 0.1;
+            opacity: 0.15;
             z-index: 1;
         }
         
