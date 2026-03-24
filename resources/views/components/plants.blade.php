@@ -35,7 +35,7 @@
                                 </p>
                             @endif
                             @if($plant->description)
-                                <p class="plant-description">{{ Str::limit($plant->description, 100) }}</p>
+                                <p class="plant-description">{!! Str::limit(strip_tags($plant->description), 100) !!}</p>
                             @endif
                             @if($plant->safety_warning)
                                 <div class="plant-warning alert alert-warning alert-sm">
