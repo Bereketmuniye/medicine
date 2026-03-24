@@ -57,7 +57,7 @@
         
         @if($featuredPlants->count() > 0)
         <div class="text-center mt-5">
-            <a href="#" class="btn btn-primary rounded-pill px-5 py-3">
+            <a href="{{ route('plants.index') }}" class="btn btn-primary rounded-pill px-5 py-3">
                 <i class="bi bi-grid-3x3-gap me-2"></i>{{ __('messages.view_all_plants') }}
             </a>
         </div>
