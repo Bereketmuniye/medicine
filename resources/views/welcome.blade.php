@@ -99,7 +99,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: url('https://images.unsplash.com/photo-1615485290382-441e4d049cb5?auto=format&fit=crop&w=1920&q=80') center/cover;
+            background: url('{{ asset('images/hero.png') }}') center/cover;
             opacity: 0.3;
             pointer-events: none;
         }
