@@ -91,7 +91,7 @@
                             @if($plant->description)
                                 <div class="mb-4">
                                     <h5>{{ __('messages.description') }}</h5>
-                                    <p class="text-muted">{{ $plant->description }}</p>
+                                    <div class="text-muted">{!! $plant->description !!}</div>
                                 </div>
                             @endif
 
