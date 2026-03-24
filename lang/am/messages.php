@@ -100,7 +100,7 @@ return [
     'video_not_available' => 'ቪዲዮው አይገኝም',
     
     // Hero Section
-    'subtitle' => 'ባህርያዊ የኢትዮጵያ ህክምና እና የተፈጥሮ ህክማና',
+    'subtitle' => 'ባህላያዊ የኢትዮጵያ ህክምና እና የተፈጥሮ ህክማና',
     'title' => 'ሻሎም',
     'title_span' => 'የዕጽዋት ህክምና',
     'search_placeholder' => 'የንፁሳፍ ወይም የህክምና ዓይነቶችን ይፍለጡ...',
