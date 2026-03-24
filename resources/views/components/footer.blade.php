@@ -24,19 +24,14 @@
                 </div>
             </div>
             <div class="col-lg-2">
-                <h5>{{ __('messages.follow_us') }}</h5>
-                <ul>
-                    <li><a href="#">{{ __('messages.herbal_extracts') }}</a></li>
-                    <li><a href="#">{{ __('messages.dry_herbs') }}</a></li>
-                    <li><a href="#">{{ __('messages.traditional_books') }}</a></li>
-                </ul>
-            </div>
-            <div class="col-lg-2">
                 <h5>{{ __('messages.support') }}</h5>
                 <ul>
-                    <li><a href="#">{{ __('messages.frequent_questions') }}</a></li>
-                    <li><a href="#">{{ __('messages.ordering') }}</a></li>
-                    <li><a href="#">{{ __('messages.contact_us_footer') }}</a></li>
+                    <li><a href="{{ request()->routeIs('welcome') ? '#home' : route('welcome') }}">{{ __('messages.home') }}</a></li>
+                    <li><a href="{{ request()->routeIs('welcome') ? '#about' : route('welcome').'#about' }}">{{ __('messages.about') }}</a></li>
+                    <li><a href="{{ request()->routeIs('welcome') ? '#videos' : route('welcome').'#videos' }}">{{ __('messages.videos') }}</a></li>
+                    <li><a href="{{ request()->routeIs('welcome') ? '#contact' : route('welcome').'#contact' }}">{{ __('messages.contact') }}</a></li>
+                    <li><a href="{{ route('articles.index') }}">{{ __('messages.articles') }}</a></li>
+                    <li><a href="{{ route('books.index') }}">{{ __('messages.books') }}</a></li>
                 </ul>
             </div>
             <div class="col-lg-4">
