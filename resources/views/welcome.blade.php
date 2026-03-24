@@ -104,6 +104,25 @@
             pointer-events: none;
         }
 
+        /* Mobile video adjustments */
+        @media (max-width: 768px) {
+            .hero-video-background {
+                display: block !important;
+                opacity: 0.6;
+            }
+            
+            .hero-section::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 100%);
+                z-index: 1;
+            }
+        }
+
         .hero-overlay {
             position: absolute;
             top: 0;
@@ -1405,10 +1424,25 @@
     // Video background fallback
     const video = document.querySelector('.hero-video-background');
     if (video) {
-        video.play().catch(function(error) {
-            console.log("Video autoplay failed:", error);
-            // Video will show poster image instead
-        });
+        // Force video to play on mobile
+        video.muted = true;
+        video.playsInline = true;
+        video.setAttribute('playsinline', '');
+        video.setAttribute('webkit-playsinline', '');
+        
+        // Try multiple approaches to autoplay
+        const playVideo = () => {
+            video.play().then(() => {
+                console.log("Video autoplay successful");
+            }).catch(function(error) {
+                console.log("Video autoplay failed:", error);
+                // Try again after user interaction
+                document.addEventListener('touchstart', playVideo, { once: true });
+                document.addEventListener('click', playVideo, { once: true });
+            });
+        };
+        
+        playVideo();
     }
 
     // Newsletter subscription
