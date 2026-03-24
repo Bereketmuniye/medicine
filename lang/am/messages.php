@@ -165,7 +165,7 @@ return [
     // Footer
     'follow_us' => 'ይከተሉን',
     'newsletter_title' => 'የኢሜይል ዝርዝርችንን ይተቀሉት',
-    'newsletter_desc' => 'አዲስኛ የህክማናዎች እና የጤና ምክርቶችን ያግኙ',
+    'newsletter_desc' => 'አዲስ የህክምና እና የጤና ምክሮችን ያግኙ',
     'your_email_placeholder' => 'ኢሜይል አድራሻዎን ያስገቡ',
     'subscribe' => 'ይመዝገቡ',
     'all_rights_reserved' => 'መብቱ በህግ የተጠበቀ ነው።',
