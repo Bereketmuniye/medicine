@@ -1453,7 +1453,6 @@
 
 
 <!-- Featured Books -->
-<!-- @include('components.books') -->
 <!-- Featured Remedies with Price -->
 <!-- @include('components.remedies') -->
 
