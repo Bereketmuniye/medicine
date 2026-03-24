@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Book;
 use App\Models\ArticleInteraction;
 use App\Models\SocialMediaAccount;
+use App\Models\Setting;
 use Illuminate\Http\Request;
 
 class BookController extends Controller
@@ -61,7 +62,10 @@ class BookController extends Controller
         // Get social media accounts for footer
         $socialAccounts = SocialMediaAccount::where('is_active', true)->get();
 
-        return view('books.show', compact('book', 'relatedBooks', 'socialAccounts'));
+        // Get owner phone for contact
+        $owner_phone = Setting::where('key', 'owner_phone')->value('value');
+
+        return view('books.show', compact('book', 'relatedBooks', 'socialAccounts', 'owner_phone'));
     }
 
     /**

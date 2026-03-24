@@ -310,6 +310,9 @@ class WelcomeController extends Controller
                 return $relatedPlant;
             });
 
-        return view('plants.show', compact('plant', 'relatedPlants'));
+        // Get owner phone for contact button
+        $owner_phone = Setting::where('key', 'owner_phone')->value('value');
+
+        return view('plants.show', compact('plant', 'relatedPlants', 'owner_phone'));
     }
 }

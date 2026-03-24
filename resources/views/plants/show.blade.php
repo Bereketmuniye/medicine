@@ -154,6 +154,13 @@
                                     <span class="badge bg-success">{{ __('messages.available') }}</span>
                                 </p>
                             </div>
+
+                            <!-- Contact Button -->
+                            <div class="mt-4">
+                                <button class="btn btn-success w-100 rounded-pill contact-btn" data-phone="{{ $owner_phone ?? '+251 91 163 1253' }}">
+                                    <i class="bi bi-whatsapp me-2"></i>{{ __('messages.contact') }}
+                                </button>
+                            </div>
                         </div>
                     </div>
 
@@ -195,6 +202,20 @@
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <script>
+        // Contact button interaction
+        document.querySelectorAll('.contact-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const phone = this.getAttribute('data-phone');
+                
+                // Show phone number on button
+                this.innerHTML = `<i class="bi bi-telephone-fill me-2"></i>${phone}`;
+                this.classList.remove('btn-success');
+                this.classList.add('btn-primary');
+            });
+        });
+    </script>
 
     <style>
         .card {
