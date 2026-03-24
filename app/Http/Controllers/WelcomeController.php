@@ -302,8 +302,21 @@ class WelcomeController extends Controller
             ->limit(4)
             ->get()
             ->map(function ($relatedPlant) {
+                // Handle image field that might be array-like or string (same logic as main plant)
+                $imagePath = null;
                 if ($relatedPlant->image) {
-                    $relatedPlant->image_url = asset('storage/plants/' . basename($relatedPlant->image));
+                    if (is_string($relatedPlant->image) && strpos($relatedPlant->image, '[') === 0) {
+                        preg_match('/"([^"]+)"/', $relatedPlant->image, $matches);
+                        if (isset($matches[1])) {
+                            $imagePath = $matches[1];
+                        }
+                    } else {
+                        $imagePath = $relatedPlant->image;
+                    }
+                }
+                
+                if ($imagePath) {
+                    $relatedPlant->image_url = asset('storage/plants/' . basename($imagePath));
                 } else {
                     $relatedPlant->image_url = 'https://picsum.photos/seed/' . urlencode($relatedPlant->name) . '/300/200.jpg';
                 }
