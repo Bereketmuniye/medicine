@@ -32,7 +32,7 @@
                         </div>
                     </div>
                     
-                    <a href="#" class="btn-account" style="background: var(--primary-light); color: var(--primary); border: none; padding: 1rem 2.5rem; display: inline-block;">{{ __('messages.learn_more') }}</a>
+                    <!-- <a href="#" class="btn-account" style="background: var(--primary-light); color: var(--primary); border: none; padding: 1rem 2.5rem; display: inline-block;">{{ __('messages.learn_more') }}</a> -->
                 </div>
             </div>
         </div>
