@@ -157,7 +157,7 @@
 
                             <!-- Contact Button -->
                             <div class="mt-4">
-                                <button class="btn btn-success w-100 rounded-pill contact-btn" data-phone="{{ $owner_phone ?? '+251 91 163 1253' }}">
+                                <button class="btn btn-success w-100 rounded-pill contact-btn" data-phone="{{ $owner_phone ?? '0911274140' }}">
                                     <i class="bi bi-whatsapp me-2"></i>{{ __('messages.contact') }}
                                 </button>
                             </div>
