@@ -14,7 +14,7 @@
                         </li>
                         <li>
                             <i class="bi bi-telephone"></i>
-                            <span>{{ __('messages.phone') }}</span>
+                            <a href="tel:{{ __('messages.phone') }}" style="text-decoration: none; color: inherit;">{{ __('messages.phone') }}</a>
                         </li>
                         <li>
                             <i class="bi bi-envelope"></i>
