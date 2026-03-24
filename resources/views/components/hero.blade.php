@@ -1,6 +1,6 @@
 <section class="hero-section" id="home">
     <!-- Static Image Background -->
-    <!-- <div class="hero-image-background"></div> -->
+    <div class="hero-image-background"></div>
     
     <div class="container">
         <div class="hero-content" data-aos="fade-up">

@@ -409,17 +409,17 @@
         }
 
         .video-placeholder {
-            position: absolute;
-            top: 0;
-            left: 0;
+            position: relative;
             width: 100%;
-            height: 100%;
+            height: 200px;
             background: linear-gradient(135deg, var(--primary) 0%, #2a1f02 100%);
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             color: white;
+            border-radius: 15px;
+            margin-bottom: 1rem;
         }
 
         .video-placeholder i {
