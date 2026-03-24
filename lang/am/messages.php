@@ -143,7 +143,7 @@ return [
     'copied' => 'ተቀይሯል',
     
     // Contact Section
-    'contact_title' => 'ይግኙን',
+    'contact_title' => 'አድራሻችን',
 
     'contact_subtitle' => 'በደህናነት ጉዞዎ ላይ እንርዳትዎታለን',
     'contact_description' => 'ስለ ህክማናችን ጥያቄ ካለዎት ወይም ማማከር ቢፈልጉ በዚህ ያግኙን',
