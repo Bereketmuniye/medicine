@@ -14,13 +14,7 @@
                         @if($video->embed_url)
                             @if(str_contains($video->embed_url, 'tiktok.com'))
                                 <!-- TikTok Embed -->
-                                <blockquote class="tiktok-embed" cite="{{ $video->embed_url }}" data-video-id="{{ $video->embed_url }}">
-                                    <section>
-                                        <a target="_blank" href="{{ $video->embed_url }}">@tiktok</a>
-                                        <p>Check out this video on TikTok!</p>
-                                    </section>
-                                </blockquote>
-                                <script async src="https://www.tiktok.com/embed.js"></script>
+                                <iframe src="{{ $video->embed_url }}" allowfullscreen></iframe>
                             @else
                                 <!-- YouTube/Vimeo/Other Embed -->
                                 <iframe src="{{ $video->embed_url }}" allowfullscreen></iframe>
@@ -49,7 +43,12 @@
                 </div>
             @empty
                 <!-- Fallback videos if no videos in database -->
-                
+                <div class="col-12 text-center py-5">
+                    <div class="video-placeholder">
+                        <i class="bi bi-play-circle"></i>
+                        <p>{{ __('messages.no_videos_available') }}</p>
+                    </div>
+                </div>
             @endforelse
         </div>
     </div>
