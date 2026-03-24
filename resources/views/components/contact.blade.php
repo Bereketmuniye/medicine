@@ -71,4 +71,24 @@
             </div>
         </div>
     </div>
+    
+    <!-- Google Maps Section -->
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-12">
+                <div class="map-container">
+                    <h4 class="text-center mb-4">{{ __('messages.find_us') }}</h4>
+                    <iframe 
+                        src="https://www.google.com/maps?q=Kotebe+Teaching+College,Mesalemiya,Addis+Ababa&output=embed"
+                        width="100%" 
+                        height="400" 
+                        style="border:0; border-radius: 10px;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
