@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Consultation - Traditional Ethiopian Medicine</title>
+    <title>{{ __('messages.consultation_page_title') }}</title>
 
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -294,9 +294,9 @@
 <section class="consultation-hero">
     <div class="container">
         <div class="hero-content" data-aos="fade-up">
-            <span class="section-subtitle">PERSONAL GUIDANCE</span>
-            <h1>Expert <span>Consultation</span></h1>
-            <p>Connect with our traditional medicine experts for personalized health guidance based on ancient Ethiopian healing wisdom.</p>
+            <span class="section-subtitle">{{ __('messages.consultation_personal_guidance') }}</span>
+            <h1>{{ __('messages.consultation_hero_title') }} <span>{{ __('messages.consultation_hero_title_span') }}</span></h1>
+            <p>{{ __('messages.consultation_hero_description') }}</p>
         </div>
     </div>
 </section>
@@ -307,7 +307,7 @@
         <div class="row">
             <div class="col-lg-8" data-aos="fade-up">
                 <div class="consultation-form">
-                    <h2 class="section-title">Book Your Consultation</h2>
+                    <h2 class="section-title">{{ __('messages.consultation_book_title') }}</h2>
                     
                     @if(session('success'))
                         <div class="alert-success">
@@ -320,31 +320,31 @@
                         
                         <!-- Personal Information -->
                         <div class="form-section">
-                            <h5>Personal Information</h5>
+                            <h5>{{ __('messages.consultation_personal_info') }}</h5>
                             <div class="row">
                                 <div class="col-md-6 mb-3">
-                                    <label for="name" class="form-label">Full Name *</label>
+                                    <label for="name" class="form-label">{{ __('messages.consultation_full_name') }} *</label>
                                     <input type="text" class="form-control" id="name" name="name" required>
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <label for="email" class="form-label">Email Address *</label>
+                                    <label for="email" class="form-label">{{ __('messages.consultation_email_address') }} *</label>
                                     <input type="email" class="form-control" id="email" name="email" required>
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <label for="phone" class="form-label">Phone Number *</label>
+                                    <label for="phone" class="form-label">{{ __('messages.consultation_phone_number') }} *</label>
                                     <input type="tel" class="form-control" id="phone" name="phone" required>
                                 </div>
                                 <div class="col-md-3 mb-3">
-                                    <label for="age" class="form-label">Age *</label>
+                                    <label for="age" class="form-label">{{ __('messages.consultation_age') }} *</label>
                                     <input type="number" class="form-control" id="age" name="age" min="1" max="120" required>
                                 </div>
                                 <div class="col-md-3 mb-3">
-                                    <label for="gender" class="form-label">Gender *</label>
+                                    <label for="gender" class="form-label">{{ __('messages.consultation_gender') }} *</label>
                                     <select class="form-select" id="gender" name="gender" required>
-                                        <option value="">Select...</option>
-                                        <option value="male">Male</option>
-                                        <option value="female">Female</option>
-                                        <option value="other">Other</option>
+                                        <option value="">{{ __('messages.consultation_select') }}</option>
+                                        <option value="male">{{ __('messages.consultation_male') }}</option>
+                                        <option value="female">{{ __('messages.consultation_female') }}</option>
+                                        <option value="other">{{ __('messages.consultation_other') }}</option>
                                     </select>
                                 </div>
                             </div>
@@ -352,38 +352,38 @@
 
                         <!-- Health Information -->
                         <div class="form-section">
-                            <h5>Health Information</h5>
+                            <h5>{{ __('messages.consultation_health_info') }}</h5>
                             <div class="mb-3">
-                                <label for="symptoms" class="form-label">Describe your symptoms or health concerns *</label>
-                                <textarea class="form-control" id="symptoms" name="symptoms" rows="4" required placeholder="Please describe your symptoms, when they started, and any patterns you've noticed..."></textarea>
+                                <label for="symptoms" class="form-label">{{ __('messages.consultation_symptoms_label') }} *</label>
+                                <textarea class="form-control" id="symptoms" name="symptoms" rows="4" required placeholder="{{ __('messages.consultation_symptoms_placeholder') }}"></textarea>
                             </div>
                             <div class="row">
                                 <div class="col-md-6 mb-3">
-                                    <label for="duration" class="form-label">How long have you had these symptoms? *</label>
-                                    <input type="text" class="form-control" id="duration" name="duration" required placeholder="e.g., 2 weeks, 3 months, 1 year">
+                                    <label for="duration" class="form-label">{{ __('messages.consultation_duration_label') }} *</label>
+                                    <input type="text" class="form-control" id="duration" name="duration" required placeholder="{{ __('messages.consultation_duration_placeholder') }}">
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <label for="previous_treatment" class="form-label">Previous treatments (if any)</label>
-                                    <input type="text" class="form-control" id="previous_treatment" name="previous_treatment" placeholder="Medications, therapies, etc.">
+                                    <label for="previous_treatment" class="form-label">{{ __('messages.consultation_previous_treatment') }}</label>
+                                    <input type="text" class="form-control" id="previous_treatment" name="previous_treatment" placeholder="{{ __('messages.consultation_treatment_placeholder') }}">
                                 </div>
                             </div>
                             <div class="mb-3">
-                                <label for="medical_history" class="form-label">Relevant medical history</label>
-                                <textarea class="form-control" id="medical_history" name="medical_history" rows="3" placeholder="Any chronic conditions, allergies, or other relevant health information..."></textarea>
+                                <label for="medical_history" class="form-label">{{ __('messages.consultation_medical_history') }}</label>
+                                <textarea class="form-control" id="medical_history" name="medical_history" rows="3" placeholder="{{ __('messages.consultation_medical_placeholder') }}"></textarea>
                             </div>
                         </div>
 
                         <!-- Contact Preferences -->
                         <div class="form-section">
-                            <h5>Contact Preferences</h5>
+                            <h5>{{ __('messages.consultation_contact_preferences') }}</h5>
                             <div class="row">
                                 <div class="col-md-6 mb-3">
-                                    <label for="preferred_contact" class="form-label">Preferred contact method *</label>
+                                    <label for="preferred_contact" class="form-label">{{ __('messages.consultation_preferred_contact') }} *</label>
                                     <select class="form-select" id="preferred_contact" name="preferred_contact" required>
-                                        <option value="">Select...</option>
-                                        <option value="email">Email</option>
-                                        <option value="phone">Phone Call</option>
-                                        <option value="whatsapp">WhatsApp</option>
+                                        <option value="">{{ __('messages.consultation_select') }}</option>
+                                        <option value="email">{{ __('messages.consultation_email_option') }}</option>
+                                        <option value="phone">{{ __('messages.consultation_phone_option') }}</option>
+                                        <option value="whatsapp">{{ __('messages.consultation_whatsapp_option') }}</option>
                                     </select>
                                 </div>
                             </div>
@@ -391,12 +391,12 @@
 
                         <!-- Additional Message -->
                         <div class="mb-4">
-                            <label for="message" class="form-label">Additional message (optional)</label>
-                            <textarea class="form-control" id="message" name="message" rows="3" placeholder="Any other information you'd like to share..."></textarea>
+                            <label for="message" class="form-label">{{ __('messages.consultation_additional_message') }}</label>
+                            <textarea class="form-control" id="message" name="message" rows="3" placeholder="{{ __('messages.consultation_message_placeholder') }}"></textarea>
                         </div>
 
                         <button type="submit" class="btn-submit">
-                            <i class="bi bi-calendar-check"></i> Submit Consultation Request
+                            <i class="bi bi-calendar-check"></i> {{ __('messages.consultation_submit_button') }}
                         </button>
                     </form>
                 </div>
@@ -405,50 +405,50 @@
             <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
                 <!-- What to Expect -->
                 <div class="info-card">
-                    <h5>What to Expect</h5>
+                    <h5>{{ __('messages.consultation_what_to_expect') }}</h5>
                     <div class="info-item">
                         <i class="bi bi-clock"></i>
                         <div class="info-item-content">
-                            <h6>Response Time</h6>
-                            <p>Within 24 hours</p>
+                            <h6>{{ __('messages.consultation_response_time') }}</h6>
+                            <p>{{ __('messages.consultation_within_24_hours') }}</p>
                         </div>
                     </div>
                     <div class="info-item">
                         <i class="bi bi-person-check"></i>
                         <div class="info-item-content">
-                            <h6>Expert Guidance</h6>
-                            <p>Certified traditional medicine practitioners</p>
+                            <h6>{{ __('messages.consultation_expert_guidance') }}</h6>
+                            <p>{{ __('messages.consultation_certified_practitioners') }}</p>
                         </div>
                     </div>
                     <div class="info-item">
                         <i class="bi bi-shield-check"></i>
                         <div class="info-item-content">
-                            <h6>Confidential</h6>
-                            <p>Your health information is private and secure</p>
+                            <h6>{{ __('messages.consultation_confidential') }}</h6>
+                            <p>{{ __('messages.consultation_private_secure') }}</p>
                         </div>
                     </div>
                     <div class="info-item">
                         <i class="bi bi-currency-dollar"></i>
                         <div class="info-item-content">
-                            <h6>Consultation Fee</h6>
-                            <p>500 ETB for initial consultation</p>
+                            <h6>{{ __('messages.consultation_fee') }}</h6>
+                            <p>{{ __('messages.consultation_fee_amount') }}</p>
                         </div>
                     </div>
                 </div>
 
                 <!-- Direct Contact -->
                 <div class="info-card">
-                    <h5>Direct Contact</h5>
+                    <h5>{{ __('messages.consultation_direct_contact') }}</h5>
                     <div class="mb-3">
-                        <p class="mb-2"><strong>Emergency:</strong></p>
+                        <p class="mb-2"><strong>{{ __('messages.consultation_emergency') }}</strong></p>
                         <a href="tel:+2519112345678" class="contact-btn">
-                            <i class="bi bi-telephone"></i> Call Now
+                            <i class="bi bi-telephone"></i> {{ __('messages.consultation_call_now') }}
                         </a>
                     </div>
                     <div>
-                        <p class="mb-2"><strong>WhatsApp:</strong></p>
+                        <p class="mb-2"><strong>{{ __('messages.consultation_whatsapp') }}</strong></p>
                         <a href="https://wa.me/2519112345678" class="contact-btn contact-btn-whatsapp">
-                            <i class="bi bi-whatsapp"></i> WhatsApp Us
+                            <i class="bi bi-whatsapp"></i> {{ __('messages.consultation_whatsapp_us') }}
                         </a>
                     </div>
                 </div>
@@ -466,28 +466,28 @@
                     <i class="bi bi-people"></i>
                 </div>
                 <div class="stat-number">1000+</div>
-                <div class="stat-label">Patients</div>
+                <div class="stat-label">{{ __('messages.consultation_stats_patients') }}</div>
             </div>
             <div class="stat-item">
                 <div class="stat-icon">
                     <i class="bi bi-award"></i>
                 </div>
                 <div class="stat-number">15+</div>
-                <div class="stat-label">Years Experience</div>
+                <div class="stat-label">{{ __('messages.consultation_stats_experience') }}</div>
             </div>
             <div class="stat-item">
                 <div class="stat-icon">
                     <i class="bi bi-star"></i>
                 </div>
                 <div class="stat-number">4.9/5</div>
-                <div class="stat-label">Rating</div>
+                <div class="stat-label">{{ __('messages.consultation_stats_rating') }}</div>
             </div>
             <div class="stat-item">
                 <div class="stat-icon">
                     <i class="bi bi-heart"></i>
                 </div>
                 <div class="stat-number">100%</div>
-                <div class="stat-label">Natural</div>
+                <div class="stat-label">{{ __('messages.consultation_stats_natural') }}</div>
             </div>
         </div>
     </div>
