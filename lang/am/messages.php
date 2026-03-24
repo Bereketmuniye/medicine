@@ -115,14 +115,14 @@ return [
     // Features Section
     'why_choose_us' => 'ስለ ምን እኛን ይምረጡ',
     'feature0_title'=>'ጥንታዊ ጥበብ እና ዘመናዊ ሕክምና',
-    'feature01_title'=>'በላቦራቶሪ የተረጋገጠ',
+    'feature01_title'=>'እውቀት ከብዙ ዓመታት የስራ ልምድ ጋር',
     'feature1_title' => 'በተፈጥሮ የተሰበሰቡ',
     'feature1_desc' => 'ትውልደ ትውልድ የተላለፉ የኢትዮጵያ የተፈጥሮ ህክማና',
     'feature2_title' => 'እኛ ጋር በመምጣትዎ ተጠብቀዋል',
     'feature2_desc' => 'ንጽህናቸው እና አዳኝነታቸው የተረጋገጠ',
     'feature3_title' => 'ባለብዙ ቋንቋ',
     'feature3_desc' => 'በ4+ ዋንቋዎች ድጋፍ',
-    'feature4_title' => 'ዓለም አቀፍ ግብይት',
+    'feature4_title' => 'ለዓለም ሕዝብ  ደራሽ ፈውስ',
     'feature4_desc' => 'ባሉበት ቤትዎ ድረስ',
     'feature5_title' => 'ጥንታዊ ጥበብ',
     'feature5_desc' => 'የተለያዩ መጻሕፍት',
@@ -148,6 +148,7 @@ return [
     'contact_subtitle' => 'በደህናነት ጉዞዎ ላይ እንርዳትዎታለን',
     'contact_description' => 'ስለ ህክማናችን ጥያቄ ካለዎት ወይም ማማከር ቢፈልጉ በዚህ ያግኙን',
     'address' => 'ከኮተቤ መምህራን ኮሌጅ በመሳለምያ ወደ ካራ በሚያስወጣው መንገድ ገጠር መናፈሻ አጠገብ ወይም የኢትዮጵያ ንግድ ባንክ ከፍ ብለው ቢደውሉልን አድራሻችን ያገኙታል።',
+    'location_amp' => 'ከኮተቤ መምህራን ኮሌጅ በመሳለምያ ወደ ካራ በሚያስወጣው መንገድ ገጠር መናፈሻ አጠገብ ወይም የኢትዮጵያ ንግድ ባንክ ከፍ ብለው ቢደውሉልን አድራሻችን ያገኙታል።',
     'phone' => '0911274140',
     'email' => 'meftheasiray@ gmail.com',
     'hours' => 'ሰኞ - ዓርብ: 3:00 ጠዋት - 8:00 ሰዓት',
@@ -199,7 +200,7 @@ return [
     'search' => 'ይፈልጉ',
     'filter' => 'ያጣሩ',
     'sort' => 'ደርድዙ',
-    'international_market_to_home' => 'ዓለም አቀፍ ግብይት ባሉበት ቤትዎ ድረስ',
+    'international_market_to_home' => 'ለዓለም ሕዝብ  ደራሽ ፈውስ ባሉበት ቤትዎ ድረስ',
     
     // Consultation Page
     'consultation_page_title' => 'ማማከር - የኢትዮጵያ ባህላዊ ህክምና',
