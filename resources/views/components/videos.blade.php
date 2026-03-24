@@ -12,7 +12,19 @@
                 <div class="video-card" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
                     <div class="video-wrapper">
                         @if($video->embed_url)
-                            <iframe src="{{ $video->embed_url }}" allowfullscreen></iframe>
+                            @if(str_contains($video->embed_url, 'tiktok.com'))
+                                <!-- TikTok Embed -->
+                                <blockquote class="tiktok-embed" cite="{{ $video->embed_url }}" data-video-id="{{ $video->embed_url }}">
+                                    <section>
+                                        <a target="_blank" href="{{ $video->embed_url }}">@tiktok</a>
+                                        <p>Check out this video on TikTok!</p>
+                                    </section>
+                                </blockquote>
+                                <script async src="https://www.tiktok.com/embed.js"></script>
+                            @else
+                                <!-- YouTube/Vimeo/Other Embed -->
+                                <iframe src="{{ $video->embed_url }}" allowfullscreen></iframe>
+                            @endif
                         @else
                             <div class="video-placeholder">
                                 <i class="bi bi-play-circle"></i>

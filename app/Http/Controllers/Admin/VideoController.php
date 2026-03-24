@@ -52,6 +52,14 @@ class VideoController extends Controller
     }
 
     /**
+     * Display the specified resource.
+     */
+    public function show(Video $video)
+    {
+        return view('admin.videos.show', compact('video'));
+    }
+
+    /**
      * Show the form for editing the specified resource.
      */
     public function edit(Video $video)

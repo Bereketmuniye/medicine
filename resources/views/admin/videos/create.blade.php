@@ -24,8 +24,8 @@
                 </div>
                 
                 <div class="form-group mb-4">
-                    <label class="form-label fw-bold">Video URL (YouTube/Vimeo/etc)</label>
-                    <input type="url" name="video_url" id="video_url" class="form-control rounded-4 p-3 @error('video_url') is-invalid @enderror" placeholder="https://www.youtube.com/watch?v=..." value="{{ old('video_url') }}" required>
+                    <label class="form-label fw-bold">Video URL (YouTube/Vimeo/TikTok)</label>
+                    <input type="url" name="video_url" id="video_url" class="form-control rounded-4 p-3 @error('video_url') is-invalid @enderror" placeholder="https://www.youtube.com/watch?v=... or https://www.tiktok.com/..." value="{{ old('video_url') }}" required>
                     @error('video_url') <div class="invalid-feedback">{{ $message }}</div> @enderror
                 </div>
 
@@ -109,6 +109,11 @@
             const match = url.match(regExp);
             videoId = match ? match[3] : null;
             return videoId ? `https://player.vimeo.com/video/${videoId}` : '';
+        } else if (url.includes('tiktok.com') || url.includes('vm.tiktok.com')) {
+            const tiktokRegex = /(?:tiktok\.com\/@.*\/video\/(\d+)|vm\.tiktok\.com\/([a-zA-Z0-9]+))/;
+            const match = url.match(tiktokRegex);
+            videoId = match ? (match[1] || match[2]) : null;
+            return videoId ? `https://www.tiktok.com/embed/v2/${videoId}?mode=normal&hideHeader=1&hideCaption=1` : '';
         }
         return url;
     }

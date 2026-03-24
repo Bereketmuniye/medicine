@@ -25,15 +25,16 @@
                 </div>
                 
                 <div class="form-group mb-4">
-                    <label class="form-label fw-bold">Video URL (YouTube/Vimeo/etc)</label>
-                    <input type="url" name="video_url" id="video_url" class="form-control rounded-4 p-3 @error('video_url') is-invalid @enderror" placeholder="https://www.youtube.com/watch?v=..." value="{{ old('video_url', $video->video_url) }}" required>
+                    <label class="form-label fw-bold">Video URL (YouTube/TikTok/Vimeo/etc)</label>
+                    <input type="url" name="video_url" id="video_url" class="form-control rounded-4 p-3 @error('video_url') is-invalid @enderror" placeholder="https://www.youtube.com/watch?v=... or https://www.tiktok.com/@..." value="{{ old('video_url', $video->video_url) }}" required>
+                    <small class="text-muted">Supports YouTube, TikTok, Vimeo and other video platforms</small>
                     @error('video_url') <div class="invalid-feedback">{{ $message }}</div> @enderror
                 </div>
 
                 <div id="video-preview-row" class="mb-4">
                     <label class="form-label fw-bold">Playback Preview</label>
-                    <div class="ratio ratio-16x9 rounded-4 overflow-hidden shadow-sm bg-black">
-                        <iframe id="edit-video-preview" src="{{ $video->embed_url }}" allowfullscreen></iframe>
+                    <div id="video-preview-container" class="ratio ratio-16x9 rounded-4 overflow-hidden shadow-sm bg-black">
+                        <!-- Preview will be inserted here -->
                     </div>
                 </div>
                 
@@ -110,23 +111,54 @@
             const match = url.match(regExp);
             videoId = match ? match[3] : null;
             return videoId ? `https://player.vimeo.com/video/${videoId}` : '';
+        } else if (url.includes('tiktok.com')) {
+            // For TikTok, return the original URL for embed processing
+            return url;
         }
         return url;
     }
 
+    function updateVideoPreview(url) {
+        const previewRow = document.getElementById('video-preview-row');
+        const previewContainer = document.getElementById('video-preview-container');
+        
+        if (!url) {
+            previewRow.classList.add('d-none');
+            previewContainer.innerHTML = '';
+            return;
+        }
+        
+        if (url.includes('tiktok.com')) {
+            // TikTok embed
+            previewContainer.innerHTML = `
+                <blockquote class="tiktok-embed" cite="${url}" data-video-id="${url}">
+                    <section>
+                        <a target="_blank" href="${url}">@tiktok</a>
+                        <p>Check out this video on TikTok!</p>
+                    </section>
+                </blockquote>
+                <script async src="https://www.tiktok.com/embed.js"></script>
+            `;
+        } else {
+            // YouTube/Vimeo iframe
+            previewContainer.innerHTML = `<iframe id="edit-video-preview" src="${url}" allowfullscreen></iframe>`;
+        }
+        
+        previewRow.classList.remove('d-none');
+    }
+
+    // Initialize preview on page load
+    document.addEventListener('DOMContentLoaded', function() {
+        const currentUrl = '{{ $video->embed_url }}';
+        if (currentUrl) {
+            updateVideoPreview(currentUrl);
+        }
+    });
+
     document.getElementById('video_url').addEventListener('input', function(e) {
         const url = e.target.value;
         const embedUrl = getEmbedUrl(url);
-        const previewRow = document.getElementById('video-preview-row');
-        const previewFrame = document.getElementById('edit-video-preview');
-
-        if (embedUrl) {
-            previewFrame.src = embedUrl;
-            previewRow.classList.remove('d-none');
-        } else {
-            previewRow.classList.add('d-none');
-            previewFrame.src = '';
-        }
+        updateVideoPreview(embedUrl);
     });
 </script>
 @endsection

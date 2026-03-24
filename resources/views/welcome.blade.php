@@ -1121,6 +1121,26 @@
             }
         }
 
+        /* TikTok Video Styling */
+        .tiktok-embed {
+            width: 100%;
+            height: 400px;
+            margin: 0;
+            border: none;
+        }
+
+        .tiktok-embed iframe {
+            width: 100%;
+            height: 100%;
+            border-radius: 8px;
+        }
+
+        /* Ensure TikTok videos fit in video cards */
+        .video-card .tiktok-embed {
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
         /* Tablet responsive */
         @media (max-width: 992px) {
             .featured-book-title {

@@ -33,7 +33,11 @@ class Video extends Model
         if (preg_match('%^https?://(?:www\.|player\.)?vimeo.com/(?:channels/(?:\w+/)?|groups/([^/]*)/videos/|album/(\d+)/video/|video/|)(\d+)(?:$|/|\?)%n', $url, $match)) {
             return "https://player.vimeo.com/video/" . $match[3];
         }
-        //tiktok
+        // TikTok
+        if (preg_match('/(?:tiktok\.com\/@.*\/video\/(\d+)|vm\.tiktok\.com\/([a-zA-Z0-9]+))/', $url, $match)) {
+            $videoId = $match[1] ?? $match[2];
+            return "https://www.tiktok.com/embed/v2/" . $videoId . "?mode=normal&hideHeader=1&hideCaption=1";
+        }
 
         return $url;
     }
