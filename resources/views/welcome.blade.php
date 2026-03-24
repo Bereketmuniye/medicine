@@ -985,6 +985,152 @@
             border: 1px solid #dc3545;
         }
 
+        .section-description {
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            color: var(--text-light);
+            font-size: 1rem;
+            line-height: 1.8;
+        }
+
+        /* Featured Book Layout - Three Column Vertical Cards */
+        .featured-book-layout {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .featured-book-image {
+            position: relative;
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .featured-book-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 0;
+            box-shadow: none;
+        }
+
+        .featured-book-content {
+            padding: 1.5rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .book-category {
+            color: #0066cc;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .featured-book-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #000;
+            line-height: 1.2;
+            margin-bottom: 0.5rem;
+        }
+
+        .featured-author {
+            font-style: italic;
+            color: #666;
+            font-size: 0.8rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .featured-description {
+            color: #333;
+            font-size: 0.85rem;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+            flex: 1;
+        }
+
+        .featured-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            margin-top: auto;
+        }
+
+        .featured-meta .book-price {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .featured-meta .btn-reserve {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            white-space: nowrap;
+        }
+
+        .featured-meta .btn-reserve:hover {
+            background: var(--primary-light);
+            transform: translateY(-2px);
+        }
+
+        /* Mobile responsive */
+        @media (max-width: 768px) {
+            .featured-book-image {
+                height: 150px;
+            }
+            
+            .featured-book-content {
+                padding: 1rem;
+            }
+            
+            .featured-book-title {
+                font-size: 1rem;
+            }
+            
+            .featured-description {
+                font-size: 0.8rem;
+            }
+            
+            .featured-meta {
+                flex-direction: column;
+                gap: 0.8rem;
+                align-items: stretch;
+            }
+            
+            .featured-meta .btn-reserve {
+                justify-content: center;
+            }
+        }
+
+        /* Tablet responsive */
+        @media (max-width: 992px) {
+            .featured-book-title {
+                font-size: 1.1rem;
+            }
+            
+            .featured-description {
+                font-size: 0.8rem;
+            }
+        }
 
         .newsletter-message {
             margin-top: 1rem;
