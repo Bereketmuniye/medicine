@@ -121,7 +121,7 @@ return [
     'feature2_title' => 'እኛ ጋር በመምጣትዎ ተጠብቀዋል',
     'feature2_desc' => 'ንጽህናቸው እና አዳኝነታቸው የተረጋገጠ',
     'feature3_title' => 'ባለብዙ ቋንቋ',
-    'feature3_desc' => 'በ4+ ዋንቋዎች ድጋፍ',
+    'feature3_desc' => 'በ4+ የቋንቋ ድጋፍ',
     'feature4_title' => 'ለዓለም ሕዝብ  ደራሽ ፈውስ',
     'feature4_desc' => 'ባሉበት ቤትዎ ድረስ',
     'feature5_title' => 'ጥንታዊ ጥበብ',
