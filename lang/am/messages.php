@@ -230,7 +230,7 @@ return [
     'currency' => 'ብር',
     'availability' => 'ዝግጅነት',
     'available' => 'ይገኛል',
-    'related_plants' => 'የተዛመዱ እጽዋት',
+    'related_plants' => 'ተመሳሳይ እጽዋት',
     'back_to_plants' => 'ወደ እጽዋት ተመለስ',
     'print' => 'ይተሙ',
     'back_to_home' => 'ወደ መነሻ ተመለስ',
