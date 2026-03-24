@@ -8,31 +8,31 @@
             </div>
             <div class="col-lg-6" data-aos="fade-left">
                 <div class="about-content">
-                    <span class="section-subtitle">ታሪካችን</span>
-                    <h3>የኢትዮጵያን የማኅደረ ሕክምና ቅርስ እንለማማለን</h3>
-                    <p>ለብዙ ትውልዶች የኢትዮጵያ መድኃኒቶች የሕክምና እጽዋቶችን በልሳነ አፍ በኩል ይዞራሉ። HerbMed ይህንን ጥበብ ለማስቀመጥ እንዲሁም ለዘመናዊ ዓለም ለማድረስ ተመሠርቷል።</p>
-                    <p>በቀጥታ ከኢትዮጵያ ከፍታ የሚገኙ አካላዊ ማህበረሰቦች ጋር እንሰራለን፣ ፍትሃዊ ንግድ ልማድና ቆይታማ ማጥመድን በማረጋገጥ። እያንዳንዱ ምርት ትርታ ለማረጋገጥ በላቦራቶሪ ይሞክራል ጥንታዊ ዝግጅት ዘዴዎችን ግን ያስቀምጣል።</p>
+                    <span class="section-subtitle">{{ __('messages.about') }}</span>
+                    <h3>{{ __('messages.about_title') }}</h3>
+                    <p>{{ __('messages.about_description') }}</p>
+                    <p>{{ __('messages.about_description2') }}</p>
                     
                     <div class="about-features">
                         <div class="about-feature">
                             <i class="bi bi-check-circle-fill"></i>
-                            <span>100% ተፈጥሯዊ ንጥረ ነገሮች</span>
+                            <span>{{ __('messages.natural_remedies') }}</span>
                         </div>
                         <div class="about-feature">
                             <i class="bi bi-check-circle-fill"></i>
-                            <span>የፍትሃዊ ንግድ ምስክር</span>
+                            <span>{{ __('messages.expert_guidance') }}</span>
                         </div>
                         <div class="about-feature">
                             <i class="bi bi-check-circle-fill"></i>
-                            <span>ጥንታዊ እውቀት</span>
+                            <span>{{ __('messages.natural_healing') }}</span>
                         </div>
                         <div class="about-feature">
                             <i class="bi bi-check-circle-fill"></i>
-                            <span>ዘመናዊ ሳይንስ የተደገፈ</span>
+                            <span>{{ __('messages.proven_results') }}</span>
                         </div>
                     </div>
                     
-                    <a href="#" class="btn-account" style="background: var(--primary-light); color: var(--primary); border: none; padding: 1rem 2.5rem; display: inline-block;">ተጨማለሉ ይዘቱ</a>
+                    <a href="#" class="btn-account" style="background: var(--primary-light); color: var(--primary); border: none; padding: 1rem 2.5rem; display: inline-block;">{{ __('messages.learn_more') }}</a>
                 </div>
             </div>
         </div>

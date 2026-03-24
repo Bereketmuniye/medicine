@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>ጽሑፍ - የኢትዮጵያ ጥንታዊ ሕክምና ጽሑፍት</title>
+    <title>{{ __('messages.articles_page_title') }}</title>
 
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -453,9 +453,9 @@
 <section class="articles-hero">
     <div class="container">
         <div class="hero-content" data-aos="fade-up">
-            <span class="section-subtitle">እውቀት እና ጥበብ</span>
-            <h1>ጥንታዊ የኢትዮጵያ <span>ጽሑፍ</span></h1>
-            <p>ስለ ጥንታዊ የፈውስ እውቀቶች፣ ስለ መድሃኒትነት ያላቸው ዕጽዋቶች እና ስለ አጠቃላይ ጤናዎ ያሉንን ጽሑፎች ስብስብ እዚህ ያግኙ</p>
+            <span class="section-subtitle">{{ __('messages.articles_subtitle') }}</span>
+            <h1>{{ __('messages.articles_title') }} <span>{{ __('messages.articles_title_span') }}</span></h1>
+            <p>{{ __('messages.articles_description') }}</p>
         </div>
     </div>
 </section>
@@ -466,11 +466,11 @@
         <div class="search-form" data-aos="fade-up">
             <form method="GET" action="{{ route('articles.index') }}" class="row g-3">
                 <div class="col-md-8">
-                    <input type="text" name="search" class="form-control" placeholder="ጽሑፉዎትን ይፈልጉ..." value="{{ request('search') }}">
+                    <input type="text" name="search" class="form-control" placeholder="{{ __('messages.articles_search_placeholder') }}" value="{{ request('search') }}">
                 </div>
                 <div class="col-md-4">
                     <button type="submit" class="btn-search w-100">
-                        <i class="bi bi-search me-2"></i>ፈልጉ
+                        <i class="bi bi-search me-2"></i>{{ __('messages.search_button') }}
                     </button>
                 </div>
             </form>
@@ -481,8 +481,8 @@
 <section class="articles-section">
     <div class="container">
         <div class="section-header" data-aos="fade-up">
-            <span class="section-subtitle">የቅርብ ጊዜ ጽሑፎች</span>
-            <h2 class="section-title">የተለያዩ <span>ጽሑፎች</span></h2>
+            <span class="section-subtitle">{{ __('messages.recent_articles_subtitle') }}</span>
+            <h2 class="section-title">{{ __('messages.various_articles_title') }} <span>{{ __('messages.various_articles_span') }}</span></h2>
         </div>
 
         <div class="row g-4">
@@ -511,7 +511,7 @@
                             @endif
 
                             <span class="article-badge">
-                                {{ $article->category->name ?? 'ጥንታዊ' }}
+                                {{ $article->category->name ??'' }}
                             </span>
                         </div>
 
@@ -527,7 +527,7 @@
                             <p class="article-excerpt">{{ Str::limit(strip_tags($article->content), 140) }}</p>
 
                             <div class="article-footer">
-                                <a href="{{ route('articles.show', $article->slug) }}" class="btn-read">ጽሑፉን ያንብቡ</a>
+                                <a href="{{ route('articles.show', $article->slug) }}" class="btn-read">{{ __('messages.read_article') }}</a>
                             </div>
                         </div>
                     </div>
@@ -536,10 +536,10 @@
                 <div class="col-12">
                     <div class="no-articles" data-aos="fade-up">
                         <i class="bi bi-journal-text"></i>
-                        <h3>ጽሑፍ አልተገኘም</h3>
-                        <p>የተለየው የፍለግ ቃል ይሞክሩ ወይም የሙሉን ያስልፍሉ።</p>
+                        <h3>{{ __('messages.no_articles_found') }}</h3>
+                        <p>{{ __('messages.no_articles_description') }}</p>
                         <a href="{{ route('welcome') }}" class="btn btn-lg mt-3" style="background:var(--primary-light); color:var(--primary); border:none; padding:0.9rem 2.2rem; border-radius:50px; font-weight:700;">
-                            ወደ ቤት ይመለሱ
+                            {{ __('messages.back_to_home_articles') }}
                         </a>
                     </div>
                 </div>

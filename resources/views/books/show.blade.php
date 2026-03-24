@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ $book->title }} - የኢትዮጵያ ጥንታዊ ሕክምና መጻሕፍት</title>
+    <title>{{ $book->title }}{{ __('messages.page_title_suffix') }}</title>
 
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -576,8 +576,8 @@
     <div class="container">
         <nav aria-label="breadcrumb" data-aos="fade-up">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ route('welcome') }}">መነሻ ገጽ</a></li>
-                <li class="breadcrumb-item"><a href="{{ route('books.index') }}">መጻሕፍት</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('welcome') }}">{{ __('messages.breadcrumb_home') }}</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('books.index') }}">{{ __('messages.breadcrumb_books') }}</a></li>
                 <li class="breadcrumb-item active">{{ Str::limit($book->title, 40) }}</li>
             </ol>
         </nav>
@@ -588,9 +588,9 @@
                 <div><i class="bi bi-tag"></i> {{ ucfirst($book->type) }}</div>
                 <div><i class="bi bi-currency-dollar"></i> {{ number_format($book->price, 2) }} ETB</div>
                 @if($book->stock !== null)
-                    <div><i class="bi bi-box"></i> {{ $book->stock > 0 ? $book->stock . 'የመጻሓፍት ብዛት' : 'ከማእድና ውጣል' }}</div>
+                    <div><i class="bi bi-box"></i> {{ $book->stock > 0 ? $book->stock . ' ' . __('messages.stock_available') : __('messages.out_of_stock') }}</div>
                 @else
-                    <div><i class="bi bi-download"></i> ዲጂታል ወርድ</div>
+                    <div><i class="bi bi-download"></i> {{ __('messages.digital_download') }}</div>
                 @endif
             </div>
         </div>
@@ -648,32 +648,32 @@
                         @if($book->stock !== null)
                             <div class="mb-3">
                                 <span class="badge-custom">
-                                    <i class="bi bi-box"></i> {{ $book->stock }} ኮፒዎች ይገኛሉ
+                                    <i class="bi bi-box"></i> {{ $book->stock }} {{ __('messages.copies_available') }}
                                 </span>
                             </div>
                         @else
                             <div class="mb-3">
                                 <span class="badge-custom">
-                                    <i class="bi bi-download"></i> ዳዉንሎድ አድርግ
+                                    <i class="bi bi-download"></i> {{ __('messages.download_now') }}
                                 </span>
                             </div>
                         @endif
                         
                         <div class="d-grid gap-2">
                             <button class="btn-action contact-btn" data-phone="{{ $owner_phone ?? '+251 91 163 1253' }}">
-                                <i class="bi bi-whatsapp"></i> ይዘዙ
+                                <i class="bi bi-whatsapp"></i> {{ __('messages.order_now') }}
                             </button>
                             
                             @if($book->type === 'digital' || $book->file)
                                 <button class="btn-action btn-action-outline" onclick="downloadBook()">
-                                    <i class="bi bi-download"></i> ዲጂታል ኮፒይ አዉርድ
+                                    <i class="bi bi-download"></i> {{ __('messages.download_now') }}
                                 </button>
                             @endif
                         </div>
                         
                         <div class="mt-4 text-center">
                             <small class="text-muted">
-                                <i class="bi bi-shield-check" style="color: var(--primary-light);"></i> Secure Payment • ጥንታዊ ጥበብ
+                                <i class="bi bi-shield-check" style="color: var(--primary-light);"></i> {{ __('messages.secure_payment') }} • {{ __('messages.feature5_title') }}
                             </small>
                         </div>
                     </div>
@@ -685,37 +685,37 @@
                 <div data-aos="fade-up" data-aos-delay="100">
                     <!-- Book Description -->
                     <div class="book-description">
-                        <h2>ስለ መጽሃፉ</h2>
+                        <h2>{{ __('messages.about_book') }}</h2>
                         <div class="content-format">
                             <p class="lead">{{ $book->description }}</p>
                         </div>
                         
                         <!-- Book Details -->
-                        <h2 class="mt-4">የመጽሃፉ ይዘት</h2>
+                        <h2 class="mt-4">{{ __('messages.book_content') }}</h2>
                         <div class="book-details-grid">
                             <div class="detail-item">
-                                <strong>የመጽሃፉ አይነት</strong>
+                                <strong>{{ __('messages.book_type') }}</strong>
                                 <span>{{ ucfirst($book->type) }}</span>
                             </div>
                             <div class="detail-item">
-                                <strong>የመጽሃፉ አይነት</strong>
-                                <span>{{ $book->type === 'digital' ? 'PDF ወርድ' : 'ንግማያን ኮፒ' }}</span>
+                                <strong>{{ __('messages.format') }}</strong>
+                                <span>{{ $book->type === 'digital' ? __('messages.pdf_download') : __('messages.physical_copy') }}</span>
                             </div>
                             @if($book->stock !== null)
                                 <div class="detail-item">
-                                    <strong>የመጽሃፉ ብዛት</strong>
-                                    <span>{{ $book->stock > 0 ? 'በማእድና' : 'ከማእድና ውጣል' }}</span>
+                                    <strong>{{ __('messages.book_quantity') }}</strong>
+                                    <span>{{ $book->stock > 0 ? __('messages.in_stock') : __('messages.out_of_stock') }}</span>
                                 </div>
                             @endif
                             @if($book->pages)
                                 <div class="detail-item">
-                                    <strong>ገጽ</strong>
+                                    <strong>{{ __('messages.page') }}</strong>
                                     <span>{{ $book->pages }}</span>
                                 </div>
                             @endif
                             @if($book->language)
                                 <div class="detail-item">
-                                    <strong>ቋንቋ</strong>
+                                    <strong>{{ __('messages.language') }}</strong>
                                     <span>{{ $book->language }}</span>
                                 </div>
                             @endif
@@ -743,7 +743,7 @@
         <div class="row">
             <div class="col-12">
                 <div data-aos="fade-up">
-                    <h2 class="sidebar-title text-center mb-5" style="font-size: 2rem;">ተያያዝ መጽሃፎች</h2>
+                    <h2 class="sidebar-title text-center mb-5" style="font-size: 2rem;">{{ __('messages.related_books') }}</h2>
                 </div>
             </div>
             
@@ -761,14 +761,14 @@
 <section class="cta-section">
     <div class="container">
         <div data-aos="fade-up">
-            <h2 class="cta-title">በግል ማማከር ይፈልጋሉ?</h2>
-            <p class="cta-description">ከማህላዊ ሕክምና ባለሙያዎች ጋር ይማከሩ።</p>
+            <h2 class="cta-title">{{ __('messages.need_consultation') }}</h2>
+            <p class="cta-description">{{ __('messages.consultation_desc') }}</p>
             <div class="cta-buttons">
                 <a href="{{ route('consultation.index') }}" class="btn-cta">
-                    <i class="bi bi-chat-dots"></i> የማማከር አገልግሎት 
+                    <i class="bi bi-chat-dots"></i> {{ __('messages.consultation_service') }}
                 </a>
                 <a href="{{ route('articles.index') }}" class="btn-cta btn-cta-outline">
-                    <i class="bi bi-journal-text"></i> ጽሑፍን ይመልከቱ
+                    <i class="bi bi-journal-text"></i> {{ __('messages.view_articles') }}
                 </a>
             </div>
         </div>

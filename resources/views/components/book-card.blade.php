@@ -21,17 +21,17 @@
         <div class="book-description">{{ Str::limit($book->description, 60) }}</div>
         <div class="book-footer">
             <div>
-                <div class="book-price">{{ number_format($book->price, 2) }} ብር</div>
+                <div class="book-price">{{ number_format($book->price, 2) }} {{ __('messages.currency') }}</div>
                 <div class="book-stock">
                     @if($book->stock !== null)
-                        {{ $book->stock }} በማእድና
+                        {{ $book->stock }} {{ __('messages.in_stock') }}
                     @else
-                        ዲጂታል ወርዶች
+                        {{ __('messages.digital_downloads') }}
                     @endif
                 </div>
             </div>
             <button class="btn-reserve contact-btn" data-phone="{{ $ownerPhone }}">
-                <i class="bi bi-whatsapp"></i> ይዘዙ
+                <i class="bi bi-whatsapp"></i> {{ __('messages.order_now') }}
             </button>
         </div>
     </div>

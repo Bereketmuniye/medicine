@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ $article->title }} - የኢትዮጵያ ጥንታዊ ሕክምና ጽሑፍ</title>
+    <title>{{ $article->title }}{{ __('messages.article_page_title_suffix') }}</title>
 
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -400,8 +400,8 @@
     <div class="container">
         <nav aria-label="breadcrumb" data-aos="fade-up">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ route('welcome') }}">መነሻ ገጽ</a></li>
-                <li class="breadcrumb-item"><a href="{{ route('articles.index') }}">ጽሑፍ</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('welcome') }}">{{ __('messages.breadcrumb_home') }}</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('articles.index') }}">{{ __('messages.articles') }}</a></li>
                 <li class="breadcrumb-item active">{{ Str::limit($article->title, 40) }}</li>
             </ol>
         </nav>
@@ -409,8 +409,8 @@
         <div data-aos="fade-up">
             <h1 class="article-title">{{ $article->title }}</h1>
             <div class="article-meta">
-                <div><i class="bi bi-calendar3"></i> {{ $article->published_at ? $article->published_at->format('F d, Y') : 'በቅርብ' }}</div>
-                <div><i class="bi bi-eye"></i> {{ $article->views ?? 0 }} እይታ</div>
+                <div><i class="bi bi-calendar3"></i> {{ $article->published_at ? $article->published_at->format('F d, Y') : __('messages.recently_published') }}</div>
+                <div><i class="bi bi-eye"></i> {{ $article->views ?? 0 }} {{__('messages.view')}}</div>
                 @if($article->author)
                     <div><i class="bi bi-person"></i> {{ $article->author->name }}</div>
                 @endif
@@ -463,12 +463,12 @@
                         <div class="d-flex gap-3 align-items-center">
                             <button onclick="markHelpful()" class="btn btn-outline-primary d-flex align-items-center gap-2" id="helpful-btn">
                                 <i class="bi bi-hand-thumbs-up"></i> 
-                                <span id="helpful-text">Helpful</span>
+                                <span id="helpful-text">{{ __('messages.helpful') }}</span>
                                 <span class="badge bg-primary" id="helpful-count">{{ $article->helpfulCount() }}</span>
                             </button>
                             <button onclick="showShareModal()" class="btn btn-outline-secondary d-flex align-items-center gap-2">
                                 <i class="bi bi-share"></i> 
-                                Share
+                                {{ __('messages.share') }}
                                 <span class="badge bg-secondary" id="share-count">{{ $article->shareCount() }}</span>
                             </button>
                         </div>
@@ -483,7 +483,7 @@
                 <!-- Latest Articles -->
                 @if(isset($latestArticles) && $latestArticles->isNotEmpty())
                     <div class="sidebar-card" data-aos="fade-up" data-aos-delay="100">
-                        <h5 class="sidebar-title">የቅርብ ጽሑፎች</h5>
+                        <h5 class="sidebar-title">{{ __('messages.latest_articles_sidebar') }}</h5>
                         @foreach($latestArticles as $latest)
                             <div class="sidebar-article">
                                 <h6>
@@ -491,16 +491,15 @@
                                         {{ Str::limit($latest->title, 60) }}
                                     </a>
                                 </h6>
-                                <small>{{ $latest->published_at ? $latest->published_at->format('M d, Y') : 'በቅርብ' }}</small>
+                                <small>{{ $latest->published_at ? $latest->published_at->format('M d, Y') : __('messages.recently_published') }}</small>
                             </div>
                         @endforeach
                     </div>
                 @endif
-                
                 <!-- Related Articles -->
                 @if(isset($relatedArticles) && $relatedArticles->isNotEmpty())
                     <div class="sidebar-card" data-aos="fade-up" data-aos-delay="200">
-                        <h5 class="sidebar-title">ተያያዝ መጻፍት</h5>
+                        <h5 class="sidebar-title">{{ __('messages.related_articles_sidebar') }}</h5>
                         @foreach($relatedArticles as $related)
                             <div class="sidebar-article">
                                 <h6>
@@ -508,7 +507,7 @@
                                         {{ Str::limit($related->title, 60) }}
                                     </a>
                                 </h6>
-                                <small>{{ $related->published_at ? $related->published_at->format('M d, Y') : 'በቅርብ' }}</small>
+                                <small>{{ $related->published_at ? $related->published_at->format('M d, Y') : __('messages.recently_published') }}</small>
                             </div>
                         @endforeach
                     </div>
@@ -523,28 +522,28 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="shareModalLabel">ሽር ያድርጉ</h5>
+                <h5 class="modal-title" id="shareModalLabel">{{ __('messages.share_title') }}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <div class="d-grid gap-2">
                     <a href="#" onclick="shareOnFacebook()" class="btn btn-primary d-flex align-items-center justify-content-center gap-2">
-                        <i class="bi bi-facebook"></i> በፌስቡቡ
+                        <i class="bi bi-facebook"></i> {{ __('messages.share_facebook') }}
                     </a>
                     <a href="#" onclick="shareOnTwitter()" class="btn btn-info d-flex align-items-center justify-content-center gap-2">
-                        <i class="bi bi-twitter"></i> በትዊተር
+                        <i class="bi bi-twitter"></i> {{ __('messages.share_twitter') }}
                     </a>
                     <a href="#" onclick="shareOnLinkedIn()" class="btn btn-primary d-flex align-items-center justify-content-center gap-2">
-                        <i class="bi bi-linkedin"></i> በሊንደኢ
+                        <i class="bi bi-linkedin"></i> {{ __('messages.share_linkedin') }}
                     </a>
                     <a href="#" onclick="shareOnWhatsApp()" class="btn btn-success d-flex align-items-center justify-content-center gap-2">
-                        <i class="bi bi-whatsapp"></i> በዋትሳፕ
+                        <i class="bi bi-whatsapp"></i> {{ __('messages.share_whatsapp') }}
                     </a>
                     <a href="#" onclick="shareViaEmail()" class="btn btn-secondary d-flex align-items-center justify-content-center gap-2">
-                        <i class="bi bi-envelope"></i> በኢሜይል
+                        <i class="bi bi-envelope"></i> {{ __('messages.share_email') }}
                     </a>
                     <button onclick="copyLink()" class="btn btn-outline-dark d-flex align-items-center justify-content-center gap-2">
-                        <i class="bi bi-link-45deg"></i> ኮፒ ሊንክ
+                        <i class="bi bi-link-45deg"></i> {{ __('messages.copy_link') }}
                     </button>
                 </div>
             </div>
@@ -556,14 +555,14 @@
 <section class="cta-section">
     <div class="container">
         <div data-aos="fade-up">
-            <h2 class="cta-title">ተጨማሪ ይመልከቱ?</h2>
-            <p class="cta-description">የኢትዮጵያ ጥንታዊ ሕክምና መጻሕፍትና መድኃኒቶችን ይፈልጉ።</p>
+            <h2 class="cta-title">{{ __('messages.need_consultation') }}</h2>
+            <p class="cta-description">{{ __('messages.consultation_desc') }}</p>
             <div class="cta-buttons">
                 <a href="{{ route('books.index') }}" class="btn-cta">
-                    <i class="bi bi-book"></i> መጻሕፍትን ይፈልጉ
+                    <i class="bi bi-book"></i> {{ __('messages.view_articles') }}
                 </a>
                 <a href="{{ route('consultation.index') }}" class="btn-cta btn-cta-outline">
-                    <i class="bi bi-chat-dots"></i>ባለሙያ ያማክሩ </h2>
+                    <i class="bi bi-chat-dots"></i> {{ __('messages.consultation_service') }}
                 </a>
             </div>
         </div>
@@ -630,11 +629,11 @@
                 if (data.action === 'added') {
                     btn.classList.add('active', 'btn-primary');
                     btn.classList.remove('btn-outline-primary');
-                    text.textContent = 'Helped!';
+                    text.textContent = '{{ __('messages.helped') }}';
                 } else {
                     btn.classList.remove('active', 'btn-primary');
                     btn.classList.add('btn-outline-primary');
-                    text.textContent = 'Helpful';
+                    text.textContent = '{{ __('messages.helpful') }}';
                 }
                 count.textContent = data.count;
             }
@@ -740,7 +739,7 @@
             
             // Show feedback
             const originalHTML = copyBtn.innerHTML;
-            copyBtn.innerHTML = '<i class="bi bi-check"></i> Copied!';
+            copyBtn.innerHTML = '<i class="bi bi-check"></i> {{ __('messages.copied') }}';
             copyBtn.classList.add('btn-success');
             copyBtn.classList.remove('btn-outline-dark');
             
@@ -760,7 +759,7 @@
             try {
                 document.execCommand('copy');
                 const originalHTML = copyBtn.innerHTML;
-                copyBtn.innerHTML = '<i class="bi bi-check"></i> Copied!';
+                copyBtn.innerHTML = '<i class="bi bi-check"></i> {{ __('messages.copied') }}';
                 copyBtn.classList.add('btn-success');
                 copyBtn.classList.remove('btn-outline-dark');
                 

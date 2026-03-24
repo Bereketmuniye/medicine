@@ -367,9 +367,9 @@
 <section class="books-hero">
     <div class="container">
         <div class="hero-content" data-aos="fade-up">
-            <span class="section-subtitle">ቤተ መጻሕፍት</span>
-            <h1>ጥንታዊ ጥበብ & <span>ዘመናዊ እውቀት</span></h1>
-            <p>የኢትዮጵያ ጥንታዊ ሕክምና መጻሕፍትን ያግኙ - ከጥንታዊ የግእዝ ቅጆች እስከ ዘመናዊ የእጽዋት ጥናቶች።</p>
+            <span class="section-subtitle">{{ __('messages.books_title') }}</span>
+            <h1>{{ __('messages.books_subtitle') }}</h1>
+            <p>{{ __('messages.books_description') }}</p>
         </div>
     </div>
 </section>
@@ -380,11 +380,11 @@
         <div class="search-form" data-aos="fade-up">
             <form method="GET" action="{{ route('books.index') }}" class="row g-3">
                 <div class="col-md-8">
-                    <input type="text" name="search" class="form-control" placeholder="መጻሕፍትን ይፈልጉ..." value="{{ request('search') }}">
+                    <input type="text" name="search" class="form-control" placeholder="{{ __('messages.books_search_placeholder') }}" value="{{ request('search') }}">
                 </div>
                 <div class="col-md-4">
                     <button type="submit" class="btn-search w-100">
-                        <i class="bi bi-search me-2"></i>ፈልጉ
+                        <i class="bi bi-search me-2"></i>{{ __('messages.books_search_button') }}
                     </button>
                 </div>
             </form>
@@ -396,8 +396,8 @@
 <section class="books-section">
     <div class="container">
         <div class="section-header" data-aos="fade-up">
-            <span class="section-subtitle">መጻሕፍት</span>
-            <h2 class="section-title">የተለያዩ <span>መጻሕፍት</span></h2>
+            <span class="section-subtitle">{{ __('messages.books') }}</span>
+            <h2 class="section-title">{{ __('messages.feature5_title') }} <span>{{ __('messages.books') }}</span></h2>
         </div>
 
         <div class="row g-4">
@@ -409,10 +409,9 @@
                 <div class="col-12">
                     <div class="no-books" data-aos="fade-up">
                         <i class="bi bi-book"></i>
-                        <h3>መጻሕፍት አልተገኘም</h3>
-                        <p>ሁሉን ምድቦቶችን ያግኙ</p>
-                        <a href="{{ route('welcome') }}" class="btn-account" style="background: var(--primary-light); color: var(--primary); border: none; padding: 1rem 2.5rem; display: inline-block; margin-top: 1rem;">ወደ መነስ
-                            ገጽ ይመለሱ</a>
+                        <h3>{{ __('messages.no_books_found') }}</h3>
+                        <p>{{ __('messages.no_books_description') }}</p>
+                        <a href="{{ route('welcome') }}" class="btn-account" style="background: var(--primary-light); color: var(--primary); border: none; padding: 1rem 2.5rem; display: inline-block; margin-top: 1rem;">{{ __('messages.back_to_home') }}</a>
                     </div>
                 </div>
             @endforelse

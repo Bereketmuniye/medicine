@@ -3,13 +3,13 @@
         <div class="row g-4">
             <div class="col-lg-4">
                 <div class="footer-logo mb-4">
-                    <img src="{{ asset('images/shalom-logo-transparent.png') }}" alt="ሻሎም አትክልት ሕክምና" style="height: 60px; width: auto; filter: brightness(0) invert(1);">
+                    <img src="{{ asset('images/shalom-logo-transparent.png') }}" alt="{{ __('messages.logo_alt') }}" style="height: 60px; width: auto; filter: brightness(0) invert(1);">
                     <div class="mt-2 d-flex flex-column" style="line-height: 1;">
-                        <span style="font-size: 1.4rem; font-weight: 800; letter-spacing: 1px;">ሻሎም</span>
-                        <span style="font-size: 0.7rem; font-weight: 500; color: var(--primary-light); letter-spacing: 2px;">የዕጽዋት ህክምና</span>
+                        <span style="font-size: 1.4rem; font-weight: 800; letter-spacing: 1px;">{{ __('messages.title') }}</span>
+                        <span style="font-size: 0.7rem; font-weight: 500; color: var(--primary-light); letter-spacing: 2px;">{{ __('messages.herbal_medicine') }}</span>
                     </div>
                 </div>
-                <p class="footer-text">የኢትዮጵያን የሕክምና እጽዋቶች ቅርስ በሳይንስና ታሪክ በኩል እንለማማለን። ከአካልዊ መድኃኒቶች በእውነተኛነት የተገኙ።</p>
+                <p class="footer-text">{{ __('messages.footer_description') }}</p>
                 <div class="social-links">
                     @if(isset($socialAccounts) && $socialAccounts->isNotEmpty())
                         @foreach($socialAccounts as $account)
@@ -25,34 +25,34 @@
                 </div>
             </div>
             <div class="col-lg-2">
-                <h5>ይግዙ</h5>
+                <h5>{{ __('messages.follow_us') }}</h5>
                 <ul>
-                    <li><a href="#">የዕጽዋት ኤክስትራክት</a></li>
-                    <li><a href="#">የደረቁ ሥሮች</a></li>
-                    <li><a href="#">ጥንታዊ መጻሕፍት</a></li>
+                    <li><a href="#">{{ __('messages.herbal_extracts') }}</a></li>
+                    <li><a href="#">{{ __('messages.dry_herbs') }}</a></li>
+                    <li><a href="#">{{ __('messages.traditional_books') }}</a></li>
                 </ul>
             </div>
             <div class="col-lg-2">
-                <h5>ድጋፍ</h5>
+                <h5>{{ __('messages.support') }}</h5>
                 <ul>
-                    <li><a href="#">ተደጋጋሚ ጥያቄዎች</a></li>
-                    <li><a href="#">ማዘዣ</a></li>
-                    <li><a href="#">ያግኙን</a></li>
+                    <li><a href="#">{{ __('messages.frequent_questions') }}</a></li>
+                    <li><a href="#">{{ __('messages.ordering') }}</a></li>
+                    <li><a href="#">{{ __('messages.contact_us_footer') }}</a></li>
                 </ul>
             </div>
             <div class="col-lg-4">
-                <h5>ሳምንታዊ ጥበብ</h5>
-                <p class="footer-text">ስለ ወቅታዊ ሕክምናዎች መመሪያዎችን ለማግኘት ይመዝገቡ።</p>
+                <h5>{{ __('messages.newsletter_title') }}</h5>
+                <p class="footer-text">{{ __('messages.newsletter_desc') }}</p>
                 <form class="newsletter-form" id="newsletterForm">
                     @csrf
-                    <input type="email" name="email" placeholder="ኢሜይል አድራሻ" required>
-                    <button type="submit">ይመዝገቡ</button>
+                    <input type="email" name="email" placeholder="{{ __('messages.your_email_placeholder') }}" required>
+                    <button type="submit">{{ __('messages.subscribe') }}</button>
                 </form>
                 <div id="newsletterMessage" class="newsletter-message"></div>
             </div>
         </div>
         <div class="footer-bottom">
-            © 2026 HERBMED ETHIOPIA. መብቱ የተጠበቀ።
+            © 2026 HERBMED ETHIOPIA. {{ __('messages.all_rights_reserved') }}
         </div>
     </div>
 </footer>
