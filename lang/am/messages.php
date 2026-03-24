@@ -103,7 +103,7 @@ return [
     'subtitle' => 'ባህላዊ የኢትዮጵያ ህክምና እና የተፈጥሮ ህክምና',
     'title' => 'ሻሎም',
     'title_span' => 'የዕጽዋት ህክምና',
-    'search_placeholder' => 'የንፁሳፍ ወይም የህክምና ዓይነቶችን ይፍለጡ...',
+    'search_placeholder' => 'የህክምና ዓይነቶችን  ይፈልጉ...',
     'search_button' => 'ፈልጉ',
     
     // Stats
