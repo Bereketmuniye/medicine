@@ -1454,7 +1454,7 @@
 
 
 <!-- Featured Books -->
-@include('components.books')
+<!-- @include('components.books') -->
 <!-- Featured Remedies with Price -->
 <!-- @include('components.remedies') -->
 
