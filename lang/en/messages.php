@@ -156,7 +156,7 @@ return [
     'share' => 'Share',
     'copied' => 'Copied!',
     'phone' => '0911274140',
-    'email' => 'hello@herbmed.et',
+    'email' => 'meftheasiray@ gmail.com',
     'hours' => 'Mon-Fri: 9:00 AM - 6:00 PM',
     'your_name' => 'Your Name',
     'your_email' => 'Your Email',
