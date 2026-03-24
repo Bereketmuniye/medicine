@@ -11,10 +11,6 @@
             <span class="navbar-toggler-icon" style="filter: invert(1);"></span>
         </button>
         <div class="collapse navbar-collapse" id="nav">
-            <div class="ceo-section me-3" itemscope itemtype="https://schema.org/Person">
-                <span class="ceo-badge" itemprop="jobTitle">CEO</span>
-                <span class="ceo-name" itemprop="name">Dr. Shalom</span>
-            </div>
             <ul class="navbar-nav mx-auto">
                 <li class="nav-item">
                     <a class="nav-link {{ request()->routeIs('welcome') ? 'active' : '' }}" href="{{ request()->routeIs('welcome') ? '#home' : route('welcome') }}">መነሻ ገጽ</a>
