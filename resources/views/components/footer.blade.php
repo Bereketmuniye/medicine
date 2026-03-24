@@ -3,10 +3,9 @@
         <div class="row g-4">
             <div class="col-lg-4">
                 <div class="footer-logo mb-4">
-                    <img src="{{ asset('images/shalom-logo-transparent.png') }}" alt="{{ __('messages.logo_alt') }}" style="height: 60px; width: auto; filter: brightness(0) invert(1);">
                     <div class="mt-2 d-flex flex-column" style="line-height: 1;">
-                        <span style="font-size: 1.4rem; font-weight: 800; letter-spacing: 1px;">{{ __('messages.title') }}</span>
-                        <span style="font-size: 0.7rem; font-weight: 500; color: var(--primary-light); letter-spacing: 2px;">{{ __('messages.herbal_medicine') }}</span>
+                        <span style="font-size: 1.2rem; font-weight: 800; letter-spacing: 1px;">{{ __('messages.title') }}</span>
+                        <span style="font-size: 0.6rem; font-weight: 500; color: var(--primary-light); letter-spacing: 2px;">{{ __('messages.herbal_medicine') }}</span>
                     </div>
                 </div>
                 <p class="footer-text">{{ __('messages.footer_description') }}</p>
