@@ -168,7 +168,7 @@ return [
     'newsletter_desc' => 'አዲስኛ የህክማናዎች እና የጤና ምክርቶችን ያግኙ',
     'your_email_placeholder' => 'ኢሜይል አድራሻዎን ያስገቡ',
     'subscribe' => 'ይመዝገቡ',
-    'all_rights_reserved' => 'መብቱ በህግደኛ የተጠበቀ ነው።',
+    'all_rights_reserved' => 'መብቱ በህግ የተጠበቀ ነው።',
     
     // Testimonials Section
     'testimonials_title' => 'የደንበኞቻችን ምስክሮች',
