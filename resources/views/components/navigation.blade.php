@@ -31,6 +31,24 @@
                     <a class="nav-link {{ request()->routeIs('books.*') ? 'active' : '' }}" href="{{ route('books.index') }}">መጻሕፍት</a>
                 </li>
             </ul>
+            <!-- Language Dropdown -->
+            <div class="dropdown">
+                <button class="btn btn-outline-light dropdown-toggle" type="button" id="languageDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="bi bi-globe"></i> {{ app()->getLocale() === 'am' ? 'አማ' : 'EN' }}
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end">
+                    <li>
+                        <a class="dropdown-item {{ app()->getLocale() === 'en' ? 'active' : '' }}" href="{{ request()->fullUrlWithQuery(['lang' => 'en']) }}">
+                            <i class="bi bi-flag"></i> English
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item {{ app()->getLocale() === 'am' ? 'active' : '' }}" href="{{ request()->fullUrlWithQuery(['lang' => 'am']) }}">
+                            <i class="bi bi-flag"></i> አማርኛ
+                        </a>
+                    </li>
+                </ul>
+            </div>
             <!-- <div class="d-flex align-items-center">
                 <a href="{{ route('login') }}" class="btn-account">ACCOUNT</a>
             </div> -->
