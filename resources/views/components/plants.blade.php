@@ -401,15 +401,82 @@
         height: 320px;
     }
     
+    .curated-overlay {
+        padding: 1rem;
+    }
+    
     .curated-action-row {
         flex-direction: column;
-        gap: 1rem;
+        gap: 0.8rem;
         align-items: flex-start;
     }
     
     .curated-price {
         font-size: 1rem;
-        margin-bottom: 0.5rem;
+        font-weight: 700;
+        color: var(--primary-light);
+        text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        margin: 0;
+        padding: 0.3rem 0;
+        background: rgba(0,0,0,0.3);
+        border-radius: 4px;
+        display: inline-block;
+    }
+    
+    .curated-description {
+        font-size: 0.85rem;
+        margin-bottom: 1rem;
+    }
+    
+    .small-card .curated-title {
+        font-size: 0.95rem;
+    }
+    
+    .medium-card .curated-title {
+        font-size: 1.1rem;
+    }
+    
+    .large-card .curated-title {
+        font-size: 1.4rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .curated-overlay {
+        padding: 0.8rem;
+    }
+    
+    .curated-action-row {
+        gap: 0.6rem;
+    }
+    
+    .curated-price {
+        font-size: 0.9rem;
+        padding: 0.2rem 0.4rem;
+        background: rgba(0,0,0,0.5);
+        border-radius: 6px;
+    }
+    
+    .curated-description {
+        font-size: 0.8rem;
+        margin-bottom: 0.8rem;
+    }
+    
+    .small-card .curated-title {
+        font-size: 0.9rem;
+    }
+    
+    .medium-card .curated-title {
+        font-size: 1rem;
+    }
+    
+    .large-card .curated-title {
+        font-size: 1.2rem;
+    }
+    
+    .curated-content .btn {
+        font-size: 0.7rem;
+        padding: 0.4rem 1rem;
     }
 }
 </style>
