@@ -13,16 +13,37 @@
                     <div class="video-wrapper">
                         @if($video->embed_url)
                             @if(str_contains($video->embed_url, 'tiktok.com'))
-                                <!-- TikTok Embed with proper format -->
-                                <div style="position: relative; width: 100%; height: 0; padding-bottom: 177.78%; overflow: hidden;">
-                                    <iframe 
-                                        src="{{ $video->embed_url }}" 
-                                        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; border-radius: 15px;"
-                                        allowfullscreen
-                                        scrolling="no"
-                                        allow="encrypted-media; fullscreen; picture-in-picture">
-                                    </iframe>
-                                </div>
+                                <!-- TikTok Embed using oEmbed method -->
+                                @php
+                                    $tiktokUrl = $video->embed_url;
+                                    $videoId = '';
+                                    
+                                    // Extract video ID from different TikTok URL formats
+                                    if (preg_match('/tiktok\.com\/@([^\/]+)\/video\/(\d+)/', $tiktokUrl, $matches)) {
+                                        $videoId = $matches[2];
+                                    } elseif (preg_match('/tiktok\.com\/v\/(\d+)/', $tiktokUrl, $matches)) {
+                                        $videoId = $matches[1];
+                                    } elseif (preg_match('/tiktok\.com\/.*\/(\d+)/', $tiktokUrl, $matches)) {
+                                        $videoId = $matches[1];
+                                    }
+                                @endphp
+                                
+                                @if($videoId)
+                                    <div style="position: relative; width: 100%; height: 0; padding-bottom: 177.78%; overflow: hidden;">
+                                        <iframe 
+                                            src="https://www.tiktok.com/embed/v2/{{ $videoId }}"
+                                            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; border-radius: 15px;"
+                                            allowfullscreen
+                                            scrolling="no"
+                                            allow="encrypted-media; fullscreen; picture-in-playback">
+                                        </iframe>
+                                    </div>
+                                @else
+                                    <div class="video-placeholder">
+                                        <i class="bi bi-play-circle"></i>
+                                        <p>Invalid TikTok URL format</p>
+                                    </div>
+                                @endif
                             @else
                                 <!-- YouTube/Vimeo/Other Embed -->
                                 <iframe src="{{ $video->embed_url }}" allowfullscreen></iframe>
