@@ -17,7 +17,7 @@
     <div class="row g-4">
         <!-- Main Content -->
         <div class="col-lg-8">
-            <div class="card border-0 shadow-sm p-4" style="border-radius: 24px;">
+            <div class="card border-0 shadow-sm p-3 p-md-4" style="border-radius: 24px;">
                 <div class="form-group mb-4">
                     <label class="form-label fw-bold">Book Title</label>
                     <input type="text" name="title" class="form-control rounded-4 p-3 @error('title') is-invalid @enderror" placeholder="e.g. Traditional Cures for Modern Times" value="{{ old('title') }}" required>
@@ -26,7 +26,7 @@
                 
                 <div class="form-group mb-4">
                     <label class="form-label fw-bold">Description</label>
-                    <textarea name="description" id="summernote" rows="8" class="form-control rounded-4 p-3" placeholder="Write a compelling summary of the book...">{{ old('description') }}</textarea>
+                    <textarea name="description" id="summernote" rows="6" class="form-control rounded-4 p-3" placeholder="Write a compelling summary of the book...">{{ old('description') }}</textarea>
                 </div>
                 
                 <div class="row g-3">
@@ -51,17 +51,13 @@
                         </div>
                     </div>
                 </div>
-                
-                <div class="d-flex justify-content-end gap-2">
-                    <button type="submit" class="btn btn-primary rounded-pill px-5 py-3 fw-bold">Add Book to Store</button>
-                </div>
             </div>
         </div>
 
         <!-- Sidebar -->
         <div class="col-lg-4">
             <!-- Fulfillment Details -->
-            <div class="card border-0 shadow-sm p-4 mb-4" style="border-radius: 24px;">
+            <div class="card border-0 shadow-sm p-3 p-md-4 mb-4" style="border-radius: 24px;">
                 <h6 class="fw-bold mb-4">Fulfillment Details</h6>
                 
                 <div id="stock-group" class="form-group mb-4 {{ old('type') == 'digital' ? 'd-none' : '' }}">
@@ -72,9 +68,9 @@
                 
                 <div id="file-group" class="form-group mb-4 {{ old('type') != 'digital' ? 'd-none' : '' }}">
                     <label class="form-label small fw-bold text-secondary">Digital File</label>
-                    <div class="file-upload border border-2 border-dashed rounded-4 p-4 text-center" style="background: #f8f9fa;">
-                        <i class="fa-solid fa-file-pdf fa-2x text-primary opacity-50 mb-3"></i>
-                        <div class="small text-secondary mb-3 text-truncate" id="file-name">Upload PDF/EPUB</div>
+                    <div class="file-upload border border-2 border-dashed rounded-4 p-3 p-md-4 text-center" style="background: #f8f9fa;">
+                        <i class="fa-solid fa-file-pdf fa-1x fa-md-2x text-primary opacity-50 mb-2 mb-md-3"></i>
+                        <div class="small text-secondary mb-2 mb-md-3 text-truncate" id="file-name">Upload PDF/EPUB</div>
                         <input type="file" name="file" class="d-none" id="book-file">
                         <label for="book-file" class="btn btn-sm btn-outline-primary rounded-pill px-3">Choose File</label>
                     </div>
@@ -82,10 +78,10 @@
                 </div>
                 
                 <div class="form-group mb-4">
-                    <div class="dropzone" id="book-covers-dropzone" style="border: 2px dashed #28a745; border-radius: 8px; padding: 20px; text-align: center;">
+                    <div class="dropzone" id="book-covers-dropzone" style="border: 2px dashed #28a745; border-radius: 8px; padding: 15px 20px; text-align: center;">
                         <div class="dz-message" data-dz-message>
-                            <i class="fa-solid fa-cloud-upload-alt fa-3x text-success mb-3"></i>
-                            <div class="text-success mb-2">Drop book cover images here or click to browse</div>
+                            <i class="fa-solid fa-cloud-upload-alt fa-2x fa-md-3x text-success mb-2 mb-md-3"></i>
+                            <div class="text-success mb-2 small">Drop book cover images here or click to browse</div>
                             <small class="text-muted">Support: JPG, PNG, GIF (Max 5 files, 2MB each)</small>
                         </div>
                     </div>
@@ -93,7 +89,7 @@
                 </div>
             </div>
 
-            <div class="card border-0 shadow-sm p-4 bg-primary bg-opacity-10 text-primary" style="border-radius: 24px;">
+            <div class="card border-0 shadow-sm p-3 p-md-4 bg-primary bg-opacity-10 text-primary" style="border-radius: 24px;">
                 <div class="d-flex align-items-center mb-2">
                     <i class="fa-solid fa-lightbulb me-2"></i>
                     <h6 class="fw-bold mb-0">Elite Tip</h6>
@@ -102,20 +98,38 @@
             </div>
         </div>
     </div>
+    
+    <!-- Submit Button - Always at bottom -->
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="d-flex justify-content-end gap-2">
+                <button type="submit" class="btn btn-primary rounded-pill px-4 px-md-5 py-3 fw-bold">Add Book to Store</button>
+            </div>
+        </div>
+    </div>
 </form>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // Initialize Summernote
+    // Initialize Summernote with mobile-friendly settings
     $('#summernote').summernote({
-        height: 300,
+        height: 250,
+        minHeight: 200,
         toolbar: [
             ['style', ['style']],
             ['font', ['bold', 'italic', 'underline', 'clear']],
             ['para', ['ul', 'ol', 'paragraph']],
             ['insert', ['link', 'picture']],
             ['view', ['fullscreen', 'codeview']]
-        ]
+        ],
+        callbacks: {
+            onInit: function() {
+                // Mobile-friendly adjustments
+                if (window.innerWidth < 768) {
+                    $('.note-toolbar').addClass('note-toolbar-mobile');
+                }
+            }
+        }
     });
 
     // Sync summernote content with textarea before form submission
@@ -147,7 +161,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Dropzone init
+    // Dropzone init with mobile-friendly settings
     Dropzone.autoDiscover = false;
     const myDropzone = new Dropzone("#book-covers-dropzone", {
         url: "{{ route('admin.books.store') }}",
@@ -157,7 +171,12 @@ document.addEventListener('DOMContentLoaded', function() {
         parallelUploads: 5,
         maxFiles: 5,
         acceptedFiles: "image/*",
-        addRemoveLinks: true
+        addRemoveLinks: true,
+        thumbnailWidth: 120,
+        thumbnailHeight: 120,
+        dictDefaultMessage: window.innerWidth < 768 ? 
+            '<i class="fa-solid fa-cloud-upload-alt fa-2x text-success mb-2"></i><div class="text-success mb-2 small">Tap to add cover images</div><small class="text-muted">JPG, PNG, GIF (Max 5)</small>' :
+            '<i class="fa-solid fa-cloud-upload-alt fa-3x text-success mb-3"></i><div class="text-success mb-2">Drop book cover images here or click to browse</div><small class="text-muted">Support: JPG, PNG, GIF (Max 5 files, 2MB each)</small>'
     });
 
     // Form submission
@@ -204,13 +223,13 @@ function showToast(message, type = 'success') {
     if (!toastContainer) {
         toastContainer = document.createElement('div');
         toastContainer.id = 'toast-container';
-        toastContainer.style.cssText = 'position: fixed; top: 20px; right: 20px; z-index: 9999;';
+        toastContainer.style.cssText = 'position: fixed; top: 20px; right: 20px; z-index: 9999; left: 20px; right: auto; max-width: 400px;';
         document.body.appendChild(toastContainer);
     }
     
     const toast = document.createElement('div');
     toast.className = `alert alert-${type === 'success' ? 'success' : 'danger'} alert-dismissible fade show`;
-    toast.style.cssText = 'min-width: 300px; margin-bottom: 10px;';
+    toast.style.cssText = 'min-width: 250px; margin-bottom: 10px;';
     toast.innerHTML = `
         ${message}
         <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
@@ -220,4 +239,48 @@ function showToast(message, type = 'success') {
     setTimeout(() => { if(toast.parentNode) toast.remove(); }, 5000);
 }
 </script>
+
+<style>
+/* Mobile-specific styles */
+@media (max-width: 768px) {
+    .note-toolbar-mobile {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .note-toolbar-mobile .btn-group {
+        margin: 2px;
+    }
+    
+    .note-editor.note-frame {
+        border-radius: 12px;
+    }
+    
+    .dz-message {
+        font-size: 0.9rem !important;
+    }
+    
+    .dz-message i {
+        font-size: 2rem !important;
+    }
+    
+    .dropzone {
+        min-height: 120px !important;
+    }
+    
+    .file-upload {
+        padding: 15px !important;
+    }
+    
+    .file-upload i {
+        font-size: 1.5rem !important;
+    }
+    
+    .toast-container {
+        left: 20px !important;
+        right: 20px !important;
+        max-width: none !important;
+    }
+}
+</style>
 @endsection
