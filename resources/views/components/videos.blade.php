@@ -672,19 +672,64 @@
     }
     
     .video-wrapper {
-        height: 300px;
+        height: 250px;
     }
     
     .video-info-overlay {
-        padding: 2rem 1.5rem 1.5rem;
+        padding: 1.5rem 1rem 1rem;
     }
     
     .video-title {
-        font-size: 1.5rem;
+        font-size: 1.3rem;
+    }
+    
+    .video-description {
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .featured-tag {
+        font-size: 0.6rem;
+        padding: 0.2rem 0.6rem;
+        margin-bottom: 0.3rem;
+    }
+    
+    .video-duration {
+        font-size: 0.8rem;
+        margin-bottom: 0.3rem;
     }
     
     .community-description {
-        font-size: 1rem;
+        font-size: 0.9rem;
+        line-height: 1.6;
+    }
+    
+    .side-video-card {
+        margin-bottom: 1rem;
+    }
+    
+    .side-video-wrapper {
+        height: 180px;
+    }
+    
+    .side-video-info {
+        padding: 1rem;
+    }
+    
+    .side-video-title {
+        font-size: 0.95rem;
+        line-height: 1.3;
+        margin-bottom: 0.4rem;
+    }
+    
+    .side-video-description {
+        font-size: 0.8rem;
+        margin-bottom: 0.6rem;
+        line-height: 1.4;
+    }
+    
+    .side-video-meta {
+        font-size: 0.7rem;
     }
 }
 
@@ -693,25 +738,146 @@
         padding: 60px 0;
     }
     
+    .community-title {
+        font-size: 1.6rem;
+        line-height: 1.2;
+    }
+    
+    .community-description {
+        font-size: 0.85rem;
+        margin-bottom: 1.5rem;
+    }
+    
     .video-wrapper {
-        height: 250px;
+        height: 200px;
     }
     
-    .play-button-overlay {
-        width: 60px;
-        height: 60px;
-    }
-    
-    .play-button-overlay i {
-        font-size: 1.5rem;
+    .video-info-overlay {
+        padding: 1rem 0.8rem 0.8rem;
+        background: linear-gradient(to top, rgba(0,0,0,0.95), transparent);
     }
     
     .video-title {
-        font-size: 1.2rem;
+        font-size: 1.1rem;
+        margin-bottom: 0.3rem;
+        line-height: 1.2;
     }
     
     .video-description {
-        font-size: 0.9rem;
+        font-size: 0.8rem;
+        margin-bottom: 0.4rem;
+        line-height: 1.3;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+    
+    .featured-tag {
+        font-size: 0.55rem;
+        padding: 0.15rem 0.5rem;
+        margin-bottom: 0.2rem;
+    }
+    
+    .video-duration {
+        font-size: 0.75rem;
+        margin-bottom: 0.2rem;
+    }
+    
+    .side-video-card {
+        margin-bottom: 0.8rem;
+        border-radius: 12px;
+    }
+    
+    .side-video-wrapper {
+        height: 150px;
+    }
+    
+    .side-video-info {
+        padding: 0.8rem;
+    }
+    
+    .side-video-title {
+        font-size: 0.85rem;
+        margin-bottom: 0.3rem;
+        line-height: 1.2;
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+    
+    .side-video-description {
+        font-size: 0.75rem;
+        margin-bottom: 0.5rem;
+        line-height: 1.3;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+    
+    .side-video-meta {
+        font-size: 0.65rem;
+        flex-direction: column;
+        gap: 0.2rem;
+        align-items: flex-start;
     }
 }
-</style>
+
+@media (max-width: 480px) {
+    .video-section {
+        padding: 40px 0;
+    }
+    
+    .community-title {
+        font-size: 1.4rem;
+    }
+    
+    .video-wrapper {
+        height: 180px;
+    }
+    
+    .video-info-overlay {
+        padding: 0.8rem 0.6rem 0.6rem;
+    }
+    
+    .video-title {
+        font-size: 1rem;
+    }
+    
+    .video-description {
+        font-size: 0.75rem;
+        -webkit-line-clamp: 3;
+    }
+    
+    .featured-tag {
+        font-size: 0.5rem;
+        padding: 0.1rem 0.4rem;
+    }
+    
+    .video-duration {
+        font-size: 0.7rem;
+    }
+    
+    .side-video-wrapper {
+        height: 120px;
+    }
+    
+    .side-video-info {
+        padding: 0.6rem;
+    }
+    
+    .side-video-title {
+        font-size: 0.8rem;
+    }
+    
+    .side-video-description {
+        font-size: 0.7rem;
+        -webkit-line-clamp: 1;
+    }
+    
+    .side-video-meta {
+        font-size: 0.6rem;
+    }
+}
