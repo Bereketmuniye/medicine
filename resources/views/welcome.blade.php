@@ -408,6 +408,14 @@
             border: none;
         }
 
+        .video-wrapper .tiktok-embed {
+            width: 100%;
+            height: 400px;
+            border: none;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
         .video-placeholder {
             position: relative;
             width: 100%;
