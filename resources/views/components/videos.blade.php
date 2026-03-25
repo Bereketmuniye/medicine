@@ -33,54 +33,55 @@
                                         @endphp
                                         
                                         @if($videoId)
-                                            <div style="position: relative; width: 100%; height: 450px; overflow: hidden;">
-                                                <iframe 
-                                                    src="https://www.tiktok.com/embed/v2/{{ $videoId }}"
-                                                    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; border-radius: 15px;"
-                                                    allowfullscreen
-                                                    scrolling="no"
-                                                    allow="encrypted-media; fullscreen; picture-in-picture">
-                                                </iframe>
-                                            </div>
+                                            <iframe 
+                                                src="https://www.tiktok.com/embed/v2/{{ $videoId }}"
+                                                style="width: 100%; height: 450px; border: none; border-radius: 15px;"
+                                                allowfullscreen
+                                                allow="encrypted-media; fullscreen; picture-in-picture">
+                                            </iframe>
                                         @else
-                                            <div class="video-thumbnail-container" onclick="openVideoModal('{{ $video->embed_url }}')">
-                                                <img src="https://picsum.photos/seed/{{ urlencode($video->title) }}/800/450.jpg" alt="{{ $video->title }}" class="img-fluid video-thumbnail">
-                                                <div class="play-button-overlay">
-                                                    <i class="fas fa-play"></i>
-                                                </div>
-                                            </div>
+                                            <iframe 
+                                                src="{{ $video->embed_url }}"
+                                                style="width: 100%; height: 450px; border: none; border-radius: 15px;"
+                                                allowfullscreen>
+                                            </iframe>
                                         @endif
                                     @else
                                         <!-- YouTube/Vimeo Embed -->
-                                        <div class="video-thumbnail-container" onclick="openVideoModal('{{ $video->embed_url }}')">
-                                            @if(str_contains($video->embed_url, 'youtube.com') || str_contains($video->embed_url, 'youtu.be'))
-                                                @php
-                                                    $youtubeId = '';
-                                                    if (preg_match('/youtube\.com\/watch\?v=([^&]+)/', $video->embed_url, $matches)) {
-                                                        $youtubeId = $matches[1];
-                                                    } elseif (preg_match('/youtu\.be\/([^?]+)/', $video->embed_url, $matches)) {
-                                                        $youtubeId = $matches[1];
-                                                    }
-                                                @endphp
-                                                @if($youtubeId)
-                                                    <img src="https://img.youtube.com/vi/{{ $youtubeId }}/maxresdefault.jpg" alt="{{ $video->title }}" class="img-fluid video-thumbnail">
-                                                @else
-                                                    <img src="https://picsum.photos/seed/{{ urlencode($video->title) }}/800/450.jpg" alt="{{ $video->title }}" class="img-fluid video-thumbnail">
-                                                @endif
+                                        @if(str_contains($video->embed_url, 'youtube.com') || str_contains($video->embed_url, 'youtu.be'))
+                                            @php
+                                                $youtubeId = '';
+                                                if (preg_match('/youtube\.com\/watch\?v=([^&]+)/', $video->embed_url, $matches)) {
+                                                    $youtubeId = $matches[1];
+                                                } elseif (preg_match('/youtu\.be\/([^?]+)/', $video->embed_url, $matches)) {
+                                                    $youtubeId = $matches[1];
+                                                }
+                                            @endphp
+                                            @if($youtubeId)
+                                                <iframe 
+                                                    src="https://www.youtube.com/embed/{{ $youtubeId }}"
+                                                    style="width: 100%; height: 450px; border: none; border-radius: 15px;"
+                                                    allowfullscreen
+                                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture">
+                                                </iframe>
                                             @else
-                                                <img src="https://picsum.photos/seed/{{ urlencode($video->title) }}/800/450.jpg" alt="{{ $video->title }}" class="img-fluid video-thumbnail">
+                                                <iframe 
+                                                    src="{{ $video->embed_url }}"
+                                                    style="width: 100%; height: 450px; border: none; border-radius: 15px;"
+                                                    allowfullscreen>
+                                                </iframe>
                                             @endif
-                                            <div class="play-button-overlay">
-                                                <i class="fas fa-play"></i>
-                                            </div>
-                                        </div>
+                                        @else
+                                            <iframe 
+                                                src="{{ $video->embed_url }}"
+                                                style="width: 100%; height: 450px; border: none; border-radius: 15px;"
+                                                allowfullscreen>
+                                            </iframe>
+                                        @endif
                                     @endif
                                 @else
-                                    <div class="video-thumbnail-container" onclick="showNoVideoMessage()">
-                                        <img src="https://picsum.photos/seed/{{ urlencode($video->title) }}/800/450.jpg" alt="{{ $video->title }}" class="img-fluid video-thumbnail">
-                                        <div class="play-button-overlay">
-                                            <i class="fas fa-play"></i>
-                                        </div>
+                                    <div style="width: 100%; height: 450px; background: #f8f9fa; border-radius: 15px; display: flex; align-items: center; justify-content: center;">
+                                        <p style="color: #666; text-align: center;">{{ __('messages.video_not_available') }}</p>
                                     </div>
                                 @endif
                             </div>
@@ -130,44 +131,70 @@
                             <div class="side-video-wrapper">
                                 @if($video->embed_url)
                                     @if(str_contains($video->embed_url, 'tiktok.com'))
-                                        <!-- TikTok Thumbnail -->
-                                        <div class="video-thumbnail-container" onclick="openVideoModal('{{ $video->embed_url }}')">
-                                            <img src="https://picsum.photos/seed/{{ urlencode($video->title) }}/400/225.jpg" alt="{{ $video->title }}" class="img-fluid">
-                                            <div class="side-play-overlay">
-                                                <i class="fas fa-play"></i>
-                                            </div>
-                                        </div>
+                                        <!-- TikTok Embed -->
+                                        @php
+                                            $tiktokUrl = $video->embed_url;
+                                            $videoId = '';
+                                            
+                                            if (preg_match('/tiktok\.com\/@([^\/]+)\/video\/(\d+)/', $tiktokUrl, $matches)) {
+                                                $videoId = $matches[2];
+                                            } elseif (preg_match('/tiktok\.com\/v\/(\d+)/', $tiktokUrl, $matches)) {
+                                                $videoId = $matches[1];
+                                            } elseif (preg_match('/tiktok\.com\/.*\/(\d+)/', $tiktokUrl, $matches)) {
+                                                $videoId = $matches[1];
+                                            }
+                                        @endphp
+                                        
+                                        @if($videoId)
+                                            <iframe 
+                                                src="https://www.tiktok.com/embed/v2/{{ $videoId }}"
+                                                style="width: 100%; height: 225px; border: none; border-radius: 10px;"
+                                                allowfullscreen
+                                                allow="encrypted-media; fullscreen; picture-in-picture">
+                                            </iframe>
+                                        @else
+                                            <iframe 
+                                                src="{{ $video->embed_url }}"
+                                                style="width: 100%; height: 225px; border: none; border-radius: 10px;"
+                                                allowfullscreen>
+                                            </iframe>
+                                        @endif
                                     @else
-                                        <!-- YouTube/Vimeo Thumbnail -->
-                                        <div class="video-thumbnail-container" onclick="openVideoModal('{{ $video->embed_url }}')">
-                                            @if(str_contains($video->embed_url, 'youtube.com') || str_contains($video->embed_url, 'youtu.be'))
-                                                @php
-                                                    $youtubeId = '';
-                                                    if (preg_match('/youtube\.com\/watch\?v=([^&]+)/', $video->embed_url, $matches)) {
-                                                        $youtubeId = $matches[1];
-                                                    } elseif (preg_match('/youtu\.be\/([^?]+)/', $video->embed_url, $matches)) {
-                                                        $youtubeId = $matches[1];
-                                                    }
-                                                @endphp
-                                                @if($youtubeId)
-                                                    <img src="https://img.youtube.com/vi/{{ $youtubeId }}/mqdefault.jpg" alt="{{ $video->title }}" class="img-fluid">
-                                                @else
-                                                    <img src="https://picsum.photos/seed/{{ urlencode($video->title) }}/400/225.jpg" alt="{{ $video->title }}" class="img-fluid">
-                                                @endif
+                                        <!-- YouTube/Vimeo Embed -->
+                                        @if(str_contains($video->embed_url, 'youtube.com') || str_contains($video->embed_url, 'youtu.be'))
+                                            @php
+                                                $youtubeId = '';
+                                                if (preg_match('/youtube\.com\/watch\?v=([^&]+)/', $video->embed_url, $matches)) {
+                                                    $youtubeId = $matches[1];
+                                                } elseif (preg_match('/youtu\.be\/([^?]+)/', $video->embed_url, $matches)) {
+                                                    $youtubeId = $matches[1];
+                                                }
+                                            @endphp
+                                            @if($youtubeId)
+                                                <iframe 
+                                                        src="https://www.youtube.com/embed/{{ $youtubeId }}"
+                                                        style="width: 100%; height: 225px; border: none; border-radius: 10px;"
+                                                        allowfullscreen
+                                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture">
+                                                    </iframe>
                                             @else
-                                                <img src="https://picsum.photos/seed/{{ urlencode($video->title) }}/400/225.jpg" alt="{{ $video->title }}" class="img-fluid">
+                                                <iframe 
+                                                        src="{{ $video->embed_url }}"
+                                                        style="width: 100%; height: 225px; border: none; border-radius: 10px;"
+                                                        allowfullscreen>
+                                                    </iframe>
                                             @endif
-                                            <div class="side-play-overlay">
-                                                <i class="fas fa-play"></i>
-                                            </div>
-                                        </div>
+                                        @else
+                                            <iframe 
+                                                src="{{ $video->embed_url }}"
+                                                style="width: 100%; height: 225px; border: none; border-radius: 10px;"
+                                                allowfullscreen>
+                                            </iframe>
+                                        @endif
                                     @endif
                                 @else
-                                    <div class="video-thumbnail-container" onclick="showNoVideoMessage()">
-                                        <img src="https://picsum.photos/seed/{{ urlencode($video->title) }}/400/225.jpg" alt="{{ $video->title }}" class="img-fluid">
-                                        <div class="side-play-overlay">
-                                            <i class="fas fa-play"></i>
-                                        </div>
+                                    <div style="width: 100%; height: 225px; background: #f8f9fa; border-radius: 10px; display: flex; align-items: center; justify-content: center;">
+                                        <p style="color: #666; text-align: center; font-size: 0.9rem;">{{ __('messages.video_not_available') }}</p>
                                     </div>
                                 @endif
                             </div>
@@ -688,95 +715,3 @@
     }
 }
 </style>
-
-<!-- Video Modal -->
-<div class="video-modal" id="videoModal">
-    <div class="video-modal-content">
-        <span class="video-modal-close" onclick="closeVideoModal()">&times;</span>
-        <div class="video-modal-body" id="videoModalBody">
-            <!-- Video will be loaded here -->
-        </div>
-    </div>
-</div>
-
-<script>
-function openVideoModal(videoUrl) {
-    const modal = document.getElementById('videoModal');
-    const modalBody = document.getElementById('videoModalBody');
-    
-    // Clear previous content
-    modalBody.innerHTML = '';
-    
-    // Handle different video types
-    if (videoUrl.includes('youtube.com') || videoUrl.includes('youtu.be')) {
-        // Extract YouTube video ID
-        let videoId = '';
-        if (videoUrl.includes('youtube.com/watch?v=')) {
-            videoId = videoUrl.split('v=')[1].split('&')[0];
-        } else if (videoUrl.includes('youtu.be/')) {
-            videoId = videoUrl.split('youtu.be/')[1].split('?')[0];
-        }
-        
-        if (videoId) {
-            modalBody.innerHTML = `
-                <iframe 
-                    src="https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0" 
-                    style="width: 100%; height: 500px; border: none;"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                    allowfullscreen>
-                </iframe>
-            `;
-        }
-    } else if (videoUrl.includes('tiktok.com')) {
-        // Handle TikTok
-        modalBody.innerHTML = `
-            <iframe 
-                src="${videoUrl}" 
-                style="width: 100%; height: 500px; border: none; border-radius: 10px;"
-                allow="encrypted-media; fullscreen; picture-in-picture">
-            </iframe>
-        `;
-    } else {
-        // Handle other video platforms
-        modalBody.innerHTML = `
-            <iframe 
-                src="${videoUrl}" 
-                style="width: 100%; height: 500px; border: none;"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                allowfullscreen>
-            </iframe>
-        `;
-    }
-    
-    modal.style.display = 'block';
-    document.body.style.overflow = 'hidden';
-}
-
-function closeVideoModal() {
-    const modal = document.getElementById('videoModal');
-    const modalBody = document.getElementById('videoModalBody');
-    
-    modal.style.display = 'none';
-    modalBody.innerHTML = '';
-    document.body.style.overflow = 'auto';
-}
-
-function showNoVideoMessage() {
-    alert('{{ __("messages.video_not_available") }}');
-}
-
-// Close modal when clicking outside
-window.onclick = function(event) {
-    const modal = document.getElementById('videoModal');
-    if (event.target == modal) {
-        closeVideoModal();
-    }
-}
-
-// Close modal with Escape key
-document.addEventListener('keydown', function(event) {
-    if (event.key === 'Escape') {
-        closeVideoModal();
-    }
-});
-</script>
