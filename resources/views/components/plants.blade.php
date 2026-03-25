@@ -235,16 +235,12 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.7));
+    background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.8));
     display: flex;
     align-items: flex-end;
     padding: 2rem;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.curated-card:hover .curated-overlay {
     opacity: 1;
+    transition: all 0.3s ease;
 }
 
 .curated-content {
