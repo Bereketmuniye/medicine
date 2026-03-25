@@ -672,7 +672,7 @@
     }
     
     .video-wrapper {
-        height: 250px;
+        height: 320px;
     }
     
     .video-info-overlay {
@@ -709,7 +709,7 @@
     }
     
     .side-video-wrapper {
-        height: 180px;
+        height: 220px;
     }
     
     .side-video-info {
@@ -749,7 +749,7 @@
     }
     
     .video-wrapper {
-        height: 200px;
+        height: 280px;
     }
     
     .video-info-overlay {
@@ -790,7 +790,7 @@
     }
     
     .side-video-wrapper {
-        height: 150px;
+        height: 180px;
     }
     
     .side-video-info {
@@ -835,7 +835,7 @@
     }
     
     .video-wrapper {
-        height: 180px;
+        height: 240px;
     }
     
     .video-info-overlay {
@@ -861,7 +861,7 @@
     }
     
     .side-video-wrapper {
-        height: 120px;
+        height: 150px;
     }
     
     .side-video-info {
@@ -880,4 +880,5 @@
     .side-video-meta {
         font-size: 0.6rem;
     }
+}
 }
