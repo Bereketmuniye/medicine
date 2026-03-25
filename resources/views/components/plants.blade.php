@@ -366,6 +366,17 @@
         padding: 1.5rem;
     }
     
+    .curated-action-row {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: flex-start;
+    }
+    
+    .curated-price {
+        font-size: 1.1rem;
+        margin-bottom: 0.5rem;
+    }
+    
     .large-card .curated-title {
         font-size: 1.5rem;
     }
@@ -388,6 +399,17 @@
     .medium-card .curated-image,
     .small-card .curated-image {
         height: 320px;
+    }
+    
+    .curated-action-row {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: flex-start;
+    }
+    
+    .curated-price {
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
     }
 }
 </style>
