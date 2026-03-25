@@ -13,11 +13,16 @@
                     <div class="video-wrapper">
                         @if($video->embed_url)
                             @if(str_contains($video->embed_url, 'tiktok.com'))
-                                <!-- TikTok Embed with proper script -->
-                                <blockquote class="tiktok-embed" cite="{{ $video->embed_url }}" data-video-id="{{ Str::afterLast($video->embed_url, '/') }}" style="max-width: 605px; min-width: 325px; height: 750px; margin: 0 auto;">
-                                    <section>&nbsp;</section>
-                                </blockquote>
-                                <script async src="https://www.tiktok.com/embed.js"></script>
+                                <!-- TikTok Embed with proper format -->
+                                <div style="position: relative; width: 100%; height: 0; padding-bottom: 177.78%; overflow: hidden;">
+                                    <iframe 
+                                        src="{{ $video->embed_url }}" 
+                                        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; border-radius: 15px;"
+                                        allowfullscreen
+                                        scrolling="no"
+                                        allow="encrypted-media; fullscreen; picture-in-picture">
+                                    </iframe>
+                                </div>
                             @else
                                 <!-- YouTube/Vimeo/Other Embed -->
                                 <iframe src="{{ $video->embed_url }}" allowfullscreen></iframe>
