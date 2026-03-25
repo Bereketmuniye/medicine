@@ -104,6 +104,12 @@ return [
     'videos_span' => 'Videos',
     'videos_description' => 'Watch our educational videos about traditional healing methods.',
     'video_not_available' => 'Video Not Available',
+    'no_videos_available' => 'No Videos Available',
+    'featured_ritual' => 'Featured Ritual',
+    'days_ago' => 'days ago',
+    'recently' => 'Recently',
+    'morning_infusion' => 'Morning Infusion',
+    'community_wisdom' => 'Community Wisdom',
     
     // Videos Section  
     'videos_subtitle' => 'Various Videos',
@@ -111,6 +117,12 @@ return [
     'videos_span' => 'Videos',
     'videos_description' => 'Watch our educational videos about traditional healing methods.',
     'video_not_available' => 'Video Not Available',
+    'no_videos_available' => 'No Videos Available',
+    'featured_ritual' => 'Featured Ritual',
+    'days_ago' => 'days ago',
+    'recently' => 'Recently',
+    'morning_infusion' => 'Morning Infusion',
+    'community_wisdom' => 'Community Wisdom',
     
     // Hero Section
     'subtitle' => 'Traditional Ethiopian Medicine & Natural Remedies',

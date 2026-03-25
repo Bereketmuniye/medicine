@@ -100,6 +100,12 @@ return [
     'videos_span' => 'ቪዲዮዎች',
     'videos_description' => 'ከማህበረሰብዎ እውነተኛ ተሞክሮዎችን ይመልከቱ',
     'video_not_available' => 'ቪዲዮው አይገኝም',
+    'no_videos_available' => 'ቪዲዮዎች አይገኙም',
+    'featured_ritual' => 'የተመረጡ ሥርዓቶች',
+    'days_ago' => 'ቀናት በፊት',
+    'recently' => 'በቅርብ',
+    'morning_infusion' => 'ጠዋት ውሃ መጋፈጥ',
+    'community_wisdom' => 'የማህበረሰብ ጥበብ',
     
     // Hero Section
     'subtitle' => 'ባህላዊ የኢትዮጵያ ህክምና እና የተፈጥሮ ህክምና',
