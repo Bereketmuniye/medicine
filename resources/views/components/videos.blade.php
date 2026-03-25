@@ -835,7 +835,7 @@
     }
     
     .video-wrapper {
-        height: 240px;
+        height: 400px;
     }
     
     .video-info-overlay {
