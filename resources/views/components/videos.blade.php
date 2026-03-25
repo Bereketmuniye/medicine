@@ -33,32 +33,54 @@
                                         @endphp
                                         
                                         @if($videoId)
-                                            <div style="position: relative; width: 100%; height: 0; padding-bottom: 56.25%; overflow: hidden;">
+                                            <div style="position: relative; width: 100%; height: 450px; overflow: hidden;">
                                                 <iframe 
                                                     src="https://www.tiktok.com/embed/v2/{{ $videoId }}"
                                                     style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; border-radius: 15px;"
                                                     allowfullscreen
                                                     scrolling="no"
-                                                    allow="encrypted-media; fullscreen; picture-in-playback">
+                                                    allow="encrypted-media; fullscreen; picture-in-picture">
                                                 </iframe>
                                             </div>
                                         @else
-                                            <img src="https://picsum.photos/seed/{{ urlencode($video->title) }}/800/450.jpg" alt="{{ $video->title }}" class="img-fluid video-thumbnail">
-                                            <div class="play-button-overlay">
-                                                <i class="fas fa-play"></i>
+                                            <div class="video-thumbnail-container" onclick="openVideoModal('{{ $video->embed_url }}')">
+                                                <img src="https://picsum.photos/seed/{{ urlencode($video->title) }}/800/450.jpg" alt="{{ $video->title }}" class="img-fluid video-thumbnail">
+                                                <div class="play-button-overlay">
+                                                    <i class="fas fa-play"></i>
+                                                </div>
                                             </div>
                                         @endif
                                     @else
-                                        <!-- YouTube/Vimeo Thumbnail -->
+                                        <!-- YouTube/Vimeo Embed -->
+                                        <div class="video-thumbnail-container" onclick="openVideoModal('{{ $video->embed_url }}')">
+                                            @if(str_contains($video->embed_url, 'youtube.com') || str_contains($video->embed_url, 'youtu.be'))
+                                                @php
+                                                    $youtubeId = '';
+                                                    if (preg_match('/youtube\.com\/watch\?v=([^&]+)/', $video->embed_url, $matches)) {
+                                                        $youtubeId = $matches[1];
+                                                    } elseif (preg_match('/youtu\.be\/([^?]+)/', $video->embed_url, $matches)) {
+                                                        $youtubeId = $matches[1];
+                                                    }
+                                                @endphp
+                                                @if($youtubeId)
+                                                    <img src="https://img.youtube.com/vi/{{ $youtubeId }}/maxresdefault.jpg" alt="{{ $video->title }}" class="img-fluid video-thumbnail">
+                                                @else
+                                                    <img src="https://picsum.photos/seed/{{ urlencode($video->title) }}/800/450.jpg" alt="{{ $video->title }}" class="img-fluid video-thumbnail">
+                                                @endif
+                                            @else
+                                                <img src="https://picsum.photos/seed/{{ urlencode($video->title) }}/800/450.jpg" alt="{{ $video->title }}" class="img-fluid video-thumbnail">
+                                            @endif
+                                            <div class="play-button-overlay">
+                                                <i class="fas fa-play"></i>
+                                            </div>
+                                        </div>
+                                    @endif
+                                @else
+                                    <div class="video-thumbnail-container" onclick="showNoVideoMessage()">
                                         <img src="https://picsum.photos/seed/{{ urlencode($video->title) }}/800/450.jpg" alt="{{ $video->title }}" class="img-fluid video-thumbnail">
                                         <div class="play-button-overlay">
                                             <i class="fas fa-play"></i>
                                         </div>
-                                    @endif
-                                @else
-                                    <img src="https://picsum.photos/seed/{{ urlencode($video->title) }}/800/450.jpg" alt="{{ $video->title }}" class="img-fluid video-thumbnail">
-                                    <div class="play-button-overlay">
-                                        <i class="fas fa-play"></i>
                                     </div>
                                 @endif
                             </div>
@@ -109,21 +131,43 @@
                                 @if($video->embed_url)
                                     @if(str_contains($video->embed_url, 'tiktok.com'))
                                         <!-- TikTok Thumbnail -->
-                                        <img src="https://picsum.photos/seed/{{ urlencode($video->title) }}/400/225.jpg" alt="{{ $video->title }}" class="img-fluid">
-                                        <div class="side-play-overlay">
-                                            <i class="fas fa-play"></i>
+                                        <div class="video-thumbnail-container" onclick="openVideoModal('{{ $video->embed_url }}')">
+                                            <img src="https://picsum.photos/seed/{{ urlencode($video->title) }}/400/225.jpg" alt="{{ $video->title }}" class="img-fluid">
+                                            <div class="side-play-overlay">
+                                                <i class="fas fa-play"></i>
+                                            </div>
                                         </div>
                                     @else
                                         <!-- YouTube/Vimeo Thumbnail -->
+                                        <div class="video-thumbnail-container" onclick="openVideoModal('{{ $video->embed_url }}')">
+                                            @if(str_contains($video->embed_url, 'youtube.com') || str_contains($video->embed_url, 'youtu.be'))
+                                                @php
+                                                    $youtubeId = '';
+                                                    if (preg_match('/youtube\.com\/watch\?v=([^&]+)/', $video->embed_url, $matches)) {
+                                                        $youtubeId = $matches[1];
+                                                    } elseif (preg_match('/youtu\.be\/([^?]+)/', $video->embed_url, $matches)) {
+                                                        $youtubeId = $matches[1];
+                                                    }
+                                                @endphp
+                                                @if($youtubeId)
+                                                    <img src="https://img.youtube.com/vi/{{ $youtubeId }}/mqdefault.jpg" alt="{{ $video->title }}" class="img-fluid">
+                                                @else
+                                                    <img src="https://picsum.photos/seed/{{ urlencode($video->title) }}/400/225.jpg" alt="{{ $video->title }}" class="img-fluid">
+                                                @endif
+                                            @else
+                                                <img src="https://picsum.photos/seed/{{ urlencode($video->title) }}/400/225.jpg" alt="{{ $video->title }}" class="img-fluid">
+                                            @endif
+                                            <div class="side-play-overlay">
+                                                <i class="fas fa-play"></i>
+                                            </div>
+                                        </div>
+                                    @endif
+                                @else
+                                    <div class="video-thumbnail-container" onclick="showNoVideoMessage()">
                                         <img src="https://picsum.photos/seed/{{ urlencode($video->title) }}/400/225.jpg" alt="{{ $video->title }}" class="img-fluid">
                                         <div class="side-play-overlay">
                                             <i class="fas fa-play"></i>
                                         </div>
-                                    @endif
-                                @else
-                                    <img src="https://picsum.photos/seed/{{ urlencode($video->title) }}/400/225.jpg" alt="{{ $video->title }}" class="img-fluid">
-                                    <div class="side-play-overlay">
-                                        <i class="fas fa-play"></i>
                                     </div>
                                 @endif
                             </div>
@@ -537,6 +581,63 @@
     opacity: 0.7;
 }
 
+.video-thumbnail-container {
+    position: relative;
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+}
+
+.video-modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.9);
+    backdrop-filter: blur(5px);
+}
+
+.video-modal-content {
+    position: relative;
+    background-color: transparent;
+    margin: 5% auto;
+    padding: 0;
+    width: 90%;
+    max-width: 900px;
+    animation: modalFadeIn 0.3s ease;
+}
+
+@keyframes modalFadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.video-modal-close {
+    position: absolute;
+    top: -40px;
+    right: 0;
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 10000;
+    transition: all 0.3s ease;
+}
+
+.video-modal-close:hover {
+    color: var(--primary-light);
+    transform: scale(1.1);
+}
+
+.video-modal-body {
+    background: transparent;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
 /* Mobile Responsive */
 @media (max-width: 768px) {
     .community-title {
@@ -587,3 +688,95 @@
     }
 }
 </style>
+
+<!-- Video Modal -->
+<div class="video-modal" id="videoModal">
+    <div class="video-modal-content">
+        <span class="video-modal-close" onclick="closeVideoModal()">&times;</span>
+        <div class="video-modal-body" id="videoModalBody">
+            <!-- Video will be loaded here -->
+        </div>
+    </div>
+</div>
+
+<script>
+function openVideoModal(videoUrl) {
+    const modal = document.getElementById('videoModal');
+    const modalBody = document.getElementById('videoModalBody');
+    
+    // Clear previous content
+    modalBody.innerHTML = '';
+    
+    // Handle different video types
+    if (videoUrl.includes('youtube.com') || videoUrl.includes('youtu.be')) {
+        // Extract YouTube video ID
+        let videoId = '';
+        if (videoUrl.includes('youtube.com/watch?v=')) {
+            videoId = videoUrl.split('v=')[1].split('&')[0];
+        } else if (videoUrl.includes('youtu.be/')) {
+            videoId = videoUrl.split('youtu.be/')[1].split('?')[0];
+        }
+        
+        if (videoId) {
+            modalBody.innerHTML = `
+                <iframe 
+                    src="https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0" 
+                    style="width: 100%; height: 500px; border: none;"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
+            `;
+        }
+    } else if (videoUrl.includes('tiktok.com')) {
+        // Handle TikTok
+        modalBody.innerHTML = `
+            <iframe 
+                src="${videoUrl}" 
+                style="width: 100%; height: 500px; border: none; border-radius: 10px;"
+                allow="encrypted-media; fullscreen; picture-in-picture">
+            </iframe>
+        `;
+    } else {
+        // Handle other video platforms
+        modalBody.innerHTML = `
+            <iframe 
+                src="${videoUrl}" 
+                style="width: 100%; height: 500px; border: none;"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+            </iframe>
+        `;
+    }
+    
+    modal.style.display = 'block';
+    document.body.style.overflow = 'hidden';
+}
+
+function closeVideoModal() {
+    const modal = document.getElementById('videoModal');
+    const modalBody = document.getElementById('videoModalBody');
+    
+    modal.style.display = 'none';
+    modalBody.innerHTML = '';
+    document.body.style.overflow = 'auto';
+}
+
+function showNoVideoMessage() {
+    alert('{{ __("messages.video_not_available") }}');
+}
+
+// Close modal when clicking outside
+window.onclick = function(event) {
+    const modal = document.getElementById('videoModal');
+    if (event.target == modal) {
+        closeVideoModal();
+    }
+}
+
+// Close modal with Escape key
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+        closeVideoModal();
+    }
+});
+</script>
