@@ -6,20 +6,20 @@
     subtitle="Detailed information about this book"
 >
     <x-slot name="action">
-        <a href="{{ route('admin.books.edit', $book) }}" class="btn btn-outline-primary rounded-pill px-4 me-2">
+        <a href="{{ route('admin.books.edit', $book) }}" class="btn btn-outline-primary rounded-pill px-3 px-md-4 me-2">
             <i class="fa-solid fa-pen-to-square me-2"></i>Edit Book
         </a>
-        <a href="{{ route('admin.books.index') }}" class="btn btn-secondary rounded-pill px-4">
+        <a href="{{ route('admin.books.index') }}" class="btn btn-secondary rounded-pill px-3 px-md-4">
             <i class="fa-solid fa-arrow-left me-2"></i>Back to List
         </a>
     </x-slot>
 </x-admin.card-header>
 
-<div class="row">
+<div class="row g-4">
     <!-- Book Cover and Basic Info -->
-    <div class="col-lg-4 col-md-5 mb-4">
+    <div class="col-lg-4 col-md-5">
         <div class="card border-0 shadow-sm" style="border-radius: 24px; background: #fff;">
-            <div class="card-body p-4">
+            <div class="card-body p-3 p-md-4">
                 <!-- Book Cover Images -->
                 <div class="text-center mb-4">
                     @if($book->cover)
@@ -35,7 +35,7 @@
                                         src="{{ asset('storage/' . $covers[0]) }}" 
                                         class="img-fluid rounded-4 main-image" 
                                         alt="{{ $book->title }} - Main Cover"
-                                        style="max-height: 300px; width: 100%; object-fit: cover; cursor: zoom-in;"
+                                        style="max-height: 250px; width: 100%; object-fit: cover; cursor: zoom-in;"
                                         data-bs-toggle="modal" 
                                         data-bs-target="#imageModal"
                                         data-image="{{ asset('storage/' . $covers[0]) }}"
@@ -51,7 +51,7 @@
                                                 src="{{ asset('storage/' . $coverPath) }}" 
                                                 class="img-fluid rounded-2 thumbnail {{ $index == 0 ? 'active' : '' }}" 
                                                 alt="{{ $book->title }} - Cover {{ $index + 1 }}"
-                                                style="max-height: 60px; width: 60px; object-fit: cover; cursor: pointer; border: 2px solid {{ $index == 0 ? '#007bff' : 'transparent' }}; transition: all 0.3s ease;"
+                                                style="max-height: 50px; width: 50px; object-fit: cover; cursor: pointer; border: 2px solid {{ $index == 0 ? '#007bff' : 'transparent' }}; transition: all 0.3s ease;"
                                                 data-main-image="{{ asset('storage/' . $coverPath) }}"
                                                 data-index="{{ $index }}"
                                             >
@@ -64,7 +64,7 @@
                                 src="{{ asset('storage/' . $book->cover) }}" 
                                 class="img-fluid rounded-4 mb-3" 
                                 alt="{{ $book->title }}"
-                                style="max-height: 300px; width: 100%; object-fit: cover; cursor: zoom-in;"
+                                style="max-height: 250px; width: 100%; object-fit: cover; cursor: zoom-in;"
                                 data-bs-toggle="modal" 
                                 data-bs-target="#imageModal"
                                 data-image="{{ asset('storage/' . $book->cover) }}"
@@ -72,10 +72,10 @@
                             >
                         @endif
                     @else
-                        <div class="bg-light rounded-4 d-flex align-items-center justify-content-center mb-3" style="height: 300px;">
+                        <div class="bg-light rounded-4 d-flex align-items-center justify-content-center mb-3" style="height: 250px;">
                             <div class="text-center">
-                                <i class="fa-solid fa-book fa-3x text-secondary opacity-50 mb-3"></i>
-                                <p class="text-secondary mb-0">No Cover Available</p>
+                                <i class="fa-solid fa-book fa-2x fa-md-3x text-secondary opacity-50 mb-3"></i>
+                                <p class="text-secondary mb-0 small">No Cover Available</p>
                             </div>
                         </div>
                     @endif
@@ -87,7 +87,7 @@
                     
                     <div class="mb-3">
                         <small class="text-secondary d-block">Book ID</small>
-                        <span class="text-dark">{{ $book->book_id }}</span>
+                        <span class="text-dark fw-bold">{{ $book->book_id }}</span>
                     </div>
 
                     <div class="mb-3">
@@ -107,7 +107,7 @@
                     @if($book->type === 'physical')
                         <div class="mb-3">
                             <small class="text-secondary d-block">Stock</small>
-                            <span class="text-dark">{{ $book->stock }} units</span>
+                            <span class="text-dark fw-bold">{{ $book->stock }} units</span>
                         </div>
                     @endif
 
@@ -125,11 +125,11 @@
     </div>
 
     <!-- Detailed Information -->
-    <div class="col-lg-8 col-md-7 mb-4">
+    <div class="col-lg-8 col-md-7">
         <!-- Description -->
         @if($book->description)
             <div class="card border-0 shadow-sm mb-4" style="border-radius: 24px;">
-                <div class="card-body p-4">
+                <div class="card-body p-3 p-md-4">
                     <h6 class="fw-bold text-dark mb-3">
                         <i class="fa-solid fa-file-alt text-primary me-2"></i>Description
                     </h6>
@@ -142,39 +142,39 @@
 
         <!-- Book Details -->
         <div class="card border-0 shadow-sm mb-4" style="border-radius: 24px;">
-            <div class="card-body p-4">
+            <div class="card-body p-3 p-md-4">
                 <h6 class="fw-bold text-dark mb-4">
                     <i class="fa-solid fa-info-circle text-primary me-2"></i>Book Information
                 </h6>
                 <div class="row">
-                    <div class="col-md-6 mb-3">
+                    <div class="col-sm-6 col-12 mb-3">
                         <small class="text-secondary d-block">Book ID</small>
-                        <span class="text-dark">{{ $book->book_id }}</span>
+                        <span class="text-dark fw-bold">{{ $book->book_id }}</span>
                     </div>
-                    <div class="col-md-6 mb-3">
+                    <div class="col-sm-6 col-12 mb-3">
                         <small class="text-secondary d-block">Slug</small>
-                        <span class="text-dark">{{ $book->slug }}</span>
+                        <span class="text-dark small">{{ $book->slug }}</span>
                     </div>
-                    <div class="col-md-6 mb-3">
+                    <div class="col-sm-6 col-12 mb-3">
                         <small class="text-secondary d-block">Price</small>
-                        <span class="text-dark">ETB {{ number_format($book->price, 2, '.', ',') }}</span>
+                        <span class="text-dark fw-bold">ETB {{ number_format($book->price, 2, '.', ',') }}</span>
                     </div>
-                    <div class="col-md-6 mb-3">
+                    <div class="col-sm-6 col-12 mb-3">
                         <small class="text-secondary d-block">Format</small>
                         <span class="text-dark">{{ ucfirst($book->type) }}</span>
                     </div>
-                    <div class="col-md-6 mb-3">
+                    <div class="col-sm-6 col-12 mb-3">
                         <small class="text-secondary d-block">Created</small>
-                        <span class="text-dark">{{ $book->created_at->format('M d, Y H:i') }}</span>
+                        <span class="text-dark small">{{ $book->created_at->format('M d, Y H:i') }}</span>
                     </div>
-                    <div class="col-md-6 mb-3">
+                    <div class="col-sm-6 col-12 mb-3">
                         <small class="text-secondary d-block">Updated</small>
-                        <span class="text-dark">{{ $book->updated_at->format('M d, Y H:i') }}</span>
+                        <span class="text-dark small">{{ $book->updated_at->format('M d, Y H:i') }}</span>
                     </div>
                     @if($book->type === 'physical')
-                        <div class="col-md-6 mb-0">
+                        <div class="col-sm-6 col-12 mb-0">
                             <small class="text-secondary d-block">Stock</small>
-                            <span class="text-dark">{{ $book->stock }} units</span>
+                            <span class="text-dark fw-bold">{{ $book->stock }} units</span>
                         </div>
                     @endif
                 </div>
@@ -237,4 +237,43 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
+
+<style>
+/* Mobile-specific styles */
+@media (max-width: 768px) {
+    .main-image {
+        max-height: 200px !important;
+    }
+    
+    .thumbnail {
+        max-height: 40px !important;
+        width: 40px !important;
+    }
+    
+    .thumbnails-container {
+        gap: 1px !important;
+    }
+    
+    .modal-dialog {
+        margin: 10px !important;
+    }
+    
+    .card-body {
+        padding: 1rem !important;
+    }
+    
+    .badge {
+        font-size: 0.75rem !important;
+        padding: 0.25rem 0.5rem !important;
+    }
+    
+    h6 {
+        font-size: 1rem !important;
+    }
+    
+    .small {
+        font-size: 0.8rem !important;
+    }
+}
+</style>
 @endsection
