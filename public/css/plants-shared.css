@@ -210,11 +210,13 @@
     border-color: var(--plant-primary-light);
 }
 
-/* Container Fix for Plants Section */
-.plants-section-unified .container {
-    max-width: 100%;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
+/* Container Fix for Plants Section on Mobile */
+@media (max-width: 768px) {
+    .plants-section-unified .container {
+        max-width: 100%;
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
 }
 
 /* Responsive */
