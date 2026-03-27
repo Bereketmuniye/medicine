@@ -49,9 +49,9 @@
                                     <div class="plant-image-wrapper m-0 me-3" style="width: 120px; height: 120px; flex-shrink: 0;">
                                         <img src="{{ $plant->image_url ?? 'https://picsum.photos/seed/' . urlencode($plant->name) . '/200/200.jpg' }}" alt="{{ $plant->name }}" onerror="this.src='https://picsum.photos/seed/{{ urlencode($plant->name) }}/200/200.jpg'">
                                     </div>
-                                    <div class="flex-grow-1">
-                                        <h5 class="plant-card-title mb-1 fs-5">{{ Str::limit($plant->name, 30) }}</h5>
-                                        <p class="plant-card-desc mb-2" style="-webkit-line-clamp: 2; line-clamp: 2;">{{ Str::limit(strip_tags($plant->description), 60) }}</p>
+                                    <div class="flex-grow-1" style="width: 100%;">
+                                        <h5 class="plant-card-title mb-1 fs-5" style="overflow-wrap: break-word; word-break: break-word;">{{ Str::limit($plant->name, 40) }}</h5>
+                                        <p class="plant-card-desc mb-2" style="-webkit-line-clamp: 2; line-clamp: 2; overflow-wrap: break-word; word-break: break-word;">{{ Str::limit(strip_tags($plant->description), 80) }}</p>
                                         <a href="{{ route('plants.show', $plant->id) }}" class="text-decoration-none fw-bold" style="color: var(--plant-primary); font-size: 0.8rem;">
                                             {{ __('messages.view_details') }} →
                                         </a>

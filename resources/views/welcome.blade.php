@@ -65,6 +65,11 @@
     <link rel="stylesheet" href="{{ asset('css/videos-shared.css') }}?v={{ filemtime(public_path('css/videos-shared.css')) }}&t={{ time() }}">
 
     <style>
+        html, body {
+            overflow-x: hidden;
+            width: 100%;
+            position: relative;
+        }
         /* Hero Section - Full Screen with Video Background */
         .hero-section {
             height: 100vh;
@@ -154,7 +159,7 @@
         }
 
         .hero-title {
-            font-size: 5rem;
+            font-size: clamp(2rem, 10vw, 5rem);
             font-weight: 900;
             font-style: italic;
             color: white;
@@ -163,6 +168,8 @@
             text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
             transform-style: preserve-3d;
             animation: titleFloat 6s ease-in-out infinite;
+            overflow-wrap: break-word;
+            word-break: break-word;
         }
 
         .hero-title span {
@@ -408,14 +415,6 @@
             width: 100%;
             height: 100%;
             border: none;
-        }
-
-        .video-wrapper .tiktok-embed {
-            width: 100%;
-            height: 400px;
-            border: none;
-            border-radius: 15px;
-            overflow: hidden;
         }
 
         .video-placeholder {
@@ -999,7 +998,42 @@
             margin: 0 auto 2rem;
             color: var(--text-light);
             font-size: 1rem;
-            line-height: 1.8;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 991px) {
+            .contact-info {
+                padding-right: 0;
+                margin-bottom: 3rem;
+                text-align: center;
+            }
+            .contact-details li {
+                justify-content: center;
+            }
+            .contact-social {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .contact-section {
+                padding: 60px 0;
+            }
+            .contact-info h3 {
+                font-size: 1.8rem;
+                overflow-wrap: break-word;
+                word-break: break-word;
+            }
+            .contact-info p {
+                font-size: 1rem;
+                line-height: 1.6;
+            }
+            .contact-form {
+                padding: 1.5rem;
+            }
+            .contact-form h4 {
+                font-size: 1.3rem;
+            }
         }
 
 
