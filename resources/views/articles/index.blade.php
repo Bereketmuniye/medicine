@@ -582,7 +582,11 @@
 
     // Mobile Navigation Self-Closing Fix (Robust version)
     document.addEventListener('click', function (e) {
-        if (e.target.closest('.navbar-nav .nav-link') || e.target.closest('.dropdown-item')) {
+        const isNavLink = e.target.closest('.navbar-nav .nav-link');
+        const isDropdownToggle = e.target.closest('.dropdown-toggle');
+        const isDropdownItem = e.target.closest('.dropdown-item');
+        
+        if ((isNavLink && !isDropdownToggle) || isDropdownItem) {
             if (window.innerWidth < 992) { // Only on mobile
                 const menuToggle = document.getElementById('nav') || document.getElementById('navbarNav');
                 if (menuToggle && menuToggle.classList.contains('show')) {

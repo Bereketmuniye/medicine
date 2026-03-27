@@ -70,6 +70,3 @@
         </div>
     </div>
 </nav>
-
-    </div>
-</nav>
