@@ -1,0 +1,365 @@
+/* Videos Shared Styles - World-Class Botanical Aesthetic */
+:root {
+    --video-bg: #f8fdf9;
+    --video-primary: #1a472a;
+    --video-accent: #c4a484;
+    /* Sage/Gold accent */
+    --video-shadow: rgba(26, 71, 42, 0.08);
+    --video-radius: 24px;
+    --glass-bg: rgba(255, 255, 255, 0.7);
+    --glass-border: rgba(255, 255, 255, 0.4);
+}
+
+.video-section {
+    padding: 120px 0;
+    background-color: var(--video-bg);
+    position: relative;
+    overflow: hidden;
+}
+
+.video-section::before {
+    content: '';
+    position: absolute;
+    top: -10%;
+    right: -5%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(196, 164, 132, 0.05) 0%, transparent 70%);
+    z-index: 0;
+}
+
+.community-header {
+    margin-bottom: 4rem;
+}
+
+.community-label {
+    color: var(--video-accent);
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.community-title {
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: var(--video-primary);
+    margin-bottom: 1.5rem;
+    font-family: 'Georgia', serif;
+    line-height: 1.1;
+}
+
+.community-title span {
+    color: var(--video-accent);
+    font-style: italic;
+    font-weight: 400;
+}
+
+.community-description {
+    font-size: 1.15rem;
+    color: #4a5568;
+    line-height: 1.8;
+    max-width: 650px;
+}
+
+/* Main Video Card - Premium Style */
+.main-video-card {
+    position: relative;
+    border-radius: var(--video-radius);
+    overflow: hidden;
+    box-shadow: 0 20px 50px var(--video-shadow);
+    background: #fff;
+    margin-bottom: 3rem;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid var(--glass-border);
+}
+
+.main-video-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 30px 70px rgba(26, 71, 42, 0.15);
+}
+
+.video-wrapper {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background: #000;
+}
+
+.video-wrapper iframe,
+.video-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s ease;
+}
+
+.main-video-card:hover .video-wrapper img {
+    transform: scale(1.05);
+}
+
+.video-info-overlay {
+    position: absolute;
+    bottom: 2rem;
+    left: 2rem;
+    right: 2rem;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(12px) saturate(180%);
+    -webkit-backdrop-filter: blur(12px) saturate(180%);
+    padding: 2rem;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #fff;
+    transition: all 0.4s ease;
+}
+
+.main-video-card:hover .video-info-overlay {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-5px);
+}
+
+.featured-tag {
+    background: var(--video-accent);
+    color: #fff;
+    font-size: 0.7rem;
+    font-weight: 800;
+    padding: 0.4rem 1rem;
+    border-radius: 50px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    display: inline-block;
+    margin-bottom: 1rem;
+    box-shadow: 0 4px 15px rgba(196, 164, 132, 0.3);
+}
+
+.video-duration {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-left: 1rem;
+    opacity: 0.9;
+    display: inline-block;
+}
+
+.video-title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 0.8rem;
+    font-family: 'Georgia', serif;
+    color: #fff;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.video-description {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    opacity: 0.9;
+    margin-bottom: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Side Video Cards */
+.side-video-card {
+    display: flex;
+    background: #fff;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px var(--video-shadow);
+    margin-bottom: 2rem;
+    transition: all 0.4s ease;
+    border: 1px solid #f0f4f1;
+}
+
+.side-video-card:hover {
+    transform: translateX(10px);
+    box-shadow: 0 15px 40px rgba(26, 71, 42, 0.12);
+    border-color: var(--video-accent);
+}
+
+.side-video-wrapper {
+    width: 180px;
+    height: 180px;
+    min-width: 180px;
+    position: relative;
+    overflow: hidden;
+}
+
+.side-video-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+
+.side-video-card:hover .side-video-wrapper img {
+    transform: scale(1.1);
+}
+
+.side-video-info {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-grow: 1;
+}
+
+.side-video-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--video-primary);
+    margin-bottom: 0.6rem;
+    font-family: 'Georgia', serif;
+    line-height: 1.3;
+}
+
+.side-video-description {
+    font-size: 0.9rem;
+    color: #718096;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.side-video-meta {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--video-accent);
+}
+
+.side-play-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50px;
+    height: 50px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(5px);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    color: var(--video-primary);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.side-video-card:hover .side-play-overlay {
+    background: var(--video-accent);
+    color: #fff;
+    transform: translate(-50%, -50%) scale(1.1);
+}
+
+/* Play Button Overlay (Main) */
+.play-button-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90px;
+    height: 90px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+}
+
+.play-button-overlay::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.4);
+    animation: sonar 2s infinite;
+}
+
+@keyframes sonar {
+    0% {
+        transform: scale(1);
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: scale(1.6);
+        opacity: 0;
+    }
+}
+
+.play-button-overlay i {
+    font-size: 2.5rem;
+    color: var(--video-primary);
+    margin-left: 8px;
+    transition: all 0.3s ease;
+}
+
+.main-video-card:hover .play-button-overlay {
+    background: var(--video-accent);
+    transform: translate(-50%, -50%) scale(1.1);
+}
+
+.main-video-card:hover .play-button-overlay i {
+    color: #fff;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 991px) {
+    .community-title {
+        font-size: 2.8rem;
+    }
+
+    .side-video-wrapper {
+        width: 140px;
+        height: 140px;
+        min-width: 140px;
+    }
+}
+
+@media (max-width: 768px) {
+    .video-section {
+        padding: 80px 0;
+    }
+
+    .community-title {
+        font-size: 2.2rem;
+    }
+
+    .video-info-overlay {
+        padding: 1.5rem;
+        bottom: 1rem;
+        left: 1rem;
+        right: 1rem;
+    }
+
+    .video-title {
+        font-size: 1.5rem;
+    }
+
+    .side-video-card {
+        flex-direction: column;
+    }
+
+    .side-video-wrapper {
+        width: 100%;
+        height: 220px;
+    }
+}
