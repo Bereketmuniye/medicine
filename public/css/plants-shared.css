@@ -1,0 +1,224 @@
+:root {
+    --plant-primary: #1a472a;
+    /* Deep Herbal Green */
+    --plant-primary-light: #c5e1a5;
+    /* Fresh Mint */
+    --plant-accent: #d4a017;
+    /* Golden Accent */
+    --plant-bg-light: #f4f7f4;
+    /* Soft Botanical Background */
+    --plant-text-main: #2d3436;
+    --plant-text-muted: #636e72;
+    --white: #ffffff;
+
+    /* Premium Shadows (Matched with Books) */
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+    --shadow-md: 0 12px 30px -5px rgba(26, 71, 42, 0.12);
+    --shadow-lg: 0 24px 48px -12px rgba(26, 71, 42, 0.18);
+
+    /* Transitions */
+    --transition-smooth: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+/* Plant Card - World Class Redesign */
+.plant-card {
+    background: var(--white);
+    border-radius: 24px;
+    overflow: hidden;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    border: 1px solid rgba(26, 71, 42, 0.05);
+    box-shadow: var(--shadow-md);
+    transition: var(--transition-smooth);
+    margin-bottom: 2rem;
+}
+
+.plant-card:hover {
+    transform: translateY(-12px);
+    box-shadow: var(--shadow-lg);
+    border-color: rgba(26, 71, 42, 0.1);
+}
+
+/* Image Container */
+.plant-image-wrapper {
+    position: relative;
+    height: 280px;
+    background: #f1f5f1;
+    overflow: hidden;
+    margin: 12px;
+    border-radius: 20px;
+    z-index: 1;
+}
+
+.plant-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s ease;
+}
+
+.plant-card:hover .plant-image-wrapper img {
+    transform: scale(1.1);
+}
+
+/* Glassmorphism Badges */
+.plant-badge,
+.plant-price-badge {
+    position: absolute;
+    z-index: 3;
+    padding: 6px 14px;
+    border-radius: 12px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.plant-badge {
+    top: 12px;
+    left: 12px;
+    background: rgba(26, 71, 42, 0.85);
+    color: var(--plant-primary-light);
+}
+
+.plant-price-badge {
+    top: 12px;
+    right: 12px;
+    background: rgba(197, 225, 165, 0.9);
+    color: var(--plant-primary);
+}
+
+.plant-price-badge.free {
+    background: rgba(255, 255, 255, 0.9);
+    color: #2ecc71;
+}
+
+/* Card Content */
+.plant-card-content {
+    padding: 0 1.5rem 1.8rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.plant-card-category {
+    font-size: 0.7rem;
+    color: var(--plant-accent);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 0.8rem;
+}
+
+.plant-card-title {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--plant-primary);
+    margin-bottom: 0.6rem;
+    line-height: 1.2;
+    letter-spacing: -0.5px;
+}
+
+.plant-card-scientific {
+    font-size: 0.85rem;
+    color: var(--plant-text-muted);
+    font-style: italic;
+    margin-bottom: 1rem;
+    opacity: 0.8;
+}
+
+.plant-card-desc {
+    font-size: 0.9rem;
+    color: var(--plant-text-muted);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Card Footer */
+.plant-card-footer {
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.plant-card-price {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--plant-primary);
+}
+
+.plant-card-price small {
+    font-size: 0.7rem;
+    margin-left: 2px;
+    color: var(--plant-text-muted);
+}
+
+/* Premium Action Button */
+.btn-plant-view {
+    background: var(--plant-primary);
+    color: var(--white);
+    border: none;
+    padding: 12px 24px;
+    border-radius: 14px;
+    font-weight: 700;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: var(--transition-smooth);
+    text-decoration: none;
+}
+
+.btn-plant-view:hover {
+    background: var(--plant-accent);
+    color: var(--white);
+    box-shadow: 0 8px 20px rgba(212, 160, 23, 0.3);
+    transform: translateX(4px);
+}
+
+/* Curated Grid Helpers */
+.plant-card.large-feature .plant-card-title {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.plant-card.horizontal-mini {
+    transition: var(--transition-smooth);
+    border: 1px solid rgba(26, 71, 42, 0.05);
+}
+
+.plant-card.horizontal-mini:hover {
+    transform: translateX(10px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--plant-primary-light);
+}
+
+/* Responsive */
+@media (max-width: 991px) {
+    .plant-card.large-feature .plant-card-title {
+        font-size: 1.8rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .plant-image-wrapper {
+        height: 220px;
+    }
+
+    .plant-card-title {
+        font-size: 1.2rem;
+    }
+}

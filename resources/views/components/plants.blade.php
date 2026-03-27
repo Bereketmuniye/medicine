@@ -1,498 +1,99 @@
-<section class="plants-section" id="plants">
+@php
+    $featuredPlants = $featuredPlants ?? collect();
+@endphp
+
+@if($featuredPlants->isNotEmpty())
+<section class="plants-section-unified py-5" id="plants">
     <div class="container">
         <!-- Section Header -->
-        <div class="section-header" data-aos="fade-up">
-            <span class="section-subtitle">{{ __('messages.plants_subtitle') }}</span>
-            <h2 class="section-title">{{ __('messages.plants_title') }} <span>{{ __('messages.plants_span') }}</span></h2>
-            <p class="section-description">{{ __('messages.plants_description') }}</p>
-            <div class="view-full-link">
-                <a href="{{ route('plants.index') }}" class="btn btn-link">{{ __('messages.view_all_plants') }} →</a>
-            </div>
+        <div class="section-header text-center mb-5" data-aos="fade-up">
+            <span class="section-subtitle">{{ __('messages.botanical_wisdom') }}</span>
+            <h2 class="section-title">{{ __('messages.medicinal_plants') }}</h2>
         </div>
         
-        <!-- Curated Products Grid -->
-        <div class="curated-grid">
+        <!-- Curated Grid - World Class Restored -->
+        <div class="curated-plants-grid">
             <div class="row g-4">
-                @forelse($featuredPlants as $index => $plant)
+                @foreach($featuredPlants->take(4) as $index => $plant)
                     @if($index == 0)
-                        <!-- Large Feature Card - First Plant -->
-                        <div class="col-lg-6" data-aos="fade-up">
-                            <div class="curated-card large-card">
-                                <div class="curated-image">
-                                    <img src="{{ $plant->image_url ?? 'https://picsum.photos/seed/' . urlencode($plant->name) . '/800/600.jpg' }}" alt="{{ $plant->name }}" class="img-fluid" onerror="this.src='https://picsum.photos/seed/{{ urlencode($plant->name) }}/800/600.jpg'">
-                                    <div class="curated-overlay">
-                                        <div class="curated-content">
-                                            <h3 class="curated-title">{{ $plant->name }}</h3>
-                                            <p class="curated-description">{{ Str::limit(strip_tags($plant->description), 100) }}</p>
-                                            <div class="curated-action-row">
-                                                <div class="curated-price">
-                                                    @if($plant->price && $plant->price > 0)
-                                                        {{ number_format($plant->price, 2) }} {{ __('messages.currency') }}
-                                                    @else
-                                                        {{ __('messages.free') }}
-                                                    @endif
-                                                </div>
-                                                <a href="{{ route('plants.show', $plant->id) }}" class="btn btn-primary">{{ __('messages.view_details') }}</a>
-                                            </div>
-                                        </div>
+                        <!-- Large Feature Card -->
+                        <div class="col-lg-7" data-aos="fade-right">
+                            <div class="plant-card large-feature h-100">
+                                <div class="plant-image-wrapper" style="height: 500px;">
+                                    <img src="{{ $plant->image_url ?? 'https://picsum.photos/seed/' . urlencode($plant->name) . '/800/600.jpg' }}" alt="{{ $plant->name }}" onerror="this.src='https://picsum.photos/seed/{{ urlencode($plant->name) }}/800/600.jpg'">
+                                    <span class="plant-price-badge {{ ($plant->price && $plant->price > 0) ? '' : 'free' }}">
+                                        @if($plant->price && $plant->price > 0)
+                                            {{ number_format($plant->price, 0) }} {{ __('messages.currency') }}
+                                        @else
+                                            {{ __('messages.free') }}
+                                        @endif
+                                    </span>
+                                </div>
+                                <div class="plant-card-content">
+                                    <h3 class="plant-card-title fs-2">{{ $plant->name }}</h3>
+                                    <p class="plant-card-desc">{{ Str::limit(strip_tags($plant->description), 150) }}</p>
+                                    <div class="plant-card-footer">
+                                        <a href="{{ route('plants.show', $plant->id) }}" class="btn-plant-view">
+                                            {{ __('messages.view_details') }} <i class="bi bi-arrow-right"></i>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        
-                        <!-- Right Column for remaining plants -->
-                        <div class="col-lg-6">
+                        <div class="col-lg-5">
                             <div class="row g-4">
-                    @endif
-                    
-                    @if($index == 1)
-                        <!-- Medium Card - Second Plant -->
-                        <div class="col-12" data-aos="fade-up" data-aos-delay="100">
-                            <div class="curated-card medium-card">
-                                <div class="curated-image">
-                                    <img src="{{ $plant->image_url ?? 'https://picsum.photos/seed/' . urlencode($plant->name) . '/800/400.jpg' }}" alt="{{ $plant->name }}" class="img-fluid" onerror="this.src='https://picsum.photos/seed/{{ urlencode($plant->name) }}/800/400.jpg'">
-                                    <div class="curated-overlay">
-                                        <div class="curated-content">
-                                            <h4 class="curated-title">{{ $plant->name }}</h4>
-                                            <p class="curated-description">{{ Str::limit(strip_tags($plant->description), 80) }}</p>
-                                            <div class="curated-action-row">
-                                                <div class="curated-price">
-                                                    @if($plant->price && $plant->price > 0)
-                                                        {{ __('messages.currency') }} {{ number_format($plant->price, 2) }}
-                                                    @else
-                                                        {{ __('messages.free') }}
-                                                    @endif
-                                                </div>
-                                                <a href="{{ route('plants.show', $plant->id) }}" class="btn btn-outline-light btn-sm">{{ __('messages.view_details') }}</a>
-                                            </div>
-                                        </div>
+                    @else
+                        <div class="col-12" data-aos="fade-left" data-aos-delay="{{ $index * 100 }}">
+                            <div class="plant-card horizontal-mini shadow-sm">
+                                <div class="d-flex align-items-center p-3">
+                                    <div class="plant-image-wrapper m-0 me-3" style="width: 120px; height: 120px; flex-shrink: 0;">
+                                        <img src="{{ $plant->image_url ?? 'https://picsum.photos/seed/' . urlencode($plant->name) . '/200/200.jpg' }}" alt="{{ $plant->name }}" onerror="this.src='https://picsum.photos/seed/{{ urlencode($plant->name) }}/200/200.jpg'">
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <h5 class="plant-card-title mb-1 fs-5">{{ Str::limit($plant->name, 30) }}</h5>
+                                        <p class="plant-card-desc mb-2" style="-webkit-line-clamp: 2; line-clamp: 2;">{{ Str::limit(strip_tags($plant->description), 60) }}</p>
+                                        <a href="{{ route('plants.show', $plant->id) }}" class="text-decoration-none fw-bold" style="color: var(--plant-primary); font-size: 0.8rem;">
+                                            {{ __('messages.view_details') }} →
+                                        </a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     @endif
-                    
-                    @if($index == 2)
-                        <!-- Small Card - Third Plant -->
-                        <div class="col-6" data-aos="fade-up" data-aos-delay="200">
-                            <div class="curated-card small-card">
-                                <div class="curated-image">
-                                    <img src="{{ $plant->image_url ?? 'https://picsum.photos/seed/' . urlencode($plant->name) . '/400/300.jpg' }}" alt="{{ $plant->name }}" class="img-fluid" onerror="this.src='https://picsum.photos/seed/{{ urlencode($plant->name) }}/400/300.jpg'">
-                                    <div class="curated-overlay">
-                                        <div class="curated-content">
-                                            <h5 class="curated-title">{{ $plant->name }}</h5>
-                                            <p class="curated-description">{{ Str::limit(strip_tags($plant->description), 60) }}</p>
-                                            <div class="curated-action-row">
-                                                <div class="curated-price">
-                                                    @if($plant->price && $plant->price > 0)
-                                                        {{ __('messages.currency') }} {{ number_format($plant->price, 2) }}
-                                                    @else
-                                                        {{ __('messages.free') }}
-                                                    @endif
-                                                </div>
-                                                <a href="{{ route('plants.show', $plant->id) }}" class="btn btn-outline-light btn-sm">{{ __('messages.view_details') }}</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                @endforeach
+                @if($featuredPlants->count() > 1)
                             </div>
                         </div>
-                    @endif
-                    
-                    @if($index == 3)
-                        <!-- Small Card - Fourth Plant -->
-                        <div class="col-6" data-aos="fade-up" data-aos-delay="300">
-                            <div class="curated-card small-card">
-                                <div class="curated-image">
-                                    <img src="{{ $plant->image_url ?? 'https://picsum.photos/seed/' . urlencode($plant->name) . '/400/300.jpg' }}" alt="{{ $plant->name }}" class="img-fluid" onerror="this.src='https://picsum.photos/seed/{{ urlencode($plant->name) }}/400/300.jpg'">
-                                    <div class="curated-overlay">
-                                        <div class="curated-content">
-                                            <h5 class="curated-title">{{ $plant->name }}</h5>
-                                            <p class="curated-description">{{ Str::limit(strip_tags($plant->description), 60) }}</p>
-                                            <div class="curated-action-row">
-                                                <div class="curated-price">
-                                                    @if($plant->price && $plant->price > 0)
-                                                        {{ __('messages.currency') }} {{ number_format($plant->price, 2) }}
-                                                    @else
-                                                        {{ __('messages.free') }}
-                                                    @endif
-                                                </div>
-                                                <a href="{{ route('plants.show', $plant->id) }}" class="btn btn-outline-light btn-sm">{{ __('messages.view_details') }}</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                            </div>
-                        </div>
-                    @endif
-                @empty
-                    <!-- Fallback content when no plants available -->
-                    <div class="col-12 text-center py-5">
-                        <div class="text-muted">
-                            <i class="bi bi-flower1 fa-3x mb-3"></i>
-                            <p>{{ __('messages.no_plants_available') }}</p>
-                        </div>
-                    </div>
-                @endforelse
+                @endif
             </div>
         </div>
         
-        @if($featuredPlants->count() > 0)
-        <div class="text-center mt-5">
-            <a href="{{ route('plants.index') }}" class="btn btn-primary rounded-pill px-5 py-3">
-                <i class="bi bi-grid-3x3-gap me-2"></i>{{ __('messages.view_all_plants') }}
+        <div class="text-center mt-5" data-aos="fade-up">
+            <a href="{{ route('plants.index') }}" class="btn-plant-view px-5 py-3" style="max-width: 320px; margin: 0 auto; justify-content: center;">
+                {{ __('messages.view_all_plants') }} <i class="bi bi-grid-3x3-gap ms-2"></i>
             </a>
         </div>
-        @endif
     </div>
 </section>
+@endif
 
 <style>
-.plants-section {
-    padding: 100px 0;
-    background: #ffffff;
-}
-
-.section-header {
-    text-align: center;
-    margin-bottom: 4rem;
-}
-
-.section-title {
-    font-size: 3rem;
-    font-weight: 700;
-    color: #2d3748;
-    margin-bottom: 1rem;
-    font-family: 'Georgia', serif;
-}
-
-.section-description {
-    font-size: 1.1rem;
-    color: #718096;
-    line-height: 1.8;
-    max-width: 600px;
-    margin: 0 auto 2rem;
-    font-family: 'Georgia', serif;
-}
-
-.view-full-link {
-    margin-top: 2rem;
-}
-
-.view-full-link .btn-link {
-    color: #2d3748;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 0.9rem;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    transition: all 0.3s ease;
-    border: none;
-    background: none;
-    padding: 0;
-}
-
-.view-full-link .btn-link:hover {
-    color: #718096;
-    transform: translateX(5px);
-}
-
-.curated-grid {
-    margin-top: 3rem;
-}
-
-.curated-card {
-    position: relative;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-    transition: all 0.3s ease;
-    background: #ffffff;
-}
-
-.curated-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 30px rgba(0,0,0,0.15);
-}
-
-.curated-image {
-    position: relative;
-    overflow: hidden;
-}
-
-.large-card .curated-image {
-    height: 650px;
-}
-
-.medium-card .curated-image {
-    height: 320px;
-}
-
-.small-card .curated-image {
-    height: 280px;
-}
-
-.curated-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.6s ease;
-}
-
-.curated-card:hover .curated-image img {
-    transform: scale(1.05);
-}
-
-.curated-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.8));
-    display: flex;
-    align-items: flex-end;
-    padding: 2rem;
-    opacity: 1;
-    transition: all 0.3s ease;
-}
-
-.curated-content {
-    color: white;
-    width: 100%;
-}
-
-.large-card .curated-title {
-    font-size: 2rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-    font-family: 'Georgia', serif;
-}
-
-.medium-card .curated-title {
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-    font-family: 'Georgia', serif;
-}
-
-.small-card .curated-title {
-    font-size: 1.2rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-    font-family: 'Georgia', serif;
-}
-
-.curated-description {
-    font-size: 0.9rem;
-    margin-bottom: 1.5rem;
-    opacity: 0.9;
-    line-height: 1.4;
-}
-
-.curated-action-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-}
-
-.curated-price {
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: var(--primary-light);
-    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
-    margin: 0;
-}
-
-.small-card .curated-price {
-    font-size: 1rem;
-}
-
-.curated-content .btn {
-    border-radius: 50px;
-    padding: 0.5rem 1.5rem;
-    font-weight: 600;
-    text-decoration: none;
-    display: inline-block;
-    transition: all 0.3s ease;
-    border: 2px solid transparent;
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-.curated-content .btn-primary {
-    background: #ffffff;
-    color: #2d3748;
-    border-color: #ffffff;
-}
-
-.curated-content .btn-primary:hover {
-    background: transparent;
-    color: #ffffff;
-    border-color: #ffffff;
-}
-
-.curated-content .btn-outline-light {
-    background: transparent;
-    color: #ffffff;
-    border-color: #ffffff;
-}
-
-.curated-content .btn-outline-light:hover {
-    background: #ffffff;
-    color: #2d3748;
-}
-
-.curated-content .btn-sm {
-    padding: 0.4rem 1rem;
-    font-size: 0.75rem;
-}
-
-/* Mobile Responsive */
-@media (max-width: 768px) {
-    .plants-section {
-        padding: 60px 0;
-    }
-    
-    .section-title {
-        font-size: 2rem;
-    }
-    
-    .section-description {
-        font-size: 1rem;
-    }
-    
-    .large-card .curated-image {
-        height: 450px;
-    }
-    
-    .medium-card .curated-image {
-        height: 280px;
-    }
-    
-    .small-card .curated-image {
-        height: 240px;
-    }
-    
-    .curated-overlay {
-        padding: 1.5rem;
-    }
-    
-    .curated-action-row {
-        flex-direction: column;
-        gap: 1rem;
-        align-items: flex-start;
-    }
-    
-    .curated-price {
-        font-size: 1.1rem;
-        margin-bottom: 0.5rem;
-    }
-    
-    .large-card .curated-title {
-        font-size: 1.5rem;
-    }
-    
-    .medium-card .curated-title {
-        font-size: 1.2rem;
-    }
-    
-    .small-card .curated-title {
-        font-size: 1rem;
-    }
-}
-
-@media (max-width: 576px) {
-    .curated-grid .row > div {
-        margin-bottom: 1.5rem;
-    }
-    
-    .large-card .curated-image,
-    .medium-card .curated-image,
-    .small-card .curated-image {
-        height: 320px;
-    }
-    
-    .curated-overlay {
-        padding: 1rem;
-    }
-    
-    .curated-action-row {
-        flex-direction: column;
-        gap: 0.8rem;
-        align-items: flex-start;
-    }
-    
-    .curated-price {
-        font-size: 1rem;
-        font-weight: 700;
-        color: var(--primary-light);
-        text-shadow: 0 2px 4px rgba(0,0,0,0.5);
-        margin: 0;
-        padding: 0.3rem 0;
-        background: rgba(0,0,0,0.3);
-        border-radius: 4px;
-        display: inline-block;
-    }
-    
-    .curated-description {
-        font-size: 0.85rem;
-        margin-bottom: 1rem;
-    }
-    
-    .small-card .curated-title {
-        font-size: 0.95rem;
-    }
-    
-    .medium-card .curated-title {
-        font-size: 1.1rem;
-    }
-    
-    .large-card .curated-title {
-        font-size: 1.4rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .curated-overlay {
-        padding: 0.8rem;
-    }
-    
-    .curated-action-row {
-        gap: 0.6rem;
-    }
-    
-    .curated-price {
-        font-size: 0.9rem;
-        padding: 0.2rem 0.4rem;
-        background: rgba(0,0,0,0.5);
-        border-radius: 6px;
-    }
-    
-    .curated-description {
+    .plants-section-unified .section-subtitle {
         font-size: 0.8rem;
-        margin-bottom: 0.8rem;
+        font-weight: 800;
+        color: var(--plant-accent);
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        margin-bottom: 0.5rem;
+        display: block;
     }
-    
-    .small-card .curated-title {
-        font-size: 0.9rem;
+    .plants-section-unified .section-title {
+        font-size: 3rem;
+        font-weight: 900;
+        color: var(--plant-primary);
+        margin-bottom: 3rem;
     }
-    
-    .medium-card .curated-title {
-        font-size: 1rem;
+    .plants-section-unified .section-title span {
+        color: var(--plant-primary-light);
     }
-    
-    .large-card .curated-title {
-        font-size: 1.2rem;
-    }
-    
-    .curated-content .btn {
-        font-size: 0.7rem;
-        padding: 0.4rem 1rem;
-    }
-}
 </style>

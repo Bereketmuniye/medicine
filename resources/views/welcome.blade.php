@@ -61,6 +61,7 @@
     <!-- Custom Shared Styles -->
     <link rel="stylesheet" href="{{ asset('css/global.css') }}?v={{ filemtime(public_path('css/global.css')) }}">
     <link rel="stylesheet" href="{{ asset('css/books-shared.css') }}?v={{ filemtime(public_path('css/books-shared.css')) }}&t={{ time() }}">
+    <link rel="stylesheet" href="{{ asset('css/plants-shared.css') }}?v={{ filemtime(public_path('css/plants-shared.css')) }}&t={{ time() }}">
 
     <style>
         /* Hero Section - Full Screen with Video Background */
