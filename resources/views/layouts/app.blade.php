@@ -441,5 +441,23 @@
     </script>
     
     @yield('scripts')
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const navLinks = document.querySelectorAll('.navbar-nav .nav-link, .dropdown-item');
+            const menuToggle = document.getElementById('nav');
+            
+            navLinks.forEach((link) => {
+                link.addEventListener('click', () => {
+                    if (window.innerWidth < 992) { // Only on mobile
+                        const bsCollapse = bootstrap.Collapse.getInstance(menuToggle) || new bootstrap.Collapse(menuToggle, {toggle: false});
+                        if (menuToggle.classList.contains('show')) {
+                            bsCollapse.hide();
+                        }
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
