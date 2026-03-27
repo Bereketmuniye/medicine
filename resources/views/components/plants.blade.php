@@ -25,9 +25,13 @@
                                             <h3 class="curated-title">{{ $plant->name }}</h3>
                                             <p class="curated-description">{{ Str::limit(strip_tags($plant->description), 100) }}</p>
                                             <div class="curated-action-row">
-                                                @if($plant->price)
-                                                    <div class="curated-price"> {{ number_format($plant->price, 2) }} {{ __('messages.currency') }}</div>
-                                                @endif
+                                                <div class="curated-price">
+                                                    @if($plant->price && $plant->price > 0)
+                                                        {{ number_format($plant->price, 2) }} {{ __('messages.currency') }}
+                                                    @else
+                                                        {{ __('messages.free') }}
+                                                    @endif
+                                                </div>
                                                 <a href="{{ route('plants.show', $plant->id) }}" class="btn btn-primary">{{ __('messages.view_details') }}</a>
                                             </div>
                                         </div>
@@ -52,9 +56,13 @@
                                             <h4 class="curated-title">{{ $plant->name }}</h4>
                                             <p class="curated-description">{{ Str::limit(strip_tags($plant->description), 80) }}</p>
                                             <div class="curated-action-row">
-                                                @if($plant->price)
-                                                    <div class="curated-price">{{ __('messages.currency') }} {{ number_format($plant->price, 2) }}</div>
-                                                @endif
+                                                <div class="curated-price">
+                                                    @if($plant->price && $plant->price > 0)
+                                                        {{ __('messages.currency') }} {{ number_format($plant->price, 2) }}
+                                                    @else
+                                                        {{ __('messages.free') }}
+                                                    @endif
+                                                </div>
                                                 <a href="{{ route('plants.show', $plant->id) }}" class="btn btn-outline-light btn-sm">{{ __('messages.view_details') }}</a>
                                             </div>
                                         </div>
@@ -75,9 +83,13 @@
                                             <h5 class="curated-title">{{ $plant->name }}</h5>
                                             <p class="curated-description">{{ Str::limit(strip_tags($plant->description), 60) }}</p>
                                             <div class="curated-action-row">
-                                                @if($plant->price)
-                                                    <div class="curated-price">{{ __('messages.currency') }} {{ number_format($plant->price, 2) }}</div>
-                                                @endif
+                                                <div class="curated-price">
+                                                    @if($plant->price && $plant->price > 0)
+                                                        {{ __('messages.currency') }} {{ number_format($plant->price, 2) }}
+                                                    @else
+                                                        {{ __('messages.free') }}
+                                                    @endif
+                                                </div>
                                                 <a href="{{ route('plants.show', $plant->id) }}" class="btn btn-outline-light btn-sm">{{ __('messages.view_details') }}</a>
                                             </div>
                                         </div>
@@ -98,9 +110,13 @@
                                             <h5 class="curated-title">{{ $plant->name }}</h5>
                                             <p class="curated-description">{{ Str::limit(strip_tags($plant->description), 60) }}</p>
                                             <div class="curated-action-row">
-                                                @if($plant->price)
-                                                    <div class="curated-price">{{ __('messages.currency') }} {{ number_format($plant->price, 2) }}</div>
-                                                @endif
+                                                <div class="curated-price">
+                                                    @if($plant->price && $plant->price > 0)
+                                                        {{ __('messages.currency') }} {{ number_format($plant->price, 2) }}
+                                                    @else
+                                                        {{ __('messages.free') }}
+                                                    @endif
+                                                </div>
                                                 <a href="{{ route('plants.show', $plant->id) }}" class="btn btn-outline-light btn-sm">{{ __('messages.view_details') }}</a>
                                             </div>
                                         </div>

@@ -141,12 +141,16 @@
                                 <p class="mb-0 fw-bold">{{ $plant->plant_id ?? $plant->id }}</p>
                             </div>
 
-                            @if($plant->price)
-                                <div class="mb-3">
-                                    <small class="text-muted">{{ __('messages.price') }}</small>
-                                    <p class="mb-0 fw-bold text-primary">{{ number_format($plant->price, 2) }} {{ __('messages.currency') }}</p>
-                                </div>
-                            @endif
+                            <div class="mb-3">
+                                <small class="text-muted">{{ __('messages.price') }}</small>
+                                <p class="mb-0 fw-bold text-primary">
+                                    @if($plant->price && $plant->price > 0)
+                                        {{ number_format($plant->price, 2) }} {{ __('messages.currency') }}
+                                    @else
+                                        {{ __('messages.free') }}
+                                    @endif
+                                </p>
+                            </div>
 
                             <div class="mb-3">
                                 <small class="text-muted">{{ __('messages.availability') }}</small>

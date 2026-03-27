@@ -95,11 +95,13 @@
                                             </a>
                                         </div>
                                     </div>
-                                    @if($plant->price)
-                                        <div class="plant-price">
+                                    <div class="plant-price">
+                                        @if($plant->price && $plant->price > 0)
                                             <span class="badge bg-success">{{ number_format($plant->price, 2) }} {{ __('messages.currency') }}</span>
-                                        </div>
-                                    @endif
+                                        @else
+                                            <span class="badge bg-success">{{ __('messages.free') }}</span>
+                                        @endif
+                                    </div>
                                 </div>
                                 <div class="plant-content">
                                     <h5 class="plant-name">{{ $plant->name }}</h5>
