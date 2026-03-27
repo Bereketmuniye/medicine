@@ -161,7 +161,30 @@ function loadSideVideo(container, embedUrl) {
     const inner = container.querySelector('.side-video-inner');
     const playBtn = container.querySelector('.side-play-overlay');
     
-    inner.innerHTML = `<iframe src="${embedUrl}" style="width: 100%; height: 100%; border: none;" allowfullscreen allow="autoplay"></iframe>`;
+    // Determine iframe content
+    let finalUrl = embedUrl;
+    if (finalUrl.includes('youtube.com/watch?v=')) {
+        finalUrl = finalUrl.replace('watch?v=', 'embed/') + '?autoplay=1&mute=1&playsinline=1';
+    } else if (finalUrl.includes('youtu.be/')) {
+        finalUrl = finalUrl.replace('youtu.be/', 'youtube.com/embed/') + '?autoplay=1&mute=1&playsinline=1';
+    }
+
+    let iframeHtml = '';
+    if (embedUrl.includes('tiktok.com')) {
+        let videoId = '';
+        const match = embedUrl.match(/video\/(\d+)/);
+        if (match) videoId = match[1];
+        
+        if (videoId) {
+            iframeHtml = `<iframe src="https://www.tiktok.com/embed/v2/${videoId}" style="width: 100%; height: 100%; border: none;" allowfullscreen allow="autoplay; encrypted-media; fullscreen; picture-in-picture"></iframe>`;
+        } else {
+            iframeHtml = `<iframe src="${finalUrl}" style="width: 100%; height: 100%; border: none;" allowfullscreen allow="autoplay"></iframe>`;
+        }
+    } else {
+        iframeHtml = `<iframe src="${finalUrl}" style="width: 100%; height: 100%; border: none;" allowfullscreen allow="autoplay; accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>`;
+    }
+
+    inner.innerHTML = iframeHtml;
     if (playBtn) playBtn.style.display = 'none';
 }
 </script>
