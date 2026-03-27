@@ -88,10 +88,21 @@
         display: block;
     }
     .plants-section-unified .section-title {
-        font-size: 3rem;
+        font-size: clamp(1.8rem, 5vw, 3rem);
         font-weight: 900;
         color: var(--plant-primary);
-        margin-bottom: 3rem;
+        margin-bottom: 2.5rem;
+        line-height: 1.2;
+    }
+    
+    @media (max-width: 576px) {
+        .plants-section-unified .section-title {
+            margin-bottom: 1.5rem;
+        }
+        .plants-section-unified .section-subtitle {
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+        }
     }
     .plants-section-unified .section-title span {
         color: var(--plant-primary-light);
