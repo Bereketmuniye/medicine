@@ -9,8 +9,8 @@
                 <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=400&q=80" alt="{{ $book->title }}" class="active">
             @endif
             <span class="book-badge">{{ ucfirst($book->type) }}</span>
-            <span class="price-badge {{ $book->price > 0 ? '' : 'free' }}">
-                @if($book->price > 0)
+            <span class="price-badge {{ ($book->price && $book->price > 0) ? '' : 'free' }}">
+                @if($book->price && $book->price > 0)
                     {{ number_format($book->price, 0) }} {{ __('messages.currency') }}
                 @else
                     {{ __('messages.free') }}
@@ -29,7 +29,7 @@
         <div class="book-footer">
             <div>
                 <div class="book-price">
-                    @if($book->price > 0)
+                    @if($book->price && $book->price > 0)
                         {{ number_format($book->price, 2) }} {{ __('messages.currency') }}
                     @else
                         {{ __('messages.free') }}

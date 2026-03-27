@@ -588,7 +588,7 @@
                 <div><i class="bi bi-tag"></i> {{ ucfirst($book->type) }}</div>
                 <div>
                     <i class="bi bi-currency-dollar"></i>
-                    @if($book->price > 0)
+                    @if($book->price && $book->price > 0)
                         {{ number_format($book->price, 2) }} ETB
                     @else
                         {{ __('messages.free') }}
@@ -651,7 +651,7 @@
                     <!-- Price & Actions -->
                     <div class="book-price-section">
                         <div class="price-tag">
-                            @if($book->price > 0)
+                            @if($book->price && $book->price > 0)
                                 {{ number_format($book->price, 2) }} ETB
                             @else
                                 {{ __('messages.free') }}
