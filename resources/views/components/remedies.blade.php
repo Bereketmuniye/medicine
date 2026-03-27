@@ -28,7 +28,7 @@
                                 <div class="product-scientific">{{ $plant->scientific_name }}</div>
                             @endif
                             <div class="product-local">{{ $plant->local_name ?? 'Traditional Herb' }}</div>
-                            <div class="product-price">{{ $plant->price ?? '29.99' }} ETB</div>
+                            <div class="product-price">{{ $plant->price ?? '0' }} {{ __('messages.currency') }}</div>
                             <div class="product-footer">
                                 <button class="btn-reserve contact-btn" data-phone="{{ $owner_phone ?? '+251911XXXXXX' }}">
                                     <i class="bi bi-whatsapp"></i>

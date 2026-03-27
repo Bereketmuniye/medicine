@@ -2,30 +2,30 @@
 <section class="promotions-section">
     <div class="container">
         <div class="section-header" data-aos="fade-up">
-            <span class="section-subtitle">የገደል ጊዜ ሽልማቶች</span>
-            <h2 class="section-title">የተለዩ <span>ቅናሾች</span></h2>
+            <span class="section-subtitle">{{ __('messages.promotions_subtitle') }}</span>
+            <h2 class="section-title">{{ __('messages.promotions_title') }} <span>{{ __('messages.promotions_span') }}</span></h2>
         </div>
         
         <div class="promotions-grid">
             @foreach($activePromotions as $promotion)
                 <div class="ad-banner" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
                     <div class="ad-content">
-                        <div class="ad-badge">ፍላሽ ሽውያ</div>
+                        <div class="ad-badge">{{ __('messages.flash_sale') }}</div>
                         <div class="ad-main">
                             <h3 class="ad-title">{{ $promotion->title }}</h3>
                             <p class="ad-subtitle">{{ $promotion->description }}</p>
                             
                             @if($promotion->promo_code)
                                 <div class="ad-code-box">
-                                    <span class="code-text">ኮድ: {{ $promotion->promo_code }}</span>
-                                    <button class="code-copy-btn" onclick="copyPromoCode('{{ $promotion->promo_code }}')">ኮፒ ያድርጉ</button>
+                                    <span class="code-text">{{ __('messages.promo_code_label') }} {{ $promotion->promo_code }}</span>
+                                    <button class="code-copy-btn" onclick="copyPromoCode('{{ $promotion->promo_code }}')">{{ __('messages.copy_code') }}</button>
                                 </div>
                             @endif
                             
                             <div class="ad-footer">
-                                <span class="ad-discount">{{ $promotion->discount_percentage ? $promotion->discount_percentage . '% ቅናሽ' : 'አሁን ይቆጥቡ' }}</span>
+                                <span class="ad-discount">{{ $promotion->discount_percentage ? $promotion->discount_percentage . '% ' . __('messages.discount_off') : __('messages.save_now') }}</span>
                                 @if($promotion->expiry_date)
-                                    <span class="ad-urgent">ይወጣል {{ \Carbon\Carbon::parse($promotion->expiry_date)->diffForHumans() }}!</span>
+                                    <span class="ad-urgent">{{ __('messages.expires_in') }} {{ \Carbon\Carbon::parse($promotion->expiry_date)->diffForHumans() }}!</span>
                                 @endif
                             </div>
                         </div>

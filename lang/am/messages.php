@@ -28,6 +28,7 @@ return [
     'digital_downloads' => 'ዲጂታል ወርዶች',
     'order_now' => 'ይዘዙ',
     'free' => 'ነጻ',
+    'view_all_books' => 'ሁሉንም መጻሕፍት ይመልከቱ',
     
     // Footer
     'footer_description' => 'የኢትዮጵያን የሕክምና እጽዋቶች ቅርስ በሳይንስና በባህላዊ መንገድ እናጠናለን።',
@@ -223,6 +224,9 @@ return [
     'plants_span' => 'እጽዋት',
     'plants_description' => 'ከትውልድ የተላለፉ የኢትዮጵያ የህክምና እጽዋትን እና ጥቅሞቻቸውን ያግኙ።',
     'view_details' => 'ዝርዝሮችን ይመልከቱ',
+    'botanical_wisdom' => 'የዕጽዋት ጥበብ',
+    'discover_nature' => 'ተፈጥሮን ይወቁ',
+    'view_all_plants' => 'ሁሉንም እጽዋት ይመለከቱ',
     
     // Plant Detail Page
     'local_name' => 'የአካባቢው ስም',
@@ -297,4 +301,15 @@ return [
     'consultation_stats_experience' => 'ዓመታት ልምድ',
     'consultation_stats_rating' => 'ደረጃ',
     'consultation_stats_natural' => 'ተፈጥሯዊ',
+    
+    // Promotions Section
+    'promotions_subtitle' => 'የገደል ጊዜ ሽልማቶች',
+    'promotions_title' => 'የተለዩ',
+    'promotions_span' => 'ቅናሾች',
+    'flash_sale' => 'ፍላሽ ሽውያ',
+    'promo_code_label' => 'ኮድ:',
+    'copy_code' => 'ኮፒ ያድርጉ',
+    'discount_off' => 'ቅናሽ',
+    'save_now' => 'አሁን ይቆጥቡ',
+    'expires_in' => 'ይወጣል',
 ];

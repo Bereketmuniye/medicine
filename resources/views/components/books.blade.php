@@ -17,7 +17,7 @@
         
         <div class="text-center mt-5" data-aos="fade-up">
             <a href="{{ route('books.index') }}" class="btn-reserve" style="max-width: 300px; margin: 0 auto; background: var(--primary-light); color: var(--primary);">
-                ሁሉንም መጻሕፍት ይመልከቱ <i class="bi bi-arrow-right"></i>
+                {{ __('messages.view_all_books') }} <i class="bi bi-arrow-right"></i>
             </a>
         </div>
     </div>

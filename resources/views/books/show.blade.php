@@ -653,7 +653,7 @@
                     <div class="book-price-section">
                         <div class="price-tag">
                             @if($book->price && $book->price > 0)
-                                {{ number_format($book->price, 2) }} ETB
+                                {{ number_format($book->price, 0) }} {{ __('messages.currency') }}
                             @else
                                 {{ __('messages.free') }}
                             @endif

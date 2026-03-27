@@ -28,6 +28,7 @@ return [
     'digital_downloads' => 'Digital Downloads',
     'order_now' => 'Order Now',
     'free' => 'Free',
+    'view_all_books' => 'View All Books',
     
     // Footer
     'footer_description' => 'We preserve Ethiopia\'s medicinal plant heritage through science and history. Authentically sourced from natural remedies.',
@@ -237,6 +238,9 @@ return [
     'plants_span' => 'Plants',
     'plants_description' => 'Discover authentic Ethiopian medicinal plants with healing properties passed down through generations.',
     'view_details' => 'View Details',
+    'botanical_wisdom' => 'Botanical Wisdom',
+    'discover_nature' => 'Discover Nature',
+    'view_all_plants' => 'View All Plants',
     
     // Plant Detail Page
     'local_name' => 'Local Name',
@@ -311,4 +315,15 @@ return [
     'consultation_stats_experience' => 'Years Experience',
     'consultation_stats_rating' => 'Rating',
     'consultation_stats_natural' => 'Natural',
+    
+    // Promotions Section
+    'promotions_subtitle' => 'Limited Time Offers',
+    'promotions_title' => 'Special',
+    'promotions_span' => 'Offers',
+    'flash_sale' => 'Flash Sale',
+    'promo_code_label' => 'Code:',
+    'copy_code' => 'Copy Code',
+    'discount_off' => 'Off',
+    'save_now' => 'Save Now',
+    'expires_in' => 'Expires in',
 ];

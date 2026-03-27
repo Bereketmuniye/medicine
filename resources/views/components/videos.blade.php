@@ -96,7 +96,7 @@
                                 </span>
                                 <h2 class="video-title">{{ $video->title }}</h2>
                                 <p class="video-description">
-                                    {!! Str::limit($video->description ?? 'Capturing the vitality of traditional herbal preparation methods.', 150) !!}
+                                    {!! Str::limit($video->description ?? __('messages.videos_description'), 150) !!}
                                 </p>
                             </div>
                         </div>
@@ -201,7 +201,7 @@
                             <div class="side-video-info">
                                 <h4 class="side-video-title">{{ $video->title }}</h4>
                                 <p class="side-video-description">
-                                    {!! Str::limit($video->description ?? 'Traditional herbal preparation methods passed down through generations.', 80) !!}
+                                    {!! Str::limit($video->description ?? __('messages.videos_description'), 80) !!}
                                 </p>
                                 <div class="side-video-meta">
                                     <span class="video-duration">
