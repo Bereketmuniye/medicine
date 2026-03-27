@@ -586,7 +586,14 @@
             <h1 class="book-title">{{ $book->title }}</h1>
             <div class="book-meta">
                 <div><i class="bi bi-tag"></i> {{ ucfirst($book->type) }}</div>
-                <div><i class="bi bi-currency-dollar"></i> {{ number_format($book->price, 2) }} ETB</div>
+                <div>
+                    <i class="bi bi-currency-dollar"></i>
+                    @if($book->price > 0)
+                        {{ number_format($book->price, 2) }} ETB
+                    @else
+                        {{ __('messages.free') }}
+                    @endif
+                </div>
                 @if($book->stock !== null)
                     <div><i class="bi bi-box"></i> {{ $book->stock > 0 ? $book->stock . ' ' . __('messages.stock_available') : __('messages.out_of_stock') }}</div>
                 @else
@@ -643,7 +650,13 @@
                     
                     <!-- Price & Actions -->
                     <div class="book-price-section">
-                        <div class="price-tag">{{ number_format($book->price, 2) }} ETB</div>
+                        <div class="price-tag">
+                            @if($book->price > 0)
+                                {{ number_format($book->price, 2) }} ETB
+                            @else
+                                {{ __('messages.free') }}
+                            @endif
+                        </div>
                         
                         @if($book->stock !== null)
                             <div class="mb-3">

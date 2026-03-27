@@ -27,6 +27,7 @@ return [
     'in_stock' => 'in stock',
     'digital_downloads' => 'Digital Downloads',
     'order_now' => 'Order Now',
+    'free' => 'Free',
     
     // Footer
     'footer_description' => 'We preserve Ethiopia\'s medicinal plant heritage through science and history. Authentically sourced from natural remedies.',

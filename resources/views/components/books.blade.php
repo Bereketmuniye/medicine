@@ -17,6 +17,13 @@
                             @else
                                 <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=400&q=80" alt="{{ $book->title }}">
                             @endif
+                            <span class="price-badge {{ $book->price > 0 ? '' : 'free' }}">
+                                @if($book->price > 0)
+                                    {{ number_format($book->price, 0) }} {{ __('messages.currency') }}
+                                @else
+                                    {{ __('messages.free') }}
+                                @endif
+                            </span>
                         </div>
                         <div class="featured-book-content">
                             <div class="book-category">{{ ucfirst($book->type) }}</div>
@@ -24,7 +31,13 @@
                             <div class="featured-author">Featured by Shalom Herbal Medicine</div>
                             <p class="featured-description">{{ Str::limit($book->description, 100) }}</p>
                             <div class="featured-meta">
-                                <div class="book-price">{{ number_format($book->price, 2) }} {{ __('messages.currency') }}</div>
+                                <div class="book-price">
+                                    @if($book->price > 0)
+                                        {{ number_format($book->price, 2) }} {{ __('messages.currency') }}
+                                    @else
+                                        {{ __('messages.free') }}
+                                    @endif
+                                </div>
                                 <button class="btn-reserve contact-btn" data-phone="{{ $owner_phone ?? '+251 91 163 1253' }}">
                                     <i class="bi bi-whatsapp"></i> {{ __('messages.order_now') }}
                                 </button>

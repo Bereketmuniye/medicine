@@ -1025,6 +1025,25 @@
             box-shadow: none;
         }
 
+        .price-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--primary);
+            color: var(--primary-light);
+            font-weight: 800;
+            font-size: 0.75rem;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            z-index: 10;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .price-badge.free {
+            background: #28a745;
+            color: white;
+        }
+
         .featured-book-content {
             padding: 1.5rem;
             flex: 1;

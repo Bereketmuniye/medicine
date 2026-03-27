@@ -27,6 +27,7 @@ return [
     'in_stock' => 'በማእድና',
     'digital_downloads' => 'ዲጂታል ወርዶች',
     'order_now' => 'ይዘዙ',
+    'free' => 'ነጻ',
     
     // Footer
     'footer_description' => 'የኢትዮጵያን የሕክምና እጽዋቶች ቅርስ በሳይንስና በባህላዊ መንገድ እናጠናለን።',
