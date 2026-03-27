@@ -152,11 +152,12 @@
 
         .main-image-container {
             width: 100%;
-            height: 450px;
-            margin-bottom: 1rem;
-            border-radius: 15px;
+            height: 550px;
+            margin-bottom: 1.5rem;
+            border-radius: 24px;
             overflow: hidden;
-            box-shadow: var(--card-shadow);
+            box-shadow: var(--shadow-lg);
+            border: 1px solid rgba(0,0,0,0.05);
         }
 
         .main-image {
@@ -218,12 +219,12 @@
         }
 
         .book-price-section {
-            background: white;
-            border: 1px solid #f0f0f0;
-            border-radius: 15px;
-            padding: 1.5rem;
+            background: var(--white);
+            border: 1px solid rgba(0,0,0,0.05);
+            border-radius: 24px;
+            padding: 2rem;
             margin-bottom: 2rem;
-            box-shadow: var(--card-shadow);
+            box-shadow: var(--shadow-md);
         }
 
         .price-tag {
@@ -235,12 +236,12 @@
 
         /* Book Description */
         .book-description {
-            background: white;
-            border: 1px solid #f0f0f0;
-            border-radius: 15px;
-            padding: 2rem;
+            background: var(--white);
+            border: 1px solid rgba(0,0,0,0.05);
+            border-radius: 24px;
+            padding: 2.5rem;
             margin-bottom: 2rem;
-            box-shadow: var(--card-shadow);
+            box-shadow: var(--shadow-md);
         }
 
         .book-description h2 {
@@ -673,12 +674,12 @@
                         @endif
                         
                         <div class="d-grid gap-2">
-                            <button class="btn-action contact-btn" data-phone="{{ $owner_phone ?? '+251 91 163 1253' }}">
+                            <button class="btn-reserve contact-btn" data-phone="{{ $owner_phone ?? '+251 91 163 1253' }}">
                                 <i class="bi bi-whatsapp"></i> {{ __('messages.order_now') }}
                             </button>
                             
                             @if($book->type === 'digital' || $book->file)
-                                <button class="btn-action btn-action-outline" onclick="downloadBook()">
+                                <button class="btn-reserve" style="background: var(--white); color: var(--primary); border: 2px solid var(--primary);" onclick="downloadBook()">
                                     <i class="bi bi-download"></i> {{ __('messages.download_now') }}
                                 </button>
                             @endif
@@ -777,7 +778,7 @@
             <h2 class="cta-title">{{ __('messages.need_consultation') }}</h2>
             <p class="cta-description">{{ __('messages.consultation_desc') }}</p>
             <div class="cta-buttons">
-                <a href="{{ route('consultation.index') }}" class="btn-cta">
+                <a href="{{ route('consultation.index') }}" class="btn-reserve">
                     <i class="bi bi-chat-dots"></i> {{ __('messages.consultation_service') }}
                 </a>
                 <a href="{{ route('articles.index') }}" class="btn-cta btn-cta-outline">
@@ -827,10 +828,11 @@
             
             // Show phone number on button
             this.innerHTML = `<i class="bi bi-telephone-fill"></i> ${phone}`;
-            this.classList.remove('btn-action');
+            this.classList.remove('btn-reserve');
             this.classList.add('btn-success');
             this.style.background = '#28a745';
             this.style.color = 'white';
+            this.style.boxShadow = '0 8px 20px rgba(40, 167, 69, 0.3)';
         });
     });
 

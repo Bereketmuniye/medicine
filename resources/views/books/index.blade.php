@@ -135,31 +135,39 @@
 
         .search-form .form-control,
         .search-form .form-select {
-            border: 2px solid #f0f0f0;
-            border-radius: 10px;
-            padding: 0.8rem 1.2rem;
+            border: 1px solid rgba(0,0,0,0.08);
+            border-radius: 16px;
+            padding: 1rem 1.5rem;
             font-weight: 500;
+            background: #fcfcfc;
+            transition: var(--transition-base);
         }
 
-        .search-form .form-control:focus,
-        .search-form .form-select:focus {
+        .search-form .form-control:focus {
             border-color: var(--primary-light);
-            box-shadow: 0 0 0 0.2rem rgba(255,202,8,0.25);
+            background: white;
+            box-shadow: 0 0 0 4px rgba(255,202,8,0.1);
         }
 
         .btn-search {
             background: var(--primary);
             color: white;
             border: none;
-            padding: 0.8rem 2rem;
-            border-radius: 50px;
+            padding: 1rem 2rem;
+            border-radius: 16px;
             font-weight: 700;
-            transition: all 0.3s;
+            transition: var(--transition-base);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
         }
 
         .btn-search:hover {
-            background: var(--primary-light);
-            color: var(--primary);
+            background: var(--accent);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            color: white;
         }
 
         /* Books Section */
