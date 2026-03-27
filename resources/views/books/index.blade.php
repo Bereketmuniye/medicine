@@ -465,6 +465,27 @@
             nav.classList.remove('scrolled');
         }
     });
+
+    // Mobile Navigation Self-Closing Fix (Robust version)
+    document.addEventListener('click', function (e) {
+        if (e.target.closest('.navbar-nav .nav-link') || e.target.closest('.dropdown-item')) {
+            if (window.innerWidth < 992) { // Only on mobile
+                const menuToggle = document.getElementById('nav') || document.getElementById('navbarNav');
+                if (menuToggle && menuToggle.classList.contains('show')) {
+                    const bsCollapse = (window.bootstrap && window.bootstrap.Collapse) 
+                        ? (window.bootstrap.Collapse.getInstance(menuToggle) || new window.bootstrap.Collapse(menuToggle, {toggle: false}))
+                        : null;
+                    
+                    if (bsCollapse) {
+                        bsCollapse.hide();
+                    } else if (typeof bootstrap !== 'undefined' && bootstrap.Collapse) {
+                        const bsColl = bootstrap.Collapse.getInstance(menuToggle) || new bootstrap.Collapse(menuToggle, {toggle: false});
+                        bsColl.hide();
+                    }
+                }
+            }
+        }
+    });
 </script>
 
 </body>
