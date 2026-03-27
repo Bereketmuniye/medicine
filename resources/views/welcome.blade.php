@@ -1744,7 +1744,6 @@
             }, 5000);
         });
     });
-    });
 
     // Mobile Navigation Self-Closing Fix (Robust version)
     document.addEventListener('click', function (e) {
